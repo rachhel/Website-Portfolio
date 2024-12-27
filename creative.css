@@ -1,0 +1,73 @@
+/* General Navbar Styling */
+.navbar {
+    --bs-navbar-padding-x: 1rem;
+    --bs-navbar-padding-y: 1rem;
+    --bs-navbar-brand-color: #000;
+    --bs-navbar-brand-hover-color: #0056b3;
+    --bs-navbar-color: #333;
+    --bs-navbar-hover-color: #0056b3;
+    --bs-navbar-active-color: #007bff;
+    --bs-navbar-bg: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    background-color: var(--bs-navbar-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+h1,h2,h3,h4,h5 {
+    font-family: Helvetica;
+}
+/* Logo Styling */
+.navbar-brand img {
+    height: 80px; /* Adjust the logo size */
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.1); /* Subtle zoom on hover */
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bs-navbar-color);
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+    color: var(--bs-navbar-hover-color);
+    border-bottom: 2px solid var(--bs-navbar-hover-color); /* Add a hover underline */
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--bs-navbar-active-color);
+    border-bottom: 2px solid var(--bs-navbar-active-color);
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+    border: none;
+    color: var(--bs-navbar-color);
+    font-size: 1rem;
+}
+
+.navbar-toggler .fas {
+    font-size: 1.2rem;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 992px) {
+    .navbar {
+        padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1.5rem;
+    }
+}

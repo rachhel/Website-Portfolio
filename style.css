@@ -1,0 +1,288 @@
+/* General Navbar Styling */
+.navbar {
+    --bs-navbar-padding-x: 1rem;
+    --bs-navbar-padding-y: 1rem;
+    --bs-navbar-brand-color: #000;
+    --bs-navbar-brand-hover-color: #0056b3;
+    --bs-navbar-color: #333;
+    --bs-navbar-hover-color: #0056b3;
+    --bs-navbar-active-color: #007bff;
+    --bs-navbar-bg: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    background-color: var(--bs-navbar-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+h1,h2,h3,h4,h5 {
+    font-family: Helvetica;
+}
+/* Logo Styling */
+.navbar-brand img {
+    height: 80px; /* Adjust the logo size */
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.1); /* Subtle zoom on hover */
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bs-navbar-color);
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+    color: var(--bs-navbar-hover-color);
+    border-bottom: 2px solid var(--bs-navbar-hover-color); /* Add a hover underline */
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--bs-navbar-active-color);
+    border-bottom: 2px solid var(--bs-navbar-active-color);
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+    border: none;
+    color: var(--bs-navbar-color);
+    font-size: 1rem;
+}
+
+.navbar-toggler .fas {
+    font-size: 1.2rem;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 992px) {
+    .navbar {
+        padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+.hero-section {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-image: url(''); /* Add your background image here */
+    background-size: cover;
+    background-position: center;
+    text-align: left; /* Ensure text is centrally aligned */
+}
+
+/* Styling for the main title */
+.hero-title {
+    font-size: 5.5rem;
+    margin-top: 8rem;
+    margin-left: 12rem;
+    font-family: Helvetica;
+
+}
+
+/* Styling for the subtitle text */
+.hero-subtitle {
+    font-size: 2rem;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    margin-left: 20rem;
+    color: gray;
+
+}
+
+.coverimage {
+    position: relative; /* Allows for top and left adjustments */
+    left: 11rem; /* Push the image to the right */
+    top: 7rem; /* Push the image downward */
+    max-width: 100%; /* Keep the image responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+/* Optional: Center the down arrow */
+.scroll-down {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+/* Bounce animation for the down arrow */
+@keyframes bounce {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, 10px);
+    }
+}
+
+.text-center h2 {
+    font-family: Helvetica;
+    font-size: 1.5rem;
+}
+
+.text-center{
+    margin-top: 10rem;
+}
+
+.text-center btn {
+    margin-bottom: 20rem;
+}
+
+.custom-btn {
+    background-color: #193451;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.custom-btn:hover {
+    background-color: #8ba8c6; 
+    transform: scale(1.01); /* Slight zoom effect */
+}
+
+.custom-margin {
+    margin-top: 10rem; /* Custom top margin */
+}
+
+/* Projects Section Styles */
+#projects h1 {
+    margin-top: 10px;
+    font-family: titleFont, sans-serif;
+    font-size: 40px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Portfolio Section Styling */
+.portfolio-section {
+    max-width: 80%; /* Restrict to 80% width */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Portfolio Card */
+  .portfolio-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .portfolio-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Card Image */
+  .portfolio-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Card Overlay */
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    transition: opacity 0.3s ease;
+  }
+  
+  .portfolio-card:hover .card-overlay {
+    opacity: 1;
+  }
+  
+  .card-overlay h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-overlay p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Adjusting spacing between items */
+  .row.g-3 {
+    row-gap: 1rem; /* Adjust vertical spacing */
+    column-gap: 1rem; /* Adjust horizontal spacing */
+  }
+  .porttwo {
+    margin-top: 5rem;
+  }
+  footer {
+    margin-top: 6rem;
+    font-size: 0.9rem;
+  }
+  footer .aboutfooter  {
+    margin-top: 4rem;
+  }
+  
+  footer a {
+    transition: color 0.3s ease;
+  }
+  
+  footer text-end:hover {
+    color: #f8d03f; /* Change to a highlight color on hover */
+  }
+
+  footer .text-end {
+    margin-top: 3rem;
+
+  }
+
+  a.text-light:hover {
+    color: #00bfff; /* Light blue hover color */
+    text-decoration: none; /* Remove underline */
+    transform: scale(1.1); /* Slight enlargement */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition */
+  }
