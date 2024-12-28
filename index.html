@@ -102,9 +102,9 @@
 </div>
 
 <div class="container py-5">
-  <div class="row g-4">
+  <div class="row g-4 portfolio-row">
     <!-- Portfolio Item 1 -->
-    <div class="col-md-6 col-lg-4">
+    <div class="col-lg-4">
       <a href="tasteofla.html" target="_blank" class="text-decoration-none">
         <div class="portfolio-card">
           <img src="assets/tasteofla.png" class="card-img-top" alt="Project 1">
@@ -118,17 +118,19 @@
       </a>
     </div>
     <!-- Portfolio Item 2 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="portfolio-card">
-        <img src="assets/spotify.png" alt="Project 6">
-        <div class="card-overlay">
-          <h3>Spotify Connect</h3>
-          <p>UI/UX | Branding <br> Click to learn more!</p>
+    <div class="col-lg-4">
+      <a href="spotify.html" target="_blank" class="text-decoration-none">
+        <div class="portfolio-card">
+          <img src="assets/spotify.png" alt="Project 6">
+          <div class="card-overlay">
+            <h3>Spotify Connect</h3>
+            <p>UI/UX | Branding <br> Click to learn more!</p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <!-- Portfolio Item 3 -->
-    <div class="col-md-6 col-lg-4">
+    <div class="col-lg-4">
       <div class="portfolio-card">
         <img src="assets/fin trip.png" alt="Fin Trip">
         <div class="card-overlay">
@@ -277,6 +279,16 @@
 
   });
   ScrollReveal().reveal('.custom-margin', {
+    origin: 'bottom',
+    distance: '50px',
+    duration: 800,
+    delay: 300, // Adds delay to animate after the text
+    easing: 'ease-in-out',
+    reset: true
+
+  });
+
+  ScrollReveal().reveal('.portfolio-row', {
     origin: 'bottom',
     distance: '50px',
     duration: 800,

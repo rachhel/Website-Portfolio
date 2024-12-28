@@ -104,9 +104,9 @@ h1,h2,h3,h4,h5 {
 
 .coverimage {
     position: relative; /* Allows for top and left adjustments */
-    left: 11rem; /* Push the image to the right */
-    top: 7rem; /* Push the image downward */
-    max-width: 100%; /* Keep the image responsive */
+    left: 2rem; /* Push the image to the right */
+    top: 3rem; /* Push the image downward */
+    max-width: 80%; /* Keep the image responsive */
     height: auto; /* Maintain aspect ratio */
   }
 
@@ -188,6 +188,7 @@ h1,h2,h3,h4,h5 {
     max-width: 80%; /* Restrict to 80% width */
     margin: 0 auto; /* Center the container */
   }
+
   
   h2 {
     font-size: 2.5rem;
