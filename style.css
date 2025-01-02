@@ -144,20 +144,22 @@ h1,h2,h3,h4,h5 {
 }
 
 .custom-btn {
-    background-color: #193451;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.25rem;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 15px; /* Rounded corners */
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  background-color: #193451 !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 0.75rem 1.25rem !important;
+  font-size: 1rem !important;
+  margin-bottom: 1rem !important;
+  border-radius: 15px !important;
+  text-decoration: none !important;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out !important;
 }
 
 .custom-btn:hover {
-    background-color: #8ba8c6; 
-    transform: scale(1.01); /* Slight zoom effect */
+  background-color: #8ba8c6 !important;
+  transform: scale(1.01) !important;
 }
+
 
 .custom-margin {
     margin-top: 10rem; /* Custom top margin */
