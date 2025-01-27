@@ -60,6 +60,9 @@
                     <div class="col-12 rxmock text-center">
                       
                         <img src="assets/rx/RX.png" alt="RX mock" class="img-fluid w-100">
+                        <div class="text-center mt-4">
+                          <a href="#final-section" class="custom-btn">See the Final Design!</a>
+                        </div>
                         
                       </div>
                     </div>
@@ -78,6 +81,7 @@
               </div>
 
               <div class="mb-5">
+                <div class="process">
                 <h3 class="fw-bold">1. THE PROCESS</h3>
                 <p><strong>Research:</strong> </p>
                 <ul>
@@ -91,7 +95,8 @@
                         <img src="assets/rx/process.png" alt="Research Image 1" class="img-fluid w-100">
                     </div>
                 </div>
-
+              </div>
+              <div class="brand">
                 <h3 class="fw-bold">2. THE BRAND.</h3>
 
                 <div class="row mb-6 align-items-center">
@@ -108,13 +113,14 @@
                   </div>
                 </div>
                 
-                <div class="row mt-4 text-center">
+                <div class="row mt-4 text-center branding">
                     <div >
                         <img src="assets/rx/branding.png" alt="Research Image 1" class="img-fluid w-100">
                     </div>
                 </div>
+              </div>
 
-                    <div class="container">
+                    <div class="container" id="final-section">
                       <h2 class="fw-bold text-uppercase mb-4">The Final.</h2>
                       <h3 class = "text-center"> THE DESIGN</h3>
                       <p class = "text-center design"> 
@@ -126,9 +132,9 @@
                       </p>
                   
                       <!-- Lychee -->
-                      <div class="row align-items-center mb-5 DEMO">
+                      <div class="row align-items-center mb-5 lychee">
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 ">
                           <div class="media-container">
                             <img src="assets/rx/LYCHEE.png" alt="Research Image 1" class="img-fluid w-100">
 
@@ -145,7 +151,7 @@
                       </div>
                   
                       <!-- Muscat -->
-                      <div class="row align-items-center mb-5 profile">
+                      <div class="row align-items-center mb-5 profile muscat">
                         <div class="col-md-6 order-md-2">
                           <div class="media-container">
                             <img src="assets/rx/muscat.png" alt="Research Image 1" class="img-fluid w-100">
@@ -160,7 +166,7 @@
                       </div>
                   
                       <!-- Orange -->
-                      <div class="row align-items-center business">
+                      <div class="row align-items-center business orange">
                         <div class="col-md-6">
                           <div class="media-container">
                             <img src="assets/rx/orange.png" alt="Research Image 1" class="img-fluid w-100">
@@ -184,7 +190,7 @@
             </div>
             
 
-            <div class="container">
+            <div class="container marketing">
                 <h2 class="fw-bold text-uppercase mb-4">THE MARKETING.</h2>
                 <p class = "text-center design"> 
                     Embracing Korea's renowned pop-up store culture, RX Energy will launch a unique, immersive experience where each flavor is showcased in its own dedicated pop-up room. These themed spaces will reflect the distinct personality and design of each flavor,
@@ -192,7 +198,7 @@
                 </p>
             
                 <!-- Lychee -->
-                <div class="row align-items-center mb-5 DEMO">
+                <div class="row align-items-center mb-5 lychee">
 
                   <div class="col-md-6">
                     <div class="media-container">
@@ -209,7 +215,7 @@
                 </div>
             
                 <!-- Muscat -->
-                <div class="row align-items-center mb-5 profile">
+                <div class="row align-items-center mb-5 muscat">
                   <div class="col-md-6 order-md-2">
                     <div class="media-container">
                       <img src="assets/rx/muscatmarketing.png" alt="Research Image 1" class="img-fluid w-100">
@@ -223,7 +229,7 @@
                 </div>
             
                 <!-- Orange -->
-                <div class="row align-items-center business">
+                <div class="row align-items-center orange">
                   <div class="col-md-6">
                     <div class="media-container">
                       <img src="assets/rx/orangemarketing.png" alt="Research Image 1" class="img-fluid w-100">
@@ -254,8 +260,8 @@
           <div class="row justify-content-between align-items-center">
             <!-- Column 1: About -->
             <div class="col-md-4 aboutfooter">
-              <h5>About</h5>
-              <p class="small">
+              <h5 class="t5">About</h5>
+              <p class="small text-left">
                 A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
               </p>
             </div>
@@ -281,6 +287,54 @@
           </div>
         </div>
       </footer>
+
+
+      <!-- ScrollReveal Animation Script -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        ScrollReveal().reveal('.overview', {
+            origin: 'bottom',
+            distance: '50px',
+            duration: 800,
+            delay: 300,
+            easing: 'ease-in-out'
+        });
+        ScrollReveal().reveal('.process', {
+            origin: 'bottom',
+            distance: '50px',
+            duration: 800,
+            delay: 300,
+            easing: 'ease-in-out'
+        });
+        ScrollReveal().reveal('.brand', {
+            origin: 'bottom',
+            distance: '50px',
+            duration: 800,
+            delay: 300,
+            easing: 'ease-in-out'
+        });
+        ScrollReveal().reveal('.lychee', {
+            origin: 'right',
+            distance: '50px',
+            duration: 800,
+            delay: 300,
+            easing: 'ease-in-out'
+        });
+        ScrollReveal().reveal('.muscat', {
+            origin: 'left',
+            distance: '50px',
+            duration: 800,
+            delay: 300,
+            easing: 'ease-in-out'
+        });
+        ScrollReveal().reveal('.orange', {
+            origin: 'right',
+            distance: '50px',
+            duration: 800,
+            delay: 300,
+            easing: 'ease-in-out'
+        });
+    </script>
       
 
         
