@@ -251,6 +251,9 @@ p {
     color: #333;
   }
   
+.smallfoot {
+  color: white;
+}
   
   .img-fluid {
     max-width: 100%;
