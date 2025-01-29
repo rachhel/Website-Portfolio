@@ -73,42 +73,62 @@ h1,h2,h3,h4,h5 {
 }
 
 .hero-section {
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    background-image: url(''); /* Add your background image here */
-    background-size: cover;
-    background-position: center;
-    text-align: left; /* Ensure text is centrally aligned */
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Center align text */
+  padding: 2rem 1rem; /* Add padding to prevent content overflow */
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Styling for the main title */
 .hero-title {
-    font-size: 5.5rem;
-    margin-top: 8rem;
-    margin-left: 12rem;
-    font-family: Helvetica;
-
+  font-size: clamp(2.5rem, 5vw, 5.5rem); /* Responsive font size */
+  margin-top: 5rem; /* Adjust top margin */
+  font-family: Helvetica;
 }
 
 /* Styling for the subtitle text */
 .hero-subtitle {
-    font-size: 2rem;
-    font-style: italic;
-    letter-spacing: 0.05em;
-    margin-left: 20rem;
-    color: gray;
+  font-size: clamp(1rem, 2.5vw, 2rem); /* Responsive font size */
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: gray;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+@media (max-width: 768px) {
+  .hero-section {
+      padding-top: 20rem !important; /* Forces spacing for smaller screens */
+  }
+  
 
+  .hero-title {
+      margin-top: 5rem; /* Reduce space slightly on mobile */
+  }
 }
 
+/* Ensuring Image Responsiveness */
 .coverimage {
-    position: relative; /* Allows for top and left adjustments */
-    left: 2rem; /* Push the image to the right */
-    top: 3rem; /* Push the image downward */
-    max-width: 80%; /* Keep the image responsive */
-    height: auto; /* Maintain aspect ratio */
-  }
+  max-width: 100%; /* Prevents overflow */
+  height: auto;
+  margin-top: 2rem; /* Adds spacing between text and image */
+  position: relative;
+  left: 0; /* Remove left offset */
+}
+
+body {
+  overflow-x: hidden; /* This is fine */
+  overflow-y: auto; /* Ensures scrolling works */
+}
+html {
+  overflow-y: auto; /* Ensures scrolling */
+}
+
 
 /* Optional: Center the down arrow */
 .scroll-down {
