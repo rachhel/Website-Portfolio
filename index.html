@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rachel Chen - Portfolio</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" >
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
 </head>
+
 <body id="page-top">
+
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container px-4 px-lg-5">
@@ -34,40 +33,95 @@
   </nav>
 
   <div class="container-fluid hero-section">
+    <!-- Animated Background Elements -->
+    <div class="grid-background"></div>
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Floating Shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+
     <div class="row align-items-center text-center">
-        <div class="col-lg-6">
-            <!-- Main Title -->
-            <h1 class="hero-title">RACHEL CHEN</h1>
-            <!-- Subtitle -->
-            <div class="hero-subtitle">
-                <div class="row justify-content-center">
-                    <div class="col-auto fw-light mx-2">Creating</div>
-                    <div class="col-auto fw-light mx-2">with</div>
-                    <div class="col-auto fw-light mx-2">Code and Design</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <img src="assets/cover.jpg" alt="Decorative Image" class="img-fluid rounded coverimage">
-        </div>
+      <div class="col-lg-6">
+        <!-- Main Title with Animation Wrapper -->
+        <div class="hero-name-wrapper">
+          <h1 class="hero-title">RACHEL CHEN</h1>
+          
+
+
+<!-- Polaroid Photos Popup -->
+<div class="fun-facts">
+  <!-- Polaroid 1 -->
+  <div class="polaroid-mini">
+    <div class="polaroid-image-mini">
+      <img src="assets/music.JPG" alt="Workspace">
     </div>
-  
-
-  
-
-</div>
-
-<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-  <div class="d-flex justify-content-center">
-      <div class="text-center">
-          <h2 class="mx-auto mt-2 mb-5 text-reveal">A Computer Science and Interaction Design student at <br> Northeastern University blending creativity with technology.</h2>
-          <a class="custom-btn" href="about.html">More About Me</a>
-        </div>
+    <div class="polaroid-caption-mini">
+      playlist on 24/7 🎧
+    </div>
   </div>
+
+  <!-- Polaroid 2 -->
+  <div class="polaroid-mini">
+    <div class="polaroid-image-mini">
+      <img src="assets/coffee2.jpeg" alt="Coding">
+    </div>
+    <div class="polaroid-caption-mini">
+      café hopping ☕️
+    </div>
+  </div>
+
+  <!-- Polaroid 3 -->
+  <div class="polaroid-mini">
+    <div class="polaroid-image-mini">
+      <img src="assets/IMG_4671.JPG" alt="Design">
+    </div>
+    <div class="polaroid-caption-mini">
+      outfit of the day✨
+    </div>
+  </div>
+
+  <!-- Polaroid 4 -->
+  <div class="polaroid-mini">
+    <div class="polaroid-image-mini">
+      <img src="assets/laguna.jpeg" alt="Creative">
+    </div>
+    <div class="polaroid-caption-mini">
+      my fav view ✨
+    </div>
+  </div>
+
+  <!-- Arrow pointing to name -->
+  <div class="polaroid-arrow"></div>
 </div>
+  
+        <!-- Subtitle -->
+        <div class="hero-subtitle">
+          <!-- tagline: bigger, can stay italic -->
+          <div class="hero-tagline fw-light mx-1 typewriter-text wavy-underline" >
+            Designer–Engineer building thoughtful digital products.
+          </div>
+  
+          <!-- meta lines: smaller, not italic -->
+          <div class="hero-meta mx-1">
+            Currently studying CS + Design + Global Fashion at Northeastern University.
+          </div>
+          <div class="hero-meta mx-1">
+            Current UI/UX Software Engineer Co-op @ Delsys, prev @ Bose and Sift.
+          </div>
+        </div>
+      </div>
+  
+      <!-- <div class="col-lg-6">
+        <div class="hero-image-container">
+          <img src="assets/arrowpng.png" alt="Decorative Image" class="img-fluid rounded coverimage">
+        </div>
+      </div> -->
+    </div>
+  </div>
 
   <!-- Expertise -->
-
   <div class="container py-5">
     <!-- Section Title -->
     <h2 class="text-center mb-5 expertise-title">MY EXPERTISE</h2>
@@ -88,227 +142,293 @@
     </div>
   </div>
   
-
   <!-- Footer Text -->
   <div class="text-center custom-margin" id="work">
     <p>Browse My Recent</p>
     <h3>WORK</h3>
-</div>
+  </div>
 
-<div class="container py-5">
-  <div class="row g-4 portfolio-row">
-    <!-- Portfolio Item 1 -->
-    <div class="col-lg-4">
-      <a href="tasteofla.html" target="_blank" class="text-decoration-none">
-        <div class="portfolio-card">
-          <img src="assets/tasteofla.png" class="card-img-top" alt="Project 1">
-          <div class="card-overlay">
-            <h3 class="text-light">TASTE OF LA</h3>
-            <p class="text-light">
-              UI/UX | HTML | CSS | JavaScript <br> Click to learn more!
-            </p>
+  <div class="container py-5">
+    <div class="row g-4 portfolio-row">
+      <!-- Portfolio Item 1 -->
+      <div class="col-lg-4">
+        <a href="tasteofla.html" target="_blank" class="text-decoration-none">
+          <div class="portfolio-card">
+            <img src="assets/tasteofla.png" class="card-img-top" alt="Project 1">
+            <div class="card-overlay">
+              <h3 class="text-light">TASTE OF LA</h3>
+              <p class="text-light">
+                UI/UX | HTML | CSS | JavaScript <br> Click to learn more!
+              </p>
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
-    <!-- Portfolio Item 2 -->
-    <div class="col-lg-4">
-      <a href="spotify.html" target="_blank" class="text-decoration-none">
-        <div class="portfolio-card">
-          <img src="assets/spotify.png" alt="Project 6">
-          <div class="card-overlay">
-            <h3>Spotify Connect</h3>
-            <p>UI/UX | Branding <br> Click to learn more!</p>
+        </a>
+      </div>
+      <!-- Portfolio Item 2 -->
+      <div class="col-lg-4">
+        <a href="spotify.html" target="_blank" class="text-decoration-none">
+          <div class="portfolio-card">
+            <img src="assets/spotify.png" alt="Project 6">
+            <div class="card-overlay">
+              <h3>Spotify Connect</h3>
+              <p>UI/UX | Branding <br> Click to learn more!</p>
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
-    <!-- Portfolio Item 3 -->
-    <div class="col-lg-4">
-    <a href="fin.html" target="_blank" class="text-decoration-none">
-      <div class="portfolio-card">
-        <img src="assets/fin trip.png" alt="Fin Trip">
-        <div class="card-overlay">
-          <h3>FIN TRIP</h3>
-          <p>UI/UX | Branding <br> Click to learn more!</p>
-        </div>
+        </a>
+      </div>
+      <!-- Portfolio Item 3 -->
+      <div class="col-lg-4">
+        <a href="fin.html" target="_blank" class="text-decoration-none">
+          <div class="portfolio-card">
+            <img src="assets/fin trip.png" alt="Fin Trip">
+            <div class="card-overlay">
+              <h3>FIN TRIP</h3>
+              <p>UI/UX | Branding <br> Click to learn more!</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
-  </div>
-   <!-- Second Row -->
-   <div class="row g-4 porttwo">
-    <!-- Portfolio Item 4 -->
-    <div class="col-md-6 col-lg-4">
-      <a href="rx.html" target="_blank" class="text-decoration-none">
-        <div class="portfolio-card">
-          <img src="assets/rx.png" alt="Project 5">
-          <div class="card-overlay">
-            <h3>RX Energy</h3>
-            <p>UI/UX | Branding <br> Click to learn more!</p>
+    
+    <!-- Second Row -->
+    <div class="row g-4 porttwo">
+      <!-- Portfolio Item 4 -->
+      <div class="col-md-6 col-lg-4">
+        <a href="rx.html" target="_blank" class="text-decoration-none">
+          <div class="portfolio-card">
+            <img src="assets/rx.png" alt="Project 5">
+            <div class="card-overlay">
+              <h3>RX Energy</h3>
+              <p>UI/UX | Branding <br> Click to learn more!</p>
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
-    <!-- Portfolio Item 5 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="portfolio-card">
+        </a>
+      </div>
+      <!-- Portfolio Item 5 -->
+      <div class="col-md-6 col-lg-4">
         <a href="sin.html" target="_blank" class="text-decoration-none">
-        <img src="assets/sin.png" alt="Project 6">
-        <div class="card-overlay">
-          <h3>Sustainable Innovation Network</h3>
-          <p>UI/UX | Branding | HTML | CSS | JS  <br> Click to learn more!</p>
-        </div>
+          <div class="portfolio-card">
+            <img src="assets/sin.png" alt="Project 6">
+            <div class="card-overlay">
+              <h3>Sustainable Innovation Network</h3>
+              <p>UI/UX | Branding | HTML | CSS | JS  <br> Click to learn more!</p>
+            </div>
+          </div>
+        </a>
       </div>
-    </a>
-    </div>
-    <!-- Portfolio Item 6 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="portfolio-card">
-        <img src="assets/bose.png" alt="Project 6">
-        <div class="card-overlay">
-          <h3>Innovative Mobile Features</h3>
-          <p> Swift | Kotlin | Figma </p>
-          <p>Prototyped, implemented, and presented feature designs for the Bose app, focusing on user experience, Bluetooth functionality, and app integration.</p>  <br> Reach out to me to Learn More!  </p>
+      <!-- Portfolio Item 6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="portfolio-card">
+          <img src="assets/bose.png" alt="Project 6">
+          <div class="card-overlay">
+            <h3>Innovative Mobile Features</h3>
+            <p>Swift | Kotlin | Figma</p>
+            <p>Prototyped, implemented, and presented feature designs for the Bose app, focusing on user experience, Bluetooth functionality, and app integration.</p>
+            <br> Reach out to me to Learn More!
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer class="bg-dark text-light py-4">
-  <div class="container">
-    <!-- About and Socials -->
-    <div class="row justify-content-between align-items-center">
-      <!-- Column 1: About -->
-      <div class="col-md-4 aboutfooter">
-        <h5>About</h5>
-        <p class="small">
-          A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
-        </p>
+  <footer class="bg-dark text-light py-4">
+    <div class="container">
+      <!-- About and Socials -->
+      <div class="row justify-content-between align-items-center">
+        <!-- Column 1: About -->
+        <div class="col-md-4 aboutfooter">
+          <h5>About</h5>
+          <p class="small">
+            A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
+          </p>
+        </div>
+
+        <!-- Column 2: Socials -->
+        <div class="col-md-4 text-end">
+          <h5>Follow Me</h5>
+          <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">
+            Github
+          </a>
+          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">
+            LinkedIn
+          </a>
+          <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">
+            Email
+          </a>
+        </div>
       </div>
 
-      <!-- Column 2: Socials -->
-      <div class="col-md-4 text-end">
-        <h5>Follow Me</h5>
-        <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">
-          Github
-        </a>
-        <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">
-          LinkedIn
-        </a>
-        <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">
-          Email
-        </a>
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4 small">
+        Copyright &copy; 2025; Designed and Developed with Love by Rachel ᡣ • . • 𐭩 ♡
       </div>
     </div>
+  </footer>
 
-    <!-- Footer Bottom -->
-    <div class="text-center mt-4 small">
-      Copyright &copy; 2024; Made with Love by Rachel ᡣ • . • 𐭩 ♡
-    </div>
-  </div>
-</footer>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Animation Scripts -->
+  <script>
+    // // ===== CUSTOM CURSOR =====
+    // const cursor = document.querySelector('.custom-cursor');
+    // let mouseX = 0;
+    // let mouseY = 0;
 
+    // document.addEventListener('mousemove', (e) => {
+    //   mouseX = e.clientX;
+    //   mouseY = e.clientY;
+    //   cursor.style.left = mouseX + 'px';
+    //   cursor.style.top = mouseY + 'px';
+    // });
 
+    // // Cursor hover effects
+    
+    // const hoverElements = document.querySelectorAll('a, button, .hero-name-wrapper, .coverimage, .portfolio-card, .custom-btn, .nav-link');
+    // hoverElements.forEach(element => {
+    //   element.addEventListener('mouseenter', () => {
+    //     cursor.style.width = '50px';
+    //     cursor.style.height = '50px';
+    //     cursor.style.borderColor = '#fff';
+    //   });
+    //   element.addEventListener('mouseleave', () => {
+    //     cursor.style.width = '20px';
+    //     cursor.style.height = '20px';
+    //     cursor.style.borderColor = '#000';
+    //   });
+    // });
 
-   
-<script src="https://unpkg.com/scrollreveal"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-    <script>
+    // ===== SPLIT TEXT ANIMATION =====
+    const nameElement = document.querySelector('.hero-title');
+    if (nameElement) {
+      const nameText = nameElement.textContent;
+      nameElement.innerHTML = '';
 
-  ScrollReveal().reveal('.hero-title', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    reset: true
-  });
-  ScrollReveal().reveal('.hero-subtitle .col-auto', { 
-    delay: 300, 
-    interval: 100, // Animates each child element with a small delay
-    distance: '50px',
-    origin: 'bottom',
-    duration: 800,
-    easing: 'ease-in-out',
-  });
-  ScrollReveal().reveal('.expertise-title', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    easing: 'ease-in-out',
-  });
+      nameText.split('').forEach((char, index) => {
+        const span = document.createElement('span');
+        span.className = 'letter';
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        nameElement.appendChild(span);
+      });
+    }
 
-  ScrollReveal().reveal('.coverimage', {
-    origin: 'right',
-    distance: '50px',
-    duration: 800,
-    easing: 'ease-in-out',
-  });
+    // ===== FLOATING PARTICLES =====
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+      const particleCount = 50;
 
-  // Animate the "Computer Science" section from the left
-  ScrollReveal().reveal('.left-reveal', {
-    origin: 'left',
-    distance: '100px',
-    duration: 1000,
-    easing: 'ease-in-out',
-    reset: true
-  });
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        
+        const floatAnimation = `
+          @keyframes float-${i} {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
+          }
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = floatAnimation;
+        document.head.appendChild(style);
+        
+        particle.style.animation = `float-${i} ${Math.random() * 10 + 5}s ease-in-out infinite`;
+        particlesContainer.appendChild(particle);
+      }
 
-  // Animate the "Interaction Design" section from the right
-  ScrollReveal().reveal('.right-reveal', {
-    origin: 'right',
-    distance: '100px',
-    duration: 1000,
-    easing: 'ease-in-out',
-    reset: true
-  });  
-  ScrollReveal().reveal('.text-reveal', {
-    origin: 'bottom', // Animation starts from the bottom
-    distance: '50px', // Move the text 50px upwards
-    duration: 800, // Animation duration in ms
-    easing: 'ease-in-out',
-    reset: true
-  });
+      // Particles follow cursor
+      document.addEventListener('mousemove', (e) => {
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+          const speed = (index % 5 + 1) * 0.01;
+          const x = (e.clientX * speed);
+          const y = (e.clientY * speed);
+          
+          setTimeout(() => {
+            particle.style.transform = `translate(${x}px, ${y}px)`;
+          }, index * 10);
+        });
+      });
+    }
 
-  // Animate the button to scroll up with a slight delay
-  ScrollReveal().reveal('.btn-reveal', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    delay: 300, // Adds delay to animate after the text
-    easing: 'ease-in-out',
-    reset: true
+    // ===== PARALLAX IMAGE =====
+    const imageContainer = document.querySelector('.hero-image-container');
+    if (imageContainer) {
+      document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX - window.innerWidth / 2) / 50;
+        const y = (e.clientY - window.innerHeight / 2) / 50;
+        
+        imageContainer.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    }
 
-  });
-  ScrollReveal().reveal('.custom-margin', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    delay: 300, // Adds delay to animate after the text
-    easing: 'ease-in-out',
-    reset: true
+    // ===== SCROLLREVEAL ANIMATIONS =====
+    ScrollReveal().reveal('.hero-title', {
+      origin: 'bottom',
+      distance: '50px',
+      duration: 800,
+      reset: true
+    });
 
-  });
+    ScrollReveal().reveal('.hero-subtitle .hero-tagline, .hero-subtitle .hero-meta', { 
+      delay: 300, 
+      interval: 100,
+      distance: '50px',
+      origin: 'bottom',
+      duration: 800,
+      easing: 'ease-in-out',
+    });
 
-  ScrollReveal().reveal('.portfolio-row', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    delay: 300, // Adds delay to animate after the text
-    easing: 'ease-in-out',
-    reset: true
+    ScrollReveal().reveal('.expertise-title', {
+      origin: 'bottom',
+      distance: '50px',
+      duration: 800,
+      easing: 'ease-in-out',
+    });
 
-  });
-  ScrollReveal().reveal('.portfolio-card', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    delay: 300, // Adds delay to animate after the text
-    easing: 'ease-in-out',
-    reset: true
+    ScrollReveal().reveal('.coverimage', {
+      origin: 'right',
+      distance: '50px',
+      duration: 800,
+      easing: 'ease-in-out',
+    });
 
-  });
-    </script>
+    ScrollReveal().reveal('.left-reveal', {
+      origin: 'left',
+      distance: '100px',
+      duration: 1000,
+      easing: 'ease-in-out',
+      reset: true
+    });
+
+    ScrollReveal().reveal('.right-reveal', {
+      origin: 'right',
+      distance: '100px',
+      duration: 1000,
+      easing: 'ease-in-out',
+      reset: true
+    });
+
+    ScrollReveal().reveal('.custom-margin', {
+      origin: 'bottom',
+      distance: '50px',
+      duration: 800,
+      delay: 300,
+      easing: 'ease-in-out',
+      reset: true
+    });
+
+    ScrollReveal().reveal('.portfolio-card', {
+      origin: 'bottom',
+      distance: '50px',
+      duration: 800,
+      delay: 300,
+      easing: 'ease-in-out',
+      reset: true
+    });
+  </script>
 </body>
 </html>
