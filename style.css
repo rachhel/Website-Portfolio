@@ -41,7 +41,39 @@ h1,h2,h3,h4,h5 {
   height: 20px;
   border: 2px solid #000;
   border-radius: 50%;
-  position: fixed;
+  position: fixed;<footer class="bg-dark text-light py-4">
+    <div class="container">
+      <!-- About and Socials -->
+      <div class="row justify-content-between align-items-center">
+        <!-- Column 1: About -->
+        <div class="col-md-4 aboutfooter">
+          <h5>About</h5>
+          <p class="small">
+            A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
+          </p>
+        </div>
+
+        <!-- Column 2: Socials -->
+        <div class="col-md-4 text-end">
+          <h5>Follow Me</h5>
+          <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">
+            Github
+          </a>
+          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">
+            LinkedIn
+          </a>
+          <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">
+            Email
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4 small">
+        Copyright &copy; 2025; Designed and Developed with Love by Rachel ᡣ • . • 𐭩 ♡
+      </div>
+    </div>
+  </footer>
   pointer-events: none;
   z-index: 10000;
   transform: translate(-50%, -50%);

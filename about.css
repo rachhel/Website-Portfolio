@@ -26,6 +26,49 @@ h1,h2,h3,h4,h5 {
   font-family: Helvetica;
 }
 
+/* Navbar Links */
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bs-navbar-color);
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+  color: var(--bs-navbar-hover-color);
+  border-bottom: 2px solid var(--bs-navbar-hover-color);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--bs-navbar-active-color);
+  border-bottom: 2px solid var(--bs-navbar-active-color);
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+  border: none;
+  color: var(--bs-navbar-color);
+  font-size: 1rem;
+}
+
+.navbar-toggler .fas {
+  font-size: 1.2rem;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 992px) {
+  .navbar {
+      padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+  }
+
+  .navbar-nav .nav-link {
+      padding: 0.5rem 1.5rem;
+  }
+}
+
 /* Logo Styling */
 .navbar-brand img {
   height: 80px;
@@ -300,7 +343,6 @@ body::before {
 }
 
 .air-ticket::before {
-  content: 'AIR TICKET';
   position: absolute;
   top: 8px;
   right: 12px;
