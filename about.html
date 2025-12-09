@@ -7,116 +7,178 @@
     <link rel="icon" type="image/x-icon" href="/assets/LOGO.png">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" >
     <link rel="stylesheet" href="about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&family=Cutive+Mono&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="scrapbook-style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
 
 
 </head>
-<body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">
-                  <img src="assets/LOGO.png" alt="Logo" style="height: 100px;">
-                </a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-                        <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
-                        <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-<section class="about-section py-5">
-  <div class="container">
-    <div class="row align-items-center">
-      <!-- Left Column -->
-      <div class="col-md-4">
-        <p class="fst-italic text-muted">
-          My passion for creativity and technology has always driven me.
-        </p>
-        <p>
-          I'm deeply interested in full-stack development, web development, mobile app development, UI/UX design, and Product/Project Management. My academic journey bridges technical expertise with creativity, and I strive to push the boundaries of technology and design to create seamless, user-centric digital experiences.
-        </p>
-      </div>
-
-      <!-- Center Column -->
-      <div class="col-md-4 text-center">
-        <img src="assets/pfp.png" alt="Rachel Chen" class="img-fluid rounded">
-      </div>
-
-      <!-- Right Column -->
-      <div class="col-md-4">
-        <p>
-          I’m a fourth-year Computer Science, Interaction Design, and Global Fashion Studies student at Northeastern University in Boston, Massachusetts, originally from Los Angeles, California.
-        </p>
-      </div>
+<body>
+   <!-- Navigation-->
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#page-top">
+            <img src="assets/LOGO.png" alt="Logo" style="height: 100px;">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+                <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+                <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
+            </ul>
+        </div>
     </div>
+</nav>
 
-    <!-- Footer Title -->
-    <div class="text-center mt-4">
-      <h2 class="display-5 fw-bold">ABOUT RACHEL CHEN</h2>
-    </div>
+<div class="page-header">
+    <div class="page-title">ABOUT ME</div>
+    <div>RACHEL CHEN</div>
+</div>
+
+
+
+
+  <div class="scrapbook-container">
+      <!-- Polaroid with photo -->
+      <div class="scrap-item polaroid item-1" style="--item-rotate: -8deg;">
+          <img src="assets/pfp.png" alt="Rachel Chen" onerror="this.style.display='none'">
+          <div class="polaroid-caption">Rachel in Boston ☕</div>
+      </div>
+
+     
+
+      <!-- Intro ticket -->
+      <div class="scrap-item ticket item-2" style="--item-rotate: 5deg;">
+          <div class="ticket-header">ADMIT ONE</div>
+          <div class="ticket-number">∞ 24/7</div>
+          <div class="ticket-content">
+              <p><strong>Passenger:</strong> Rachel Chen</p>
+              <p><strong>Destination:</strong> Innovation</p>
+              <p>My passion for creativity and technology has always driven me. I bridge technical expertise with creativity to create seamless digital experiences.</p>
+          </div>
+      </div>
+
+      <!-- Skills receipt -->
+      <div class="scrap-item receipt item-3" style="--item-rotate: -3deg;">
+          <div class="receipt-header">*** TECH STACK ***</div>
+          <ul class="receipt-items">
+              <li><span>Java</span><span>✓</span></li>
+              <li><span>Swift</span><span>✓</span></li>
+              <li><span>Kotlin</span><span>✓</span></li>
+              <li><span>Python</span><span>✓</span></li>
+              <li><span>HTML/CSS/JS</span><span>✓</span></li>
+              <li><span>React</span><span>✓</span></li>
+              <li><span>C#</span><span>✓</span></li>
+          </ul>
+          <div class="receipt-total">
+              <span>TOTAL</span>
+              <span>∞ PROJECTS</span>
+          </div>
+      </div>
+
+      <!-- Bio note -->
+      <div class="scrap-item note-card item-4" style="--item-rotate: 3deg;">
+          <h3>Who I Am</h3>
+          <p>Fourth-year Computer Science, Interaction Design, and Global Fashion Studies student at Northeastern University in Boston, Massachusetts.</p>
+          <p>Originally from Los Angeles, California ☀️</p>
+      </div>
+
+      <!-- Air ticket - Experiences -->
+      <div class="scrap-item air-ticket item-5" style="--item-rotate: -5deg;">
+          <div class="air-ticket-title">PROFESSIONAL EXPERIENCES</div>
+          <div class="air-ticket-content">
+              <div class="air-ticket-row">
+                  <span>Delsys</span>
+                  <span>UI/UX SWE</span>
+              </div>
+              <div class="air-ticket-row">
+                  <span>Sift</span>
+                  <span>iOS SWE</span>
+              </div>
+              <div class="air-ticket-row">
+                  <span>Bose</span>
+                  <span>Mobile Engineer</span>
+              </div>
+              <div class="air-ticket-row">
+                  <span>Scout</span>
+                  <span>Project Lead</span>
+              </div>
+              <div class="air-ticket-row">
+                  <span>The Avenue</span>
+                  <span>Comms Designer</span>
+              </div>
+          </div>
+      </div>
+
+      <!-- Coin - Skills circle -->
+      <div class="scrap-item coin item-6" style="--item-rotate: 7deg;">
+          <div>
+              FIGMA · XCODE<br>
+              ADOBE · GIT<br>
+              JIRA · MIRO<br>
+              VISUAL STUDIO
+          </div>
+      </div>
+
+      <!-- Extracurriculars note -->
+      <div class="scrap-item note-card item-8" style="--item-rotate: 6deg;">
+          <h3>Getting Involved</h3>
+          <ul>
+              <li>NEU Campus Leader @ Figma</li>
+              <li>Program Director @ NUCOSMO</li>
+              <li>Husky Ambassador @ NEU</li>
+              <li>Dancer @ NUDANCO</li>
+              <li>Volunteer @ Women in Code</li>
+          </ul>
+      </div>
+
+
+      <!-- Philosophy note -->
+      <div class="scrap-item note-card item-11" style="--item-rotate: -6deg;">
+          <h3>My Approach</h3>
+          <p>I strive to push the boundaries of technology and design to create seamless, user-centric digital experiences.</p>
+          <p style="margin-top: 10px; font-style: italic;">Design · Develop · Delight</p>
+      </div>
   </div>
-
-    
-</section>
-
-<section class="experience-section py-5">
+  <footer class="bg-dark text-light py-4">
     <div class="container">
-      <div class="row">
-        <!-- Left Column: Experiences -->
-        <div class="col-md-4">
-          <h5 class="fw-bold">EXPERIENCES</h5>
-          <ul class="list-unstyled">
-            <li>UI/UX Software Engineer @ Delsys</li>
-            <li>iOS Software Engineer @ Sift</li>
-
-            <li>iOS/Android Mobile App Engineer @ Bose</li>
-            <li>Project Lead, UI/UX Designer, Developer @ Scout</li>
-            <li>Comms Designer @ The Avenue Fashion Magazine</li>
-            <li> Prev. Community Ambassador @ Kode with Klossy</li>
-          </ul>
+      <!-- About and Socials -->
+      <div class="row justify-content-between align-items-center">
+        <!-- Column 1: About -->
+        <div class="col-md-4 aboutfooter">
+          <h5>About</h5>
+          <p class="small">
+            A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
+          </p>
         </div>
-  
-        <!-- Center Column: Skills -->
-        <div class="col-md-4">
-          <h5 class="fw-bold">SKILLS</h5>
-          <p> Languages: Java, Swift, Kotlin, Python, HTML, CSS, JavaScript, C#, WPF </p>
-          <ul class="list-unstyled">
-            <h5 class="fw-bold">TOOLS AND FRAMEWORKS</h5>
-            <p> IntelliJ IDEA, XCode, Adobe Studios, Git, React, Visual Studio, Jira, Android Studios, Figma, Miro</p>
-            <!-- Add specific tools or frameworks here -->
-        </div>
-  
-        <!-- Right Column: Extracurriculars -->
-        <div class="col-md-4">
-          <h5 class="fw-bold text-md-end">EXTRACURRICULARS I’M INVOLVED IN</h5>
-          <ul class="list-unstyled text-md-end">
-            <li>NEU Campus Leader @ Figma</li>
-            <li>Program Director @ NUCOSMO</li>
-            <li>Husky Ambassador Tour Guide @ Northeastern</li>
-            <li>Program Educator, Fundraising, Public Relations @ Kappa Phi Lambda</li>
-            <li>Dancer @ NUDANCO</li>
-            <li>Volunteer at Women's Community of Code</li>
 
-          </ul>
+        <!-- Column 2: Socials -->
+        <div class="col-md-4 text-end">
+          <h5>Follow Me</h5>
+          <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">
+            Github
+          </a>
+          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">
+            LinkedIn
+          </a>
+          <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">
+            Email
+          </a>
         </div>
       </div>
+
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4 small">
+        Copyright &copy; 2025; Designed and Developed with Love by Rachel ᡣ • . • 𐭩 ♡
+      </div>
     </div>
-  </section>
-  
-
-
-
-<script src="https://unpkg.com/scrollreveal"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </footer>
 </body>
 </html>
