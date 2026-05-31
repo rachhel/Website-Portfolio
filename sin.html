@@ -1,144 +1,489 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="sin.css">   
-     <link rel="icon" type="image/x-icon" href="/assets/LOGO.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sustainable Innovation Network - Rachel Chen</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sin.css" />
+  </head>
+  <body class="sin-page">
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="ring"></div>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-</head>
-<body id="page-top">
-    <!-- Navigation-->
+    <!-- NAV -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container px-4 px-lg-5">
-          <a class="navbar-brand" href="index.html">
-            <img src="assets/LOGO.png" alt="Logo" style="height: 100px;">
-          </a>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              Menu
-              <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ms-auto">
-                  <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                  <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#creative.html">Creative</a></li>
-                  <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
-              </ul>
-          </div>
+      <div class="container nav-container">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/LOGO.png" alt="Logo" style="height: 70px" />
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          Menu
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#work">Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="creative.html">Creative</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:chen.rachel1@northeastern.edu"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
-  </nav>
+    </nav>
 
-    <section class="project-section">
-        <!-- Full-Width Header Image -->
-        <div class="header-image">
-          <img src="assets/sin/SINbanner.png" alt="SIN Banner" class="img-fluid w-100">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text"
+          >Branding · UX Design · Web Development</span
+        >
+      </div>
+      <h1 class="sin-title">SIN.</h1>
+      <div class="hero-rule"></div>
+      <div class="hero-strip">
+        <div class="meta-block">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">UI/UX Designer<br />Web Developer</span>
         </div>
-      
-        <div class="container py-5">
-          <!-- Overview Section -->
-          <div class="row mb-5 overview">
-            <h2 class="fw-bold">OVERVIEW</h2>
-            <div class="col-md-6">
-              <p><strong>Challenge:</strong>The client needed a cohesive brand identity from scratch, including a logo, brand book, and website, to establish a strong and memorable presence in their industry. The challenge was to 
-                align the brand's visuals and messaging with their values and target audience while ensuring consistency across all platforms.</p>
-              <p><strong>Opportunity:</strong> This project offered the chance to create a unified and impactful brand identity that set the foundation for the client’s growth. By designing a professional logo, a
-                 detailed brand book, and an engaging website, the brand could effectively communicate its story and connect with its audience.</p>
-              <p><strong>Technologies:</strong> UI/UX | HTML | CSS | JavaScript</p>
-              <p><strong>Frameworks used:</strong> Figma, VSCode, Git</p>
-            </div>
-            <div class="col-md-6">
-              <p><strong>Responsibilities:</strong> UI/UX Designer, Brand Designer, Web Developer, Fullstack Development</p>
-              <p><strong>Project Lead:</strong> Albee Mote</p>
-              <p><strong>Design Team:</strong> Xin Li, Rachel Chen, Vanessa Balin, Gabrielle Schwarz, Madison Lebiedzinski, Grace Uecker </p>
-              <p><strong>Development Team:</strong> Yuni Park, Rachel Chen, Maddie Lebiedzinski, Heidi Eren </p>
+        <div class="meta-block">
+          <span class="meta-label">Team</span>
+          <span class="meta-value">8 Members<br />Cross-functional</span>
+        </div>
+        <div class="meta-block">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Figma · HTML/CSS<br />JS · Git</span>
+        </div>
+        <div class="meta-block">
+          <span class="meta-label">Type</span>
+          <span class="meta-value">Brand Identity ·<br />Full-Stack Web</span>
+        </div>
+      </div>
+      <p class="hero-tagline">
+        A complete brand identity and website built from scratch - logo, brand
+        book, and a live web experience for the Sustainable Innovation Network.
+      </p>
+    </div>
 
+    <!-- HERO IMAGE -->
+    <div class="hero-showcase">
+      <img src="assets/sin/SINbanner.png" alt="SIN Banner" />
+    </div>
+
+    <!-- CASE STUDY -->
+    <div class="case-study">
+      <aside class="sidebar">
+        <span class="sidebar-label">Contents</span>
+        <nav class="sidebar-nav">
+          <a href="#overview" class="sidebar-link active">01. Overview</a>
+          <a href="#demo" class="sidebar-link">02. Live Site</a>
+          <a href="#process" class="sidebar-link">03. Process</a>
+          <a href="#ideation" class="sidebar-link">04. Ideation</a>
+          <a href="#outcome" class="sidebar-link">05. Outcome</a>
+        </nav>
+        <a href="index.html#work" class="sidebar-back">Back to work</a>
+      </aside>
+
+      <main class="content">
+        <!-- 01 OVERVIEW -->
+        <section class="section" id="overview">
+          <div class="section-label">01 - Overview</div>
+          <h2 class="section-title">A brand built <em>from scratch.</em></h2>
+          <div class="section-body">
+            <p>
+              The Sustainable Innovation Network needed a cohesive brand
+              identity from the ground up - logo, brand book, and website - to
+              establish a strong and memorable presence. The challenge was
+              aligning visuals and messaging with their values and target
+              audience while ensuring consistency across all platforms.
+            </p>
+            <p>
+              This project offered the chance to create a unified, impactful
+              brand that set the foundation for the organization's growth -
+              communicating their story and connecting with their audience
+              effectively.
+            </p>
+          </div>
+
+          <div class="deliverables">
+            <div class="deliverable-item">
+              <span class="deliverable-num">01</span
+              ><span class="deliverable-name">Logo & Brand Identity</span>
+            </div>
+            <div class="deliverable-item">
+              <span class="deliverable-num">02</span
+              ><span class="deliverable-name">Brand Book</span>
+            </div>
+            <div class="deliverable-item">
+              <span class="deliverable-num">03</span
+              ><span class="deliverable-name">Website Design</span>
+            </div>
+            <div class="deliverable-item">
+              <span class="deliverable-num">04</span
+              ><span class="deliverable-name">Full-Stack Development</span>
             </div>
           </div>
-      
-          <!-- Video Section -->
-          <div class="row text-center">
-            <div class="col-12 text-center">
-              <!-- Video -->
-              <div class="ratio ratio-16x9 videosample">
-                <video autoplay muted loop>
-                  <source src="assets/sin/demo.mov" type="video/mp4">                  
-                </video>
 
+          <div class="team-grid">
+            <div class="team-block">
+              <div class="team-label">Project Lead</div>
+              <div class="team-value">Albee Mote</div>
+            </div>
+            <div class="team-block">
+              <div class="team-label">Design Team</div>
+              <div class="team-value">
+                Xin Li, Rachel Chen, Vanessa Balin, Gabrielle Schwarz, Madison
+                Lebiedzinski, Grace Uecker
               </div>
             </div>
-            <div class="custom-btn-wrapper">
-                <a class="custom-btn" href="https://sin-neu.netlify.app/">Final Website</a>
+            <div class="team-block">
+              <div class="team-label">Dev Team</div>
+              <div class="team-value">
+                Yuni Park, Rachel Chen, Maddie Lebiedzinski, Heidi Eren
               </div>
+            </div>
           </div>
-
-
-          <!-- Impact Section -->
-          <div class="row mb-5 align-items-center">
-            <div>
-              <h2 class="section-title">THE IMPACT.</h2>
-              <h3 class="section-subtitle">THE WHY</h3>
-              <p>
-                RX Energy redefines the energy drink market by blending the rich flavors and traditions of Asian and Western cultures into a unique, health-conscious beverage. Crafted with 
-                natural ingredients that promote probiotics and essential vitamins, it offers a refreshing energy boost tailored to the modern, active lifestyle.                   </p>
-            </div>
-        
-          </div>
-
-          <div class="mb-5">
-            <h3 class="fw-bold">1. THE PROCESS</h3>
-            <p><strong>Research and Ideation:</strong> </p>
-            <ul>
-                <li> Understanding competitiors and what their branding is.  </li>
-                <li> Meeting with our client and discussing through what they want. </li>
-                <li> Brainstorming logo ideations </li>
-                <li> Creating Site Map and Moodboard </li>
-
-            </ul>
-
-            <div class="row mt-4 text-center">
-                <div >
-                    <p> Competitor Analysis </p>
-                    <img src="assets/sin/sinbegin.png" alt="Research Image 1" class="img-fluid w-100">
-                    <p> Moodboard, Logos, Sitemap </p>
-
-                    <img src="assets/sin/research.png" alt="Research Image 1" class="img-fluid w-100">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-5">
-            <h3 class="fw-bold">2. Ideation and Feedback</h3>
-            <p><strong></strong> </p>
-            <ul>
-                <li> Design Critiques </li>
-                <li> Iteration of Lo-FI Wireframes</li>
-                <li> Finalizing Brand Book</li>
-
-            </ul>
-
-            <div class="row mt-4 text-center">
-                <div >
-                    <img src="assets/sin/sinbegin.png" alt="Research Image 1" class="img-fluid w-100">
-                    <img src="assets/sin/research.png" alt="Research Image 1" class="img-fluid w-100">
-
-                </div>
-            </div>
-        </div>
-
-        
-
-        
-
         </section>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+        <div class="section-rule"></div>
+
+        <!-- 02 LIVE SITE -->
+        <section class="section" id="demo">
+          <div class="section-label">02 - Live Site</div>
+          <h2 class="section-title">See it <em>live.</em></h2>
+          <div class="section-body">
+            <p>
+              The final website is live and deployed - a fully functional,
+              responsive web experience that brings the SIN brand to life.
+            </p>
+          </div>
+          <div class="video-block">
+            <video autoplay muted loop playsinline>
+              <source src="assets/sin/demo.mov" type="video/mp4" />
+            </video>
+          </div>
+          <a
+            href="https://sin-neu.netlify.app/"
+            target="_blank"
+            class="case-link-btn"
+            >Visit Live Site →</a
+          >
+        </section>
+
+        <div class="section-rule"></div>
+
+        <!-- 03 PROCESS -->
+        <section class="section" id="process">
+          <div class="section-label">03 - Process</div>
+          <h2 class="section-title">
+            Research, collaboration, <em>iteration.</em>
+          </h2>
+          <div class="section-body">
+            <p>
+              The process began with understanding the competitive landscape and
+              meeting with the client to align on vision, values, and goals -
+              then moved into logo ideation, sitemap, and moodboard development.
+            </p>
+          </div>
+
+          <div class="process-steps">
+            <div class="step">
+              <div class="step-num">Step 01</div>
+              <div class="step-title">Research & Discovery</div>
+              <div class="step-body">
+                Competitor analysis, client meetings, brainstorming logo
+                ideations, and creating the sitemap and moodboard.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">Step 02</div>
+              <div class="step-title">Ideation & Feedback</div>
+              <div class="step-body">
+                Design critiques, iterating on lo-fi wireframes, and finalizing
+                the brand book with team and client input.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">Step 03</div>
+              <div class="step-title">Build & Launch</div>
+              <div class="step-body">
+                Full-stack development of the final website using HTML, CSS, JS,
+                and Git - deployed live on Netlify.
+              </div>
+            </div>
+          </div>
+
+          <div class="img-block">
+            <img src="assets/sin/sinbegin.png" alt="Competitor Analysis" />
+          </div>
+          <div class="img-caption">Competitor Analysis</div>
+          <div class="img-block">
+            <img
+              src="assets/sin/research.png"
+              alt="Moodboard, Logos, Sitemap"
+            />
+          </div>
+          <div class="img-caption">Moodboard, Logos &amp; Sitemap</div>
+        </section>
+
+        <div class="section-rule"></div>
+
+        <!-- 04 IDEATION -->
+        <section class="section" id="ideation">
+          <div class="section-label">04 - Ideation & Feedback</div>
+          <h2 class="section-title">
+            Design critiques &amp; <em>iteration.</em>
+          </h2>
+          <div class="section-body">
+            <p>
+              Design critiques shaped the direction - iterating on lo-fi
+              wireframes and refining the brand book through rounds of team and
+              client feedback before moving into high-fidelity and development.
+            </p>
+          </div>
+          <div class="img-half">
+            <div class="img-block">
+              <img src="assets/sin/sinbegin.png" alt="Lo-fi Wireframes" />
+            </div>
+            <div class="img-block">
+              <img src="assets/sin/research.png" alt="Brand Book" />
+            </div>
+          </div>
+        </section>
+
+        <div class="section-rule"></div>
+
+        <!-- 05 OUTCOME -->
+        <section class="section" id="outcome">
+          <div class="section-label">05 - Outcome</div>
+          <h2 class="section-title">A brand that <em>lives online.</em></h2>
+          <div class="section-body">
+            <p>
+              The final deliverable was a fully deployed website alongside a
+              comprehensive brand identity system - giving SIN a professional,
+              consistent presence across digital platforms.
+            </p>
+          </div>
+          <div class="outcomes-grid">
+            <div class="outcome-item">
+              <div class="outcome-label">Delivered</div>
+              <div class="outcome-value">
+                Complete brand identity system - logo, colors, typography, and
+                usage guidelines
+              </div>
+            </div>
+            <div class="outcome-item">
+              <div class="outcome-label">Delivered</div>
+              <div class="outcome-value">
+                Live, responsive website deployed at sin-neu.netlify.app
+              </div>
+            </div>
+            <div class="outcome-item">
+              <div class="outcome-label">My Role</div>
+              <div class="outcome-value">
+                UI/UX design, brand design, and full-stack web development
+                across both teams
+              </div>
+            </div>
+            <div class="outcome-item">
+              <div class="outcome-label">Stack</div>
+              <div class="outcome-value">
+                HTML · CSS · JavaScript · Figma · Git · Netlify
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- NEXT PROJECT -->
+        <div class="next-project">
+          <div>
+            <div class="next-label">Next project</div>
+            <a href="boozy.html" class="next-title">Boozy Treats →</a>
+          </div>
+          <span class="next-arrow">→</span>
+        </div>
+      </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer
+      style="
+        background: #0e0e0e;
+        color: #ccc;
+        font-size: 0.88rem;
+        padding: 2rem 0;
+      "
+    >
+      <div style="max-width: 100%; padding: 0 4rem">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding-top: 2rem;
+          "
+        >
+          <div>
+            <h5
+              style="
+                color: #fff;
+                font-size: 0.8rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                font-family: &quot;DM Sans&quot;, sans-serif;
+              "
+            >
+              About
+            </h5>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: #666;
+                font-family: &quot;DM Sans&quot;, sans-serif;
+                font-weight: 300;
+              "
+            >
+              A passionate creator blending creativity and technology.<br />Based
+              in Los Angeles and Durham.
+            </p>
+          </div>
+          <div style="text-align: right">
+            <h5
+              style="
+                color: #fff;
+                font-size: 0.8rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                font-family: &quot;DM Sans&quot;, sans-serif;
+              "
+            >
+              Follow Me
+            </h5>
+            <div style="display: flex; gap: 1.5rem; justify-content: flex-end">
+              <a
+                href="https://github.com/rachhel"
+                target="_blank"
+                style="
+                  color: #666;
+                  text-decoration: none;
+                  font-size: 0.82rem;
+                  font-family: &quot;DM Sans&quot;, sans-serif;
+                "
+                onmouseover="this.style.color = '#ddd'"
+                onmouseout="this.style.color = '#666'"
+                >Github</a
+              >
+              <a
+                href="https://www.linkedin.com/in/rachelchen1016/"
+                target="_blank"
+                style="
+                  color: #666;
+                  text-decoration: none;
+                  font-size: 0.82rem;
+                  font-family: &quot;DM Sans&quot;, sans-serif;
+                "
+                onmouseover="this.style.color = '#ddd'"
+                onmouseout="this.style.color = '#666'"
+                >LinkedIn</a
+              >
+              <a
+                href="mailto:chen.rachel1@northeastern.edu"
+                style="
+                  color: #666;
+                  text-decoration: none;
+                  font-size: 0.82rem;
+                  font-family: &quot;DM Sans&quot;, sans-serif;
+                "
+                onmouseover="this.style.color = '#ddd'"
+                onmouseout="this.style.color = '#666'"
+                >Email</a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #444;
+            font-family: &quot;DM Sans&quot;, sans-serif;
+          "
+        >
+          Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("ring");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.left = mx + "px";
+        cursor.style.top = my + "px";
+      });
+      (function loop() {
+        rx += (mx - rx) * 0.1;
+        ry += (my - ry) * 0.1;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(loop);
+      })();
+
+      const sections = document.querySelectorAll(".section[id]");
+      const links = document.querySelectorAll(".sidebar-link");
+      function updateActive() {
+        const scrollY = window.scrollY + 120;
+        let current = "";
+        sections.forEach((s) => {
+          if (s.offsetTop <= scrollY) current = s.id;
+        });
+        links.forEach((l) => {
+          l.classList.remove("active");
+          if (l.getAttribute("href") === "#" + current)
+            l.classList.add("active");
+        });
+      }
+      window.addEventListener("scroll", updateActive, { passive: true });
+      updateActive();
+    </script>
+  </body>
 </html>

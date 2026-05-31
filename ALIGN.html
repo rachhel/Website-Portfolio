@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Align — Rachel Chen</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="align.css">
+</head>
+<body class="align-page">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- NAV — matches index.html -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container nav-container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/LOGO.png" alt="Logo" style="height:70px;">
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
+        <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+        <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-line"></div>
+    <span class="hero-eyebrow-text">Senior Capstone · ARTG 4550</span>
+  </div>
+
+  <h1 class="align-title"><span class="align-a">A</span>lign.</h1>
+
+  <div class="hero-rule"></div>
+
+  <div class="hero-strip">
+    <div class="meta-block">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Lead Designer &<br>Researcher</span>
+    </div>
+    <div class="meta-block">
+      <span class="meta-label">Timeline</span>
+      <span class="meta-value">Spring 2026</span>
+    </div>
+    <div class="meta-block">
+      <span class="meta-label">Tools</span>
+      <span class="meta-value">Figma · Canva<br>User Testing</span>
+    </div>
+    <div class="meta-block">
+      <span class="meta-label">Type</span>
+      <span class="meta-value">UX Design ·<br>Brand Design</span>
+    </div>
+  </div>
+
+  <p class="hero-tagline">A more intentional wardrobe, helping users make confident, personalized fashion choices through an interactive styling app.</p>
+</div>
+
+<!-- HERO IMAGE SHOWCASE -->
+<div class="hero-showcase">
+  <!-- Replace the src below with your final product image/mockup -->
+  <img src="assets/headeralign.png" alt="Align App Final Design">
+ 
+</div>
+
+<!-- CASE STUDY -->
+<div class="case-study">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <span class="sidebar-label">Contents</span>
+    <nav class="sidebar-nav">
+      <a href="#overview" class="sidebar-link active">01. Overview</a>
+      <a href="#problem" class="sidebar-link">02. Problem</a>
+      <a href="#research" class="sidebar-link">03. Research</a>
+      <a href="#process" class="sidebar-link">04. Process</a>
+      <a href="#branding" class="sidebar-link">05. Branding</a>
+      <a href="#solution" class="sidebar-link">06. Solution</a>
+      <a href="#outcomes" class="sidebar-link">07. Outcomes</a>
+    </nav>
+    <a href="index.html#work" class="sidebar-back">Back to work</a>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- 01 OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="section-label">01 — Overview</div>
+      <h2 class="section-title">A more <em>intentional</em> wardrobe.</h2>
+      <div class="section-body">
+        <p>Align is a fashion styling app that helps users feel more confident and intentional about their clothing choices. By uploading or snapping a photo of a clothing item, users select a style vibe — casual, professional, or night out — and receive curated outfit inspiration sourced from fashion creators and visual platforms.</p>
+        <p>Through an interactive swiping experience, users can quickly assess whether a piece aligns with their personal style and if they should buy it. Blending fashion, technology, and personalization, the app makes thoughtful styling both accessible and fun.</p>
+      </div>
+
+      <div class="deliverables">
+        <div class="deliverable-item"><span class="deliverable-num">01</span><span class="deliverable-name">Brand Book</span></div>
+        <div class="deliverable-item"><span class="deliverable-num">02</span><span class="deliverable-name">Mobile App</span></div>
+        <div class="deliverable-item"><span class="deliverable-num">03</span><span class="deliverable-name">Posters</span></div>
+        <div class="deliverable-item"><span class="deliverable-num">04</span><span class="deliverable-name">Social Media</span></div>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- 02 PROBLEM -->
+    <section class="section" id="problem">
+      <div class="section-label">02 — Problem</div>
+      <h2 class="section-title">The emotional pain point happens in the <em>dressing room.</em></h2>
+      <div class="section-body">
+        <p>Many shoppers struggle to decide whether to purchase clothing items because they cannot easily visualize how the piece fits into their personal style or real-life contexts.</p>
+        <p>Existing solutions like Pinterest and TikTok are fragmented and inefficient, especially when shopping alone. There is a need for a centralized, visually guided, and personalized system.</p>
+      </div>
+
+      <div class="callout">
+        <p>"Existing wardrobe apps optimize for organization and long-term efficiency, but my research shows the emotional pain point happens in the dressing room."</p>
+      </div>
+
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- 03 RESEARCH -->
+    <section class="section" id="research">
+      <div class="section-label">03 — Research</div>
+      <h2 class="section-title">Competitive analysis & <em>user insights.</em></h2>
+      <div class="section-body">
+        <p>The research phase began with a competitive analysis of existing wardrobe and styling apps — Alta, Stylebook, and Whering — to understand where they fell short in addressing the in-the-moment purchase decision problem.</p>
+        <p>User interviews and surveys revealed that existing tools are built for long-term organization, not the emotional, high-pressure moment of deciding whether to buy a piece.</p>
+      </div>
+
+       <div class="img-block"><img src="assets/aligncompetition.png" alt="Competitive Analysis"></div>    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- 04 PROCESS -->
+    <section class="section" id="process">
+      <div class="section-label">04 — Process</div>
+      <h2 class="section-title">From research to <em>high-fidelity.</em></h2>
+      <div class="section-body">
+        <p>The project moved through competitive research, user flows, low-fidelity wireframes, and into polished high-fidelity prototypes — exploring visual styling, personalization, and the swiping interaction.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">Phase 01</div>
+          <div class="step-title">Research & Flows</div>
+          <div class="step-body">Competitive analysis, user interviews, and user flow definition to map the core experience.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Phase 02</div>
+          <div class="step-title">Wireframes</div>
+          <div class="step-body">Sketch drafts and mid-fidelity wireframes exploring layout, swiping mechanic, and vibe selection.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Phase 03</div>
+          <div class="step-title">High-Fidelity</div>
+          <div class="step-body">Polished screens, brand guidelines, and promotional materials — ready for launch.</div>
+        </div>
+      </div>
+
+    <div class="img-half">
+  <div class="img-block"><img src="assets/sketchalign.png" alt="Sketch"></div>
+  <div class="img-block"><img src="assets/midfi.png" alt="Mid-fi"></div>
+    </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- 05 BRANDING -->
+    <section class="section" id="branding">
+      <div class="section-label">05 — Branding</div>
+      <h2 class="section-title">Elegant, high-class, <em>fashion.</em></h2>
+      <div class="section-body">
+        <p>The Align brand is built around a moodboard of elegance and high-class fashion — a deep crimson red paired with clean typography and textured backgrounds that feel luxurious without being inaccessible.</p>
+        <p>The logo fuses a calligraphic script "A" with a clean sans-serif wordmark, grounding the brand in both tradition and modernity.</p>
+      </div>
+    <div class="img-block"><img src="assets/alignmoodboard.png" alt="Sketch"></div>
+      <div class="img-half">
+          <div class="img-block"><img src="assets/logo iterations.png" alt="logo"></div>
+          <div class="img-block"><img src="assets/type.png" alt="type"></div>
+
+
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- 06 SOLUTION -->
+    <section class="section" id="solution">
+      <div class="section-label">06 — Solution</div>
+      <h2 class="section-title">Swipe to <em>align.</em></h2>
+      <div class="section-body">
+        <p>The final app experience lets users snap or upload a clothing item, select a style vibe, and swipe through curated outfit suggestions sourced from fashion creators. A quick yes/no interaction makes the decision feel effortless.</p>
+        <p>The onboarding flow, high-fidelity screens, and promotional posters all came together into a complete product ready for presentation.</p>
+      </div>
+          <div class="img-block"><img src="assets/onboard.png" alt="type"></div>
+      <div class="img-half">
+  <div class="img-block"><video autoplay loop muted playsinline><source src="assets/alignpt1.MOV" type="video/mp4"></video></div>
+  <div class="img-block"><video autoplay loop muted playsinline><source src="assets/alignpt2.mov" type="video/mp4"></video></div>
+</div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- 07 OUTCOMES -->
+    <section class="section" id="outcomes">
+      <div class="section-label">07 — Outcomes</div>
+      <h2 class="section-title">What <em>Align</em> delivered.</h2>
+
+      <div class="outcomes-grid">
+        <div class="outcome-item">
+          <div class="outcome-label">Deliverable</div>
+          <div class="outcome-value">Complete brand identity including logo, color system, and typography guidelines</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-label">Deliverable</div>
+          <div class="outcome-value">High-fidelity mobile app prototype with full onboarding and swiping flow</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-label">Deliverable</div>
+          <div class="outcome-value">Promotional poster series for launch campaign</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-label">Deliverable</div>
+          <div class="outcome-value">Social media content system designed for Instagram and TikTok</div>
+        </div>
+      </div>
+
+      <div class="section-body" style="margin-top: 2rem;">
+        <p>Presented as the final capstone for ARTG 4550 at Northeastern University, Align represents a full end-to-end product design process, from user research through brand and interaction design to a launch-ready prototype.</p>
+      </div>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <div class="next-project">
+      <div>
+        <div class="next-label">Next project</div>
+        <a href="betweenus.html" class="next-title">Between Us →</a>
+      </div>
+      <span class="next-arrow">→</span>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER — matches index.html -->
+<footer style="background:#0e0e0e; color:#ccc; font-size:0.88rem; padding: 2rem 0;">
+  <div style="max-width:100%; padding: 0 4rem;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding-top:2rem;">
+      <div>
+        <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">About</h5>
+        <p style="font-size:0.82rem; color:#666; font-family:'DM Sans',sans-serif; font-weight:300;">A passionate creator blending creativity and technology.<br>Based in Los Angeles and Durham.</p>
+      </div>
+      <div style="text-align:right;">
+        <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">Follow Me</h5>
+        <div style="display:flex; gap:1.5rem; justify-content:flex-end;">
+          <a href="https://github.com/rachhel" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Github</a>
+          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">LinkedIn</a>
+          <a href="mailto:chen.rachel1@northeastern.edu" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Email</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem; font-size:0.75rem; color:#444; font-family:'DM Sans',sans-serif;">
+      Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  });
+  (function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+  // active sidebar link on scroll — reliable scroll position approach
+  const sections = document.querySelectorAll('.section[id]');
+  const links = document.querySelectorAll('.sidebar-link');
+
+  function updateActive() {
+    const scrollY = window.scrollY + 120; // offset for navbar
+    let current = '';
+    sections.forEach(section => {
+      if (section.offsetTop <= scrollY) {
+        current = section.getAttribute('id');
+      }
+    });
+    links.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive(); // run on load
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Between Us - Rachel Chen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="betweenus.css" />
+</head>
+<body class="bu-page">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="ring"></div>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container nav-container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/LOGO.png" alt="Logo" style="height: 70px" />
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+          <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">CreateSC Designathon · Spring 2025 · 24 hours</span>
+    </div>
+    <h1 class="bu-title">Between Us.</h1>
+    <div class="hero-rule"></div>
+    <div class="hero-strip">
+      <div class="meta-block">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">UX Designer</span>
+      </div>
+      <div class="meta-block">
+        <span class="meta-label">Timeline</span>
+        <span class="meta-value">24 Hours<br />Spring 2025</span>
+      </div>
+      <div class="meta-block">
+        <span class="meta-label">Skills</span>
+        <span class="meta-value">Prototyping · Visual<br />Interaction Design</span>
+      </div>
+      <div class="meta-block">
+        <span class="meta-label">Team</span>
+        <span class="meta-value">Autumn Fung<br />Rachel Chen<br />Valerie Irawan<br />Tiffany Zheng</span>
+      </div>
+    </div>
+    <p class="hero-tagline">A digital letter-writing experience that puts emotional depth back into the way we communicate online.</p>
+  </div>
+
+  <!-- HERO IMAGE SHOWCASE -->
+  <div class="hero-showcase">
+    <img src="assets/betweenus/between us.png" alt="Between Us App">
+  </div>
+
+  <!-- CASE STUDY -->
+  <div class="case-study">
+    <aside class="sidebar">
+      <span class="sidebar-label">Contents</span>
+      <nav class="sidebar-nav">
+        <a href="#overview" class="sidebar-link active">01. Overview</a>
+        <a href="#problem" class="sidebar-link">02. Problem</a>
+        <a href="#solution" class="sidebar-link">03. Solution</a>
+        <a href="#features" class="sidebar-link">04. Features</a>
+        <a href="#interaction" class="sidebar-link">05. Interaction</a>
+        <a href="#brand" class="sidebar-link">06. Brand</a>
+        <a href="#reflection" class="sidebar-link">07. Reflection</a>
+      </nav>
+      <a href="index.html#work" class="sidebar-back">Back to work</a>
+    </aside>
+
+    <main class="content">
+
+      <!-- 01 OVERVIEW -->
+      <section class="section" id="overview">
+        <div class="section-label">01 - Overview</div>
+        <h2 class="section-title">Take your time.<br /><em>Say something real.</em></h2>
+        <div class="section-body">
+          <p>Between Us is a mobile-first platform that translates the care and weight of a handwritten letter into something you can send from your phone. We built the entire thing in under 24 hours at the CreateSC Designathon, working through the night to get every interaction feeling right.</p>
+          <p>Users can build rich, layered messages using photos, voice memos, sketches, and mood customization, then set them to arrive at a specific moment in the future. No notifications. No read receipts. Just the letter, when it's ready.</p>
+        </div>
+        <div class="link-strip">
+          <a href="https://devpost.com/software/between-us-pi9k20" target="_blank" class="case-link">View Devpost submission</a>
+          <a href="#" target="_blank" class="case-link">View Figma prototype</a>
+        </div>
+      </section>
+
+      <div class="section-rule"></div>
+
+      <!-- 02 PROBLEM -->
+      <section class="section" id="problem">
+        <div class="section-label">02 - Problem</div>
+        <h2 class="section-title">We text constantly and yet somehow feel <em>further apart.</em></h2>
+        <div class="section-body">
+          <p>The designathon brief asked us to take a physical, tangible experience and bring it into a digital format without losing what makes it special. We kept coming back to the experience of handwriting letters. Not emails. Not DMs. </p>
+          <p>Modern messaging is built for speed. You send a text in three seconds and the conversation moves on before either person has really said anything. The emotional weight that used to live in written communication has been compressed out of existence.</p>
+          <p>Our team felt this personally. We were all studying far from home, and the friendships that mattered most were the ones hardest to maintain across different schedules and time zones.</p>
+        </div>
+        <div class="callout">
+          <p>What would it feel like if sending a message to someone required you to slow down, sit with your thoughts, and actually mean what you wrote?</p>
+        </div>
+      </section>
+
+      <div class="section-rule"></div>
+
+      <!-- 03 SOLUTION -->
+      <section class="section" id="solution">
+        <div class="section-label">03 - Solution</div>
+        <h2 class="section-title">The feeling of opening something <em>made just for you.</em></h2>
+        <div class="section-body">
+          <p>Between Us is designed to resist the urge to rush. Every step of the experience, from writing to sending to receiving, is built with friction that feels good. The kind of pause that makes you think twice about what you actually want to say.</p>
+        </div>
+      </section>
+
+      <div class="section-rule"></div>
+
+      <!-- 04 FEATURES -->
+      <section class="section" id="features">
+        <div class="section-label">04 - Features</div>
+        <h2 class="section-title">Four ways to make it <em>yours.</em></h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">💌</div>
+            <div class="feature-title">Time-Locked Letters</div>
+            <div class="feature-body">Schedule delivery for a specific moment, a birthday, a rough week, an anniversary, or no reason at all except that you wanted them to have it then.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✍️</div>
+            <div class="feature-title">Reflective Prompts</div>
+            <div class="feature-body">Optional writing prompts pulled from the spirit of We're Not Really Strangers, nudging you past small talk into something worth saying.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🎙️</div>
+            <div class="feature-title">Multimedia Messages</div>
+            <div class="feature-body">Layer in voice memos, letter opening noise effects, hand-drawn sketches, and photos so the letter feels like something they can hold rather than just read.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✉️</div>
+            <div class="feature-title">Envelope Customization</div>
+            <div class="feature-body">Choose stamps, stickers, and a mood palette so the outside of the letter is customized just like how you can customize physically. </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-rule"></div>
+
+      <!-- 05 INTERACTION -->
+      <section class="section" id="interaction">
+        <div class="section-label">05 - Interaction Design</div>
+        <h2 class="section-title">Designed to feel like <em>the real thing.</em></h2>
+        <div class="process-steps">
+          <div class="step">
+            <div class="step-num"> 01</div>
+            <div class="step-title">The Inbox</div>
+            <div class="step-body">Letters sit sealed until you're ready. You scroll through them the way you'd flip through a stack of mail, each one waiting to be opened.</div>
+          </div>
+          <div class="step">
+            <div class="step-num"> 02</div>
+            <div class="step-title">Writing a Letter</div>
+            <div class="step-body">Build your message layer by layer, add a voice note, a doodle, a photo, choose your stamp, and decide when it goes out.</div>
+          </div>
+          <div class="step">
+            <div class="step-num"> 03</div>
+            <div class="step-title">Opening a Letter</div>
+            <div class="step-body">The envelope animates open to reveal the full message in a full-screen view that asks you to stop scrolling and just read.</div>
+          </div>
+        </div>
+        <div class="img-half">
+  <div class="img-with-caption">
+    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/inbox.mp4" type="video/mp4"></video></div>
+    <span class="img-caption">Checking your inbox</span>
+  </div>
+  <div class="img-with-caption">
+    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/betweenus/archive.mp4" type="video/mp4"></video></div>
+    <span class="img-caption">Archive view</span>
+  </div>
+</div>
+<div class="img-half">
+  <div class="img-with-caption">
+    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/create.mp4" type="video/mp4"></video></div>
+    <span class="img-caption">Writing a letter</span>
+  </div>
+  <div class="img-with-caption">
+    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/open.mp4" type="video/mp4"></video></div>
+    <span class="img-caption">Opening a letter</span>
+  </div>
+</div>
+      </section>
+
+      <div class="section-rule"></div>
+
+      <!-- 06 BRAND -->
+      <section class="section" id="brand">
+        <div class="section-label">06 - Brand Identity</div>
+        <h2 class="section-title">Soft, personal, <em>analog at heart.</em></h2>
+        <div class="section-body">
+          <p>The visual identity pulls from the tactile world of paper and ink. Warm neutrals, subtle textures, and type choices that feel like they were chosen by hand rather than generated from a template.</p>
+          <p>Nothing in the brand should feel clinical or tech-forward. Between Us is supposed to feel like something your grandmother might recognize and your best friend would love.</p>
+        </div>
+        <div class="img-block"> <img src = "assets/betweenus/brand.png" ></div>
+        <div class="img-half">
+        <div class="img-block"> <img src = "assets/betweenus/logo.png" ></div>
+        <div class="img-block"> <img src = "assets/betweenus/ui components.png" ></div>
+        </div>
+      </section>
+
+      <div class="section-rule"></div>
+
+   <!-- 07 REFLECTION -->
+<section class="section" id="reflection">
+  <div class="section-label">07 - Reflection</div>
+  <div class="reflection-split">
+    <div class="section-body">
+      <h2 class="section-title" style="margin-bottom: 1rem;">Make it.<br /><em>Matter.</em></h2>
+      <p>We came in with a list of twenty ideas and left with four. That constraint was the best thing that happened to the project. Every feature we kept had to earn its place, and the ones we cut would have diluted what made the core idea worth building in the first place.</p>
+      <p>We had no idea if it would work. That's the honest answer. We had a concept, a tight deadline, and a team running on coffee and conviction. What surprised me most wasn't that we shipped it, but how good it felt to ship something I was actually proud of. Between Us didn't happen because the conditions were perfect. It happened because we decided it would.
+
+</p>
+    </div>
+    <div class="reflection-img">
+      <img src="assets/doingit.png" alt="Between Us Logo">
+    </div>
+  </div>
+</section>
+
+      <!-- NEXT PROJECT -->
+      <div class="next-project">
+        <div>
+          <div class="next-label">Next project</div>
+          <a href="superhero.html" class="next-title">Superpower Mentors</a>
+        </div>
+        <span class="next-arrow">→</span>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="background:#0e0e0e; color:#ccc; font-size:0.88rem; padding: 2rem 0;">
+    <div style="max-width:100%; padding: 0 4rem;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding-top:2rem;">
+        <div>
+          <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">About</h5>
+          <p style="font-size:0.82rem; color:#666; font-family:'DM Sans',sans-serif; font-weight:300;">A passionate creator blending creativity and technology.<br>Based in Los Angeles and Durham.</p>
+        </div>
+        <div style="text-align:right;">
+          <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">Follow Me</h5>
+          <div style="display:flex; gap:1.5rem; justify-content:flex-end;">
+            <a href="https://github.com/rachhel" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Github</a>
+            <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">LinkedIn</a>
+            <a href="mailto:chen.rachel1@northeastern.edu" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Email</a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:2rem; font-size:0.75rem; color:#444; font-family:'DM Sans',sans-serif;">
+        Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const cursor = document.getElementById("cursor");
+    const ring = document.getElementById("ring");
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener("mousemove", (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + "px"; cursor.style.top = my + "px";
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+      ring.style.left = rx + "px"; ring.style.top = ry + "px";
+      requestAnimationFrame(loop);
+    })();
+    const sections = document.querySelectorAll(".section[id]");
+    const links = document.querySelectorAll(".sidebar-link");
+    function updateActive() {
+      const scrollY = window.scrollY + 120;
+      let current = "";
+      sections.forEach((s) => { if (s.offsetTop <= scrollY) current = s.id; });
+      links.forEach((l) => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    }
+    window.addEventListener("scroll", updateActive, { passive: true });
+    updateActive();
+  </script>
+</body>
+</html>

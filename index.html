@@ -1,435 +1,392 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rachel Chen - Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body id="page-top">
+  <body id="page-top">
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container px-4 px-lg-5">
-          <a class="navbar-brand" href="#page-top">
-            <img src="assets/LOGO.png" alt="Logo" style="height: 100px;">
-          </a>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              Menu
-              <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ms-auto">
-                  <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
-                  <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
-                  <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
-              </ul>
-          </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container nav-container">
+        <a class="navbar-brand" href="#page-top">
+          <img src="assets/LOGO.png" alt="Logo" style="height: 100px" />
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+            <li class="nav-item"><a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a></li>
+          </ul>
+        </div>
       </div>
-  </nav>
+    </nav>
 
-  <div class="container-fluid hero-section">
-    <!-- Animated Background Elements -->
-    <div class="grid-background"></div>
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Floating Shapes -->
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
+    <!-- Hero -->
+    <div class="hero-section">
+      <span class="tag tag-1">Based in LA, Boston, Durham, Abroad</span>
+      <span class="tag tag-serif tag-serif-1">Designer–Engineer</span>
+      <span class="tag tag-2">Currently Masters @ Duke!</span>
 
-    <div class="row align-items-center text-center">
-      <div class="col-lg-6">
-        <!-- Main Title with Animation Wrapper -->
-        <div class="hero-name-wrapper">
-          <h1 class="hero-title">RACHEL CHEN</h1>
-          
-
-
-<!-- Polaroid Photos Popup -->
-<div class="fun-facts">
-  <!-- Polaroid 1 -->
-  <div class="polaroid-mini">
-    <div class="polaroid-image-mini">
-      <img src="assets/music.JPG" alt="Workspace">
-    </div>
-    <div class="polaroid-caption-mini">
-      playlist on 24/7 
-    </div>
-  </div>
-
-  <!-- Polaroid 2 -->
-  <div class="polaroid-mini">
-    <div class="polaroid-image-mini">
-      <img src="assets/coffee2.jpeg" alt="Coding">
-    </div>
-    <div class="polaroid-caption-mini">
-      café hopping 
-    </div>
-  </div>
-
-  <!-- Polaroid 3 -->
-  <div class="polaroid-mini">
-    <div class="polaroid-image-mini">
-      <img src="assets/IMG_4671.JPG" alt="Design">
-    </div>
-    <div class="polaroid-caption-mini">
-      outfit of the day
-    </div>
-  </div>
-
-  <!-- Polaroid 4 -->
-  <div class="polaroid-mini">
-    <div class="polaroid-image-mini">
-      <img src="assets/laguna.jpeg" alt="Creative">
-    </div>
-    <div class="polaroid-caption-mini">
-      my fav view 
-    </div>
-  </div>
-
-  <!-- Arrow pointing to name -->
-  <div class="polaroid-arrow"></div>
-</div>
-  
-        <!-- Subtitle -->
-        <div class="hero-subtitle">
-          <!-- tagline: bigger, can stay italic -->
-          <div class="hero-tagline fw-light mx-1 typewriter-text wavy-underline" >
-            Designer–Engineer building thoughtful digital products.
-          </div>
-  
-          <!-- meta lines: smaller, not italic -->
-          <div class="hero-meta mx-1">
-            Currently studying CS + Design + Global Fashion at Northeastern University.
-          </div>
-          <div class="hero-meta mx-1">
-            Current UI/UX Software Engineer Co-op @ Delsys, prev @ Bose and Sift.
+      <div class="hero-name-block">
+        <div class="hero-top-rule"></div>
+        <span class="hero-name" id="nameLine1">RACHEL CHEN</span>
+        <div class="hero-bottom-rule"></div>
+        <div class="hero-strip">
+          <p class="hero-tagline">Building thoughtful digital products at the intersection of design and engineering.</p>
+          <div class="hero-meta-wrap">
+            <div class="hero-meta">M.Eng Design &amp; Tech @ Duke</div>
+            <div class="hero-meta">B.S CS, Design, Fashion @ Northeastern</div>
+            <div class="hero-meta">
+              Prev @
+              <a href="https://delsys.com/" target="_blank" class="hero-meta-link">Delsys</a> ·
+              <a href="https://www.bose.com" target="_blank" class="hero-meta-link">Bose</a> ·
+              <a href="https://www.sift-info.com/" target="_blank" class="hero-meta-link">Sift</a>
+            </div>
           </div>
         </div>
       </div>
-  
-      <!-- <div class="col-lg-6">
-        <div class="hero-image-container">
-          <img src="assets/arrowpng.png" alt="Decorative Image" class="img-fluid rounded coverimage">
-        </div>
-      </div> -->
     </div>
-  </div>
 
-  <!-- Expertise -->
-  <div class="container py-5">
-    <!-- Section Title -->
-    <h2 class="text-center mb-5 expertise-title">MY EXPERTISE</h2>
-  
-    <!-- Expertise Content -->
-    <div class="row text-center">
-        <!-- Left Column: Computer Science -->
+    <!-- Expertise -->
+    <div class="container py-5 expertise-section">
+      <h2 class="text-center mb-5 expertise-title">MY EXPERTISE</h2>
+      <div class="row text-center">
         <div class="col-md-6 left-reveal">
-            <h3 class="fw-light fst-italic">Computer Science</h3>
-            <p>Experienced in hybrid mobile app development, full-stack web development, and functional programming.</p>
+          <h3 class="fw-light fst-italic">Computer Science</h3>
+          <p>Full-stack web, hybrid mobile, and functional programming across React, Swift, and Kotlin.</p>
         </div>
-        
-        <!-- Right Column: Interaction Design -->
         <div class="col-md-6 right-reveal">
-            <h3 class="fw-light fst-italic">Interaction Design</h3>
-            <p>Passionate about UI/UX design, product design, brand design and identity, and front-end development.</p>
-        </div>
-    </div>
-  </div>
-  
-  <!-- Footer Text -->
-  <div class="text-center custom-margin" id="work">
-    <p>Browse My Recent</p>
-    <h3>WORK</h3>
-  </div>
-
-  <div class="container py-5">
-    <div class="row g-4 portfolio-row">
-      <!-- Portfolio Item 1 -->
-      <div class="col-lg-4">
-        <a href="tasteofla.html" target="_self" class="text-decoration-none">
-          <div class="portfolio-card">
-            <img src="assets/tasteofla.png" class="card-img-top" alt="Project 1">
-            <div class="card-overlay">
-              <h3 class="text-light">TASTE OF LA</h3>
-              <p class="text-light">
-                UI/UX | HTML | CSS | JavaScript <br> Click to learn more!
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- Portfolio Item 2 -->
-      <div class="col-lg-4">
-        <a href="spotify.html" target="_self" class="text-decoration-none">
-          <div class="portfolio-card">
-            <img src="assets/spotify.png" alt="Project 6">
-            <div class="card-overlay">
-              <h3>Spotify Connect</h3>
-              <p>UI/UX | Branding <br> Click to learn more!</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- Portfolio Item 3 -->
-      <div class="col-lg-4">
-        <a href="fin.html" target="_self" class="text-decoration-none">
-          <div class="portfolio-card">
-            <img src="assets/fin trip.png" alt="Fin Trip">
-            <div class="card-overlay">
-              <h3>FIN TRIP</h3>
-              <p>UI/UX | Branding <br> Click to learn more!</p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-    
-    <!-- Second Row -->
-    <div class="row g-4 porttwo">
-      <!-- Portfolio Item 4 -->
-      <div class="col-md-6 col-lg-4">
-        <a href="rx.html" target="_self" class="text-decoration-none">
-          <div class="portfolio-card">
-            <img src="assets/rx.png" alt="Project 5">
-            <div class="card-overlay">
-              <h3>RX Energy</h3>
-              <p>UI/UX | Branding <br> Click to learn more!</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- Portfolio Item 5 -->
-      <div class="col-md-6 col-lg-4">
-        <a href="sin.html" target="_self" class="text-decoration-none">
-          <div class="portfolio-card">
-            <img src="assets/sin.png" alt="Project 6">
-            <div class="card-overlay">
-              <h3>Sustainable Innovation Network</h3>
-              <p>UI/UX | Branding | HTML | CSS | JS  <br> Click to learn more!</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- Portfolio Item 6 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="portfolio-card">
-          <img src="assets/bose.png" alt="Project 6">
-          <div class="card-overlay">
-            <h3>Innovative Mobile Features</h3>
-            <p>Swift | Kotlin | Figma</p>
-            <p>Prototyped, implemented, and presented feature designs for the Bose app, focusing on user experience, Bluetooth functionality, and app integration.</p>
-            <br> Reach out to me to Learn More!
-          </div>
+          <h3 class="fw-light fst-italic">Interaction Design</h3>
+          <p>Crafting intuitive experiences through UX, product, and brand design.</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <footer class="bg-dark text-light py-4">
-    <div class="container">
-      <!-- About and Socials -->
-      <div class="row justify-content-between align-items-center">
-        <!-- Column 1: About -->
-        <div class="col-md-4 aboutfooter">
-          <h5>About</h5>
-          <p class="small">
-            A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
-          </p>
+    <!-- Chrome Works Section -->
+    <div class="chrome-works-section" id="work">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">
+            <div class="eyebrow-line"></div>
+            <span class="eyebrow-text">Selected work</span>
+          </div>
+          <h2 class="section-title">Work</h2>
         </div>
+        <div class="header-right">
+          <span class="project-count">09 projects</span>
+          <span class="header-tag">UX &amp; Product Design</span>
+        </div>
+      </div>
 
-        <!-- Column 2: Socials -->
-        <div class="col-md-4 text-end">
-          <h5>Follow Me</h5>
-          <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">
-            Github
+      <div class="rule-wrap">
+        <div class="chrome-rule"></div>
+        <div class="rule-diamond left"></div>
+        <div class="rule-diamond mid"></div>
+        <div class="rule-diamond right"></div>
+      </div>
+
+      <div class="projects-grid projects-grid-top">
+
+        <!-- 01 -->
+        <div class="project-card card-1">
+          <a href="ALIGN.html" class="card-link">
+            <div class="card-frame"><div class="card-inner"><div class="card-img-wrap">
+              <img class="card-img" src="assets/align.png" alt="ALIGN" />
+              <div class="shimmer"></div>
+              <div class="rivets"><div class="rivet tl"></div><div class="rivet tr"></div><div class="rivet bl"></div><div class="rivet br"></div></div>
+              <div class="card-overlay">
+                <div class="overlay-link"><svg viewBox="0 0 12 12"><path d="M2 10 L10 2 M4 2 H10 V8"/></svg></div>
+                <span class="overlay-tag">UX Design · Mobile · Fashion</span>
+                <h3 class="overlay-title">ALIGN</h3>
+              </div>
+            </div></div></div>
           </a>
-          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">
-            LinkedIn
+          <div class="card-label"><span class="card-num">01</span><span class="card-name">ALIGN</span></div>
+        </div>
+
+        <!-- 02 -->
+        <div class="project-card card-2">
+          <a href="betweenus.html" class="card-link">
+            <div class="card-frame"><div class="card-inner"><div class="card-img-wrap">
+              <img class="card-img" src="assets/betweenus/betweenus.png" alt="Between Us" />
+              <div class="shimmer"></div>
+              <div class="rivets"><div class="rivet tl"></div><div class="rivet tr"></div><div class="rivet bl"></div><div class="rivet br"></div></div>
+              <div class="card-overlay">
+                <div class="overlay-link"><svg viewBox="0 0 12 12"><path d="M2 10 L10 2 M4 2 H10 V8"/></svg></div>
+                <span class="overlay-tag">UX Design · Mobile</span>
+                <h3 class="overlay-title">Between Us</h3>
+              </div>
+            </div></div></div>
           </a>
-          <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">
-            Email
+          <div class="card-label"><span class="card-num">02</span><span class="card-name">Between Us</span></div>
+        </div>
+
+        <!-- 03 -->
+        <div class="project-card card-3">
+          <a href="superhero.html" class="card-link">
+            <div class="card-frame"><div class="card-inner"><div class="card-img-wrap">
+              <img class="card-img" src="assets/superpowerhead.png" alt="Superpower Mentors" />
+              <div class="shimmer"></div>
+              <div class="rivets"><div class="rivet tl"></div><div class="rivet tr"></div><div class="rivet bl"></div><div class="rivet br"></div></div>
+              <div class="card-overlay">
+                <div class="overlay-link"><svg viewBox="0 0 12 12"><path d="M2 10 L10 2 M4 2 H10 V8"/></svg></div>
+                <span class="overlay-tag">Branding · UX Design · Web</span>
+                <h3 class="overlay-title">Superpower Mentors</h3>
+              </div>
+            </div></div></div>
           </a>
+          <div class="card-label"><span class="card-num">03</span><span class="card-name">Superpower Mentors</span></div>
+        </div>
+
+        <!-- 04 -->
+        <div class="project-card card-4">
+          <a href="rx.html" class="card-link">
+            <div class="card-frame"><div class="card-inner"><div class="card-img-wrap">
+              <img class="card-img" src="assets/RXenergyheader.png" alt="RX Energy" />
+              <div class="shimmer"></div>
+              <div class="rivets"><div class="rivet tl"></div><div class="rivet tr"></div><div class="rivet bl"></div><div class="rivet br"></div></div>
+              <div class="card-overlay">
+                <div class="overlay-link"><svg viewBox="0 0 12 12"><path d="M2 10 L10 2 M4 2 H10 V8"/></svg></div>
+                <span class="overlay-tag">Branding · Product/Package Design</span>
+                <h3 class="overlay-title">RX Energy</h3>
+              </div>
+            </div></div></div>
+          </a>
+          <div class="card-label"><span class="card-num">04</span><span class="card-name">RX Energy</span></div>
+        </div>
+
+        <!-- 05 -->
+        <div class="project-card card-5">
+          <a href="sin.html" class="card-link">
+            <div class="card-frame"><div class="card-inner"><div class="card-img-wrap">
+              <img class="card-img" src="assets/SINcover.png" alt="SIN" />
+              <div class="shimmer"></div>
+              <div class="rivets"><div class="rivet tl"></div><div class="rivet tr"></div><div class="rivet bl"></div><div class="rivet br"></div></div>
+              <div class="card-overlay">
+                <div class="overlay-link"><svg viewBox="0 0 12 12"><path d="M2 10 L10 2 M4 2 H10 V8"/></svg></div>
+                <span class="overlay-tag">Branding · UX Design · Web</span>
+                <h3 class="overlay-title">Sustainable Innovation Network</h3>
+              </div>
+            </div></div></div>
+          </a>
+          <div class="card-label"><span class="card-num">05</span><span class="card-name">Sustainable Innovation Network</span></div>
+        </div>
+
+        <!-- 06 -->
+        <div class="project-card card-6">
+          <a href="boozy.html" class="card-link">
+            <div class="card-frame"><div class="card-inner"><div class="card-img-wrap">
+              <img class="card-img" src="assets/boozyhead.png" alt="Boozy Treats" />
+              <div class="shimmer"></div>
+              <div class="rivets"><div class="rivet tl"></div><div class="rivet tr"></div><div class="rivet bl"></div><div class="rivet br"></div></div>
+              <div class="card-overlay">
+                <div class="overlay-link"><svg viewBox="0 0 12 12"><path d="M2 10 L10 2 M4 2 H10 V8"/></svg></div>
+                <span class="overlay-tag">Branding · UX Design · Web</span>
+                <h3 class="overlay-title">Boozy Treats</h3>
+              </div>
+            </div></div></div>
+          </a>
+          <div class="card-label"><span class="card-num">06</span><span class="card-name">Boozy Treats</span></div>
+        </div>
+
+      </div><!-- end first 6 grid -->
+
+      
+      <div class="section-footer">
+        <span class="footer-note">Rachel · 2026</span>
+        <a href="#work" class="view-all">All projects</a>
+      </div>
+    </div>
+
+    <!-- Featured Professional Experiences -->
+    <div class="experience-section" id="experience">
+      <div class="section-header" style="padding: 5rem 80px 0;">
+        <div>
+          <div class="eyebrow">
+            <div class="eyebrow-line"></div>
+            <span class="eyebrow-text">Professional Experience</span>
+          </div>
+          <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="header-right">
+          <span class="project-count">03 co-ops</span>
+          <span class="header-tag">Industry Experience</span>
         </div>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="text-center mt-4 small">
-        Copyright &copy; 2025; Designed and Developed with Love by Rachel ᡣ • . • 𐭩 ♡
+      <div class="rule-wrap" style="margin: 2.5rem 80px 0;">
+        <div class="chrome-rule"></div>
+        <div class="rule-diamond left"></div>
+        <div class="rule-diamond mid"></div>
+        <div class="rule-diamond right"></div>
+      </div>
+
+      <div class="exp-grid">
+
+        <div class="exp-card">
+          <div class="exp-card-inner">
+            <div class="exp-num">01</div>
+            <div class="exp-company">Bose Corporation</div>
+            <div class="exp-role">Mobile App Software Engineering Co-op</div>
+            <div class="exp-date">July 2024 - December 2024</div>
+            <div class="exp-divider"></div>
+            <div class="exp-body">Prototyped, implemented, and presented feature designs for the Bose mobile app, focusing on user experience, Bluetooth functionality, and app integration across iOS and Android.</div>
+            <div class="exp-tags">
+              <span class="exp-tag">Swift</span>
+              <span class="exp-tag">Kotlin</span>
+              <span class="exp-tag">Figma</span>
+              <span class="exp-tag">Mobile</span>
+            </div>
+            <div class="exp-footer"><span class="exp-request">Reach out to learn more →</span></div>
+          </div>
+          <div class="exp-hover-overlay">
+            <span class="exp-hover-text"> reach out to learn more</span>
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-inner">
+            <div class="exp-num">02</div>
+            <div class="exp-company">Delsys</div>
+            <div class="exp-role">Software Engineering Co-op</div>
+            <div class="exp-date">July 2025 - December 2025</div>
+            <div class="exp-divider"></div>
+            <div class="exp-body">Developed software solutions for biomedical signal processing and EMG sensor technology, building tools used by researchers and clinicians worldwide.</div>
+            <div class="exp-tags">
+              <span class="exp-tag">Python</span>
+              <span class="exp-tag">C#</span>
+              <span class="exp-tag">Biomedical</span>
+              <span class="exp-tag">Signal Processing</span>
+            </div>
+            <div class="exp-footer"><span class="exp-request">Reach out to learn more →</span></div>
+          </div>
+          <div class="exp-hover-overlay">
+            <span class="exp-hover-text">reach out to learn more</span>
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-inner">
+            <div class="exp-num">03</div>
+            <div class="exp-company">Sift</div>
+            <div class="exp-role">Software Engineering Co-op</div>
+            <div class="exp-date">Summer 2025</div>
+            <div class="exp-divider"></div>
+            <div class="exp-body">Helped a startup fashion tech brand build their database and set up backend infrastructure, laying the technical foundation for their product from the ground up.</div>
+            <div class="exp-tags">
+              <span class="exp-tag">Full Stack</span>
+              <span class="exp-tag">React</span>
+              <span class="exp-tag">Python &amp; SQL</span>
+              <span class="exp-tag">Startup</span>
+
+            </div>
+            <div class="exp-footer"><span class="exp-request">Reach out to learn more →</span></div>
+          </div>
+          <div class="exp-hover-overlay">
+            <span class="exp-hover-text"> reach out to learn more</span>
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn">Contact Me</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-footer" style="margin: 0 80px;">
+        <span class="footer-note">Rachel · 2026</span>
       </div>
     </div>
-  </footer>
 
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Animation Scripts -->
-  <script>
-    // // ===== CUSTOM CURSOR =====
-    // const cursor = document.querySelector('.custom-cursor');
-    // let mouseX = 0;
-    // let mouseY = 0;
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-4 aboutfooter">
+            <h5>About</h5>
+            <p class="small">A passionate creator blending creativity and technology.<br />Based in Los Angeles and Durham.</p>
+          </div>
+          <div class="col-md-4 text-end">
+            <h5>Follow Me</h5>
+            <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">Github</a>
+            <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">LinkedIn</a>
+            <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">Email</a>
+          </div>
+        </div>
+        <div class="text-center mt-4 small">
+          Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+        </div>
+      </div>
+    </footer>
 
-    // document.addEventListener('mousemove', (e) => {
-    //   mouseX = e.clientX;
-    //   mouseY = e.clientY;
-    //   cursor.style.left = mouseX + 'px';
-    //   cursor.style.top = mouseY + 'px';
-    // });
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    // // Cursor hover effects
-    
-    // const hoverElements = document.querySelectorAll('a, button, .hero-name-wrapper, .coverimage, .portfolio-card, .custom-btn, .nav-link');
-    // hoverElements.forEach(element => {
-    //   element.addEventListener('mouseenter', () => {
-    //     cursor.style.width = '50px';
-    //     cursor.style.height = '50px';
-    //     cursor.style.borderColor = '#fff';
-    //   });
-    //   element.addEventListener('mouseleave', () => {
-    //     cursor.style.width = '20px';
-    //     cursor.style.height = '20px';
-    //     cursor.style.borderColor = '#000';
-    //   });
-    // });
-
-    // ===== SPLIT TEXT ANIMATION =====
-    const nameElement = document.querySelector('.hero-title');
-    if (nameElement) {
-      const nameText = nameElement.textContent;
-      nameElement.innerHTML = '';
-
-      nameText.split('').forEach((char, index) => {
-        const span = document.createElement('span');
-        span.className = 'letter';
-        span.textContent = char === ' ' ? '\u00A0' : char;
-        nameElement.appendChild(span);
-      });
-    }
-
-    // ===== FLOATING PARTICLES =====
-    const particlesContainer = document.getElementById('particles');
-    if (particlesContainer) {
-      const particleCount = 50;
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        
-        const floatAnimation = `
-          @keyframes float-${i} {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-          }
-        `;
-        
-        const style = document.createElement('style');
-        style.textContent = floatAnimation;
-        document.head.appendChild(style);
-        
-        particle.style.animation = `float-${i} ${Math.random() * 10 + 5}s ease-in-out infinite`;
-        particlesContainer.appendChild(particle);
+    <script>
+      function splitLetters(el) {
+        if (!el) return;
+        const txt = el.textContent;
+        el.innerHTML = "";
+        txt.split("").forEach((char) => {
+          const s = document.createElement("span");
+          s.className = "letter";
+          s.textContent = char === " " ? "\u00A0" : char;
+          el.appendChild(s);
+        });
       }
+      splitLetters(document.getElementById("nameLine1"));
 
-      // Particles follow cursor
-      document.addEventListener('mousemove', (e) => {
-        const particles = document.querySelectorAll('.particle');
-        particles.forEach((particle, index) => {
-          const speed = (index % 5 + 1) * 0.01;
-          const x = (e.clientX * speed);
-          const y = (e.clientY * speed);
-          
+      document.querySelectorAll(".hero-name .letter").forEach((letter) => {
+        letter.addEventListener("mouseenter", () => {
+          letter.style.transition = "all 0.08s ease";
+          letter.style.background = "linear-gradient(158deg, #aaa 0%, #fff 28%, #888 50%, #eee 72%, #999 100%)";
+          letter.style.webkitBackgroundClip = "text";
+          letter.style.webkitTextFillColor = "transparent";
+          letter.style.backgroundClip = "text";
+        });
+        letter.addEventListener("mouseleave", () => {
           setTimeout(() => {
-            particle.style.transform = `translate(${x}px, ${y}px)`;
-          }, index * 10);
+            letter.style.background = "none";
+            letter.style.webkitTextFillColor = "#0e0e0e";
+          }, 650);
         });
       });
-    }
 
-    // ===== PARALLAX IMAGE =====
-    const imageContainer = document.querySelector('.hero-image-container');
-    if (imageContainer) {
-      document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX - window.innerWidth / 2) / 50;
-        const y = (e.clientY - window.innerHeight / 2) / 50;
-        
-        imageContainer.style.transform = `translate(${x}px, ${y}px)`;
+      ScrollReveal().reveal(".expertise-title", { origin: "bottom", distance: "50px", duration: 800 });
+      ScrollReveal().reveal(".left-reveal", { origin: "left", distance: "100px", duration: 1000, reset: true });
+      ScrollReveal().reveal(".right-reveal", { origin: "right", distance: "100px", duration: 1000, reset: true });
+
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX; my = e.clientY;
+        cursor.style.left = mx + "px"; cursor.style.top = my + "px";
       });
-    }
-
-    // ===== SCROLLREVEAL ANIMATIONS =====
-    ScrollReveal().reveal('.hero-title', {
-      origin: 'bottom',
-      distance: '50px',
-      duration: 800,
-      reset: true
-    });
-
-    ScrollReveal().reveal('.hero-subtitle .hero-tagline, .hero-subtitle .hero-meta', { 
-      delay: 300, 
-      interval: 100,
-      distance: '50px',
-      origin: 'bottom',
-      duration: 800,
-      easing: 'ease-in-out',
-    });
-
-    ScrollReveal().reveal('.expertise-title', {
-      origin: 'bottom',
-      distance: '50px',
-      duration: 800,
-      easing: 'ease-in-out',
-    });
-
-    ScrollReveal().reveal('.coverimage', {
-      origin: 'right',
-      distance: '50px',
-      duration: 800,
-      easing: 'ease-in-out',
-    });
-
-    ScrollReveal().reveal('.left-reveal', {
-      origin: 'left',
-      distance: '100px',
-      duration: 1000,
-      easing: 'ease-in-out',
-      reset: true
-    });
-
-    ScrollReveal().reveal('.right-reveal', {
-      origin: 'right',
-      distance: '100px',
-      duration: 1000,
-      easing: 'ease-in-out',
-      reset: true
-    });
-
-    ScrollReveal().reveal('.custom-margin', {
-      origin: 'bottom',
-      distance: '50px',
-      duration: 800,
-      delay: 300,
-      easing: 'ease-in-out',
-      reset: true
-    });
-
-    ScrollReveal().reveal('.portfolio-card', {
-      origin: 'bottom',
-      distance: '50px',
-      duration: 800,
-      delay: 300,
-      easing: 'ease-in-out',
-      reset: true
-    });
-  </script>
-</body>
+      (function loop() {
+        rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+        ring.style.left = rx + "px"; ring.style.top = ry + "px";
+        requestAnimationFrame(loop);
+      })();
+      document.querySelectorAll(".project-card, a, button").forEach((c) => {
+        c.addEventListener("mouseenter", () => document.body.classList.add("hovering"));
+        c.addEventListener("mouseleave", () => document.body.classList.remove("hovering"));
+      });
+    </script>
+  </body>
 </html>

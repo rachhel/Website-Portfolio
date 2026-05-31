@@ -1,218 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="creative.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative — Rachel Chen</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="creative.css">
 </head>
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">
-              <img src="assets/LOGO.png" alt="Logo" style="height: 100px;">
-            </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-                    <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
-                    <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
-                </ul>
-            </div>
+<body class="creative-page">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container nav-container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/LOGO.png" alt="Logo" style="height:70px;">
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
+        <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+        <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="creative-hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-line"></div>
+    <span class="hero-eyebrow-text">Design · Photography · Painting · Motion</span>
+  </div>
+  <h1 class="creative-title">Creative.</h1>
+  <div class="hero-rule"></div>
+  <p class="creative-tagline">Welcome to my Playground: photography, graphic design, painting, and PR work that keeps the creative muscles moving.</p>
+</div>
+
+
+
+<!-- CREATIVE ROLES -->
+<div class="creative-body">
+
+  <!-- ROLE 01 -->
+  <section class="role-section">
+    <div class="role-num">01</div>
+    <div class="role-content">
+      <div class="role-img">
+        <img src="assets/creative/Comms Designer.png" alt="Communications Designer">
+      </div>
+      <div class="role-text">
+        <div class="role-label">Communications Designer</div>
+        <h2 class="role-title">Brand <em>voice</em> and visual identity.</h2>
+        <p>I serve as the primary creative force behind communications projects, utilizing design tools to craft visually compelling content. I ensure brand consistency by maintaining clear copy, engaging design, and a cohesive visual identity across social platforms.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="creative-rule"></div>
+
+  <!-- ROLE 02 -->
+  <section class="role-section role-reverse">
+    <div class="role-num">02</div>
+    <div class="role-content">
+      <div class="role-text">
+        <div class="role-label">Creative Director</div>
+        <h2 class="role-title">From photoshoot to <em>published.</em></h2>
+        <p>I lead all aspects of creative direction: from setting up photoshoots and collaborating with brands to designing and approving social media content. I create engaging reels and posts to enhance brand visibility and drive audience engagement.</p>
+      </div>
+      <div class="role-img">
+        <img src="assets/creative/pr.png" alt="PR Creative Direction">
+      </div>
+    </div>
+  </section>
+
+  <div class="creative-rule"></div>
+
+  <!-- GALLERY -->
+  <section class="gallery-section">
+    <div class="gallery-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Selected Work</span>
+    </div>
+    <h2 class="gallery-title">A little of <em>everything.</em></h2>
+
+
+    <div class="gallery-grid">
+
+      <div class="gallery-item">
+        <img src="assets/gallery/gall2.png" alt="Van Gogh Exhibit">
+        <div class="gallery-overlay">
+          <p>Van Gogh Exhibit poster — InDesign, Type 1 class</p>
         </div>
-    </nav>
-    
-    <section class="project-section text-center">
-        <!-- Full-Width Header Image -->
-        <div class="header-image">
-            <img src="assets/creative/cover.png" alt="Fin Banner" class="img-fluid w-100">
-            
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/gallery/gall1.png" alt="Van Gogh Exhibit 2">
+        <div class="gallery-overlay">
+          <p>Van Gogh Exhibit poster — InDesign, Type 1 class</p>
         </div>
-     
-    </section>
-    
-    <!-- Content Container -->
-    <section class="creative text-center">
-        <div class="containerCreative">
-            <div class=" row align-items-center">
-                <div class="pic1 col-md-8 grid-image text-end"><img src="assets/creative/Comms Designer.png" alt="Grid Image 1" class="img-fluid"></div>
-                <div class="text1 col-md-3 grid-text text-start">I serve as the primary creative force behind communications projects, utilizing design tools to craft visually compelling content. I ensure brand consistency by maintaining clear copy, engaging design, and a cohesive visual identity across social platforms. </div>
-            </div>
-            
-            <div class="container2 row align-items-center mt-4">
-                <div class="pic2 col-md-3 grid-text text-end">I lead all aspects of creative direction, from setting up photoshoots and collaborating with brands to designing and approving social media content. I create engaging reels and posts to enhance brand visibility and drive audience engagement. </div>
-                <div class=" text2 col-md-8 grid-image text-start"><img src="assets/creative/pr.png" alt="Grid Image 1" class="img-fluid"></div>
-            </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/gallery/gall3.png" alt="Van Gogh Exhibit 3">
+        <div class="gallery-overlay">
+          <p>Van Gogh Exhibit poster — InDesign, Type 1 class</p>
         </div>
-    </section>
+      </div>
 
-
-   
-    <section class="creative text-center">
-        <img class="play" src="assets/creative/Screen Shot 2025-01-29 at 2.44.44 AM.png" alt="Gallery Image 1">            </div>
-
-        <div class="container">
-
-            <div class=" gallery-container text-center">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/gall2.png" alt="Gallery Image 1">
-                        <div class="overlay">Graphic I made in InDesign to promote a Van Gogh Exhibit for my Type1 class</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/gall1.png" alt="Gallery Image 2">
-                        <div class="overlay">Graphic I made in InDesign to promote a Van Gogh Exhibit for my Type1 class</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/gall3.png" alt="Gallery Image 3">
-                        <div class="overlay">Graphic I made in InDesign to promote a Van Gogh Exhibit for my Type1 class</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/jyp.png" alt="Gallery Image 4">
-                        <div class="overlay">Logo redesign of the popular entertainment company JYP for a rebrand assignment in my Brand Design and Identity class </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/typee2.png" alt="Gallery Image 5">
-                        <div class="overlay"> Graphic where I was challenged to only use the type to convey the feeling the font Didot gives to the viewer in my Type2 class</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/toc.png" alt="Gallery Image 6">
-                        <div class="overlay">A simple table of contents page from my magazine I made in my Type2 class</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/bird.png" alt="Gallery Image 7">
-                        <div class="overlay">An acrylic painting I made in my free time.</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/giraffe.png" alt="Gallery Image 8">
-                        <div class="overlay">An acrylic painting I made in my free time</div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="gallery-item">
-                        <img src="assets/gallery/peacock.png" alt="Gallery Image 9">
-                        <div class="overlay">An acrylic painting I made in my free time</div>
-                    </div>
-                </div>
-                <p class = "p"> more creative juices flowing = more to come!</p>
-            </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/jyp.png" alt="JYP Rebrand">
+        <div class="gallery-overlay">
+          <p>JYP Entertainment logo rebrand — Brand Design & Identity class</p>
         </div>
-    </section>
+      </div>
 
-    <footer class="bg-dark text-light py-4">
-        <div class="container">
-          <!-- About and Socials -->
-          <div class="row justify-content-between align-items-center">
-            <!-- Column 1: About -->
-            <div class="col-md-4 aboutfooter">
-              <h5>About</h5>
-              <p class="small">
-                A passionate creator blending creativity and technology. <br> Based in Los Angeles and Boston.
-              </p>
-            </div>
-      
-            <!-- Column 2: Socials -->
-            <div class="col-md-4 text-end">
-              <h5>Follow Me</h5>
-              <a href="https://github.com/rachhel" target="_blank" class="text-light me-3">
-                Github
-              </a>
-              <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="text-light me-3">
-                LinkedIn
-              </a>
-              <a href="mailto:chen.rachel1@northeastern.edu" target="_blank" class="text-light">
-                Email
-              </a>
-            </div>
-          </div>
-      
-          <!-- Footer Bottom -->
-          <div class="text-center mt-4 small">
-            Copyright &copy; 2024; Made with Love by Rachel ᡣ • . • 𐭩 ♡
-          </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/typee2.png" alt="Didot Typography">
+        <div class="gallery-overlay">
+          <p>Type-only exploration of Didot — Type 2 class</p>
         </div>
-      </footer>
+      </div>
 
-      <!-- ScrollReveal Animation Script -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        ScrollReveal().reveal('.pic1', {
-            origin: 'left',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-        ScrollReveal().reveal('.text1', {
-            origin: 'bottom',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-        ScrollReveal().reveal('.pic2', {
-            origin: 'right',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-        ScrollReveal().reveal('.text2', {
-            origin: 'bottom',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-        ScrollReveal().reveal('.gallery-item', {
-            origin: 'bottom',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-        ScrollReveal().reveal('.play', {
-            origin: 'bottom',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-        ScrollReveal().reveal('.p', {
-            origin: 'bottom',
-            distance: '50px',
-            duration: 800,
-            delay: 300,
-            easing: 'ease-in-out'
-        });
-    </script>
-    
+      <div class="gallery-item">
+        <img src="assets/gallery/toc.png" alt="Magazine Table of Contents">
+        <div class="gallery-overlay">
+          <p>Magazine table of contents — Type 2 class</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/gallery/bird.png" alt="Bird Painting">
+        <div class="gallery-overlay">
+          <p>Acrylic painting — personal work</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/gallery/giraffe.png" alt="Giraffe Painting">
+        <div class="gallery-overlay">
+          <p>Acrylic painting — personal work</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/gallery/peacock.png" alt="Peacock Painting">
+        <div class="gallery-overlay">
+          <p>Acrylic painting — personal work</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="gallery-note">more creative juices flowing — more to come.</p>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#0e0e0e; color:#ccc; font-size:0.88rem; padding: 2rem 0;">
+  <div style="max-width:100%; padding: 0 4rem;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding-top:2rem;">
+      <div>
+        <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">About</h5>
+        <p style="font-size:0.82rem; color:#666; font-family:'DM Sans',sans-serif; font-weight:300;">A passionate creator blending creativity and technology.<br>Based in Los Angeles and Durham.</p>
+      </div>
+      <div style="text-align:right;">
+        <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">Follow Me</h5>
+        <div style="display:flex; gap:1.5rem; justify-content:flex-end;">
+          <a href="https://github.com/rachhel" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Github</a>
+          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">LinkedIn</a>
+          <a href="mailto:chen.rachel1@northeastern.edu" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Email</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem; font-size:0.75rem; color:#444; font-family:'DM Sans',sans-serif;">
+      Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  });
+  (function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+  ScrollReveal().reveal('.role-section', { origin:'bottom', distance:'40px', duration:900, delay:100, easing:'ease-out' });
+  ScrollReveal().reveal('.gallery-item', { origin:'bottom', distance:'30px', duration:700, delay:100, interval:80, easing:'ease-out' });
+  ScrollReveal().reveal('.gallery-wide', { origin:'bottom', distance:'40px', duration:800, easing:'ease-out' });
+</script>
 </body>
 </html>
