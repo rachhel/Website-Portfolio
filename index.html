@@ -20,6 +20,618 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ============================================================
+   SEQUIN HERO + CHROME CURSOR
+   Linked in index.html right after style.css
+   ============================================================ */
+
+      /* ---------- hero: name on the left, sequin pad on the right ---------- */
+      .hero-section.hero--pad {
+        justify-content: center;
+        padding: 150px 60px 80px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        gap: clamp(2rem, 5vw, 6rem);
+        align-items: center;
+      }
+      .hero--pad .hero-kicker {
+        position: static;
+        display: block;
+        margin-bottom: 0.6rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
+      }
+      .hero--pad .hero-kicker-serif {
+        position: static;
+        display: block;
+        margin-bottom: 1.6rem;
+      }
+      .hero--pad .hero-name {
+        margin: 0 0 1.8rem;
+        font-size: clamp(2.6rem, 6vw, 6.2rem);
+        line-height: 0.86;
+      }
+      .hero-name-line {
+        display: block;
+      }
+      .hero-name-line + .hero-name-line {
+        padding-left: 0;
+      }
+      .hero--pad .hero-tagline {
+        max-width: 34rem;
+        margin-bottom: 1.4rem;
+      }
+      .hero--pad .hero-meta-wrap {
+        align-items: flex-start;
+      }
+      .hero--pad .hero-meta {
+        text-align: left;
+        font-size: 0.74rem;
+      }
+
+      /* the pad */
+      .sequin-pad-wrap {
+        margin: 0;
+        width: 100%;
+        max-width: 680px;
+        justify-self: end;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .pad-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: #0e0e0e;
+        margin-bottom: 14px;
+      }
+      .hero-sequins {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        max-height: 64vh;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.6) inset,
+          0 24px 50px -28px rgba(0, 0, 0, 0.45);
+      }
+      .hero-sequins canvas {
+        display: block;
+      }
+      .hero-sequins--noir {
+        background: #0d0d0c;
+      }
+      .hero-sequins--pearl {
+        background: #fff;
+        outline: 0.5px solid rgba(0, 0, 0, 0.1);
+      }
+      .pad-note {
+        margin-top: 12px;
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        color: #888;
+        transition: opacity 0.8s ease;
+      }
+      .pad-note.is-hidden {
+        opacity: 0;
+      }
+
+      /* the name is still real text for search engines and screen readers */
+      .visually-hidden {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 900px) {
+        .hero-section.hero--pad {
+          padding: 110px 24px 56px;
+          min-height: auto;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .hero--pad .tag,
+        .hero--pad .tag-serif {
+          display: block; /* keep the kickers on mobile now that they are inline */
+        }
+        .hero--pad .hero-name {
+          font-size: clamp(3.2rem, 17vw, 6rem) !important;
+        }
+        .hero-sequins {
+          aspect-ratio: 4 / 3;
+        }
+
+        /* phones: put the pad right under the name so it's on the first screen */
+        .hero--pad .hero-grid {
+          gap: 0;
+        }
+        .hero--pad .hero-left {
+          display: contents;
+        }
+        .hero--pad .hero-kicker {
+          order: 1;
+        }
+        .hero--pad .hero-kicker-serif {
+          order: 2;
+        }
+        .hero--pad .hero-name {
+          order: 3;
+          margin-bottom: 1.6rem;
+        }
+        .hero--pad .sequin-pad-wrap {
+          order: 7; /* phones: pad sits under the details, right before Expertise */
+          max-width: none;
+          margin-top: 2.4rem;
+          margin-bottom: 0;
+        }
+        .hero--pad .hero-tagline {
+          order: 5;
+        }
+        .hero--pad .hero-meta-wrap {
+          order: 6;
+        }
+        .pad-label {
+          margin-bottom: 10px;
+        }
+      }
+
+      /* ---------- chrome cursor ---------- */
+      /* Only hide the system cursor when the custom one is running
+   (touch devices keep their normal behaviour). */
+      * {
+        cursor: auto;
+      }
+      html.chrome-cursor,
+      html.chrome-cursor * {
+        cursor: none !important;
+      }
+      html.native-cursor .cursor,
+      html.native-cursor .cursor-ring {
+        display: none;
+      }
+
+      .cursor,
+      .cursor-ring {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        will-change: transform;
+      }
+      body.cursor-visible .cursor,
+      body.cursor-visible .cursor-ring {
+        opacity: 1;
+      }
+
+      .cursor {
+        transition:
+          width 0.25s,
+          height 0.25s,
+          background 0.25s,
+          opacity 0.2s;
+      }
+      .cursor-ring {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          border-color 0.3s,
+          background 0.3s,
+          opacity 0.2s;
+      }
+      .cursor-arrow {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: #0e0e0e;
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0;
+        transform: scale(0.4) rotate(-45deg);
+        transition:
+          opacity 0.25s,
+          transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* link state: the dot disappears, the ring becomes a chrome lens with an arrow */
+      body.cursor-link .cursor {
+        width: 0;
+        height: 0;
+      }
+      body.cursor-link .cursor-ring {
+        width: 58px;
+        height: 58px;
+        border: 1px solid transparent;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
+            padding-box,
+          linear-gradient(
+              135deg,
+              #c8c8c8 0%,
+              #ffffff 22%,
+              #7a7a7a 42%,
+              #f2f2f2 58%,
+              #5a5a5a 78%,
+              #d8d8d8 100%
+            )
+            border-box;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+      }
+      body.cursor-link .cursor-arrow {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      body.cursor-press .cursor-ring {
+        width: 24px;
+        height: 24px;
+      }
+      body.cursor-link.cursor-press .cursor-ring {
+        width: 48px;
+        height: 48px;
+      }
+
+      /* over the dark sequin band */
+      body.cursor-dark:not(.cursor-link) .cursor {
+        background: #f0efeb;
+      }
+      body.cursor-dark:not(.cursor-link) .cursor-ring {
+        border-color: rgba(240, 239, 235, 0.45);
+      }
+
+      /* star trail canvas */
+      .cursor-stars {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 9997;
+      }
+
+      /* ============================================================
+         HIERARCHY PASS: name first, pad second, details last
+         ============================================================ */
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        align-items: center;
+      }
+      .hero--pad .hero-kicker {
+        margin-bottom: 1.4rem;
+        color: #6f6f6f;
+      }
+      .hero--pad .hero-name {
+        font-size: clamp(4rem, 9.5vw, 10.5rem);
+        line-height: 0.84;
+        margin-bottom: 2rem;
+      }
+      .hero--pad .hero-tagline {
+        font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+        max-width: 30rem;
+        margin-bottom: 1.6rem;
+      }
+      .hero--pad .hero-meta {
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        line-height: 2;
+        color: #7a7a7a;
+      }
+      .hero--pad .hero-meta-link {
+        color: #0e0e0e;
+      }
+
+      /* pad: a touch smaller so it supports the name instead of competing */
+      .sequin-pad-wrap {
+        max-width: 580px;
+      }
+      .pad-label {
+        font-size: 9px;
+        color: #9a9a9a;
+      }
+      .hero-sequins {
+        box-shadow: 0 18px 40px -30px rgba(0, 0, 0, 0.35);
+      }
+      /* softer pad colours (match the theme in the script at the bottom) */
+      .hero-sequins--smoke {
+        background: #34332f;
+      }
+      .hero-sequins--stone {
+        background: #d9d6cf;
+      }
+
+      /* push the name block toward the middle (desktop only) */
+      @media (min-width: 901px) {
+        .hero--pad .hero-left {
+          padding-left: clamp(2rem, 7vw, 9rem);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero--pad .hero-name {
+          font-size: clamp(3.4rem, 18vw, 6.5rem) !important;
+          margin-bottom: 1.6rem;
+        }
+        .hero--pad .hero-meta-wrap {
+          order: 6;
+        }
+        .sequin-pad-wrap {
+          max-width: none;
+        }
+      }
+
+      /* ============================================================
+         EXPERTISE: hang tags
+         ============================================================ */
+      .expertise-section {
+        padding-top: 4.5rem;
+        padding-bottom: 4.5rem;
+      }
+      .expertise-section .expertise-title {
+        margin-bottom: 2.2rem !important;
+      }
+      .tag-rail {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .rail-bar {
+        height: 2px;
+        margin: 0 2%;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          #a9a7a0,
+          #e9e8e4 30%,
+          #8f8d86 55%,
+          #dcdad5 80%,
+          #a9a7a0
+        );
+      }
+      .tag-row {
+        display: flex;
+        justify-content: space-around;
+        gap: 24px;
+      }
+      .hang {
+        position: relative;
+        width: 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform-origin: 50% 0;
+        perspective: 900px;
+      }
+      .hang-string {
+        width: 1px;
+        height: 34px;
+        background: #9a9890;
+      }
+      .tag-rail.is-in .hang {
+        animation: tagSwing 1.4s ease both;
+      }
+      .tag-rail.is-in .hang:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .tag-rail.is-in .hang:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+      .hang:hover,
+      .tag-rail.is-in .hang:hover {
+        animation: tagSwingHover 1.2s ease;
+      }
+      @keyframes tagSwingHover {
+        20% {
+          transform: rotate(6deg);
+        }
+        45% {
+          transform: rotate(-4deg);
+        }
+        70% {
+          transform: rotate(2deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+      @keyframes tagSwing {
+        20% {
+          transform: rotate(6deg);
+        }
+        45% {
+          transform: rotate(-4deg);
+        }
+        70% {
+          transform: rotate(2deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      .hang-tag {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: none;
+        font: inherit;
+        color: inherit;
+        position: relative;
+        width: 100%;
+        height: 154px;
+        margin-top: -6px;
+        transform-style: preserve-3d;
+        transition: transform 0.75s cubic-bezier(0.3, 1.3, 0.5, 1);
+      }
+      .hang-tag.is-flipped {
+        transform: rotateY(180deg);
+      }
+      .hang-tag:focus-visible {
+        outline: none;
+      }
+      .hang-tag:focus-visible .tag-face {
+        background: #0e0e0e;
+      }
+
+      /* the tag shape: clipped corners + 1px edge drawn by layering */
+      .tag-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 28px 18px 14px;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        background: #cfccc4;
+        clip-path: polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%);
+      }
+      .tag-face::before {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        background: #fbfaf7;
+        clip-path: polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%);
+        z-index: -1;
+      }
+      .tag-face {
+        isolation: isolate;
+      }
+      /* chrome grommet */
+      .tag-face::after {
+        content: "";
+        position: absolute;
+        top: 9px;
+        left: 50%;
+        width: 11px;
+        height: 11px;
+        margin-left: -5.5px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 50%, #f3f2ee 0 32%, transparent 34%),
+          conic-gradient(
+            from 200deg,
+            #8a8a87,
+            #ffffff,
+            #6e6d69,
+            #e8e8e6,
+            #8a8a87
+          );
+      }
+      .tag-back {
+        transform: rotateY(180deg);
+      }
+
+      .tag-num {
+        font-family: "DM Sans", sans-serif;
+        font-size: 8.5px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: #9a9890;
+        margin-bottom: 6px;
+      }
+      .tag-title {
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-weight: 300;
+        font-size: 1.55rem;
+        line-height: 1;
+        color: #1a1a1a;
+      }
+      .tag-hint {
+        margin-top: auto;
+        font-family: "DM Sans", sans-serif;
+        font-size: 8.5px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #a3a29c;
+        transition: color 0.3s;
+      }
+      .hang:hover .tag-hint {
+        color: #1a1a1a;
+      }
+      .tag-desc {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: 0.76rem;
+        line-height: 1.5;
+        color: #555;
+      }
+      .tag-tools {
+        margin-top: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 8.5px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #9a9890;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hang:hover,
+        .tag-rail.is-in .hang,
+        .tag-rail.is-in .hang:hover {
+          animation: none;
+        }
+        .hang-tag {
+          transition-duration: 0.01s;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .expertise-section {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .tag-row {
+          gap: 8px;
+        }
+        .hang {
+          width: 32%;
+        }
+        .hang-string {
+          height: 26px;
+        }
+        .hang-tag {
+          height: 168px;
+        }
+        .tag-face {
+          padding: 24px 8px 10px;
+        }
+        .tag-title {
+          font-size: 1.15rem;
+        }
+        .tag-desc {
+          font-size: 0.66rem;
+          line-height: 1.45;
+        }
+        .tag-hint,
+        .tag-tools {
+          font-size: 7px;
+          letter-spacing: 0.12em;
+        }
+      }
+    </style>
     <script
       src="https://cdn.databuddy.cc/databuddy.js"
       data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
@@ -59,7 +671,7 @@
               <a class="nav-link" href="creative.html">Creative</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:chen.rachel1@northeastern.edu"
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com"
                 >Contact</a
               >
             </li>
@@ -69,43 +681,38 @@
     </nav>
 
     <!-- Hero -->
-    <div class="hero-section">
-      <span class="tag tag-1">Based in LA, Boston, Durham, Abroad</span>
-      <span class="tag tag-serif tag-serif-1">Designer–Engineer</span>
-
-      <div class="hero-top-rule"></div>
-
-      <div class="hero-name-block">
-        <span class="hero-name" id="nameLine1">RACHEL CHEN</span>
-        <div class="hero-bottom-rule"></div>
-        <div class="hero-strip">
+    <div class="hero-section hero--pad">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <span class="tag hero-kicker"
+            >Designer–Engineer based in LA, Boston &amp; Durham</span
+          >
+          <h1 class="hero-name" aria-label="Rachel Chen">
+            <span class="hero-name-line" id="nameLine1">RACHEL</span>
+            <span class="hero-name-line" id="nameLine2">CHEN</span>
+          </h1>
           <p class="hero-tagline">
-            Building thoughtful digital products at the intersection of design
-            and engineering.
+            I design and build digital products, bridging design and engineering
+            with a product mindset.
           </p>
           <div class="hero-meta-wrap">
             <div class="hero-meta">
-              M.Eng Design &amp; Technoloy Innovation @ Duke
-            </div>
-            <div class="hero-meta">
-              B.S Computer Science, Design, Fashion @ Northeastern
-            </div>
-            <div class="hero-meta">
-              Prev @
+              Currently pursuing M.Eng of Design and Technology Innovation at
+              Duke University
+              <br />
+              Prev coded and designed for
+              <a
+                href="https://www.bose.com"
+                target="_blank"
+                class="hero-meta-link"
+                >Bose Corporation</a
+              >,
               <a
                 href="https://delsys.com/"
                 target="_blank"
                 class="hero-meta-link"
                 >Delsys</a
-              >
-              ·
-              <a
-                href="https://www.bose.com"
-                target="_blank"
-                class="hero-meta-link"
-                >Bose</a
-              >
-              ·
+              >,
               <a
                 href="https://www.sift-info.com/"
                 target="_blank"
@@ -115,26 +722,92 @@
             </div>
           </div>
         </div>
+
+        <!-- Sequin pad -->
+        <figure class="sequin-pad-wrap">
+          <figcaption class="pad-label">Brush the sequins</figcaption>
+          <div
+            class="hero-sequins hero-sequins--smoke"
+            id="heroSequins"
+            data-no-stars
+            data-cursor-theme="dark"
+          ></div>
+        </figure>
       </div>
     </div>
 
-    <!-- Expertise -->
-    <div class="container py-5 expertise-section">
-      <h2 class="text-center mb-5 expertise-title">MY EXPERTISE</h2>
-      <div class="row text-center">
-        <div class="col-md-6 left-reveal">
-          <h3 class="fw-light fst-italic">Computer Science</h3>
-          <p>
-            Full-stack web, hybrid mobile, and functional programming across
-            React, Swift, and Kotlin.
-          </p>
-        </div>
-        <div class="col-md-6 right-reveal">
-          <h3 class="fw-light fst-italic">Interaction Design</h3>
-          <p>
-            Crafting intuitive experiences through UX, product, and brand
-            design.
-          </p>
+    <!-- Expertise: hang tags -->
+    <div class="container expertise-section">
+      <h2 class="text-center expertise-title">My Expertise</h2>
+      <div class="tag-rail">
+        <div class="rail-bar" aria-hidden="true"></div>
+        <div class="tag-row">
+          <div class="hang">
+            <span class="hang-string" aria-hidden="true"></span>
+            <button
+              class="hang-tag"
+              type="button"
+              aria-pressed="false"
+              aria-label="Computer Science. Flip for more."
+            >
+              <span class="tag-face tag-front">
+                <span class="tag-num">No. 01</span>
+                <span class="tag-title">Computer<br />Science</span>
+                <span class="tag-hint">flip for more ↻</span>
+              </span>
+              <span class="tag-face tag-back">
+                <span class="tag-desc"
+                  >Building full-stack web, native mobile, and data work, from
+                  the database to the last pixel.</span
+                >
+                <span class="tag-tools">React · Swift · Java · Python</span>
+              </span>
+            </button>
+          </div>
+          <div class="hang">
+            <span class="hang-string" aria-hidden="true"></span>
+            <button
+              class="hang-tag"
+              type="button"
+              aria-pressed="false"
+              aria-label="Interaction Design. Flip for more."
+            >
+              <span class="tag-face tag-front">
+                <span class="tag-num">No. 02</span>
+                <span class="tag-title">Interaction<br />Design</span>
+                <span class="tag-hint">flip for more ↻</span>
+              </span>
+              <span class="tag-face tag-back">
+                <span class="tag-desc"
+                  >Designing interfaces and brands that feel intuitive and look
+                  considered.</span
+                >
+                <span class="tag-tools">UX · UI · Brand</span>
+              </span>
+            </button>
+          </div>
+          <div class="hang">
+            <span class="hang-string" aria-hidden="true"></span>
+            <button
+              class="hang-tag"
+              type="button"
+              aria-pressed="false"
+              aria-label="Customer First. Flip for more."
+            >
+              <span class="tag-face tag-front">
+                <span class="tag-num">No. 03</span>
+                <span class="tag-title">Customer<br />First</span>
+                <span class="tag-hint">flip for more ↻</span>
+              </span>
+              <span class="tag-face tag-back">
+                <span class="tag-desc"
+                  >Starting from the customer’s real problem, then shaping what
+                  to build and why.</span
+                >
+                <span class="tag-tools">User research · Problem framing</span>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -553,18 +1226,835 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+      (function () {
+        /**
+         * SequinWall — reversible-sequin text effect.
+         *
+         * Brush right to flip sequins to chrome, brush left to flip them back.
+         * The name starts "pre-brushed" into the fabric, a light sweeps over the
+         * chrome side, and after a few idle seconds the name restores itself.
+         *
+         *   (load this file before creating the wall)
+         *   const wall = new SequinWall(document.querySelector('#wall'), { text: 'Rachel Chen' });
+         *
+         * The container just needs a width and a height; the canvas fills it.
+         */
+
+        const THEMES = {
+          noir: {
+            bg: "#0d0d0c",
+            matte: ["#2a2a28", "#191918"],
+            hole: "#050505",
+            rim: "rgba(0,0,0,0.35)",
+            lo: [58, 58, 56],
+            hi: [255, 253, 247],
+          },
+          pearl: {
+            bg: "#e9e6df",
+            matte: ["#f6f4ef", "#dcd8cf"],
+            hole: "#bdb8ad",
+            rim: "rgba(0,0,0,0.12)",
+            lo: [64, 64, 62],
+            hi: [255, 255, 252],
+          },
+        };
+
+        const DEFAULTS = {
+          text: "Rachel Chen", // use '\n' for multiple lines
+          fontFamily: '"Cormorant Garamond", Georgia, serif',
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: 0.8, // text height as a fraction of the wall height
+          maxTextWidth: 0.92, // never wider than this fraction of the wall
+          spacing: 10, // px between sequins (smaller = finer fabric, more work)
+          brush: 28, // brush radius in px
+          theme: "noir", // 'noir' | 'pearl' | a custom theme object like THEMES.noir
+          invert: false, // true = chrome background, matte name
+          intro: true, // brush the name in on first load
+          introDelay: 400, // ms before the intro sweep starts
+          heal: 6000, // ms of no brushing before the name restores (0 = never)
+          axis: "x", // 'x': right = chrome, left = matte. 'y': down = chrome
+          cursor: "crosshair", // CSS cursor over the wall ('none' if the site draws its own)
+          onBrush: null, // called once, the first time someone brushes the wall
+        };
+
+        const WL = 8; // flip-width steps in the sprite atlas
+        const BL = 14; // brightness steps for the chrome side
+
+        class SequinWall {
+          constructor(el, opts = {}) {
+            this.el = el;
+            this.o = { ...DEFAULTS, ...opts };
+            this.theme = this._resolveTheme(this.o.theme);
+            this.reduced = window.matchMedia(
+              "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            this.c = document.createElement("canvas");
+            this.c.setAttribute("role", "img");
+            this.c.setAttribute(
+              "aria-label",
+              String(this.o.text).replace(/\n/g, " "),
+            );
+            Object.assign(this.c.style, {
+              display: "block",
+              width: "100%",
+              height: "100%",
+              touchAction: "pan-y", // vertical swipes still scroll the page on phones
+              cursor: this.o.cursor,
+            });
+            el.appendChild(this.c);
+            this.ctx = this.c.getContext("2d");
+
+            this.S = [];
+            this.W = 0;
+            this.H = 0;
+            this.light = { x: 0, y: 0, tx: 0, ty: 0, hover: false };
+            this.last = null;
+            this.down = false;
+            this.dirty = false;
+            this.lastBrush = 0;
+            this.sweep = null;
+            this.visible = true;
+            this.raf = 0;
+
+            this._bind();
+            this.ready = this._init();
+          }
+
+          /* ---------- public API ---------- */
+
+          /** Flip everything back to matte, then brush the name in again. */
+          replay() {
+            for (const s of this.S) s.t = 0;
+            this.dirty = false;
+            this.sweep = { start: performance.now() + 700, dur: 1600 };
+          }
+
+          /** Restore the name right now with a sweep. */
+          reset() {
+            this.sweep = { start: performance.now(), dur: 1400 };
+          }
+
+          setText(text) {
+            this.o.text = text;
+            this.c.setAttribute("aria-label", String(text).replace(/\n/g, " "));
+            this._build(true);
+          }
+
+          setTheme(theme) {
+            this.theme = this._resolveTheme(theme);
+            if (this.W) this._atlas();
+          }
+
+          destroy() {
+            this.destroyed = true;
+            cancelAnimationFrame(this.raf);
+            this.ro && this.ro.disconnect();
+            this.io && this.io.disconnect();
+            for (const [k, fn] of Object.entries(this._on))
+              this.c.removeEventListener(k, fn);
+            this.c.remove();
+          }
+
+          /* ---------- setup ---------- */
+
+          _resolveTheme(t) {
+            return typeof t === "string" ? THEMES[t] || THEMES.noir : t;
+          }
+
+          _font(px) {
+            return `${this.o.fontStyle} ${this.o.fontWeight} ${px}px ${this.o.fontFamily}`;
+          }
+
+          async _init() {
+            // Wait for the web font, or the mask gets drawn in the fallback font.
+            try {
+              await document.fonts.load(this._font(64), String(this.o.text));
+            } catch (_) {
+              /* fall through with whatever is available */
+            }
+            if (this.destroyed) return;
+
+            if (this.o.intro && !this.reduced) {
+              this.sweep = {
+                start: performance.now() + this.o.introDelay,
+                dur: 1600,
+              };
+            }
+
+            this.ro = new ResizeObserver(() => this._build());
+            this.ro.observe(this.el);
+            this.io = new IntersectionObserver(([e]) => {
+              this.visible = e.isIntersecting;
+              if (this.visible) this._start();
+            });
+            this.io.observe(this.el);
+
+            this._build();
+            this._start();
+          }
+
+          _build(force) {
+            const rect = this.el.getBoundingClientRect();
+            const W = Math.round(rect.width);
+            const H = Math.round(rect.height);
+            if (!W || !H || (!force && W === this.W && H === this.H)) return;
+            this.W = W;
+            this.H = H;
+
+            const dpr = (this.dpr = Math.min(window.devicePixelRatio || 1, 2));
+            this.c.width = W * dpr;
+            this.c.height = H * dpr;
+            this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            // 1. Draw the text into an offscreen mask, sized to fit.
+            const m = document.createElement("canvas");
+            m.width = W;
+            m.height = H;
+            const mx = m.getContext("2d", { willReadFrequently: true });
+            const lines = String(this.o.text).split("\n");
+            let size = (H * this.o.fontSize) / lines.length;
+            mx.font = this._font(size);
+            const widest = Math.max(
+              ...lines.map((l) => mx.measureText(l).width),
+            );
+            if (widest > W * this.o.maxTextWidth)
+              size *= (W * this.o.maxTextWidth) / widest;
+            mx.font = this._font(size);
+            mx.textAlign = "center";
+            mx.textBaseline = "middle";
+            mx.fillStyle = "#000";
+            lines.forEach((l, i) => {
+              const y =
+                H / 2 +
+                (i - (lines.length - 1) / 2) * size * 0.95 +
+                size * 0.04;
+              mx.fillText(l, W / 2, y);
+            });
+            const a = mx.getImageData(0, 0, W, H).data;
+            const alpha = (x, y) => {
+              x |= 0;
+              y |= 0;
+              return x < 0 || y < 0 || x >= W || y >= H
+                ? 0
+                : a[(y * W + x) * 4 + 3];
+            };
+
+            // 2. Lay out overlapping, offset rows of sequins, like real fabric.
+            const sp = (this.sp = this.o.spacing);
+            const rowH = (this.rowH = sp * 0.8);
+            const R = (this.R = sp * 0.56);
+            this.cols = Math.ceil(W / sp) + 2;
+            this.rows = Math.ceil(H / rowH) + 2;
+
+            const startMatte = !!this.sweep;
+            const S = [];
+            const h = R * 0.45; // sample a small cross so thin serif hairlines still register
+            for (let j = 0; j < this.rows; j++) {
+              const off = ((j % 2) * sp) / 2 - sp / 2;
+              for (let i = 0; i < this.cols; i++) {
+                const x = i * sp + off;
+                const y = j * rowH - rowH / 2;
+                const inText =
+                  Math.max(
+                    alpha(x, y),
+                    alpha(x - h, y),
+                    alpha(x + h, y),
+                    alpha(x, y - h),
+                    alpha(x, y + h),
+                  ) > 110;
+                const home = inText !== this.o.invert ? 1 : 0;
+                const v = startMatte ? 0 : home;
+                S.push({
+                  x,
+                  y,
+                  home,
+                  f: v,
+                  t: v,
+                  tilt: Math.random(),
+                  glint: 0,
+                });
+              }
+            }
+            this.S = S;
+            this._atlas();
+          }
+
+          // Pre-render every sequin look (flip width x brightness) once, then just blit.
+          _atlas() {
+            const { dpr, R } = this;
+            const th = this.theme;
+            const cs = (this.cs = Math.ceil(R * 2 * dpr) + 4);
+            const at = (this.at = document.createElement("canvas"));
+            at.width = cs * WL;
+            at.height = cs * (BL + 1);
+            const x = at.getContext("2d");
+            const r = R * dpr;
+            const mix = (b) =>
+              th.lo.map((lo, k) =>
+                Math.round(lo + (th.hi[k] - lo) * Math.min(1, Math.max(0, b))),
+              );
+            const rgb = (c) => `rgb(${c[0]},${c[1]},${c[2]})`;
+
+            for (let w = 0; w < WL; w++) {
+              const sx = 0.14 + (0.86 * w) / (WL - 1);
+              for (let b = 0; b <= BL; b++) {
+                x.save();
+                x.translate(w * cs + cs / 2, b * cs + cs / 2);
+                x.scale(sx, 1);
+                x.beginPath();
+                x.arc(0, 0, r, 0, Math.PI * 2);
+                let g;
+                if (b < BL) {
+                  // chrome side
+                  const v = b / (BL - 1);
+                  g = x.createLinearGradient(-r, -r, r, r);
+                  g.addColorStop(0, rgb(mix(v + 0.3)));
+                  g.addColorStop(0.5, rgb(mix(v)));
+                  g.addColorStop(1, rgb(mix(v * 0.45)));
+                } else {
+                  // matte side
+                  g = x.createLinearGradient(0, -r, 0, r);
+                  g.addColorStop(0, th.matte[0]);
+                  g.addColorStop(1, th.matte[1]);
+                }
+                x.fillStyle = g;
+                x.fill();
+                x.lineWidth = Math.max(0.5, dpr * 0.5);
+                x.strokeStyle = th.rim;
+                x.stroke();
+                x.beginPath();
+                x.arc(0, -r * 0.42, r * 0.13, 0, Math.PI * 2);
+                x.fillStyle = th.hole;
+                x.fill();
+                x.restore();
+              }
+            }
+          }
+
+          /* ---------- interaction ---------- */
+
+          _bind() {
+            const c = this.c;
+            const pos = (e) => {
+              const r = c.getBoundingClientRect();
+              return { x: e.clientX - r.left, y: e.clientY - r.top };
+            };
+            this._on = {
+              pointermove: (e) => {
+                const p = pos(e);
+                // Mouse brushes on hover; touch/pen brush while pressed.
+                if (e.pointerType === "mouse" || this.down) {
+                  if (this.last)
+                    this._brush(this.last.x, this.last.y, p.x, p.y);
+                  this.last = p;
+                }
+                this.light.tx = p.x;
+                this.light.ty = p.y;
+                this.light.hover = true;
+              },
+              pointerdown: (e) => {
+                this.down = true;
+                this.last = pos(e);
+              },
+              pointerup: (e) => {
+                this.down = false;
+                if (e.pointerType !== "mouse") {
+                  this.last = null;
+                  this.light.hover = false;
+                }
+              },
+              pointercancel: () => {
+                this.down = false;
+                this.last = null;
+                this.light.hover = false;
+              },
+              pointerleave: () => {
+                this.down = false;
+                this.last = null;
+                this.light.hover = false;
+              },
+            };
+            for (const [k, fn] of Object.entries(this._on))
+              c.addEventListener(k, fn);
+          }
+
+          _brush(x0, y0, x1, y1) {
+            const dir = this.o.axis === "y" ? y1 - y0 : x1 - x0;
+            if (Math.abs(dir) < 0.5) return;
+            const v = dir > 0 ? 1 : 0;
+            // Stamp along the segment so fast flicks don't leave gaps.
+            const n = Math.max(
+              1,
+              Math.ceil(Math.hypot(x1 - x0, y1 - y0) / (this.sp * 0.5)),
+            );
+            for (let k = 1; k <= n; k++) {
+              this._stamp(
+                x0 + ((x1 - x0) * k) / n,
+                y0 + ((y1 - y0) * k) / n,
+                v,
+              );
+            }
+            this.dirty = true;
+            this.lastBrush = performance.now();
+            if (this.o.onBrush && !this.brushed) {
+              this.brushed = true;
+              this.o.onBrush();
+            }
+            if (this.sweep && performance.now() >= this.sweep.start)
+              this.sweep = null; // user takes over
+          }
+
+          _stamp(x, y, v) {
+            const { sp, rowH, cols, rows, S } = this;
+            const r = this.o.brush;
+            const r2 = r * r;
+            const j0 = Math.max(0, Math.floor((y - r + rowH / 2) / rowH));
+            const j1 = Math.min(rows - 1, Math.ceil((y + r + rowH / 2) / rowH));
+            for (let j = j0; j <= j1; j++) {
+              const off = ((j % 2) * sp) / 2 - sp / 2;
+              const i0 = Math.max(0, Math.floor((x - r - off) / sp));
+              const i1 = Math.min(cols - 1, Math.ceil((x + r - off) / sp));
+              for (let i = i0; i <= i1; i++) {
+                const s = S[j * cols + i];
+                const dx = s.x - x;
+                const dy = s.y - y;
+                if (dx * dx + dy * dy < r2) s.t = v;
+              }
+            }
+          }
+
+          /* ---------- render loop ---------- */
+
+          _start() {
+            if (this.raf) return;
+            const tick = (now) => {
+              if (!this.visible || this.destroyed) {
+                this.raf = 0;
+                return;
+              }
+              if (this.W) this._frame(now);
+              this.raf = requestAnimationFrame(tick);
+            };
+            this.raf = requestAnimationFrame(tick);
+          }
+
+          _frame(now) {
+            const { ctx, W, H, S, theme } = this;
+            const L = this.light;
+            const t = this.reduced ? 0 : now / 1000;
+
+            // Light follows the cursor, otherwise drifts slowly across the fabric.
+            if (!L.hover) {
+              L.tx = W * (0.5 + 0.38 * Math.sin(t * 0.35));
+              L.ty = H * (0.5 + 0.35 * Math.sin(t * 0.6 + 1));
+            }
+            L.x += (L.tx - L.x) * 0.12;
+            L.y += (L.ty - L.y) * 0.12;
+
+            // Intro / heal sweep: a wavy front that brushes sequins back to their home side.
+            if (this.sweep) {
+              const p = (now - this.sweep.start) / this.sweep.dur;
+              if (p >= 0) {
+                const front = -W * 0.15 + Math.min(p, 1) * W * 1.3;
+                for (const s of S) {
+                  if (s.t !== s.home && s.x < front + Math.sin(s.y * 0.04) * 40)
+                    s.t = s.home;
+                }
+                if (p >= 1) {
+                  this.sweep = null;
+                  this.dirty = false;
+                }
+              }
+            } else if (
+              this.o.heal &&
+              this.dirty &&
+              !this.down &&
+              now - this.lastBrush > this.o.heal
+            ) {
+              this.sweep = { start: now, dur: 1400 };
+            }
+
+            ctx.fillStyle = theme.bg;
+            ctx.fillRect(0, 0, W, H);
+
+            const lr = Math.max(W, H) * 0.32;
+            const cs = this.cs;
+            const dw = cs / this.dpr;
+            const half = dw / 2;
+            const rate = this.reduced ? 3 : 1;
+
+            // A few random glints on chrome sequins.
+            if (!this.reduced) {
+              for (let k = 0; k < S.length * 0.0012; k++) {
+                const s = S[(Math.random() * S.length) | 0];
+                if (s.f > 0.9) s.glint = 1;
+              }
+            }
+
+            for (const s of S) {
+              s.f += (s.t - s.f) * (0.1 + 0.1 * s.tilt) * rate;
+              if (Math.abs(s.t - s.f) < 0.002) s.f = s.t;
+              const k = Math.cos(s.f * Math.PI); // 1 = matte facing out, -1 = chrome facing out
+              const w = Math.round(Math.abs(k) * (WL - 1));
+              let row = BL;
+              if (k < 0) {
+                const near = Math.max(
+                  0,
+                  1 - Math.hypot(s.x - L.x, s.y - L.y) / lr,
+                );
+                const b =
+                  0.22 +
+                  0.18 * s.tilt +
+                  0.7 * near * near * (0.55 + 0.45 * s.tilt) +
+                  0.1 *
+                    Math.sin(s.x * 0.012 + s.y * 0.006 - t * 1.4 + s.tilt * 3);
+                row = Math.max(0, Math.min(BL - 1, Math.round(b * (BL - 1))));
+              }
+              ctx.drawImage(
+                this.at,
+                w * cs,
+                row * cs,
+                cs,
+                cs,
+                s.x - half,
+                s.y - half,
+                dw,
+                dw,
+              );
+            }
+
+            ctx.strokeStyle = "#fff";
+            ctx.lineCap = "round";
+            ctx.lineWidth = 1;
+            for (const s of S) {
+              if (s.glint < 0.03) continue;
+              const g = s.glint;
+              const l = this.R * 2.2 * g;
+              ctx.globalAlpha = g;
+              ctx.beginPath();
+              ctx.moveTo(s.x - l, s.y);
+              ctx.lineTo(s.x + l, s.y);
+              ctx.moveTo(s.x, s.y - l);
+              ctx.lineTo(s.x, s.y + l);
+              ctx.stroke();
+              s.glint *= 0.86;
+            }
+            ctx.globalAlpha = 1;
+          }
+        }
+
+        SequinWall.THEMES = THEMES;
+        window.SequinWall = SequinWall;
+      })();
+    </script>
+    <script>
+      (function () {
+        /**
+         * Chrome-star cursor.
+         *
+         *  - Normal state: a small dot + ring, and a trail of chrome four-point stars.
+         *  - Over anything clickable: stars stop, the ring grows into a chrome lens
+         *    with an arrow, so it reads as "this is a link".
+         *  - Click on empty space: a small burst of stars.
+         *  - Inside [data-no-stars]: no trail (used on the sequin wall so the two
+         *    effects don't compete).
+         *  - Inside [data-cursor-theme="dark"]: the dot and ring turn light.
+         *  - Touch devices: does nothing, the normal cursor stays.
+         *  - prefers-reduced-motion: dot + ring + link state only, no stars.
+         *
+         * Expects #cursor and #cursorRing elements (already in index.html).
+         */
+
+        const CLICKABLE =
+          'a, button, [role="button"], input, select, textarea, label, summary, .project-card, [data-cursor="link"]';
+
+        function initChromeCursor({
+          dot = document.getElementById("cursor"),
+          ring = document.getElementById("cursorRing"),
+          spacing = 14, // px of mouse travel between stars
+          maxStars = 90,
+        } = {}) {
+          const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+          ).matches;
+          if (!finePointer || !dot || !ring) {
+            document.documentElement.classList.add("native-cursor");
+            return () => {};
+          }
+          const reduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          document.documentElement.classList.add("chrome-cursor");
+
+          // Arrow that appears inside the ring in link state.
+          if (!ring.querySelector(".cursor-arrow")) {
+            ring.insertAdjacentHTML(
+              "beforeend",
+              '<svg class="cursor-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M4.5 3 H9 V7.5"/></svg>',
+            );
+          }
+
+          // Full-screen canvas for the star trail.
+          const c = document.createElement("canvas");
+          c.className = "cursor-stars";
+          c.setAttribute("aria-hidden", "true");
+          document.body.appendChild(c);
+          const ctx = c.getContext("2d");
+          let W = 0,
+            H = 0,
+            dpr = 1;
+          const resize = () => {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth;
+            H = window.innerHeight;
+            c.width = W * dpr;
+            c.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          };
+          resize();
+          window.addEventListener("resize", resize);
+
+          // Pre-render a few chrome star sprites so drawing stays cheap.
+          const sprites = [
+            ["#e8e8e6", "#8a8a87", "#2c2c2a"],
+            ["#ffffff", "#6e6d69", "#1a1a1a"],
+            ["#d3d1c7", "#9a9993", "#444441"],
+            ["#f1efe8", "#5f5e5a", "#0e0e0e"],
+          ].map(([a, b, d]) => {
+            const S = 64;
+            const s = document.createElement("canvas");
+            s.width = s.height = S;
+            const x = s.getContext("2d");
+            const g = x.createLinearGradient(0, 0, S, S);
+            g.addColorStop(0, a);
+            g.addColorStop(0.42, b);
+            g.addColorStop(0.5, "#ffffff");
+            g.addColorStop(0.62, b);
+            g.addColorStop(1, d);
+            x.translate(S / 2, S / 2);
+            x.beginPath();
+            const R = S / 2 - 1,
+              r = S * 0.07;
+            for (let i = 0; i < 8; i++) {
+              const ang = (i * Math.PI) / 4 - Math.PI / 2;
+              const rad = i % 2 ? r : R;
+              x.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+            }
+            x.closePath();
+            x.fillStyle = g;
+            x.fill();
+            x.lineWidth = 1.2;
+            x.strokeStyle = "rgba(20,20,20,0.55)";
+            x.stroke();
+            return s;
+          });
+
+          const stars = [];
+          const spawn = (x, y, burst) => {
+            if (reduced) return;
+            const a = burst
+              ? Math.random() * Math.PI * 2
+              : Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+            const sp = burst
+              ? 2 + Math.random() * 3
+              : 0.4 + Math.random() * 0.9;
+            stars.push({
+              x,
+              y,
+              vx: Math.cos(a) * sp,
+              vy: Math.sin(a) * sp,
+              size: (burst ? 12 : 9) + Math.random() * 11,
+              rot: Math.random() * Math.PI,
+              vr: (Math.random() - 0.5) * 0.12,
+              life: 1,
+              decay: 0.011 + Math.random() * 0.009,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+            if (stars.length > maxStars) stars.shift();
+          };
+
+          let mx = -100,
+            my = -100,
+            rx = -100,
+            ry = -100;
+          let lastX = null,
+            lastY = null,
+            travel = 0;
+          let mode = "default";
+          let trail = true;
+          let shown = false;
+
+          const setMode = (target) => {
+            const el = target && target.closest ? target : null;
+            const link = !!(el && el.closest(CLICKABLE));
+            const next = link ? "link" : "default";
+            if (next !== mode) {
+              mode = next;
+              document.body.classList.toggle("hovering", link); // keeps your existing CSS hook
+              document.body.classList.toggle("cursor-link", link);
+            }
+            trail = !link && !(el && el.closest("[data-no-stars]"));
+            document.body.classList.toggle(
+              "cursor-dark",
+              !!(el && el.closest('[data-cursor-theme="dark"]')),
+            );
+          };
+
+          const onMove = (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (!shown) {
+              shown = true;
+              rx = mx;
+              ry = my;
+              document.body.classList.add("cursor-visible");
+            }
+            setMode(e.target);
+            dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            if (trail && lastX !== null) {
+              travel += Math.hypot(mx - lastX, my - lastY);
+              while (travel > spacing) {
+                travel -= spacing;
+                spawn(
+                  mx + (Math.random() - 0.5) * 6,
+                  my + (Math.random() - 0.5) * 6,
+                );
+              }
+            }
+            lastX = mx;
+            lastY = my;
+          };
+          const onDown = (e) => {
+            document.body.classList.add("cursor-press");
+            if (trail)
+              for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
+          };
+          const onUp = () => document.body.classList.remove("cursor-press");
+          const onLeave = () => {
+            shown = false;
+            lastX = null;
+            document.body.classList.remove("cursor-visible");
+          };
+          // Re-check what's under the cursor after scroll (links move under a still mouse).
+          const onScroll = () => {
+            if (!shown) return;
+            setMode(document.elementFromPoint(mx, my));
+          };
+
+          document.addEventListener("pointermove", onMove, { passive: true });
+          document.addEventListener("pointerdown", onDown);
+          document.addEventListener("pointerup", onUp);
+          document.documentElement.addEventListener("mouseleave", onLeave);
+          window.addEventListener("scroll", onScroll, { passive: true });
+
+          let raf = 0;
+          const loop = () => {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+
+            ctx.clearRect(0, 0, W, H);
+            for (let i = stars.length - 1; i >= 0; i--) {
+              const s = stars[i];
+              s.x += s.vx;
+              s.y += s.vy;
+              s.vx *= 0.96;
+              s.vy = s.vy * 0.96 + 0.04;
+              s.rot += s.vr;
+              s.life -= s.decay;
+              if (s.life <= 0) {
+                stars.splice(i, 1);
+                continue;
+              }
+              const k = s.life;
+              const sz = s.size * (0.35 + 0.65 * k);
+              ctx.save();
+              ctx.globalAlpha = Math.min(1, k * 1.4);
+              ctx.translate(s.x, s.y);
+              ctx.rotate(s.rot);
+              ctx.drawImage(s.sprite, -sz / 2, -sz / 2, sz, sz);
+              ctx.restore();
+            }
+            raf = requestAnimationFrame(loop);
+          };
+          loop();
+
+          return () => {
+            cancelAnimationFrame(raf);
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerdown", onDown);
+            document.removeEventListener("pointerup", onUp);
+            document.documentElement.removeEventListener("mouseleave", onLeave);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", resize);
+            c.remove();
+          };
+        }
+
+        window.initChromeCursor = initChromeCursor;
+      })();
+    </script>
+
+    <script>
+      /* ---------- sequin pad ---------- */
+      // Softer than pure black. Pick one: "smoke" (soft charcoal) or "stone" (warm greige).
+      const PAD_STYLE = "smoke";
+      const PAD_THEMES = {
+        smoke: {
+          bg: "#34332f",
+          matte: ["#46453f", "#383733"],
+          hole: "#262522",
+          rim: "rgba(0,0,0,0.22)",
+          lo: [96, 95, 90],
+          hi: [236, 234, 228],
+        },
+        stone: {
+          bg: "#d9d6cf",
+          matte: ["#e4e1da", "#d3cfc7"],
+          hole: "#b9b4aa",
+          rim: "rgba(0,0,0,0.10)",
+          lo: [92, 91, 87],
+          hi: [252, 251, 247],
+        },
+      };
+      const pad = document.getElementById("heroSequins");
+      pad.className = "hero-sequins hero-sequins--" + PAD_STYLE;
+      if (PAD_STYLE === "stone") pad.removeAttribute("data-cursor-theme");
+
+      const phone = window.matchMedia("(max-width: 600px)");
+      const wall = new SequinWall(pad, {
+        text: "so happy\nyou\u2019re here",
+        fontFamily: '"Cormorant Garamond", Georgia, serif',
+        fontStyle: "italic",
+        fontWeight: 600,
+        fontSize: 0.74,
+        maxTextWidth: 0.84,
+        spacing: phone.matches ? 5 : 7, // finer sequins on phones so the words stay readable
+        brush: 24,
+        theme: PAD_THEMES[PAD_STYLE],
+        cursor: "none",
+      });
+
+      /* ---------- chrome star cursor (replaces the old cursor code) ---------- */
+      initChromeCursor();
+
+      /* ---------- name: letter drop + chrome hover ---------- */
       function splitLetters(el) {
         if (!el) return;
-        const txt = el.textContent;
+        const txt = el.textContent.trim();
         el.innerHTML = "";
         txt.split("").forEach((char) => {
           const s = document.createElement("span");
           s.className = "letter";
+          s.setAttribute("aria-hidden", "true");
           s.textContent = char === " " ? "\u00A0" : char;
           el.appendChild(s);
         });
       }
       splitLetters(document.getElementById("nameLine1"));
+      splitLetters(document.getElementById("nameLine2"));
 
       document.querySelectorAll(".hero-name .letter").forEach((letter) => {
         letter.addEventListener("mouseenter", () => {
@@ -583,51 +2073,36 @@
         });
       });
 
-      ScrollReveal().reveal(".expertise-title", {
-        origin: "bottom",
-        distance: "50px",
-        duration: 800,
+      /* ---------- expertise hang tags ---------- */
+      document.querySelectorAll(".hang-tag").forEach((tag) => {
+        tag.addEventListener("click", () => {
+          const flipped = tag.classList.toggle("is-flipped");
+          tag.setAttribute("aria-pressed", String(flipped));
+        });
       });
-      ScrollReveal().reveal(".left-reveal", {
-        origin: "left",
-        distance: "100px",
-        duration: 1000,
-        reset: true,
-      });
-      ScrollReveal().reveal(".right-reveal", {
-        origin: "right",
-        distance: "100px",
-        duration: 1000,
-        reset: true,
-      });
+      // a little swing when the tags scroll into view
+      const rail = document.querySelector(".tag-rail");
+      if (rail && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              rail.classList.add("is-in");
+              io.disconnect();
+            }
+          },
+          { threshold: 0.4 },
+        );
+        io.observe(rail);
+      }
 
-      const cursor = document.getElementById("cursor");
-      const ring = document.getElementById("cursorRing");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        cursor.style.left = mx + "px";
-        cursor.style.top = my + "px";
-      });
-      (function loop() {
-        rx += (mx - rx) * 0.1;
-        ry += (my - ry) * 0.1;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(loop);
-      })();
-      document.querySelectorAll(".project-card, a, button").forEach((c) => {
-        c.addEventListener("mouseenter", () =>
-          document.body.classList.add("hovering"),
-        );
-        c.addEventListener("mouseleave", () =>
-          document.body.classList.remove("hovering"),
-        );
-      });
+      /* ---------- scroll reveals ---------- */
+      if (window.ScrollReveal) {
+        ScrollReveal().reveal(".expertise-title", {
+          origin: "bottom",
+          distance: "50px",
+          duration: 800,
+        });
+      }
     </script>
   </body>
 </html>
