@@ -631,6 +631,29 @@
           letter-spacing: 0.12em;
         }
       }
+
+      /* ============================================================
+         EXPERIENCE: company logos
+         ============================================================ */
+      .exp-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 26px;
+        margin-bottom: 1.2rem;
+      }
+      .exp-top .exp-num {
+        margin-bottom: 0;
+      }
+      .exp-logo {
+        height: 22px; /* adjust per logo if one looks too big/small */
+        width: auto;
+        max-width: 110px;
+        object-fit: contain;
+        object-position: right center;
+        filter: grayscale(1);
+        opacity: 0.6;
+      }
     </style>
     <script
       src="https://cdn.databuddy.cc/databuddy.js"
@@ -1083,7 +1106,15 @@
       <div class="exp-grid">
         <div class="exp-card">
           <div class="exp-card-inner">
-            <div class="exp-num">01</div>
+            <div class="exp-top">
+              <div class="exp-num">01</div>
+              <img
+                class="exp-logo"
+                src="assets/logos/bose.png"
+                alt="Bose logo"
+                style="height: 40px"
+              />
+            </div>
             <div class="exp-company">Bose</div>
             <div class="exp-role">Software Engineering Co-op</div>
             <div class="exp-date">2023</div>
@@ -1115,7 +1146,15 @@
 
         <div class="exp-card">
           <div class="exp-card-inner">
-            <div class="exp-num">02</div>
+            <div class="exp-top">
+              <div class="exp-num">02</div>
+              <img
+                class="exp-logo"
+                src="assets/logos/delsys.png"
+                alt="Delsys logo"
+                onerror="this.remove()"
+              />
+            </div>
             <div class="exp-company">Delsys</div>
             <div class="exp-role">Software Engineering Co-op</div>
             <div class="exp-date">2024</div>
@@ -1137,9 +1176,7 @@
           </div>
           <div class="exp-hover-overlay">
             <span class="exp-hover-text">reach out to learn more</span>
-            <a
-              href="mailto:chen.rachel1@northeastern.edu"
-              class="exp-contact-btn"
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn"
               >Contact Me</a
             >
           </div>
@@ -1147,7 +1184,15 @@
 
         <div class="exp-card">
           <div class="exp-card-inner">
-            <div class="exp-num">03</div>
+            <div class="exp-top">
+              <div class="exp-num">03</div>
+              <img
+                class="exp-logo"
+                src="assets/logos/sift.png"
+                alt="Sift logo"
+                onerror="this.remove()"
+              />
+            </div>
             <div class="exp-company">Sift</div>
             <div class="exp-role">Software Engineering Co-op</div>
             <div class="exp-date">2024</div>

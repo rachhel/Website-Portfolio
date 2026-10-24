@@ -174,7 +174,9 @@ body.hovering .cursor-ring {
   position: relative;
   z-index: 2;
 }
-
+.exp-logo {
+  mix-blend-mode: multiply;
+}
 /* RACHEL */
 .hero-name {
   font-family: "Cormorant Garamond", serif;
