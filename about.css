@@ -132,7 +132,7 @@ body.about-page {
   display: block;
 }
 .about-name-line + .about-name-line {
-  padding-left: 0.5em;
+  padding-left: 0;
 }
 /* letter drop, same as home */
 .about-name .letter {
