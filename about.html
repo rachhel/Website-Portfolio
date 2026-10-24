@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About — Rachel Chen</title>
+    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,17 +16,143 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="about.css" />
-    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
-</head>
-  <body class="about-page">
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="ring"></div>
+    <style>
+      /* chrome-star cursor, same as the home page */
+      /* ---------- chrome cursor ---------- */
+      /* Only hide the system cursor when the custom one is running
+   (touch devices keep their normal behaviour). */
+      * {
+        cursor: auto;
+      }
+      html.chrome-cursor,
+      html.chrome-cursor * {
+        cursor: none !important;
+      }
+      html.native-cursor .cursor,
+      html.native-cursor .cursor-ring {
+        display: none;
+      }
 
-    <!-- NAV -->
+      .cursor,
+      .cursor-ring {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        will-change: transform;
+      }
+      body.cursor-visible .cursor,
+      body.cursor-visible .cursor-ring {
+        opacity: 1;
+      }
+
+      .cursor {
+        transition:
+          width 0.25s,
+          height 0.25s,
+          background 0.25s,
+          opacity 0.2s;
+      }
+      .cursor-ring {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          border-color 0.3s,
+          background 0.3s,
+          opacity 0.2s;
+      }
+      .cursor-arrow {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: #0e0e0e;
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0;
+        transform: scale(0.4) rotate(-45deg);
+        transition:
+          opacity 0.25s,
+          transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* link state: the dot disappears, the ring becomes a chrome lens with an arrow */
+      body.cursor-link .cursor {
+        width: 0;
+        height: 0;
+      }
+      body.cursor-link .cursor-ring {
+        width: 58px;
+        height: 58px;
+        border: 1px solid transparent;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
+            padding-box,
+          linear-gradient(
+              135deg,
+              #c8c8c8 0%,
+              #ffffff 22%,
+              #7a7a7a 42%,
+              #f2f2f2 58%,
+              #5a5a5a 78%,
+              #d8d8d8 100%
+            )
+            border-box;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+      }
+      body.cursor-link .cursor-arrow {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      body.cursor-press .cursor-ring {
+        width: 24px;
+        height: 24px;
+      }
+      body.cursor-link.cursor-press .cursor-ring {
+        width: 48px;
+        height: 48px;
+      }
+
+      /* over the dark sequin band */
+      body.cursor-dark:not(.cursor-link) .cursor {
+        background: #f0efeb;
+      }
+      body.cursor-dark:not(.cursor-link) .cursor-ring {
+        border-color: rgba(240, 239, 235, 0.45);
+      }
+
+      /* star trail canvas */
+      .cursor-stars {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 9997;
+      }
+    </style>
+    <script
+      src="https://cdn.databuddy.cc/databuddy.js"
+      data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
+      data-track-web-vitals="true"
+      data-track-errors="true"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </head>
+
+  <body class="about-page" id="page-top">
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV (same as home) -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container nav-container">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/LOGO.png" alt="Logo" style="height: 70px" />
+          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -40,19 +167,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
+            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html#work">Work</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="creative.html">Creative</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="mailto:chen.rachel1@northeastern.edu"
-                >Contact</a
-              >
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
             </li>
           </ul>
         </div>
@@ -62,34 +181,26 @@
     <!-- HERO -->
     <div class="about-hero">
       <div class="about-hero-left">
-        <div class="hero-eyebrow">
-          <div class="hero-eyebrow-line"></div>
-          <span class="hero-eyebrow-text">Designer · Engineer · Creator</span>
-        </div>
-        <h1 class="about-title">Rachel<br />Chen.</h1>
-        <div class="hero-rule"></div>
+        <span class="about-kicker">Designer · Engineer · Creator</span>
+        <h1 class="about-name" aria-label="Rachel Chen">
+          <span class="about-name-line" id="nameLine1">RACHEL</span>
+          <span class="about-name-line" id="nameLine2">CHEN</span>
+        </h1>
         <p class="about-tagline">
-          Building thoughtful digital products at the intersection of design and
-          engineering.
+          Building thoughtful digital products where design and engineering meet.
         </p>
         <div class="about-meta">
-          <div class="about-meta-item">
-            M.Eng Design &amp; Technology Innovation @ Duke
-          </div>
-          <div class="about-meta-item">
-            B.S CS, Interaction Design, Global Fashion @ Northeastern
-          </div>
-          <div class="about-meta-item">
-            Based in LA · Boston · Durham · Abroad
-          </div>
+          Duke M.Eng · Northeastern B.S. · LA, Boston &amp; Durham
         </div>
       </div>
 
       <div class="about-hero-right">
-        <div class="about-photo-wrap">
-          <img src="assets/pfp.png" alt="Rachel Chen" />
-          <div class="photo-chrome-frame"></div>
-        </div>
+        <figure class="about-photo">
+          <div class="about-photo-frame">
+            <img src="assets/pfp.png" alt="Portrait of Rachel Chen" />
+          </div>
+          <figcaption>Rachel Chen · Durham, NC · 2026</figcaption>
+        </figure>
       </div>
     </div>
 
@@ -97,104 +208,135 @@
     <div class="about-body">
       <!-- WHO I AM -->
       <section class="about-section" id="who">
-        <div class="about-section-label">Who I Am</div>
+        <div class="about-section-label">Who I am</div>
         <div class="about-section-content">
           <h2 class="about-section-title">
-            Designer Engineer building<br /><em
-              >thoughtful digital products.</em
-            >
+            Where creativity and <em>engineering overlap.</em>
           </h2>
           <div class="about-text">
             <p>
-              I'm a graduate student at Duke University pursuing a Master's in
-              Design and Technology Innovation, and a Northeastern University
-              alum with a B.S. in Computer Science, Interaction Design, and
-              Global Fashion Studies. I've always been drawn to the space
-              where creativity and engineering overlap. I care about the details
-              that make products feel right.
+              I'm a graduate student at Duke pursuing a Master of Engineering in
+              Design and Technology Innovation, and a Northeastern alum with a
+              B.S. in Computer Science, Interaction Design, and Global Fashion
+              Studies. I've always been drawn to the space where creativity and
+              engineering overlap, and I care about the details that make a
+              product feel right.
             </p>
             <p>
-              Originally from Los Angeles, I studied for one year in Oakland, 3 years in Boston,
-              1 summer in Paris, 1 summer in Korea, and now I'm currently in Durham, North Carolina. 
-              
+              I'm originally from Los Angeles. Since then I've spent a year in
+              Oakland, three years in Boston, a summer in Paris, and a summer in
+              Korea, and I'm now based in Durham, North Carolina.
             </p>
-              <p>
-              When I'm not working/studying, I love to play tennis, dance (hip hop, contemporary, ballet), try 
-              new restaurants and cafes (Beli warrior..), travel, and go to concerts/festivals! 
+            <p>
+              Outside of work and school, you'll find me playing tennis, dancing
+              (hip hop, contemporary, and ballet), hunting down new restaurants
+              and cafés (a proud Beli warrior), traveling, or at a concert or
+              festival.
             </p>
+          </div>
+          <div class="itinerary" aria-label="Places I've lived and studied">
+            <span>Los Angeles</span><span class="itin-arrow">→</span>
+            <span>Oakland</span><span class="itin-arrow">→</span>
+            <span>Boston</span><span class="itin-arrow">→</span>
+            <span>Paris</span><span class="itin-arrow">→</span>
+            <span>Korea</span><span class="itin-arrow">→</span>
+            <span class="itin-now">Durham · now</span>
           </div>
         </div>
       </section>
 
       <div class="about-rule"></div>
 
-      <!-- EXPERIENCE -->
+      <!-- EXPERIENCE TIMELINE -->
       <section class="about-section" id="experience">
         <div class="about-section-label">Experience</div>
         <div class="about-section-content">
           <h2 class="about-section-title">Where I've <em>worked.</em></h2>
-          <div class="exp-list">
-               <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Figma</div>
-                <div class="exp-role">Campus Leader</div>
-              </div>
-              <div class="exp-year">September 2025- May 2026</div>
+
+          <div class="vt" id="timeline">
+            <div class="tl-filters" role="group" aria-label="Filter roles">
+              <button class="tl-filter" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="tl-filter" type="button" data-filter="coop" aria-pressed="false">Co-ops</button>
+              <button class="tl-filter" type="button" data-filter="leadership" aria-pressed="false">Leadership</button>
+              <button class="tl-filter" type="button" data-filter="community" aria-pressed="false">Teaching &amp; community</button>
             </div>
-              <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Delsys</div>
-                <div class="exp-role">
-                  UI/UX Software Engineering Co-op · Biomedical
-                </div>
-              </div>
-              <div class="exp-year">July 2025 - December 2025</div>
-            </div>
-            <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Sift</div>
-                <div class="exp-role">
-                  Software Engineering Co-op · Fashion Tech
-                </div>
-              </div>
-              <div class="exp-year">July 2025 - September 2025</div>
-            </div>
-          
-            <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Khoury College</div>
-                <div class="exp-role">Teaching Assistant</div>
-              </div>
-              <div class="exp-year">January 2025 - April 2025</div>
-            </div>
-             <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Bose</div>
-                <div class="exp-role">
-                  Mobile App Software Engineering Co-op · iOS &amp; Android
-                </div>
-              </div>
-              <div class="exp-year"> July 2024 - December 2024</div>
-            </div>
-              <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Northeastern Admissions</div>
-                <div class="exp-role">
-                  Husky Ambassador (Tour Guide) 
-                </div>
-              </div>
-              <div class="exp-year"> July 2023 - May 2025</div>
-            </div>
-             <div class="exp-row">
-              <div class="exp-left">
-                <div class="exp-company">Kode With Klossy</div>
-                <div class="exp-role">
-                  Content Community Ambassador 
-                </div>
-              </div>
-              <div class="exp-year"> July 2023 - May 2024</div>
-            </div>
-         
+
+            <ol class="vt-list">
+                <li class="vt-marker vt-now" aria-hidden="true"><span>Now</span></li>
+                <li class="vt-marker" aria-hidden="true"><span>2025</span></li>
+                <li class="vt-item" data-type="leadership">
+                  <div class="vt-date">Sep 2025 –<br />May 2026</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Figma</div>
+                    <div class="vt-role">Campus Leader</div>
+                    <div class="vt-date-inline">Sep 2025 – May 2026</div>
+                    <span class="vt-tag">Leadership</span>
+                  </div>
+                </li>
+                <li class="vt-item" data-type="coop">
+                  <div class="vt-date">Jul 2025 –<br />Dec 2025</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Delsys</div>
+                    <div class="vt-role">UI/UX Software Engineering Co-op · Biomedical</div>
+                    <div class="vt-date-inline">Jul 2025 – Dec 2025</div>
+                    <span class="vt-tag">Co-op</span>
+                  </div>
+                </li>
+                <li class="vt-item" data-type="coop">
+                  <div class="vt-date">Jul 2025 –<br />Sep 2025</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Sift</div>
+                    <div class="vt-role">Software Engineering Co-op · Fashion Tech</div>
+                    <div class="vt-date-inline">Jul 2025 – Sep 2025</div>
+                    <span class="vt-tag">Co-op</span>
+                  </div>
+                </li>
+                <li class="vt-item" data-type="community">
+                  <div class="vt-date">Jan 2025 –<br />Apr 2025</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Khoury College</div>
+                    <div class="vt-role">Teaching Assistant</div>
+                    <div class="vt-date-inline">Jan 2025 – Apr 2025</div>
+                    <span class="vt-tag">Teaching</span>
+                  </div>
+                </li>
+                <li class="vt-marker" aria-hidden="true"><span>2024</span></li>
+                <li class="vt-item" data-type="coop">
+                  <div class="vt-date">Jul 2024 –<br />Dec 2024</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Bose</div>
+                    <div class="vt-role">Mobile App Software Engineering Co-op · iOS &amp; Android</div>
+                    <div class="vt-date-inline">Jul 2024 – Dec 2024</div>
+                    <span class="vt-tag">Co-op</span>
+                  </div>
+                </li>
+                <li class="vt-marker" aria-hidden="true"><span>2023</span></li>
+                <li class="vt-item" data-type="leadership">
+                  <div class="vt-date">Jul 2023 –<br />May 2025</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Northeastern Admissions</div>
+                    <div class="vt-role">Husky Ambassador · Tour Guide</div>
+                    <div class="vt-date-inline">Jul 2023 – May 2025</div>
+                    <span class="vt-tag">Leadership</span>
+                  </div>
+                </li>
+                <li class="vt-item" data-type="community">
+                  <div class="vt-date">Jul 2023 –<br />May 2024</div>
+                  <span class="vt-node" aria-hidden="true"></span>
+                  <div class="vt-card">
+                    <div class="vt-company">Kode With Klossy</div>
+                    <div class="vt-role">Content Community Ambassador</div>
+                    <div class="vt-date-inline">Jul 2023 – May 2024</div>
+                    <span class="vt-tag">Community</span>
+                  </div>
+                </li>
+            </ol>
           </div>
         </div>
       </section>
@@ -208,30 +350,27 @@
           <h2 class="about-section-title">What I <em>work with.</em></h2>
           <div class="skills-grid">
             <div class="skill-group">
-              <div class="skill-group-label">Languages</div>
+              <div class="skill-group-label">Languages &amp; frameworks</div>
               <div class="skill-list">
-                Java · Swift · Kotlin · Python · HTML · CSS · JavaScript · C# ·
-                React · SQL  
+                Java · Swift · Kotlin · Python · JavaScript · React · HTML · CSS · C# · SQL
               </div>
             </div>
             <div class="skill-group">
               <div class="skill-group-label">Design</div>
               <div class="skill-list">
-                Figma · Adobe Illustrator · InDesign · Miro · Prototyping ·
-                Brand Design · Video Editing · Canva 
+                Figma · Illustrator · InDesign · Miro · Canva · Prototyping · Brand design · Video editing
               </div>
             </div>
             <div class="skill-group">
               <div class="skill-group-label">Tools</div>
               <div class="skill-list">
-                Xcode · VSCode · Git · Jira · Visual Studio · Netlify
+                Xcode · VS Code · Visual Studio · Git · Jira · Netlify
               </div>
             </div>
             <div class="skill-group">
               <div class="skill-group-label">Expertise</div>
               <div class="skill-list">
-                UX Design · Product Management · Full-Stack Web · Mobile
-                Development · Brand Identity · Graphic Design
+                UX design · Product management · Full-stack web · Mobile development · Brand identity · Graphic design
               </div>
             </div>
           </div>
@@ -242,48 +381,69 @@
 
       <!-- INVOLVEMENT -->
       <section class="about-section" id="involvement">
-        <div class="about-section-label">Beyond Work</div>
+        <div class="about-section-label">Beyond work</div>
         <div class="about-section-content">
-          <h2 class="about-section-title">Getting <em>involved at Northeastern.</em></h2>
-          <div class="involvement-grid">
+          <h2 class="about-section-title">
+            Getting involved <em id="invTitle">at Duke.</em>
+          </h2>
+          <div class="tl-filters inv-switch" role="group" aria-label="Choose a school">
+            <button class="tl-filter" type="button" data-school="duke" aria-pressed="true">Duke</button>
+            <button class="tl-filter" type="button" data-school="neu" aria-pressed="false">Northeastern</button>
+          </div>
+
+          <div class="involvement-grid" data-school="duke">
             <div class="involvement-item">
-              <div class="involvement-role">Project Lead, UX Lead</div>
+              <div class="involvement-org">Duke Product Lab</div>
+              <div class="involvement-role">Design Lead</div>
+            </div>
+            <div class="involvement-item">
+              <div class="involvement-org">Duke Campus Concerts</div>
+              <div class="involvement-role">Member</div>
+            </div>
+            <div class="involvement-item is-soon">
+              <div class="involvement-org">More this year</div>
+              <div class="involvement-role">First year at Duke · in progress</div>
+            </div>
+          </div>
+
+          <div class="involvement-grid" data-school="neu" hidden>
+            <div class="involvement-item">
               <div class="involvement-org">Scout</div>
+              <div class="involvement-role">Project Lead · UX Lead</div>
             </div>
             <div class="involvement-item">
-              <div class="involvement-role">Communications Designer, Associate Set Design Director</div>
               <div class="involvement-org">The Avenue</div>
+              <div class="involvement-role">Communications Designer · Associate Set Design Director</div>
             </div>
             <div class="involvement-item">
-              <div class="involvement-role">Program Director</div>
               <div class="involvement-org">NUCOSMO</div>
+              <div class="involvement-role">Program Director</div>
             </div>
             <div class="involvement-item">
-              <div class="involvement-role">Husky Ambassador</div>
+              <div class="involvement-org">Figma @ Northeastern</div>
+              <div class="involvement-role">Founder · Campus Leader</div>
+            </div>
+            <div class="involvement-item">
               <div class="involvement-org">Northeastern University</div>
+              <div class="involvement-role">Husky Ambassador</div>
             </div>
             <div class="involvement-item">
-              <div class="involvement-role">Dancer</div>
               <div class="involvement-org">NUDANCO</div>
+              <div class="involvement-role">Dancer</div>
             </div>
             <div class="involvement-item">
-              <div class="involvement-role">Program Educator</div>
-              <div class="involvement-org">KPL</div>
-            </div>
-            <div class="involvement-item">
-              <div class="involvement-role">Volunteer</div>
-              <div class="involvement-org">Women in Code</div>
-            </div>
-             <div class="involvement-item">
-              <div class="involvement-role">Model</div>
               <div class="involvement-org">Fashion Society</div>
+              <div class="involvement-role">Model</div>
             </div>
             <div class="involvement-item">
-              <div class="involvement-role">Campus Leader and Founder</div>
-              <div class="involvement-org">Figma @ Northeastern </div>
+              <div class="involvement-org">KPL</div>
+              <div class="involvement-role">Program Educator</div>
             </div>
-             </div>
-             
+            <div class="involvement-item">
+              <div class="involvement-org">Women in Code</div>
+              <div class="involvement-role">Volunteer</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -291,149 +451,59 @@
 
       <!-- APPROACH -->
       <section class="about-section" id="approach">
-        <div class="about-section-label">My Approach</div>
+        <div class="about-section-label">My approach</div>
         <div class="about-section-content">
-          <h2 class="about-section-title">
-            <em>Design. Develop. Delight.</em>
-          </h2>
+          <h2 class="about-section-title"><em>Design. Develop. Delight.</em></h2>
           <div class="about-text">
             <p>
-              I strive to push the boundaries of technology and design to create
-              seamless, user-centric digital experiences. I believe the best
-              products are built at the intersection of technical rigor and
-              genuine empathy for the people using them.
+              I like pushing technology and design to make digital experiences
+              that feel effortless. The best products come from technical rigor
+              and real empathy for the people using them.
             </p>
           </div>
           <div class="contact-strip">
-            <a href="rachelmchen16@gmail.com" class="contact-link"
-              >rachelmchen16@gmail.com</a
-            >
-            <a
-              href="https://www.linkedin.com/in/rachelchen1016/"
-              target="_blank"
-              class="contact-link"
-              >LinkedIn</a
-            >
-            <a
-              href="https://github.com/rachhel"
-              target="_blank"
-              class="contact-link"
-              >GitHub</a
-            >
+            <a href="mailto:rachelmchen16@gmail.com" class="contact-link">rachelmchen16@gmail.com</a>
+            <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="contact-link">LinkedIn</a>
+            <a href="https://github.com/rachhel" target="_blank" class="contact-link">GitHub</a>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- FOOTER -->
-    <footer
-      style="
-        background: #0e0e0e;
-        color: #ccc;
-        font-size: 0.88rem;
-        padding: 2rem 0;
-      "
-    >
-      <div style="max-width: 100%; padding: 0 4rem">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding-top: 2rem;
-          "
-        >
-          <div>
-            <h5
-              style="
-                color: #fff;
-                font-size: 0.8rem;
-                letter-spacing: 0.15em;
-                text-transform: uppercase;
-                margin-bottom: 1rem;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-              "
-            >
-              About
-            </h5>
-            <p
-              style="
-                font-size: 0.82rem;
-                color: #666;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-                font-weight: 300;
-              "
-            >
+    <!-- FOOTER (same as home) -->
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-4 aboutfooter">
+            <h5>About</h5>
+            <p class="small">
               A passionate creator blending creativity and technology.<br />Based
               in Los Angeles and Durham.
             </p>
           </div>
-          <div style="text-align: right">
-            <h5
-              style="
-                color: #fff;
-                font-size: 0.8rem;
-                letter-spacing: 0.15em;
-                text-transform: uppercase;
-                margin-bottom: 1rem;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-              "
+          <div class="col-md-4 text-end">
+            <h5>Follow Me</h5>
+            <a
+              href="https://github.com/rachhel"
+              target="_blank"
+              class="text-light me-3"
+              >Github</a
             >
-              Follow Me
-            </h5>
-            <div style="display: flex; gap: 1.5rem; justify-content: flex-end">
-              <a
-                href="https://github.com/rachhel"
-                target="_blank"
-                style="
-                  color: #666;
-                  text-decoration: none;
-                  font-size: 0.82rem;
-                  font-family: &quot;DM Sans&quot;, sans-serif;
-                "
-                onmouseover="this.style.color = '#ddd'"
-                onmouseout="this.style.color = '#666'"
-                >Github</a
-              >
-              <a
-                href="https://www.linkedin.com/in/rachelchen1016/"
-                target="_blank"
-                style="
-                  color: #666;
-                  text-decoration: none;
-                  font-size: 0.82rem;
-                  font-family: &quot;DM Sans&quot;, sans-serif;
-                "
-                onmouseover="this.style.color = '#ddd'"
-                onmouseout="this.style.color = '#666'"
-                >LinkedIn</a
-              >
-              <a
-                href="mailto:rachelmchen16@gmail.com"
-                style="
-                  color: #666;
-                  text-decoration: none;
-                  font-size: 0.82rem;
-                  font-family: &quot;DM Sans&quot;, sans-serif;
-                "
-                onmouseover="this.style.color = '#ddd'"
-                onmouseout="this.style.color = '#666'"
-                >Email</a
-              >
-            </div>
+            <a
+              href="https://www.linkedin.com/in/rachelchen1016/"
+              target="_blank"
+              class="text-light me-3"
+              >LinkedIn</a
+            >
+            <a
+              href="mailto:rachelmchen16@gmail.com"
+              target="_blank"
+              class="text-light"
+              >Email</a
+            >
           </div>
         </div>
-        <div
-          style="
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            color: #444;
-            font-family: &quot;DM Sans&quot;, sans-serif;
-          "
-        >
+        <div class="text-center mt-4 small">
           Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
         </div>
       </div>
@@ -441,24 +511,346 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      const cursor = document.getElementById("cursor");
-      const ring = document.getElementById("ring");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        cursor.style.left = mx + "px";
-        cursor.style.top = my + "px";
+      (function () {
+        /**
+         * Chrome-star cursor.
+         *
+         *  - Normal state: a small dot + ring, and a trail of chrome four-point stars.
+         *  - Over anything clickable: stars stop, the ring grows into a chrome lens
+         *    with an arrow, so it reads as "this is a link".
+         *  - Click on empty space: a small burst of stars.
+         *  - Inside [data-no-stars]: no trail (used on the sequin wall so the two
+         *    effects don't compete).
+         *  - Inside [data-cursor-theme="dark"]: the dot and ring turn light.
+         *  - Touch devices: does nothing, the normal cursor stays.
+         *  - prefers-reduced-motion: dot + ring + link state only, no stars.
+         *
+         * Expects #cursor and #cursorRing elements (already in index.html).
+         */
+
+        const CLICKABLE =
+          'a, button, [role="button"], input, select, textarea, label, summary, .project-card, [data-cursor="link"]';
+
+        function initChromeCursor({
+          dot = document.getElementById("cursor"),
+          ring = document.getElementById("cursorRing"),
+          spacing = 14, // px of mouse travel between stars
+          maxStars = 90,
+        } = {}) {
+          const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+          ).matches;
+          if (!finePointer || !dot || !ring) {
+            document.documentElement.classList.add("native-cursor");
+            return () => {};
+          }
+          const reduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          document.documentElement.classList.add("chrome-cursor");
+
+          // Arrow that appears inside the ring in link state.
+          if (!ring.querySelector(".cursor-arrow")) {
+            ring.insertAdjacentHTML(
+              "beforeend",
+              '<svg class="cursor-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M4.5 3 H9 V7.5"/></svg>',
+            );
+          }
+
+          // Full-screen canvas for the star trail.
+          const c = document.createElement("canvas");
+          c.className = "cursor-stars";
+          c.setAttribute("aria-hidden", "true");
+          document.body.appendChild(c);
+          const ctx = c.getContext("2d");
+          let W = 0,
+            H = 0,
+            dpr = 1;
+          const resize = () => {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth;
+            H = window.innerHeight;
+            c.width = W * dpr;
+            c.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          };
+          resize();
+          window.addEventListener("resize", resize);
+
+          // Pre-render a few chrome star sprites so drawing stays cheap.
+          const sprites = [
+            ["#e8e8e6", "#8a8a87", "#2c2c2a"],
+            ["#ffffff", "#6e6d69", "#1a1a1a"],
+            ["#d3d1c7", "#9a9993", "#444441"],
+            ["#f1efe8", "#5f5e5a", "#0e0e0e"],
+          ].map(([a, b, d]) => {
+            const S = 64;
+            const s = document.createElement("canvas");
+            s.width = s.height = S;
+            const x = s.getContext("2d");
+            const g = x.createLinearGradient(0, 0, S, S);
+            g.addColorStop(0, a);
+            g.addColorStop(0.42, b);
+            g.addColorStop(0.5, "#ffffff");
+            g.addColorStop(0.62, b);
+            g.addColorStop(1, d);
+            x.translate(S / 2, S / 2);
+            x.beginPath();
+            const R = S / 2 - 1,
+              r = S * 0.07;
+            for (let i = 0; i < 8; i++) {
+              const ang = (i * Math.PI) / 4 - Math.PI / 2;
+              const rad = i % 2 ? r : R;
+              x.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+            }
+            x.closePath();
+            x.fillStyle = g;
+            x.fill();
+            x.lineWidth = 1.2;
+            x.strokeStyle = "rgba(20,20,20,0.55)";
+            x.stroke();
+            return s;
+          });
+
+          const stars = [];
+          const spawn = (x, y, burst) => {
+            if (reduced) return;
+            const a = burst
+              ? Math.random() * Math.PI * 2
+              : Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+            const sp = burst
+              ? 2 + Math.random() * 3
+              : 0.4 + Math.random() * 0.9;
+            stars.push({
+              x,
+              y,
+              vx: Math.cos(a) * sp,
+              vy: Math.sin(a) * sp,
+              size: (burst ? 12 : 9) + Math.random() * 11,
+              rot: Math.random() * Math.PI,
+              vr: (Math.random() - 0.5) * 0.12,
+              life: 1,
+              decay: 0.011 + Math.random() * 0.009,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+            if (stars.length > maxStars) stars.shift();
+          };
+
+          let mx = -100,
+            my = -100,
+            rx = -100,
+            ry = -100;
+          let lastX = null,
+            lastY = null,
+            travel = 0;
+          let mode = "default";
+          let trail = true;
+          let shown = false;
+
+          const setMode = (target) => {
+            const el = target && target.closest ? target : null;
+            const link = !!(el && el.closest(CLICKABLE));
+            const next = link ? "link" : "default";
+            if (next !== mode) {
+              mode = next;
+              document.body.classList.toggle("hovering", link); // keeps your existing CSS hook
+              document.body.classList.toggle("cursor-link", link);
+            }
+            trail = !link && !(el && el.closest("[data-no-stars]"));
+            document.body.classList.toggle(
+              "cursor-dark",
+              !!(el && el.closest('[data-cursor-theme="dark"]')),
+            );
+          };
+
+          const onMove = (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (!shown) {
+              shown = true;
+              rx = mx;
+              ry = my;
+              document.body.classList.add("cursor-visible");
+            }
+            setMode(e.target);
+            dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            if (trail && lastX !== null) {
+              travel += Math.hypot(mx - lastX, my - lastY);
+              while (travel > spacing) {
+                travel -= spacing;
+                spawn(
+                  mx + (Math.random() - 0.5) * 6,
+                  my + (Math.random() - 0.5) * 6,
+                );
+              }
+            }
+            lastX = mx;
+            lastY = my;
+          };
+          const onDown = (e) => {
+            document.body.classList.add("cursor-press");
+            if (trail)
+              for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
+          };
+          const onUp = () => document.body.classList.remove("cursor-press");
+          const onLeave = () => {
+            shown = false;
+            lastX = null;
+            document.body.classList.remove("cursor-visible");
+          };
+          // Re-check what's under the cursor after scroll (links move under a still mouse).
+          const onScroll = () => {
+            if (!shown) return;
+            setMode(document.elementFromPoint(mx, my));
+          };
+
+          document.addEventListener("pointermove", onMove, { passive: true });
+          document.addEventListener("pointerdown", onDown);
+          document.addEventListener("pointerup", onUp);
+          document.documentElement.addEventListener("mouseleave", onLeave);
+          window.addEventListener("scroll", onScroll, { passive: true });
+
+          let raf = 0;
+          const loop = () => {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+
+            ctx.clearRect(0, 0, W, H);
+            for (let i = stars.length - 1; i >= 0; i--) {
+              const s = stars[i];
+              s.x += s.vx;
+              s.y += s.vy;
+              s.vx *= 0.96;
+              s.vy = s.vy * 0.96 + 0.04;
+              s.rot += s.vr;
+              s.life -= s.decay;
+              if (s.life <= 0) {
+                stars.splice(i, 1);
+                continue;
+              }
+              const k = s.life;
+              const sz = s.size * (0.35 + 0.65 * k);
+              ctx.save();
+              ctx.globalAlpha = Math.min(1, k * 1.4);
+              ctx.translate(s.x, s.y);
+              ctx.rotate(s.rot);
+              ctx.drawImage(s.sprite, -sz / 2, -sz / 2, sz, sz);
+              ctx.restore();
+            }
+            raf = requestAnimationFrame(loop);
+          };
+          loop();
+
+          return () => {
+            cancelAnimationFrame(raf);
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerdown", onDown);
+            document.removeEventListener("pointerup", onUp);
+            document.documentElement.removeEventListener("mouseleave", onLeave);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", resize);
+            c.remove();
+          };
+        }
+
+        window.initChromeCursor = initChromeCursor;
+      })();
+    </script>
+
+    <script>
+      /* ---------- chrome star cursor ---------- */
+      initChromeCursor();
+
+      /* ---------- name: letter drop + chrome hover (same as home) ---------- */
+      function splitLetters(el, delayStart) {
+        if (!el) return;
+        const txt = el.textContent.trim();
+        el.innerHTML = "";
+        txt.split("").forEach((char, i) => {
+          const s = document.createElement("span");
+          s.className = "letter";
+          s.setAttribute("aria-hidden", "true");
+          s.style.animationDelay = (delayStart + i * 0.04).toFixed(2) + "s";
+          s.textContent = char === " " ? "\u00A0" : char;
+          el.appendChild(s);
+        });
+      }
+      splitLetters(document.getElementById("nameLine1"), 0.03);
+      splitLetters(document.getElementById("nameLine2"), 0.28);
+      document.querySelectorAll(".about-name .letter").forEach((letter) => {
+        letter.addEventListener("mouseenter", () => {
+          letter.style.transition = "all 0.08s ease";
+          letter.style.background =
+            "linear-gradient(158deg, #aaa 0%, #fff 28%, #888 50%, #eee 72%, #999 100%)";
+          letter.style.webkitBackgroundClip = "text";
+          letter.style.backgroundClip = "text";
+          letter.style.webkitTextFillColor = "transparent";
+        });
+        letter.addEventListener("mouseleave", () => {
+          setTimeout(() => {
+            letter.style.background = "none";
+            letter.style.webkitTextFillColor = "#0e0e0e";
+          }, 650);
+        });
       });
-      (function loop() {
-        rx += (mx - rx) * 0.1;
-        ry += (my - ry) * 0.1;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(loop);
+
+      /* ---------- Beyond work: Duke / Northeastern switch ---------- */
+      (function () {
+        const btns = document.querySelectorAll(".inv-switch .tl-filter");
+        const grids = document.querySelectorAll(".involvement-grid[data-school]");
+        const title = document.getElementById("invTitle");
+        const names = { duke: "at Duke.", neu: "at Northeastern." };
+        btns.forEach((btn) =>
+          btn.addEventListener("click", () => {
+            const s = btn.dataset.school;
+            btns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            grids.forEach((g) => (g.hidden = g.dataset.school !== s));
+            title.textContent = names[s];
+          }),
+        );
+      })();
+
+      /* ---------- vertical experience timeline ---------- */
+      (function () {
+        const tl = document.getElementById("timeline");
+        if (!tl) return;
+        const items = [...tl.querySelectorAll(".vt-item")];
+        tl.querySelectorAll(".vt-item, .vt-marker").forEach((el, i) => {
+          el.style.transitionDelay = 0.15 + i * 0.07 + "s";
+        });
+
+        // draw the spine and reveal entries when the timeline scrolls into view
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver(
+            ([e]) => {
+              if (e.isIntersecting) {
+                tl.classList.add("is-in");
+                io.disconnect();
+                // after the entrance, make hover/filter changes feel instant
+                setTimeout(() => {
+                  tl.querySelectorAll(".vt-item, .vt-marker").forEach((el) => (el.style.transitionDelay = "0s"));
+                }, 1800);
+              }
+            },
+            { threshold: 0.15 },
+          );
+          io.observe(tl);
+        } else {
+          tl.classList.add("is-in");
+        }
+
+        // filters
+        const btns = tl.querySelectorAll(".tl-filter");
+        btns.forEach((btn) =>
+          btn.addEventListener("click", () => {
+            const f = btn.dataset.filter;
+            btns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            items.forEach((it) =>
+              it.classList.toggle("is-dim", f !== "all" && it.dataset.type !== f),
+            );
+          }),
+        );
       })();
     </script>
   </body>
