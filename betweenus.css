@@ -3,12 +3,10 @@
   cursor: none;
 }
 
-html,
 body.bu-page {
-  overflow-x: clip; /* no sideways scrolling */
+  overflow-x: clip; /* no sideways scrolling (keep this on body only, or sticky breaks) */
 }
 body.bu-page {
-  overflow-y: auto;
   margin: 0;
   padding: 0;
   background: #f8f7f4;
