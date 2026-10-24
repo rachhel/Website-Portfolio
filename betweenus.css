@@ -3,8 +3,11 @@
   cursor: none;
 }
 
+html,
 body.bu-page {
-  overflow-x: clip;
+  overflow-x: clip; /* no sideways scrolling */
+}
+body.bu-page {
   overflow-y: auto;
   margin: 0;
   padding: 0;
@@ -39,30 +42,10 @@ body.bu-page {
   gap: 3rem;
   align-items: center;
 }
-.img-block {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.img-block img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  max-width: 100%;
-}
 
 .reflection-img img {
   width: 100%;
   height: auto;
-  display: block;
-}
-.img-block video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
 }
 
@@ -350,6 +333,7 @@ body.bu-page {
 /* ── CONTENT ── */
 .content {
   padding: 4rem 80px 6rem 60px;
+  min-width: 0; /* lets wide images shrink instead of pushing the page wider */
 }
 .section {
   margin-bottom: 5rem;
@@ -499,30 +483,37 @@ body.bu-page {
   line-height: 1.65;
 }
 
-/* image blocks */
+/* ── IMAGES & VIDEOS ──
+   Every image shows in full at its own shape (no cropping). */
 .img-block {
   width: 100%;
-  aspect-ratio: 16/9;
+  margin: 2rem 0;
   background: var(--bg-dark);
   border: 0.5px solid rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--light);
+  overflow: hidden;
 }
+.img-block img,
+.img-block video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* two side by side */
 .img-half {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  align-items: start;
   margin: 2rem 0;
 }
 .img-half .img-block {
   margin: 0;
-  aspect-ratio: 4/3;
+}
+/* tall phone recordings: keep them from getting huge */
+.img-half .img-block video {
+  max-height: 78vh;
+  object-fit: contain;
 }
 
 /* outcomes */
@@ -584,4 +575,48 @@ body.bu-page {
 .next-arrow {
   font-size: 1.5rem;
   color: var(--light);
+}
+
+/* ── PHONES & SMALL TABLETS ── */
+@media (max-width: 900px) {
+  .nav-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .hero {
+    min-height: auto;
+    padding: 110px 24px 0;
+  }
+  .hero-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .hero-tagline {
+    max-width: 100%;
+  }
+  .case-study {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none; /* the contents list takes too much room on a phone */
+  }
+  .content {
+    padding: 3rem 24px 4rem;
+  }
+  .features-grid,
+  .process-steps,
+  .outcomes-grid,
+  .reflection-split {
+    grid-template-columns: 1fr;
+  }
+  .reflection-split {
+    gap: 2rem;
+  }
+  .img-half {
+    grid-template-columns: 1fr;
+  }
+  .link-strip {
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
 }
