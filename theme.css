@@ -1,0 +1,547 @@
+/* ============================================================
+   THEME — fashion-house grotesk
+   One shared look for every page. Load it LAST in <head>:
+   <link rel="stylesheet" href="theme.css" />
+
+   Black and white, Inter Tight, solid 1px rules, no ornaments.
+   The sequins and chrome cursor are the only decoration.
+   To change the whole site's look later, change the tokens below.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap");
+
+/* Title font: TeX Gyre Heros, a free Helvetica redraw, hosted with the site
+   so every device (Mac, Windows, Android) shows the same thing.
+   Files live in /fonts next to this stylesheet. License: fonts/GUST-FONT-LICENSE.txt */
+@font-face {
+  font-family: "Heros Web";
+  src: url("fonts/heros-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Heros Web";
+  src: url("fonts/heros-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --paper-2: #f4f4f4; /* the one off-white, for cards and image wells */
+  --muted: #6b6b6b;
+  --hair: rgba(10, 10, 10, 0.12);
+  /* body and small text */
+  --font: "Inter Tight", "Inter", system-ui, -apple-system, Arial, sans-serif;
+  /* big titles: Helvetica look on every device (self-hosted Heros, see @font-face above) */
+  --display: "Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* re-point the old per-page variables so every page follows the theme */
+  --bg: var(--paper);
+  --bg-white: var(--paper);
+  --bg-dark: var(--paper-2);
+  --light: #8a8a8a;
+  --smoke: var(--ink);
+  --chrome: linear-gradient(var(--ink), var(--ink));
+  --chrome-solid: linear-gradient(var(--ink), var(--ink));
+}
+
+/* ---------- type: one family everywhere, no italics, no shouting caps ---------- */
+body,
+body *:not(canvas) {
+  font-family: var(--font) !important;
+  font-style: normal !important;
+  text-transform: none !important;
+}
+body {
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+em {
+  font-style: normal !important;
+}
+
+/* big display type: Helvetica, tight and confident */
+.hero-name,
+.hero-name *,
+.about-name,
+.about-name *,
+.align-title,
+.align-title *,
+.bu-title,
+.section-title,
+.about-title,
+.about-section-title {
+  font-family: var(--display) !important;
+}
+.hero-name,
+.about-name,
+.align-title,
+.bu-title,
+.section-title,
+.about-title {
+  font-weight: 400 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 0.88 !important;
+}
+.hero--pad .hero-name {
+  letter-spacing: -0.05em !important;
+}
+.hero-name-line + .hero-name-line,
+.about-name-line + .about-name-line {
+  padding-left: 0 !important;
+}
+
+/* headings and names */
+.about-section-title,
+.exp-company,
+.tl-company,
+.vt-company,
+.tag-title,
+.overlay-title,
+.next-title,
+.involvement-org,
+.step-title,
+.feature-title,
+.deliverable-name,
+.outcome-value,
+.meta-value,
+.callout p,
+.header-tag,
+.exp-hover-text {
+  font-weight: 500 !important;
+  letter-spacing: -0.03em !important;
+}
+.about-section-title,
+.section-title + * {
+  line-height: 1.1;
+}
+
+/* body copy */
+.hero-lede,
+.hero-tagline,
+.about-tagline,
+.section-body,
+.about-text,
+.exp-body,
+.tag-desc,
+.feature-body,
+.step-body,
+.skill-list,
+.fact-value {
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--ink) !important;
+}
+.hero-lede,
+.hero-tagline,
+.about-tagline {
+  font-size: clamp(1.1rem, 1.4vw, 1.3rem) !important;
+  line-height: 1.4 !important;
+}
+.section-body,
+.about-text,
+.exp-body {
+  color: #2b2b2b !important;
+}
+
+/* small labels: readable sentence case instead of tiny tracked caps */
+.nav-link,
+.eyebrow-text,
+.sidebar-label,
+.section-label,
+.meta-label,
+.hero-eyebrow-text,
+.deliverable-num,
+.step-num,
+.outcome-label,
+.next-label,
+.card-num,
+.card-name,
+.overlay-tag,
+.view-all,
+.footer-note,
+.project-count,
+.exp-num,
+.exp-role,
+.exp-date,
+.exp-tag,
+.exp-request,
+.exp-contact-btn,
+.tag-num,
+.tag-hint,
+.tag-tools,
+.img-caption,
+.skill-group-label,
+.involvement-role,
+.tl-filter,
+.vt-tag,
+.vt-date,
+.vt-date-inline,
+.vt-marker span,
+.about-kicker,
+.about-meta,
+.itinerary,
+.about-photo figcaption,
+.about-section-label,
+.sidebar-link,
+.sidebar-back,
+.contact-link,
+.case-link,
+.pad-label,
+.fact-label,
+.expertise-title,
+footer h5,
+footer p,
+footer a,
+footer .small {
+  letter-spacing: 0 !important;
+}
+.eyebrow-text,
+.sidebar-label,
+.section-label,
+.meta-label,
+.hero-eyebrow-text,
+.deliverable-num,
+.step-num,
+.outcome-label,
+.next-label,
+.card-num,
+.overlay-tag,
+.view-all,
+.footer-note,
+.project-count,
+.exp-num,
+.exp-date,
+.exp-tag,
+.exp-request,
+.exp-contact-btn,
+.tag-num,
+.tag-hint,
+.tag-tools,
+.img-caption,
+.skill-group-label,
+.involvement-role,
+.tl-filter,
+.vt-tag,
+.vt-date,
+.vt-date-inline,
+.vt-marker span,
+.about-kicker,
+.about-meta,
+.itinerary,
+.about-photo figcaption,
+.about-section-label,
+.sidebar-back,
+.pad-label,
+.fact-label {
+  font-size: 0.8rem !important;
+}
+.expertise-section .expertise-title {
+  text-transform: none !important; /* style.css forces caps here */
+  font-size: 0.85rem !important;
+  letter-spacing: 0 !important;
+  color: var(--muted) !important;
+  font-weight: 400 !important;
+}
+.card-name,
+.exp-role,
+.sidebar-link {
+  font-size: 0.85rem !important;
+  color: var(--ink) !important;
+}
+.meta-label,
+.section-label,
+.sidebar-label,
+.eyebrow-text,
+.outcome-label,
+.next-label,
+.card-num,
+.exp-num,
+.exp-date,
+.tag-num,
+.fact-label,
+.pad-label,
+.skill-group-label,
+.vt-date,
+.about-section-label,
+.about-kicker,
+.about-meta,
+.img-caption {
+  color: var(--muted) !important;
+}
+.eyebrow-line,
+.hero-eyebrow-line {
+  display: none !important;
+}
+.section-label::after {
+  background: var(--hair) !important;
+}
+
+/* ---------- surfaces: plain white, one light gray for cards ---------- */
+.navbar {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid var(--ink) !important;
+}
+.nav-link {
+  color: var(--ink) !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+}
+.nav-link:hover {
+  color: var(--muted) !important;
+}
+a.navbar-brand {
+  text-decoration: none;
+}
+
+.hero-section,
+.hero,
+.facts,
+.expertise-section,
+.chrome-works-section,
+.experience-section,
+.about-hero,
+.about-body,
+.case-study,
+.content {
+  background: var(--paper) !important;
+}
+.hero-showcase {
+  background: var(--paper-2) !important;
+  border-color: var(--ink) !important;
+}
+/* section breaks: one solid line instead of alternating cream tones */
+.expertise-section,
+.chrome-works-section,
+.experience-section {
+  border-top: 1px solid var(--ink);
+}
+.expertise-section.container {
+  max-width: 100% !important;
+}
+
+.exp-card,
+.skill-group,
+.involvement-item,
+.step,
+.deliverable-item,
+.feature-item,
+.callout,
+.outcome-item,
+.img-block {
+  background: var(--paper) !important;
+  border: 1px solid var(--hair) !important;
+  border-radius: 0 !important;
+}
+.callout {
+  border-left: 2px solid var(--ink) !important;
+}
+.outcomes-grid {
+  background: var(--hair) !important;
+}
+.exp-tag,
+.vt-tag {
+  border-color: var(--hair) !important;
+  color: var(--ink) !important;
+  border-radius: 0 !important;
+}
+.exp-hover-overlay {
+  background: rgba(10, 10, 10, 0.92) !important;
+}
+.exp-hover-text {
+  color: #fff !important;
+  font-size: 1.4rem !important;
+}
+.exp-contact-btn {
+  background: #fff !important;
+  color: var(--ink) !important;
+  border-radius: 0 !important;
+}
+
+/* ---------- rules: solid 1px, no chrome gradients, no diamonds ---------- */
+.chrome-rule,
+.hero-rule,
+.section-rule,
+.about-rule,
+.grid-divider-rule {
+  height: 1px !important;
+  background: var(--ink) !important;
+  opacity: 1 !important;
+}
+.exp-divider {
+  background: var(--hair) !important;
+}
+.rule-diamond {
+  display: none !important;
+}
+.section-footer,
+.next-project {
+  border-top: 1px solid var(--ink) !important;
+  border-image: none !important;
+}
+.hero-strip {
+  border-bottom: 1px solid var(--ink) !important;
+}
+.facts-grid {
+  border-top: 1px solid var(--ink) !important;
+}
+
+/* ---------- project cards: image in a plain frame ---------- */
+.card-frame {
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  border: 1px solid var(--ink);
+}
+.project-card:hover .card-frame {
+  background: none !important;
+}
+.card-inner {
+  border-radius: 0 !important;
+}
+.rivets,
+.shimmer {
+  display: none !important;
+}
+.card-label {
+  padding-top: 0.7rem !important;
+}
+.overlay-tag {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.overlay-title {
+  color: #fff !important;
+}
+
+/* ---------- hang tags: white card, black edge and strings ---------- */
+.rail-bar {
+  height: 1px !important;
+  background: var(--ink) !important;
+}
+.hang-string {
+  background: var(--ink) !important;
+}
+.tag-face {
+  background: var(--ink) !important; /* this is the 1px outline */
+}
+.tag-face::before {
+  background: #fff !important;
+}
+.tag-title {
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
+  color: var(--ink) !important;
+}
+.tag-hint,
+.tag-tools {
+  color: var(--muted) !important;
+}
+
+/* ---------- details row ---------- */
+.fact-value a,
+.hero-meta-link,
+.contact-link,
+.case-link {
+  color: var(--ink) !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  border-bottom: none !important;
+}
+.fact-value a:hover,
+.contact-link:hover,
+.case-link:hover {
+  color: var(--muted) !important;
+}
+
+/* ---------- sequin pad ---------- */
+.hero-sequins,
+.hero-sequins--smoke,
+.hero-sequins--noir,
+.hero-sequins--black {
+  background: var(--ink) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+/* caption under the pad: "↳ Brush the sequins" */
+.sequin-pad-wrap .pad-label {
+  margin: 12px 0 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  color: var(--ink) !important;
+}
+
+/* ---------- about page bits ---------- */
+.about-photo-frame {
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  border: 1px solid var(--ink);
+  box-shadow: none !important;
+}
+.about-photo-frame img {
+  border-radius: 0 !important;
+}
+.about-section-label::before {
+  background: var(--ink) !important;
+}
+.about-section-title em,
+.section-title em {
+  color: var(--muted) !important;
+}
+.itinerary span:not(.itin-arrow) {
+  border-radius: 0 !important;
+  border-color: var(--hair) !important;
+  color: var(--ink);
+}
+.itinerary .itin-now,
+.tl-filter[aria-pressed="true"],
+.vt-now span {
+  background: var(--ink) !important;
+  border-color: var(--ink) !important;
+  color: #fff !important;
+}
+.tl-filter,
+.vt-marker span {
+  border-radius: 0 !important;
+  border-color: var(--hair) !important;
+  color: var(--ink) !important;
+}
+.vt-list::before {
+  background: var(--ink) !important;
+}
+.vt-marker.vt-now span {
+  background: var(--ink) !important;
+  color: #fff !important;
+}
+
+/* ---------- footer: plain black ---------- */
+footer {
+  background: var(--ink) !important;
+}
+footer h5 {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+}
+footer a.text-light,
+footer a {
+  color: #bdbdbd !important;
+}
+footer a:hover {
+  color: #fff !important;
+}
+
+/* ---------- case-study sidebar ---------- */
+.sidebar {
+  border-right: 1px solid var(--hair) !important;
+}
+.sidebar-link.active {
+  border-left-color: var(--ink) !important;
+}

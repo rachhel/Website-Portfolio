@@ -83,9 +83,7 @@
         width: 0;
         height: 0;
       }
-      body.cursor-link .cursor-ring {
-        width: 58px;
-        height: 58px;
+      body.cursor-link .cursor-ring.__old {
         border: 1px solid transparent;
         background:
           linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
@@ -133,6 +131,51 @@
         pointer-events: none;
         z-index: 9997;
       }
+
+      /* ---------- hover label: the cursor tells you what a click does ---------- */
+      .cursor-label {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+        pointer-events: none;
+        padding: 7px 12px 7px 11px;
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Inter Tight", "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.12s linear;
+        will-change: transform;
+      }
+      body.cursor-link .cursor-label.has-text {
+        opacity: 1;
+      }
+      /* in link state: the ring simply fades (no resizing, so nothing bounces);
+         the dot stays the same size at the exact click point */
+      body.cursor-link .cursor-ring,
+      body.cursor-press .cursor-ring {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      body.cursor-link .cursor-ring {
+        opacity: 0 !important;
+        transition: opacity 0.12s linear !important;
+      }
+      body.cursor-link .cursor {
+        width: 9px !important;
+        height: 9px !important;
+        background: #0a0a0a !important;
+        transition: none !important;
+      }
+      body.cursor-link .cursor-arrow {
+        display: none;
+      }
     </style>
     <script
       src="https://cdn.databuddy.cc/databuddy.js"
@@ -142,7 +185,66 @@
       crossorigin="anonymous"
       async
     ></script>
-  </head>
+    <!-- site-wide look: keep this as the last stylesheet -->
+  <link rel="stylesheet" href="theme.css" />
+    <!-- no eyebrows; one left edge for everything (same as the home page) -->
+    <style>
+      .about-kicker,
+      .about-meta,
+      .about-section-label,
+      .about-photo figcaption {
+        display: none !important;
+      }
+      .about-hero {
+        padding-left: 80px !important;
+        padding-right: 80px !important;
+      }
+      .about-hero-left {
+        padding-left: 0 !important;
+      }
+      .about-body {
+        max-width: none !important;
+        padding: 5rem 80px 6rem !important;
+      }
+      .about-section {
+        grid-template-columns: minmax(0, 1fr) !important;
+        max-width: 1040px;
+      }
+      /* timeline centered on the page: dates left of the spine, roles right */
+      @media (min-width: 901px) {
+        #experience.about-section {
+          max-width: none;
+        }
+        .vt {
+          max-width: 880px;
+          margin: 0 auto;
+        }
+        .tl-filters {
+          justify-content: center;
+          margin-bottom: 2.5rem !important;
+        }
+        .vt-item,
+        .vt-marker {
+          grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) !important;
+        }
+        .vt-list::before {
+          left: 50% !important;
+        }
+        .vt-date {
+          padding-right: 4px;
+        }
+      }
+      @media (max-width: 900px) {
+        .about-hero {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        .about-body {
+          padding: 3rem 20px 4rem !important;
+        }
+      }
+    </style>
+</head>
 
   <body class="about-page" id="page-top">
     <div class="cursor" id="cursor"></div>
@@ -181,17 +283,13 @@
     <!-- HERO -->
     <div class="about-hero">
       <div class="about-hero-left">
-        <span class="about-kicker">Designer · Engineer · Creator</span>
         <h1 class="about-name" aria-label="Rachel Chen">
-          <span class="about-name-line" id="nameLine1">RACHEL</span>
-          <span class="about-name-line" id="nameLine2">CHEN</span>
+          <span class="about-name-line" id="nameLine1">Rachel</span>
+          <span class="about-name-line" id="nameLine2">Chen</span>
         </h1>
         <p class="about-tagline">
           Building thoughtful digital products where design and engineering meet.
         </p>
-        <div class="about-meta">
-          Duke M.Eng · Northeastern B.S. · LA, Boston &amp; Durham
-        </div>
       </div>
 
       <div class="about-hero-right">
@@ -199,7 +297,6 @@
           <div class="about-photo-frame">
             <img src="assets/pfp.png" alt="Portrait of Rachel Chen" />
           </div>
-          <figcaption>Rachel Chen · Durham, NC · 2026</figcaption>
         </figure>
       </div>
     </div>
@@ -208,7 +305,6 @@
     <div class="about-body">
       <!-- WHO I AM -->
       <section class="about-section" id="who">
-        <div class="about-section-label">Who I am</div>
         <div class="about-section-content">
           <h2 class="about-section-title">
             Where creativity and <em>engineering overlap.</em>
@@ -249,7 +345,6 @@
 
       <!-- EXPERIENCE TIMELINE -->
       <section class="about-section" id="experience">
-        <div class="about-section-label">Experience</div>
         <div class="about-section-content">
           <h2 class="about-section-title">Where I've <em>worked.</em></h2>
 
@@ -345,7 +440,6 @@
 
       <!-- SKILLS -->
       <section class="about-section" id="skills">
-        <div class="about-section-label">Skills</div>
         <div class="about-section-content">
           <h2 class="about-section-title">What I <em>work with.</em></h2>
           <div class="skills-grid">
@@ -381,7 +475,6 @@
 
       <!-- INVOLVEMENT -->
       <section class="about-section" id="involvement">
-        <div class="about-section-label">Beyond work</div>
         <div class="about-section-content">
           <h2 class="about-section-title">
             Getting involved <em id="invTitle">at Duke.</em>
@@ -451,7 +544,6 @@
 
       <!-- APPROACH -->
       <section class="about-section" id="approach">
-        <div class="about-section-label">My approach</div>
         <div class="about-section-content">
           <h2 class="about-section-title"><em>Design. Develop. Delight.</em></h2>
           <div class="about-text">
@@ -504,7 +596,7 @@
           </div>
         </div>
         <div class="text-center mt-4 small">
-          Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+          &copy; 2026 Rachel Chen
         </div>
       </div>
     </footer>
@@ -647,9 +739,49 @@
           let trail = true;
           let shown = false;
 
+          const label = document.createElement("div");
+          label.className = "cursor-label";
+          label.setAttribute("aria-hidden", "true");
+          document.body.appendChild(label);
+          const labelFor = (hit) => {
+            const own = hit.closest("[data-cursor-label]");
+            if (own) return own.getAttribute("data-cursor-label");
+            if (hit.closest(".hang-tag"))
+              return hit.closest(".hang-tag").classList.contains("is-flipped")
+                ? "Flip back"
+                : "Flip me";
+            if (hit.closest(".project-card")) return "See the project";
+            if (hit.closest(".tl-filter")) return "Show";
+            if (hit.closest(".navbar-brand"))
+              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+                ? "Back to top"
+                : "Home";
+            const a = hit.closest("a");
+            if (a) {
+              const href = a.getAttribute("href") || "";
+              if (href.startsWith("mailto:")) return "Say hi";
+              if (/linkedin/i.test(href)) return "Let\u2019s connect";
+              if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
+              if (href.startsWith("#")) return "Take me there";
+              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              return "Go";
+            }
+            if (hit.closest(".navbar-toggler")) return "Menu";
+            return "Click";
+          };
+          let labelText = "";
+          const setLabel = (t) => {
+            if (t === labelText) return;
+            labelText = t;
+            if (t) label.textContent = t; // keep old text while it fades out
+            label.classList.toggle("has-text", !!t);
+          };
+
           const setMode = (target) => {
             const el = target && target.closest ? target : null;
-            const link = !!(el && el.closest(CLICKABLE));
+            const hit = el && el.closest(CLICKABLE);
+            const link = !!hit;
+            setLabel(hit ? labelFor(el) : "");
             const next = link ? "link" : "default";
             if (next !== mode) {
               mode = next;
@@ -674,6 +806,7 @@
             }
             setMode(e.target);
             dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            label.style.transform = `translate3d(${mx + 12}px, ${my + 14}px, 0)`;
             if (trail && lastX !== null) {
               travel += Math.hypot(mx - lastX, my - lastY);
               while (travel > spacing) {
@@ -692,7 +825,11 @@
             if (trail)
               for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
           };
-          const onUp = () => document.body.classList.remove("cursor-press");
+          const onUp = () => {
+            document.body.classList.remove("cursor-press");
+            // a click can change what the label should say (e.g. a tag flipping)
+            setTimeout(() => setMode(document.elementFromPoint(mx, my)), 0);
+          };
           const onLeave = () => {
             shown = false;
             lastX = null;
@@ -790,7 +927,7 @@
         letter.addEventListener("mouseleave", () => {
           setTimeout(() => {
             letter.style.background = "none";
-            letter.style.webkitTextFillColor = "#0e0e0e";
+            letter.style.webkitTextFillColor = "#0a0a0a";
           }, 650);
         });
       });

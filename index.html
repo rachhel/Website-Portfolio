@@ -256,9 +256,7 @@
         width: 0;
         height: 0;
       }
-      body.cursor-link .cursor-ring {
-        width: 58px;
-        height: 58px;
+      body.cursor-link .cursor-ring.__old {
         border: 1px solid transparent;
         background:
           linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
@@ -654,7 +652,424 @@
         filter: grayscale(1);
         opacity: 0.6;
       }
+
+      /* ============================================================
+         SIMPLIFIED HERO: name + one sentence + pad (no eyebrow)
+         ============================================================ */
+      .hero--pad .hero-name {
+        margin-bottom: 1.8rem;
+      }
+      .hero-lede {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+        line-height: 1.55;
+        color: #333;
+        max-width: 32rem;
+        margin: 0;
+      }
+      /* desktop: break after "code"; phones: wrap naturally */
+      @media (max-width: 900px) {
+        .lede-break {
+          display: none;
+        }
+      }
+      /* hero no longer fills the whole screen, so the details sit on the first screen */
+      .hero-section.hero--pad {
+        min-height: auto;
+        padding-top: 170px;
+        padding-bottom: 5rem;
+      }
+      /* caption sits on the pad's left edge, like everything else */
+      .sequin-pad-wrap {
+        align-items: flex-start;
+      }
+      /* pad caption: quiet sentence case, not a tracked eyebrow */
+      .pad-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 300;
+        letter-spacing: 0;
+        text-transform: none;
+        color: #8a8a8a;
+        margin-bottom: 12px;
+      }
+
+      /* ============================================================
+         FACTS: the details, as their own calm section
+         ============================================================ */
+      .facts {
+        background: #fff;
+        padding: 0 60px 4.5rem;
+      }
+      .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.5rem;
+        padding-top: 2rem;
+        border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+      }
+      .fact-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: #8a8a8a;
+        margin: 0 0 0.5rem;
+      }
+      .fact-value {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.55;
+        color: #1a1a1a;
+        margin: 0;
+      }
+      .fact-value a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 400; /* a touch darker than the surrounding text */
+        transition: color 0.2s;
+      }
+      .fact-value a:hover {
+        color: #8a877f;
+      }
+      /* line the facts up with the indented name on desktop */
+      @media (min-width: 901px) {
+        .facts {
+          padding-left: calc(60px + clamp(2rem, 7vw, 9rem));
+        }
+      }
+
+      @media (max-width: 900px) {
+        /* phones: name, sentence, then the pad; facts follow as a section */
+        .hero--pad .hero-left {
+          display: block;
+        }
+        .hero--pad .sequin-pad-wrap {
+          order: 0;
+          margin-top: 2.5rem;
+        }
+        .hero-section.hero--pad {
+          padding-top: 110px;
+          padding-bottom: 3rem;
+        }
+        .facts {
+          padding: 0 24px 3rem;
+        }
+        .facts-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.75rem 1.5rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .facts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* hang tags: skimmable fronts (title + tools) */
+      .tag-keys {
+        margin-top: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.8rem;
+        line-height: 1.45;
+        color: #1a1a1a;
+      }
+      .tag-front .tag-title {
+        font-size: 1.6rem !important;
+      }
+      .tag-keys .k {
+        white-space: nowrap;
+      }
+      @media (max-width: 768px) {
+        .tag-keys {
+          font-size: 0.66rem;
+          margin-top: 6px;
+        }
+        .tag-front .tag-title {
+          font-size: clamp(0.82rem, 4.1vw, 1.1rem) !important;
+          letter-spacing: -0.03em !important;
+        }
+      }
+
+      /* ---------- hover label: the cursor tells you what a click does ---------- */
+      .cursor-label {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+        pointer-events: none;
+        padding: 7px 12px 7px 11px;
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Inter Tight", "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.12s linear;
+        will-change: transform;
+      }
+      body.cursor-link .cursor-label.has-text {
+        opacity: 1;
+      }
+      /* in link state: the ring simply fades (no resizing, so nothing bounces);
+         the dot stays the same size at the exact click point */
+      body.cursor-link .cursor-ring,
+      body.cursor-press .cursor-ring {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      body.cursor-link .cursor-ring {
+        opacity: 0 !important;
+        transition: opacity 0.12s linear !important;
+      }
+      body.cursor-link .cursor {
+        width: 9px !important;
+        height: 9px !important;
+        background: #0a0a0a !important;
+        transition: none !important;
+      }
+      body.cursor-link .cursor-arrow {
+        display: none;
+      }
+      .sequin-pad-wrap .pad-label {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: baseline;
+        width: 100%;
+      }
+      .pad-reset {
+        appearance: none;
+        background: none;
+        border: 0;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+      }
+      .pad-reset:hover {
+        color: #6b6b6b;
+      }
+
+      /* section titles brush to chrome letter by letter (no whole-word hover) */
+      .section-title:hover {
+        background: none !important;
+        -webkit-text-fill-color: currentColor !important;
+        filter: none !important;
+      }
+      .section-title .letter {
+        display: inline-block;
+        font-family: var(--display, "Helvetica Neue", Helvetica, Arial, sans-serif) !important;
+        -webkit-text-fill-color: var(--ink, #0a0a0a);
+      }
+      /* one left edge for Expertise, Work and Experience */
+      .expertise-section .section-header,
+      .chrome-works-section .section-header,
+      .experience-section .section-header {
+        padding: 5rem 80px 0 !important;
+      }
+      .expertise-section .expertise-header {
+        padding: 0 80px 2rem !important;
+      }
+      .expertise-section .tag-rail {
+        padding: 0 24px;
+      }
+      @media (max-width: 900px) {
+        .expertise-section .section-header,
+        .chrome-works-section .section-header,
+        .experience-section .section-header {
+          padding: 3rem 20px 0 !important;
+        }
+        .expertise-section .expertise-header {
+          padding: 0 20px 1.5rem !important;
+        }
+        .expertise-section .tag-rail {
+          padding: 0 12px;
+        }
+      }
+      /* hero + details share the same left edge as the section titles */
+      @media (min-width: 901px) {
+        .hero-section.hero--pad {
+          padding-left: 80px !important;
+          padding-right: 80px !important;
+        }
+        .hero--pad .hero-left {
+          padding-left: 0 !important;
+        }
+        .facts {
+          padding-left: 80px !important;
+          padding-right: 80px !important;
+        }
+      }
+      @media (max-width: 900px) {
+        .hero-section.hero--pad,
+        .facts,
+        .exp-grid {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+      }
+      /* tag front: just the title; back: the tools, stacked like a care label */
+      .tag-front .tag-title {
+        margin-top: auto;
+      }
+      @media (min-width: 769px) {
+        .hang-tag {
+          height: 176px !important; /* room for six tools on the back */
+        }
+      }
+      .tag-back {
+        padding-top: 30px !important;
+      }
+      .tag-tools-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.86rem;
+        line-height: 1.25;
+        color: #0a0a0a;
+      }
+      @media (max-width: 768px) {
+        .tag-tools-list {
+          font-size: 0.68rem;
+          gap: 3px;
+        }
+      }
+      .expertise-header .section-title {
+        margin-bottom: 0 !important;
+      }
+      .expertise-section .tag-rail {
+        margin-top: 0 !important;
+      }
+      /* ---------- runway mini game ---------- */
+      .runway-section {
+        padding: 5rem 80px 5rem;
+        background: #fff;
+      }
+      .runway-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .runway-line {
+        margin: 0;
+        font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+        color: #0a0a0a;
+      }
+      .runway-score {
+        margin: 0;
+        font-variant-numeric: tabular-nums;
+        font-size: 1rem;
+        color: #0a0a0a;
+        display: flex;
+        gap: 1.25rem;
+        white-space: nowrap;
+      }
+      .runway-best {
+        color: #6b6b6b;
+      }
+      .runway-stage {
+        position: relative;
+        height: 220px;
+        border: 1px solid #0a0a0a;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+        outline: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .runway-stage:focus-visible {
+        box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.2);
+      }
+      .runway-stage canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .runway-help {
+        margin: 12px 0 0;
+        font-size: 0.95rem;
+        color: #6b6b6b;
+      }
+      @media (max-width: 900px) {
+        .runway-section {
+          padding: 3.5rem 20px 3.5rem;
+        }
+        .runway-stage {
+          height: 200px;
+        }
+      }
+
+      /* ---------- hierarchy: the name is the biggest thing on the page ---------- */
+      .chrome-works-section .section-title,
+      .experience-section .section-title {
+        font-size: clamp(2.6rem, 5vw, 4.75rem) !important;
+      }
+      .chrome-works-section .section-header,
+      .experience-section .section-header {
+        padding-top: 4.5rem !important;
+      }
+      .chrome-works-section .rule-wrap,
+      .experience-section .rule-wrap {
+        margin-top: 1.5rem !important;
+      }
+
+      /* Skills is a sign on top of the rack, not a section title */
+      .expertise-section {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+      }
+      .rack-sign {
+        display: block !important;
+        text-align: center;
+        font-size: clamp(1.5rem, 2.2vw, 2rem) !important;
+        line-height: 1 !important;
+        letter-spacing: -0.03em !important;
+        margin: 0 0 14px !important;
+      }
+      .rack-sign .letter {
+        display: inline-block;
+      }
+      .expertise-section .rail-bar {
+        position: relative;
+        overflow: visible;
+      }
+      /* little knobs on the ends of the rail, like a real garment rack */
+      .expertise-section .rail-bar::before,
+      .expertise-section .rail-bar::after {
+        content: "";
+        position: absolute;
+        top: -3.5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #0a0a0a;
+      }
+      .expertise-section .rail-bar::before {
+        left: -4px;
+      }
+      .expertise-section .rail-bar::after {
+        right: -4px;
+      }
+      @media (max-width: 900px) {
+        .expertise-section {
+          padding-top: 3rem !important;
+          padding-bottom: 3rem !important;
+        }
+      }
     </style>
+    <!-- site-wide look: keep this as the last stylesheet -->
+    <link rel="stylesheet" href="theme.css" />
     <script
       src="https://cdn.databuddy.cc/databuddy.js"
       data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
@@ -707,76 +1122,96 @@
     <div class="hero-section hero--pad">
       <div class="hero-grid">
         <div class="hero-left">
-          <span class="tag hero-kicker"
-            >Designer–Engineer based in LA, Boston &amp; Durham</span
-          >
           <h1 class="hero-name" aria-label="Rachel Chen">
-            <span class="hero-name-line" id="nameLine1">RACHEL</span>
-            <span class="hero-name-line" id="nameLine2">CHEN</span>
+            <span class="hero-name-line" id="nameLine1">Rachel</span>
+            <span class="hero-name-line" id="nameLine2">Chen</span>
           </h1>
-          <p class="hero-tagline">
-            I design and build digital products, bridging design and engineering
+          <p class="hero-lede">
+            Design engineer, bridging design and code<br class="lede-break" />
             with a product mindset.
           </p>
-          <div class="hero-meta-wrap">
-            <div class="hero-meta">
-              Currently pursuing M.Eng of Design and Technology Innovation at
-              <a
-                href="https://engineering.duke.edu/"
-                target="_blank"
-                class="hero-meta-link"
-                >Duke University</a
-              >
-              <br />
-              <a
-                href="https://www.northeastern.edu/"
-                target="_blank"
-                class="hero-meta-link"
-                >Northeastern</a
-              >
-              graduate in Computer Science &amp; Design, and Global Fashion
-              Studies
-              <br />
-              Prev coded and designed for
-              <a
-                href="https://www.bose.com"
-                target="_blank"
-                class="hero-meta-link"
-                >Bose Corporation</a
-              >,
-              <a
-                href="https://delsys.com/"
-                target="_blank"
-                class="hero-meta-link"
-                >Delsys</a
-              >,
-              <a
-                href="https://www.sift-info.com/"
-                target="_blank"
-                class="hero-meta-link"
-                >Sift</a
-              >
-            </div>
-          </div>
         </div>
 
         <!-- Sequin pad -->
         <figure class="sequin-pad-wrap">
-          <figcaption class="pad-label">Brush the sequins</figcaption>
           <div
             class="hero-sequins hero-sequins--smoke"
             id="heroSequins"
             data-no-stars
             data-cursor-theme="dark"
           ></div>
+          <figcaption class="pad-label">
+            <span>Brush the sequins</span>
+            <button type="button" class="pad-reset" id="padReset" data-cursor-label="Fix it">
+              Reset <span aria-hidden="true">↺</span>
+            </button>
+          </figcaption>
         </figure>
       </div>
     </div>
 
+    <!-- Background: details moved out of the hero -->
+    <section class="facts" aria-label="Background">
+      <div class="facts-grid">
+        <div class="fact">
+          <p class="fact-label">Now</p>
+          <p class="fact-value">
+            M.Eng in Design &amp; Technology Innovation at
+            <a
+              href="https://duke.edu"
+              target="_blank"
+              style="text-decoration: underline; text-underline-offset: 2px;"
+              >Duke University</a
+            >
+          </p>
+        </div>
+        <div class="fact">
+          <p class="fact-label">Studied</p>
+          <p class="fact-value">
+            Computer Science, Design, and Global Fashion Studies at
+            <a
+              href="https://www.northeastern.edu"
+              target="_blank"
+              style="text-decoration: underline; text-underline-offset: 2px;"
+              >Northeastern</a
+            >
+          </p>
+        </div>
+        <div class="fact">
+          <p class="fact-label">Previously</p>
+          <p class="fact-value">
+            Coded and designed at<br />
+            <a
+              href="https://www.bose.com"
+              target="_blank"
+              style="text-decoration: underline; text-underline-offset: 2px;"
+              >Bose</a
+            >,
+            <a
+              href="https://delsys.com/company/timeline/?gad_source=1&gad_campaignid=23530796799&gbraid=0AAAAABO8dc0aWSSe-OWF7sZpfJbxv5B9X&gclid=CjwKCAiAhqHXBhAXEiwATbksU1pesr4o4f1FK0BqGhLXvOpf8QT-9TwmDhfOBLbxJqjjHLDpuFeAexoCv6cQAvD_BwE"
+              target="_blank"
+              style="text-decoration: underline; text-underline-offset: 2px;"
+              >Delsys</a
+            >, and
+            <a
+              href="https://www.sift-info.com/"
+              target="_blank"
+              style="text-decoration: underline; text-underline-offset: 2px;"
+              >Sift</a
+            >
+          </p>
+        </div>
+        <div class="fact">
+          <p class="fact-label">Based in</p>
+          <p class="fact-value">Los Angeles, Boston, and Durham</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Expertise: hang tags -->
-    <div class="container expertise-section">
-      <h2 class="text-center expertise-title">My Expertise</h2>
+    <div class="expertise-section">
       <div class="tag-rail">
+        <h2 class="section-title rack-sign">Skills</h2>
         <div class="rail-bar" aria-hidden="true"></div>
         <div class="tag-row">
           <div class="hang">
@@ -785,63 +1220,48 @@
               class="hang-tag"
               type="button"
               aria-pressed="false"
-              aria-label="Computer Science. Flip for more."
+              aria-label="Product. Flip to see tools: User research, Product strategy, PRDs, A/B testing, Analytics, Jira, Miro."
             >
               <span class="tag-face tag-front">
-                <span class="tag-num">No. 01</span>
+                <span class="tag-title">Product</span>
+                <span class="tag-hint">Flip ↻</span>
+              </span>
+              <span class="tag-face tag-back">
+                <span class="tag-tools-list"><span>User research</span><span>Product strategy</span><span>PRDs · A/B testing</span><span>Analytics</span><span>Jira · Miro</span></span>
+              </span>
+            </button>
+          </div>
+          <div class="hang">
+            <span class="hang-string" aria-hidden="true"></span>
+            <button
+              class="hang-tag"
+              type="button"
+              aria-pressed="false"
+              aria-label="Design. Flip to see tools: Figma, Illustrator, InDesign, Prototyping, Design systems."
+            >
+              <span class="tag-face tag-front">
+                <span class="tag-title">Design</span>
+                <span class="tag-hint">Flip ↻</span>
+              </span>
+              <span class="tag-face tag-back">
+                <span class="tag-tools-list"><span>Figma</span><span>Illustrator</span><span>InDesign</span><span>Prototyping</span><span>Design systems</span></span>
+              </span>
+            </button>
+          </div>
+          <div class="hang">
+            <span class="hang-string" aria-hidden="true"></span>
+            <button
+              class="hang-tag"
+              type="button"
+              aria-pressed="false"
+              aria-label="Computer Science. Flip to see tools: Java, Kotlin, React, Swift, Python, SQL, C#/WPF."
+            >
+              <span class="tag-face tag-front">
                 <span class="tag-title">Computer<br />Science</span>
-                <span class="tag-hint">flip for more ↻</span>
+                <span class="tag-hint">Flip ↻</span>
               </span>
               <span class="tag-face tag-back">
-                <span class="tag-desc"
-                  >Building full-stack web, native mobile, and data work, from
-                  the database to the last pixel.</span
-                >
-                <span class="tag-tools">React · Swift · Java · Python</span>
-              </span>
-            </button>
-          </div>
-          <div class="hang">
-            <span class="hang-string" aria-hidden="true"></span>
-            <button
-              class="hang-tag"
-              type="button"
-              aria-pressed="false"
-              aria-label="Interaction Design. Flip for more."
-            >
-              <span class="tag-face tag-front">
-                <span class="tag-num">No. 02</span>
-                <span class="tag-title">Interaction<br />Design</span>
-                <span class="tag-hint">flip for more ↻</span>
-              </span>
-              <span class="tag-face tag-back">
-                <span class="tag-desc"
-                  >Designing interfaces and brands that feel intuitive and look
-                  considered.</span
-                >
-                <span class="tag-tools">UX · UI · Brand</span>
-              </span>
-            </button>
-          </div>
-          <div class="hang">
-            <span class="hang-string" aria-hidden="true"></span>
-            <button
-              class="hang-tag"
-              type="button"
-              aria-pressed="false"
-              aria-label="Customer First. Flip for more."
-            >
-              <span class="tag-face tag-front">
-                <span class="tag-num">No. 03</span>
-                <span class="tag-title">Product<br />Thinking</span>
-                <span class="tag-hint">flip for more ↻</span>
-              </span>
-              <span class="tag-face tag-back">
-                <span class="tag-desc"
-                  >Starting from the customer’s real problem, then shaping what
-                  to build and why.</span
-                >
-                <span class="tag-tools">User research · Problem framing</span>
+                <span class="tag-tools-list"><span>Java · Kotlin</span><span>React</span><span>Swift</span><span>Python · SQL</span><span>C#/WPF</span></span>
               </span>
             </button>
           </div>
@@ -853,10 +1273,6 @@
     <div class="chrome-works-section" id="work">
       <div class="section-header">
         <div>
-          <div class="eyebrow">
-            <div class="eyebrow-line"></div>
-            <span class="eyebrow-text">Selected work</span>
-          </div>
           <h2 class="section-title">Work</h2>
         </div>
       </div>
@@ -1096,17 +1512,9 @@
 
     <!-- Featured Professional Experiences -->
     <div class="experience-section" id="experience">
-      <div class="section-header" style="padding: 5rem 80px 0">
+      <div class="section-header">
         <div>
-          <div class="eyebrow">
-            <div class="eyebrow-line"></div>
-            <span class="eyebrow-text">Professional Experience</span>
-          </div>
           <h2 class="section-title">Experience</h2>
-        </div>
-        <div class="header-right">
-          <span class="project-count">03 co-ops</span>
-          <span class="header-tag">Industry Experience</span>
         </div>
       </div>
 
@@ -1121,66 +1529,27 @@
         <div class="exp-card">
           <div class="exp-card-inner">
             <div class="exp-top">
-              <div class="exp-num">01</div>
               <img
                 class="exp-logo"
-                src="assets/logos/bose.png"
-                alt="Bose logo"
-                style="height: 40px"
-              />
-            </div>
-            <div class="exp-company">Bose</div>
-            <div class="exp-role">Software Engineering Co-op</div>
-            <div class="exp-date">2023</div>
-            <div class="exp-divider"></div>
-            <div class="exp-body">
-              Prototyped, implemented, and presented feature designs for the
-              Bose mobile app — focusing on user experience, Bluetooth
-              functionality, and app integration across iOS and Android.
-            </div>
-            <div class="exp-tags">
-              <span class="exp-tag">Swift</span>
-              <span class="exp-tag">Kotlin</span>
-              <span class="exp-tag">Figma</span>
-              <span class="exp-tag">Mobile</span>
-            </div>
-            <div class="exp-footer">
-              <span class="exp-request">Reach out to learn more →</span>
-            </div>
-          </div>
-          <div class="exp-hover-overlay">
-            <span class="exp-hover-text">reach out to learn more</span>
-            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn"
-              >Contact Me</a
-            >
-          </div>
-        </div>
-
-        <div class="exp-card">
-          <div class="exp-card-inner">
-            <div class="exp-top">
-              <div class="exp-num">02</div>
-              <img
-                class="exp-logo"
-                src="assets/logos/delsys.png"
+                src="assets/logos/delsys.svg"
                 alt="Delsys logo"
                 onerror="this.remove()"
               />
             </div>
             <div class="exp-company">Delsys</div>
-            <div class="exp-role">Software Engineering Co-op</div>
-            <div class="exp-date">2024</div>
+            <div class="exp-role">UI/UX Software Engineering Co-op</div>
+            <div class="exp-date">Jul to Dec 2025 · Biomedical</div>
             <div class="exp-divider"></div>
             <div class="exp-body">
-              Developed software solutions for biomedical signal processing and
-              EMG sensor technology — building tools used by researchers and
-              clinicians worldwide.
+              Designed and built interfaces for biomedical software that
+              researchers and clinicians around the world use to work with EMG
+              sensor data.
             </div>
             <div class="exp-tags">
+              <span class="exp-tag">UI/UX</span>
               <span class="exp-tag">Python</span>
               <span class="exp-tag">C#</span>
-              <span class="exp-tag">Biomedical</span>
-              <span class="exp-tag">Signal Processing</span>
+              <span class="exp-tag">EMG Sensors</span>
             </div>
             <div class="exp-footer">
               <span class="exp-request">Reach out to learn more →</span>
@@ -1188,7 +1557,9 @@
           </div>
           <div class="exp-hover-overlay">
             <span class="exp-hover-text">reach out to learn more</span>
-            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn"
+            <a
+              href="mailto:chen.rachel1@northeastern.edu"
+              class="exp-contact-btn"
               >Contact Me</a
             >
           </div>
@@ -1197,17 +1568,16 @@
         <div class="exp-card">
           <div class="exp-card-inner">
             <div class="exp-top">
-              <div class="exp-num">03</div>
               <img
                 class="exp-logo"
-                src="assets/logos/sift.png"
+                src="assets/logos/sift.svg"
                 alt="Sift logo"
                 onerror="this.remove()"
               />
             </div>
             <div class="exp-company">Sift</div>
             <div class="exp-role">Software Engineering Co-op</div>
-            <div class="exp-date">2024</div>
+            <div class="exp-date">Jul to Sep 2025 · Fashion Tech</div>
             <div class="exp-divider"></div>
             <div class="exp-body">
               Helped a startup fashion tech brand build their database and set
@@ -1233,12 +1603,72 @@
             >
           </div>
         </div>
+
+        <div class="exp-card">
+          <div class="exp-card-inner">
+            <div class="exp-top">
+              <img
+                class="exp-logo"
+                src="assets/logos/bose.svg"
+                alt="Bose logo"
+                onerror="this.remove()"
+              />
+            </div>
+            <div class="exp-company">Bose</div>
+            <div class="exp-role">Mobile App Software Engineering Co-op</div>
+            <div class="exp-date">Jul to Dec 2024 · iOS &amp; Android</div>
+            <div class="exp-divider"></div>
+            <div class="exp-body">
+              Prototyped, built, and presented new features for the Bose mobile
+              app, focusing on user experience, Bluetooth, and integration
+              across iOS and Android.
+            </div>
+            <div class="exp-tags">
+              <span class="exp-tag">Swift</span>
+              <span class="exp-tag">Kotlin</span>
+              <span class="exp-tag">Figma</span>
+              <span class="exp-tag">Mobile</span>
+            </div>
+            <div class="exp-footer">
+              <span class="exp-request">Reach out to learn more →</span>
+            </div>
+          </div>
+          <div class="exp-hover-overlay">
+            <span class="exp-hover-text">reach out to learn more</span>
+            <a
+              href="mailto:chen.rachel1@northeastern.edu"
+              class="exp-contact-btn"
+              >Contact Me</a
+            >
+          </div>
+        </div>
       </div>
 
-      <div class="section-footer" style="margin: 0 80px">
-        <span class="footer-note">Rachel · 2026</span>
-      </div>
     </div>
+
+    <!-- Closer: runway mini game -->
+    <section class="runway-section" aria-label="Runway mini game">
+      <div class="runway-head">
+        <p class="runway-line">Made it to the end? Walk the runway.</p>
+        <p class="runway-score" aria-live="polite">
+          <span id="runwayScore">000</span>
+          <span class="runway-best">Best <span id="runwayBest">000</span></span>
+        </p>
+      </div>
+      <div
+        class="runway-stage"
+        id="runwayStage"
+        data-no-stars
+        data-cursor="link"
+        data-cursor-label="Jump"
+        role="button"
+        tabindex="0"
+        aria-label="Runway game. Press space or tap to jump over the obstacles."
+      >
+        <canvas id="runwayCanvas"></canvas>
+      </div>
+      <p class="runway-help">Space or tap to jump</p>
+    </section>
 
     <footer class="bg-dark text-light py-4">
       <div class="container">
@@ -1273,7 +1703,7 @@
           </div>
         </div>
         <div class="text-center mt-4 small">
-          Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
+          &copy; 2026 Rachel Chen
         </div>
       </div>
     </footer>
@@ -1473,12 +1903,16 @@
             const lines = String(this.o.text).split("\n");
             let size = (H * this.o.fontSize) / lines.length;
             mx.font = this._font(size);
+            if ("letterSpacing" in mx)
+              mx.letterSpacing = Math.round(size * (this.o.letterSpacing || 0)) + "px";
             const widest = Math.max(
               ...lines.map((l) => mx.measureText(l).width),
             );
             if (widest > W * this.o.maxTextWidth)
               size *= (W * this.o.maxTextWidth) / widest;
             mx.font = this._font(size);
+            if ("letterSpacing" in mx)
+              mx.letterSpacing = Math.round(size * (this.o.letterSpacing || 0)) + "px";
             mx.textAlign = "center";
             mx.textBaseline = "middle";
             mx.fillStyle = "#000";
@@ -1943,9 +2377,49 @@
           let trail = true;
           let shown = false;
 
+          const label = document.createElement("div");
+          label.className = "cursor-label";
+          label.setAttribute("aria-hidden", "true");
+          document.body.appendChild(label);
+          const labelFor = (hit) => {
+            const own = hit.closest("[data-cursor-label]");
+            if (own) return own.getAttribute("data-cursor-label");
+            if (hit.closest(".hang-tag"))
+              return hit.closest(".hang-tag").classList.contains("is-flipped")
+                ? "Flip back"
+                : "Flip me";
+            if (hit.closest(".project-card")) return "See the project";
+            if (hit.closest(".tl-filter")) return "Show";
+            if (hit.closest(".navbar-brand"))
+              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+                ? "Back to top"
+                : "Home";
+            const a = hit.closest("a");
+            if (a) {
+              const href = a.getAttribute("href") || "";
+              if (href.startsWith("mailto:")) return "Say hi";
+              if (/linkedin/i.test(href)) return "Let\u2019s connect";
+              if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
+              if (href.startsWith("#")) return "Take me there";
+              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              return "Go";
+            }
+            if (hit.closest(".navbar-toggler")) return "Menu";
+            return "Click";
+          };
+          let labelText = "";
+          const setLabel = (t) => {
+            if (t === labelText) return;
+            labelText = t;
+            if (t) label.textContent = t; // keep old text while it fades out
+            label.classList.toggle("has-text", !!t);
+          };
+
           const setMode = (target) => {
             const el = target && target.closest ? target : null;
-            const link = !!(el && el.closest(CLICKABLE));
+            const hit = el && el.closest(CLICKABLE);
+            const link = !!hit;
+            setLabel(hit ? labelFor(el) : "");
             const next = link ? "link" : "default";
             if (next !== mode) {
               mode = next;
@@ -1970,6 +2444,7 @@
             }
             setMode(e.target);
             dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            label.style.transform = `translate3d(${mx + 12}px, ${my + 14}px, 0)`;
             if (trail && lastX !== null) {
               travel += Math.hypot(mx - lastX, my - lastY);
               while (travel > spacing) {
@@ -1988,7 +2463,11 @@
             if (trail)
               for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
           };
-          const onUp = () => document.body.classList.remove("cursor-press");
+          const onUp = () => {
+            document.body.classList.remove("cursor-press");
+            // a click can change what the label should say (e.g. a tag flipping)
+            setTimeout(() => setMode(document.elementFromPoint(mx, my)), 0);
+          };
           const onLeave = () => {
             shown = false;
             lastX = null;
@@ -2056,9 +2535,17 @@
 
     <script>
       /* ---------- sequin pad ---------- */
-      // Softer than pure black. Pick one: "smoke" (soft charcoal) or "stone" (warm greige).
-      const PAD_STYLE = "smoke";
+      // Black sequins to match the black-and-white theme. Old options kept below.
+      const PAD_STYLE = "black";
       const PAD_THEMES = {
+        black: {
+          bg: "#0a0a0a",
+          matte: ["#1c1c1c", "#121212"],
+          hole: "#050505",
+          rim: "rgba(0,0,0,0.4)",
+          lo: [84, 84, 84],
+          hi: [248, 248, 248],
+        },
         smoke: {
           bg: "#34332f",
           matte: ["#46453f", "#383733"],
@@ -2083,16 +2570,20 @@
       const phone = window.matchMedia("(max-width: 600px)");
       const wall = new SequinWall(pad, {
         text: "so happy\nyou\u2019re here",
-        fontFamily: '"Cormorant Garamond", Georgia, serif',
-        fontStyle: "italic",
-        fontWeight: 600,
-        fontSize: 0.74,
-        maxTextWidth: 0.84,
-        spacing: phone.matches ? 5 : 7, // finer sequins on phones so the words stay readable
+        fontFamily: '"Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif',
+        fontStyle: "normal",
+        fontWeight: 700,
+        fontSize: phone.matches ? 0.38 : 0.34, // message size relative to the pad height
+        maxTextWidth: phone.matches ? 0.72 : 0.58,
+        letterSpacing: phone.matches ? -0.01 : -0.025, // tight like the headline; a bit looser on phones
+        spacing: phone.matches ? 3.5 : 4.5, // fine sequins so the smaller letters stay crisp
         brush: 24,
         theme: PAD_THEMES[PAD_STYLE],
         cursor: "none",
       });
+
+      /* reset button: wipe the pad back to matte and brush the message in again */
+      document.getElementById("padReset").addEventListener("click", () => wall.replay());
 
       /* ---------- chrome star cursor (replaces the old cursor code) ---------- */
       initChromeCursor();
@@ -2112,23 +2603,52 @@
       }
       splitLetters(document.getElementById("nameLine1"));
       splitLetters(document.getElementById("nameLine2"));
-
-      document.querySelectorAll(".hero-name .letter").forEach((letter) => {
-        letter.addEventListener("mouseenter", () => {
-          letter.style.transition = "all 0.08s ease";
-          letter.style.background =
-            "linear-gradient(158deg, #aaa 0%, #fff 28%, #888 50%, #eee 72%, #999 100%)";
-          letter.style.webkitBackgroundClip = "text";
-          letter.style.webkitTextFillColor = "transparent";
-          letter.style.backgroundClip = "text";
-        });
-        letter.addEventListener("mouseleave", () => {
-          setTimeout(() => {
-            letter.style.background = "none";
-            letter.style.webkitTextFillColor = "#0e0e0e";
-          }, 650);
-        });
+      // section titles (Expertise, Work, Experience) brush to chrome the same way as the name
+      document.querySelectorAll(".section-title").forEach((t) => {
+        t.setAttribute("aria-label", t.textContent.trim());
+        splitLetters(t);
       });
+
+      const CHROME =
+        "linear-gradient(158deg, #aaa 0%, #fff 28%, #888 50%, #eee 72%, #999 100%)";
+      const chromeOn = (letter) => {
+        clearTimeout(letter._off);
+        letter.style.transition = "all 0.08s ease";
+        letter.style.background = CHROME;
+        letter.style.webkitBackgroundClip = "text";
+        letter.style.backgroundClip = "text";
+        letter.style.webkitTextFillColor = "transparent";
+      };
+      const chromeOff = (letter) => {
+        clearTimeout(letter._off);
+        letter._off = setTimeout(() => {
+          letter.style.background = "none";
+          letter.style.webkitTextFillColor = "";
+        }, 650);
+      };
+      document
+        .querySelectorAll(".hero-name .letter, .section-title .letter")
+        .forEach((letter) => {
+          letter.addEventListener("mouseenter", () => chromeOn(letter));
+          letter.addEventListener("mouseleave", () => chromeOff(letter));
+        });
+      // phones: dragging a finger across a title brushes it too
+      let lastTouched = null;
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          const t = e.touches[0];
+          const el = document.elementFromPoint(t.clientX, t.clientY);
+          const letter =
+            el && el.closest && el.closest(".hero-name .letter, .section-title .letter");
+          if (letter && letter !== lastTouched) {
+            chromeOn(letter);
+            chromeOff(letter);
+          }
+          lastTouched = letter;
+        },
+        { passive: true },
+      );
 
       /* ---------- expertise hang tags ---------- */
       document.querySelectorAll(".hang-tag").forEach((tag) => {
@@ -2152,9 +2672,397 @@
         io.observe(rail);
       }
 
+      /* ---------- runway mini game ---------- */
+      (function () {
+        const stage = document.getElementById("runwayStage");
+        const cv = document.getElementById("runwayCanvas");
+        if (!stage || !cv) return;
+        const ctx = cv.getContext("2d");
+        const scoreEl = document.getElementById("runwayScore");
+        const bestEl = document.getElementById("runwayBest");
+        const INK = "#0a0a0a";
+        const MUTED = "#9a9a9a";
+        const FONT = '"Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif';
+
+        let W = 0, H = 0, dpr = 1, ground = 0;
+        const resize = () => {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          W = stage.clientWidth;
+          H = stage.clientHeight;
+          cv.width = W * dpr;
+          cv.height = H * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ground = H - 34;
+          // jump peak scales with the stage so the model never leaves the frame
+          const peak = Math.min(94, (ground - 84) * 0.95);
+          JUMP = Math.sqrt(2 * GRAV * peak);
+          if (state !== "play") draw(0);
+        };
+
+        let best = 0;
+        try { best = parseInt(localStorage.getItem("runwayBest") || "0", 10) || 0; } catch (e) {}
+        const pad3 = (n) => String(Math.floor(n)).padStart(3, "0");
+        bestEl.textContent = pad3(best);
+
+        // world
+        let state = "ready"; // ready | play | over
+        let t = 0, speed = 0, score = 0, nextGap = 0, walk = 0;
+        let obstacles = [], sparkles = [];
+        const model = { x: 0, y: 0, vy: 0, h: 58 };
+        const GRAV = 2600;
+        let JUMP = 700;
+
+        const reset = () => {
+          obstacles = [];
+          sparkles = [];
+          speed = 330;
+          score = 0;
+          nextGap = 420;
+          model.x = Math.max(56, W * 0.12);
+          model.y = 0;
+          model.vy = 0;
+          scoreEl.textContent = "000";
+        };
+
+        const jump = () => {
+          if (state === "ready" || state === "over") {
+            reset();
+            state = "play";
+            last = performance.now();
+            loop(last);
+            return;
+          }
+          if (model.y === 0) {
+            model.vy = JUMP;
+            for (let i = 0; i < 6; i++)
+              sparkles.push({ x: model.x, y: ground, vx: (Math.random() - 0.7) * 120, vy: -Math.random() * 90, life: 1 });
+          }
+        };
+
+        // obstacles: clothing rack, shopping bag, hat box
+        const KINDS = [
+          { name: "rack", w: 46, h: 44 },
+          { name: "bag", w: 24, h: 30 },
+          { name: "box", w: 30, h: 22 },
+          { name: "bags", w: 50, h: 30 },
+        ];
+        const spawn = () => {
+          const k = KINDS[(Math.random() * KINDS.length) | 0];
+          obstacles.push({ ...k, x: W + 20 });
+        };
+
+        // drawing helpers
+        const line = (x1, y1, x2, y2, w = 2) => {
+          ctx.lineWidth = w;
+          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+        };
+
+        // the model: an original Y2K fashion-doll version of Rachel
+        // (big head, long glossy black hair, navy baby tee, black flares, platforms, iced coffee)
+        const SKIN = "#efcdb4", SKIN_SH = "#e2b89b";
+        const NAVY = "#1f2e57", NAVY_BACK = "#16213f";
+        const JEANS = "#111111", JEANS_BACK = "#2c2c2c", HAIR = "#0b0b0b";
+        const LIPS = "#d4607a", BLUSH = "rgba(240,120,140,0.35)";
+        const limb = (x1, y1, x2, y2, w, c) => {
+          ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = "round";
+          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+        };
+        // flared jeans leg + chunky platform
+        const leg = (hx, hy, thigh, bend, c) => {
+          const kx = hx + Math.sin(thigh) * 12, ky = hy + Math.cos(thigh) * 12;
+          const sh = thigh - bend;
+          const fx = kx + Math.sin(sh) * 13, fy = ky + Math.cos(sh) * 13;
+          limb(hx, hy, kx, ky, 5.2, c);
+          // shin flares out toward the hem
+          const nx = Math.cos(sh), ny = -Math.sin(sh);
+          ctx.fillStyle = c;
+          ctx.beginPath();
+          ctx.moveTo(kx + nx * 2.2, ky + ny * 2.2);
+          ctx.lineTo(fx + nx * 3.8, fy + ny * 3.8);
+          ctx.lineTo(fx - nx * 3.8, fy - ny * 3.8);
+          ctx.lineTo(kx - nx * 2.2, ky - ny * 2.2);
+          ctx.closePath(); ctx.fill();
+          // platform shoe peeking out under the flare
+          ctx.fillStyle = "#000";
+          ctx.beginPath();
+          ctx.moveTo(fx - 3, fy); ctx.lineTo(fx + 5.5, fy + 0.5);
+          ctx.lineTo(fx + 5.5, fy + 4.5); ctx.lineTo(fx - 3, fy + 4.5);
+          ctx.closePath(); ctx.fill();
+        };
+        const swingArm = (sx, sy, up, bend, sleeve) => {
+          const ex = sx + Math.sin(up) * 9, ey = sy + Math.cos(up) * 9;
+          const fa = up + bend;
+          const hx = ex + Math.sin(fa) * 9, hy = ey + Math.cos(fa) * 9;
+          limb(sx, sy, sx + Math.sin(up) * 4, sy + Math.cos(up) * 4, 4.4, sleeve); // puff of the tee sleeve
+          limb(sx + Math.sin(up) * 3, sy + Math.cos(up) * 3, ex, ey, 2.6, SKIN);
+          limb(ex, ey, hx, hy, 2.4, SKIN);
+          return [hx, hy];
+        };
+        const icedCoffee = (cx, cy) => {
+          // clear cup, coffee with a milk swirl, dome lid, straw
+          ctx.fillStyle = "#7a4a2c";
+          ctx.beginPath(); ctx.moveTo(cx - 3.6, cy - 5); ctx.lineTo(cx + 3.6, cy - 5);
+          ctx.lineTo(cx + 2.6, cy + 6); ctx.lineTo(cx - 2.6, cy + 6); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = "#c99a73";
+          ctx.fillRect(cx - 3.4, cy - 5, 6.8, 3.2);
+          ctx.strokeStyle = "#0a0a0a"; ctx.lineWidth = 0.9;
+          ctx.beginPath(); ctx.moveTo(cx - 3.8, cy - 7); ctx.lineTo(cx + 3.8, cy - 7);
+          ctx.lineTo(cx + 2.7, cy + 6.3); ctx.lineTo(cx - 2.7, cy + 6.3); ctx.closePath(); ctx.stroke();
+          ctx.beginPath(); ctx.arc(cx, cy - 7, 3.8, Math.PI, 0); ctx.stroke(); // dome lid
+          limb(cx + 0.8, cy - 10.5, cx + 2.6, cy - 16, 1.3, "#0a0a0a"); // straw
+          ctx.fillStyle = "rgba(255,255,255,0.75)";
+          ctx.fillRect(cx - 2.6, cy - 4, 0.9, 8); // shine on the plastic
+        };
+
+        const drawModel = (x, yOff) => {
+          const base = ground - yOff - 4.5; // platforms add height
+          const air = yOff > 0;
+          const still = !air && state !== "play";
+          const s = Math.sin(walk), c = Math.cos(walk);
+          const bob = air || still ? 0 : Math.abs(c) * 1.2;
+          const hipY = base - 25 + bob, shY = base - 41 + bob;
+          const hx0 = x + 1, hy0 = base - 55 + bob; // head centre
+          const sway = air || still ? 0 : s * 1.4;
+
+          // hair behind everything (long, glossy, swings when she walks)
+          const flow = air ? -7 : still ? -1 : -2 - Math.abs(s) * 2;
+          const lift = air ? -8 : 0;
+          ctx.fillStyle = HAIR;
+          ctx.beginPath();
+          ctx.moveTo(hx0 + 7, hy0 - 6);
+          ctx.quadraticCurveTo(hx0 - 2, hy0 - 15, hx0 - 10, hy0 - 3);
+          ctx.quadraticCurveTo(hx0 - 12 + flow * 0.4, shY + 8, hx0 - 10 + flow, hipY - 2 + lift);
+          ctx.quadraticCurveTo(hx0 - 5 + flow * 0.5, hipY + 1 + lift * 0.6, hx0 - 2, shY + 6);
+          ctx.quadraticCurveTo(hx0 + 1, hy0 + 6, hx0 + 7, hy0 - 6);
+          ctx.fill();
+
+          // back leg + back arm
+          if (air) leg(x - 1, hipY, -0.45, 0.7, JEANS_BACK);
+          else if (still) leg(x - 1, hipY, -0.06, 0.03, JEANS_BACK);
+          else leg(x - 1, hipY, -s * 0.4, Math.max(0, -c) * 0.8 + 0.05, JEANS_BACK);
+          swingArm(x - 1.5, shY + 2, air ? -2.3 : still ? -0.1 : s * 0.5, air ? 0.4 : -0.2, NAVY_BACK);
+
+          // front leg
+          if (air) leg(x + 1, hipY, 0.8, 1.3, JEANS);
+          else if (still) leg(x + 1, hipY, 0.07, 0.03, JEANS);
+          else leg(x + 1, hipY, s * 0.4, Math.max(0, c) * 0.8 + 0.05, JEANS);
+
+          // low-rise waistband + a little midriff (very Y2K)
+          ctx.fillStyle = JEANS;
+          ctx.fillRect(x - 5 + sway * 0.3, hipY - 2.5, 10.5, 5);
+          ctx.fillStyle = SKIN;
+          ctx.fillRect(x - 4.2 + sway * 0.25, hipY - 5, 8.8, 2.8);
+
+          // navy baby tee
+          ctx.fillStyle = NAVY;
+          ctx.beginPath();
+          ctx.moveTo(x - 4.6, shY);
+          ctx.quadraticCurveTo(x + 1, shY - 2, x + 5, shY + 0.5);
+          ctx.quadraticCurveTo(x + 6.6, shY + 7, x + 4.6 + sway * 0.25, hipY - 5);
+          ctx.lineTo(x - 4.4 + sway * 0.25, hipY - 5);
+          ctx.quadraticCurveTo(x - 5.6, shY + 7, x - 4.6, shY);
+          ctx.fill();
+
+          // neck
+          ctx.fillStyle = SKIN_SH;
+          ctx.fillRect(x - 0.8, hy0 + 7, 3.4, shY - hy0 - 6);
+
+          // big doll head, three-quarter view
+          ctx.fillStyle = SKIN;
+          ctx.beginPath(); ctx.ellipse(hx0 + 1, hy0, 8.2, 9.2, 0.08, 0, Math.PI * 2); ctx.fill();
+          // blush
+          ctx.fillStyle = BLUSH;
+          ctx.beginPath(); ctx.ellipse(hx0 + 5.5, hy0 + 3.6, 2.2, 1.3, 0, 0, Math.PI * 2); ctx.fill();
+          // eyes: big almond shapes with a catchlight + a lash flick
+          const eye = (ex, ey, rx, ry) => {
+            ctx.fillStyle = "#0a0a0a";
+            ctx.beginPath(); ctx.ellipse(ex, ey, rx, ry, 0, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = "#fff";
+            ctx.beginPath(); ctx.arc(ex + rx * 0.35, ey - ry * 0.35, Math.max(0.6, rx * 0.35), 0, Math.PI * 2); ctx.fill();
+            limb(ex + rx * 0.6, ey - ry * 0.7, ex + rx * 1.4, ey - ry * 1.3, 0.8, "#0a0a0a");
+          };
+          eye(hx0 + 5.4, hy0 + 0.2, 1.7, 2.1);
+          eye(hx0 - 0.4, hy0 + 0.2, 1.3, 1.9);
+          // brows
+          ctx.strokeStyle = "#2a1a14"; ctx.lineWidth = 0.7;
+          ctx.beginPath(); ctx.moveTo(hx0 + 3.8, hy0 - 3.5); ctx.quadraticCurveTo(hx0 + 5.6, hy0 - 4.6, hx0 + 7.1, hy0 - 3.7); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(hx0 - 2, hy0 - 3.4); ctx.quadraticCurveTo(hx0 - 0.6, hy0 - 4.3, hx0 + 0.7, hy0 - 3.6); ctx.stroke();
+          // glossy lips
+          ctx.fillStyle = LIPS;
+          ctx.beginPath(); ctx.ellipse(hx0 + 3.6, hy0 + 5.8, 2, 1.1, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = "rgba(255,255,255,0.85)";
+          ctx.beginPath(); ctx.arc(hx0 + 4.2, hy0 + 5.4, 0.45, 0, Math.PI * 2); ctx.fill();
+
+          // hair on top: side part, glossy shine, front strand over the shoulder
+          ctx.fillStyle = HAIR;
+          ctx.beginPath();
+          ctx.moveTo(hx0 + 9.4, hy0 - 1);
+          ctx.quadraticCurveTo(hx0 + 8, hy0 - 11, hx0 - 1, hy0 - 10.5);
+          ctx.quadraticCurveTo(hx0 - 9, hy0 - 9, hx0 - 8.6, hy0 + 2);
+          ctx.quadraticCurveTo(hx0 - 7.5, hy0 + 12, hx0 - 6.5, shY + 10);
+          ctx.lineTo(hx0 - 3.6, shY + 9);
+          ctx.quadraticCurveTo(hx0 - 4, hy0 + 6, hx0 - 3, hy0 - 2.5);
+          ctx.quadraticCurveTo(hx0 + 2, hy0 - 6.8, hx0 + 9.4, hy0 - 1);
+          ctx.fill();
+          ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(hx0 + 0.5, hy0 - 2, 7.4, -2.4, -1.5); ctx.stroke();
+          // tiny gold hoop
+          ctx.strokeStyle = "#c9a24a"; ctx.lineWidth = 0.9;
+          ctx.beginPath(); ctx.arc(hx0 - 2.6, hy0 + 6.6, 1.6, 0, Math.PI * 2); ctx.stroke();
+
+          // front arm holding the iced coffee (raised when she jumps)
+          const sx = x + 1, sy = shY + 2;
+          if (air) {
+            const [cx, cy] = swingArm(sx, sy, 2.3, -0.5, NAVY); // coffee held up and out, not over her face
+            icedCoffee(cx + 1.5, cy - 4);
+          } else {
+            const [cx, cy] = swingArm(sx, sy, 0.15, 1.35, NAVY);
+            icedCoffee(cx + 1.5, cy - 2.5);
+          }
+        };
+
+        const drawObstacle = (o) => {
+          const x = o.x, b = ground;
+          ctx.strokeStyle = INK; ctx.fillStyle = INK; ctx.lineCap = "round";
+          if (o.name === "rack") {
+            line(x, b, x, b - o.h, 2); line(x + o.w, b, x + o.w, b - o.h, 2);
+            line(x - 3, b - o.h, x + o.w + 3, b - o.h, 2);
+            line(x - 5, b, x + 5, b, 2); line(x + o.w - 5, b, x + o.w + 5, b, 2);
+            for (let i = 0; i < 3; i++) {
+              const gx = x + 9 + i * 14;
+              line(gx, b - o.h, gx, b - o.h + 4, 1.4);
+              ctx.beginPath();
+              ctx.moveTo(gx - 5, b - o.h + 5); ctx.lineTo(gx + 5, b - o.h + 5);
+              ctx.lineTo(gx + 6, b - o.h + 24 + (i % 2) * 5); ctx.lineTo(gx - 6, b - o.h + 24 + (i % 2) * 5);
+              ctx.closePath();
+              if (i === 1) ctx.fill(); else { ctx.lineWidth = 1.4; ctx.stroke(); }
+            }
+          } else if (o.name === "bag" || o.name === "bags") {
+            const one = (bx, w, h, fill) => {
+              ctx.beginPath();
+              ctx.moveTo(bx, b); ctx.lineTo(bx + w, b); ctx.lineTo(bx + w - 2, b - h); ctx.lineTo(bx + 2, b - h); ctx.closePath();
+              if (fill) ctx.fill(); else { ctx.lineWidth = 1.6; ctx.stroke(); }
+              ctx.lineWidth = 1.4;
+              ctx.beginPath(); ctx.arc(bx + w / 2, b - h, w * 0.26, Math.PI, 0); ctx.stroke();
+            };
+            one(x, 24, 30, true);
+            if (o.name === "bags") one(x + 26, 22, 24, false);
+          } else {
+            ctx.lineWidth = 1.6;
+            ctx.strokeRect(x, b - o.h, o.w, o.h);
+            line(x - 2, b - o.h, x + o.w + 2, b - o.h, 2.4);
+            line(x + o.w / 2, b - o.h, x + o.w / 2, b, 1.2);
+          }
+        };
+
+        const draw = () => {
+          ctx.clearRect(0, 0, W, H);
+          // runway floor with lights
+          ctx.strokeStyle = INK;
+          line(0, ground + 0.5, W, ground + 0.5, 1);
+          ctx.fillStyle = MUTED;
+          const off = (t * speed) % 40;
+          for (let x = -off; x < W; x += 40) ctx.fillRect(x, ground + 12, 14, 1.5);
+          obstacles.forEach(drawObstacle);
+          drawModel(model.x, model.y);
+          // sparkles
+          sparkles.forEach((p) => {
+            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.fillStyle = INK;
+            const r = 3 * p.life;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y - r * 1.6); ctx.lineTo(p.x + r * 0.4, p.y); ctx.lineTo(p.x, p.y + r * 1.6); ctx.lineTo(p.x - r * 0.4, p.y);
+            ctx.closePath(); ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(p.x - r * 1.6, p.y); ctx.lineTo(p.x, p.y + r * 0.4); ctx.lineTo(p.x + r * 1.6, p.y); ctx.lineTo(p.x, p.y - r * 0.4);
+            ctx.closePath(); ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          // messages
+          ctx.fillStyle = INK;
+          ctx.textAlign = "center";
+          if (state === "ready") {
+            ctx.font = `400 ${W < 500 ? 20 : 26}px ${FONT}`;
+            ctx.fillText(W < 500 ? "Tap to walk the runway" : "Press space or click to walk the runway", W / 2, H * 0.36);
+          } else if (state === "over") {
+            ctx.font = `400 ${W < 500 ? 20 : 26}px ${FONT}`;
+            ctx.fillText("Wardrobe malfunction.", W / 2, H * 0.32);
+            ctx.font = `400 14px ${FONT}`;
+            ctx.fillStyle = "#6b6b6b";
+            ctx.fillText(W < 500 ? "Tap to try again" : "Space or click to try again", W / 2, H * 0.32 + 26);
+          }
+        };
+
+        const hit = (o) => {
+          const mx1 = model.x - 6, mx2 = model.x + 8;
+          const my = ground - model.y; // feet
+          return mx2 > o.x + 3 && mx1 < o.x + o.w - 3 && my > ground - o.h + 4;
+        };
+
+        let raf = 0, last = 0, visible = false;
+        const loop = (now) => {
+          cancelAnimationFrame(raf);
+          const dt = Math.min(0.033, (now - last) / 1000 || 0);
+          last = now;
+          t += dt;
+          if (state === "play") {
+            speed = Math.min(760, speed + dt * 9);
+            walk += dt * speed * 0.045;
+            score += dt * speed * 0.03;
+            scoreEl.textContent = pad3(score);
+            model.vy -= GRAV * dt;
+            model.y = Math.max(0, model.y + model.vy * dt);
+            if (model.y === 0) model.vy = 0;
+            nextGap -= dt * speed;
+            if (nextGap <= 0) {
+              spawn();
+              nextGap = 260 + Math.random() * 320 + speed * 0.35;
+            }
+            obstacles.forEach((o) => (o.x -= dt * speed));
+            obstacles = obstacles.filter((o) => o.x > -80);
+            if (obstacles.some(hit)) {
+              state = "over";
+              if (score > best) {
+                best = Math.floor(score);
+                bestEl.textContent = pad3(best);
+                try { localStorage.setItem("runwayBest", String(best)); } catch (e) {}
+              }
+            }
+          }
+          sparkles.forEach((p) => { p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt * 2.2; });
+          sparkles = sparkles.filter((p) => p.life > 0);
+          draw();
+          if (visible && (state === "play" || sparkles.length)) raf = requestAnimationFrame(loop);
+        };
+
+        stage.addEventListener("pointerdown", (e) => { e.preventDefault(); stage.focus({ preventScroll: true }); jump(); });
+        document.addEventListener("keydown", (e) => {
+          if (!(e.code === "Space" || e.code === "ArrowUp")) return;
+          const active = document.activeElement;
+          if (active && active.matches("input, textarea, select, [contenteditable]")) return;
+          if (!visible) return;
+          e.preventDefault();
+          jump();
+        });
+
+        // only run while on screen
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(([en]) => {
+            visible = en.intersectionRatio > 0.5;
+            if (!visible && state === "play") { state = "over"; draw(); }
+          }, { threshold: [0, 0.5, 1] }).observe(stage);
+        } else visible = true;
+
+        window.addEventListener("resize", resize);
+        resize();
+        reset();
+        draw();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => state !== "play" && draw());
+      })();
+
       /* ---------- scroll reveals ---------- */
       if (window.ScrollReveal) {
-        ScrollReveal().reveal(".expertise-title", {
+        ScrollReveal().reveal(".rack-sign", {
           origin: "bottom",
           distance: "50px",
           duration: 800,
