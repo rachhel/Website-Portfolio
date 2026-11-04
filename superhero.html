@@ -1,410 +1,1585 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Superpower Mentors — Rachel Chen</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="superhero.css">
-  <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
-</head>
-<body class="superhero-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Superpower Mentors · Rachel Chen</title>
+    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="align.css" />
+    <style>
+      /* chrome-star cursor, same as the home page */
+      /* ---------- chrome cursor ---------- */
+      /* Only hide the system cursor when the custom one is running
+   (touch devices keep their normal behaviour). */
+      * {
+        cursor: auto;
+      }
+      html.chrome-cursor,
+      html.chrome-cursor * {
+        cursor: none !important;
+      }
+      html.native-cursor .cursor,
+      html.native-cursor .cursor-ring {
+        display: none;
+      }
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="ring"></div>
+      .cursor,
+      .cursor-ring {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        will-change: transform;
+      }
+      body.cursor-visible .cursor,
+      body.cursor-visible .cursor-ring {
+        opacity: 1;
+      }
 
-<!-- NAV -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-  <div class="container nav-container">
-    <a class="navbar-brand" href="index.html">
-      <img src="assets/LOGO.png" alt="Logo" style="height:70px;">
-    </a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-        <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
-        <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      .cursor {
+        transition:
+          width 0.25s,
+          height 0.25s,
+          background 0.25s,
+          opacity 0.2s;
+      }
+      .cursor-ring {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          border-color 0.3s,
+          background 0.3s,
+          opacity 0.2s;
+      }
+      .cursor-arrow {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: #0e0e0e;
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0;
+        transform: scale(0.4) rotate(-45deg);
+        transition:
+          opacity 0.25s,
+          transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">
-    <div class="hero-eyebrow-line"></div>
-    <span class="hero-eyebrow-text">UX Design · Branding · Web · Client Work</span>
-  </div>
-  <h1 class="superhero-title">Superpower<br>Mentors.</h1>
-  <div class="hero-rule"></div>
-  <div class="hero-strip">
-    <div class="meta-block">
-      <span class="meta-label">Role</span>
-      <span class="meta-value">UX Design Lead<br>Senior Designer<br>Stakeholder Liaison</span>
-    </div>
-    <div class="meta-block">
-      <span class="meta-label">Team</span>
-      <span class="meta-value">10 Members<br>Cross-functional</span>
-    </div>
-    <div class="meta-block">
-      <span class="meta-label">Tools</span>
-      <span class="meta-value">Figma · HTML/CSS<br>JavaScript</span>
-    </div>
-    <div class="meta-block">
-      <span class="meta-label">Type</span>
-      <span class="meta-value">Brand Identity ·<br>UX Design · Web</span>
-    </div>
-  </div>
-  <p class="hero-tagline">A complete brand and website redesign for Superpower Mentors — connecting students with relatable mentors who actually get them.</p>
-</div>
+      /* link state: the dot disappears, the ring becomes a chrome lens with an arrow */
+      body.cursor-link .cursor {
+        width: 0;
+        height: 0;
+      }
+      body.cursor-link .cursor-ring.__old {
+        border: 1px solid transparent;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
+            padding-box,
+          linear-gradient(
+              135deg,
+              #c8c8c8 0%,
+              #ffffff 22%,
+              #7a7a7a 42%,
+              #f2f2f2 58%,
+              #5a5a5a 78%,
+              #d8d8d8 100%
+            )
+            border-box;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+      }
+      body.cursor-link .cursor-arrow {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      body.cursor-press .cursor-ring {
+        width: 24px;
+        height: 24px;
+      }
+      body.cursor-link.cursor-press .cursor-ring {
+        width: 48px;
+        height: 48px;
+      }
 
-<!-- HERO IMAGE -->
-<div class="hero-showcase">
-  <img src="assets/superpowerheader.png" alt="Superpower Mentors">
+      /* over the dark sequin band */
+      body.cursor-dark:not(.cursor-link) .cursor {
+        background: #f0efeb;
+      }
+      body.cursor-dark:not(.cursor-link) .cursor-ring {
+        border-color: rgba(240, 239, 235, 0.45);
+      }
 
-</div>
+      /* star trail canvas */
+      .cursor-stars {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 9997;
+      }
 
-<!-- CASE STUDY -->
-<div class="case-study">
+      /* ---------- hover label: the cursor tells you what a click does ---------- */
+      .cursor-label {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+        pointer-events: none;
+        padding: 7px 12px 7px 11px;
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Inter Tight", "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.12s linear;
+        will-change: transform;
+      }
+      body.cursor-link .cursor-label.has-text {
+        opacity: 1;
+      }
+      /* in link state: the ring simply fades (no resizing, so nothing bounces);
+         the dot stays the same size at the exact click point */
+      body.cursor-link .cursor-ring,
+      body.cursor-press .cursor-ring {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      body.cursor-link .cursor-ring {
+        opacity: 0 !important;
+        transition: opacity 0.12s linear !important;
+      }
+      body.cursor-link .cursor {
+        width: 9px !important;
+        height: 9px !important;
+        background: #0a0a0a !important;
+        transition: none !important;
+      }
+      body.cursor-link .cursor-arrow {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
+    <!-- site-wide look: keep this as the last stylesheet -->
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      /* ============================================================
+         Align case study, in the home page style:
+         black and white, big grotesk titles, no rules, no eyebrows,
+         one left edge (80px), sticky contents on the left.
+         ============================================================ */
+      :root {
+        --crimson: #8b1a1a; /* Align's brand red, used as this case study's accent */
+        --blush: #f7f1ee;
+      }
+      body.align-page {
+        background: #fff !important;
+        color: #0a0a0a;
+      }
 
-  <aside class="sidebar">
-    <span class="sidebar-label">Contents</span>
-    <nav class="sidebar-nav">
-      <a href="#overview" class="sidebar-link active">01. Overview</a>
-      <a href="#client" class="sidebar-link">02. The Client</a>
-      <a href="#goals" class="sidebar-link">03. Goals</a>
-      <a href="#process" class="sidebar-link">04. Process</a>
-      <a href="#iteration" class="sidebar-link">05. Iteration</a>
-      <a href="#website" class="sidebar-link">06. Website</a>
-      <a href="#showcase" class="sidebar-link">07. Showcase</a>
+      /* hero */
+      .cs-hero {
+        padding: 240px 80px 0;
+      }
+      .cs-title .cs-a {
+        color: inherit;
+      }
+      .cs-title {
+        font-family: var(--display) !important;
+        font-size: clamp(3.5rem, 9vw, 9rem) !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.05em !important;
+        line-height: 0.88 !important;
+        margin: 0 0 2.2rem;
+        color: #0a0a0a;
+      }
+      .cs-lede {
+        max-width: 36rem;
+        margin: 0;
+        font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+        line-height: 1.5;
+        color: #0a0a0a;
+      }
+      .cs-facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin: 3.5rem 0 0;
+      }
+      .cs-fact-label {
+        display: block;
+        font-size: 0.85rem;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+      .cs-fact-value {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.5;
+        color: #0a0a0a;
+      }
+      .cs-cover {
+        margin: 3.5rem 80px 0;
+      }
+      .cs-cover img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      /* soundtrack chip */
+      .cs-song {
+        margin-top: 1.8rem;
+      }
+      .cs-song-btn {
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 18px 8px 8px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--blush);
+        color: #0a0a0a;
+        font: inherit;
+        font-size: 0.95rem;
+        transition: background 0.25s;
+      }
+      .cs-song-btn:hover {
+        background: #f1e6e1;
+      }
+      .cs-song-btn strong {
+        font-weight: 500;
+      }
+      /* little iridescent CD */
+      .cs-cd {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        flex: none;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, #fff 0 3px, #d9d9d9 3.5px 6px, rgba(255, 255, 255, 0.35) 6.5px 7.5px, transparent 8px),
+          conic-gradient(from 20deg, #e9e9e9, #cdeeff, #f4d3ff, #fff2c2, #d1ffe0, #cfe2ff, #ffd6e8, #e9e9e9);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+      }
+      .cs-cd::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 45%, transparent 60%, rgba(255, 255, 255, 0.5));
+      }
+      .is-playing .cs-cd {
+        animation: cs-spin 2.4s linear infinite;
+      }
+      @keyframes cs-spin {
+        to { transform: rotate(360deg); }
+      }
+      .cs-song-btn .cs-song-state {
+        color: #8a6f68;
+      }
+
+      /* the player opens right under the chip */
+      .cs-inline-player {
+        max-width: 420px;
+        margin-top: 12px;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.3s ease, transform 0.35s ease;
+      }
+      .cs-inline-player.is-shown {
+        opacity: 1;
+        transform: none;
+      }
+      .cs-inline-player iframe {
+        display: block;
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+      }
+
+      /* layout: sticky contents + story */
+      .case-study {
+        margin-top: 2rem;
+      }
+      .sidebar {
+        border: 0 !important;
+        padding: 3rem 1.5rem 3rem 80px !important;
+      }
+      .sidebar-link {
+        border: 0 !important;
+        padding: 0.45rem 0 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        line-height: 1.3 !important;
+        color: #9a9a9a !important;
+      }
+      .sidebar-link:hover,
+      .sidebar-link.active {
+        color: #0a0a0a !important;
+      }
+      .sidebar-back {
+        margin-top: 2rem !important;
+        font-size: 0.9rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        color: #6b6b6b !important;
+      }
+      .sidebar-back::before {
+        content: "\2190" !important;
+      }
+      .content {
+        padding: 3rem 80px 5rem 40px !important;
+        max-width: 1100px;
+      }
+      .section {
+        margin-bottom: 7rem !important;
+        scroll-margin-top: 110px;
+      }
+      .section-title {
+        font-family: var(--display) !important;
+        font-size: clamp(2rem, 3.4vw, 3.1rem) !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+        letter-spacing: -0.04em !important;
+        line-height: 1.02 !important;
+        margin: 0 0 1.6rem !important;
+        max-width: 22ch;
+        color: #0a0a0a !important;
+      }
+      .section-title em {
+        font-style: normal !important;
+        color: var(--crimson) !important;
+      }
+      .section-body {
+        max-width: 700px !important;
+        font-size: 1.05rem !important;
+        line-height: 1.7 !important;
+        color: #333 !important;
+      }
+      .section-body p {
+        margin: 0;
+      }
+      .section-body p + p {
+        margin-top: 1.1rem;
+      }
+      .cs-quote {
+        position: relative;
+        max-width: 820px;
+        margin: 3.5rem 0 0;
+        padding-left: 3.2rem;
+        font-family: var(--display) !important;
+        font-size: clamp(1.3rem, 2vw, 1.7rem) !important;
+        letter-spacing: -0.03em !important;
+        line-height: 1.3 !important;
+        color: #0a0a0a;
+      }
+
+      /* images: no frames, no lines */
+      .cs-img {
+        margin: 2.5rem 0 0;
+      }
+      .cs-img img,
+      .cs-img video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        background: #f4f4f4;
+      }
+      .cs-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin: 2.5rem 0 0;
+        align-items: start;
+      }
+      .cs-pair .cs-img {
+        margin: 0;
+      }
+      .cs-pair video {
+        max-height: 78vh;
+        object-fit: contain;
+      }
+      .cs-caption {
+        margin: 10px 0 0;
+        font-size: 0.9rem;
+        color: #6b6b6b;
+      }
+      /* process images stay small on purpose */
+      .cs-pair.is-small {
+        max-width: 640px;
+      }
+
+      /* big crimson quote mark */
+      .cs-mark {
+        position: absolute;
+        left: 0;
+        top: -0.2em;
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 5rem;
+        line-height: 1;
+        color: var(--crimson);
+      }
+      .cs-quote em {
+        font-style: normal;
+        color: var(--crimson);
+      }
+
+      /* journey map */
+      .journey {
+        margin: 3.5rem 0 0;
+        padding: 2.2rem 2.2rem 1.8rem;
+        background: var(--blush);
+        border-radius: 12px;
+      }
+      .journey-mood {
+        position: relative;
+        height: 120px;
+        margin: 0 0 1.4rem;
+      }
+      .journey-mood svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .journey-mood path {
+        fill: none;
+        stroke: var(--crimson);
+        stroke-width: 2;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 1400;
+        stroke-dashoffset: 1400;
+        transition: stroke-dashoffset 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .journey.is-in .journey-mood path {
+        stroke-dashoffset: 0;
+      }
+      .journey-dot {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        margin: -7px 0 0 -7px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--crimson);
+      }
+      .journey-dot.is-low {
+        background: var(--crimson);
+      }
+      .journey-axis-top,
+      .journey-axis-bottom {
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+        color: #8a7a74;
+      }
+      .journey-axis-top {
+        top: 4px;
+      }
+      .journey-axis-bottom {
+        bottom: 0;
+      }
+      .journey-steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1rem;
+        counter-reset: step;
+      }
+      .journey-steps li {
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        color: #5a4a44;
+      }
+      .journey-steps strong {
+        display: block;
+        margin-bottom: 4px;
+        font-family: var(--display) !important;
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: #0a0a0a;
+      }
+      .journey .cs-caption {
+        margin-top: 1.6rem;
+      }
+
+      /* what I made: four cards that jump to the work */
+      .cs-made {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 2.5rem;
+      }
+      .cs-made-card {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 1.3rem 1.2rem 1.4rem;
+        background: var(--blush);
+        border-radius: 12px;
+        color: #5a4a44;
+        text-decoration: none;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s;
+      }
+      .cs-made-card:hover {
+        transform: translateY(-3px);
+        background: #f1e6e1;
+      }
+      .cs-made-num {
+        font-family: var(--display) !important;
+        font-size: 1rem;
+        color: var(--crimson);
+      }
+      .cs-made-card strong {
+        font-family: var(--display) !important;
+        font-size: 1.45rem;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: #0a0a0a;
+      }
+      @media (max-width: 900px) {
+        .cs-hero {
+          padding-top: 150px !important;
+        }
+        .cs-made {
+          grid-template-columns: 1fr 1fr;
+        }
+        .journey {
+          padding: 1.5rem 1.2rem;
+        }
+        .journey-mood {
+          display: none;
+        }
+        .journey-steps {
+          grid-template-columns: 1fr;
+          gap: 0.9rem;
+          counter-reset: step;
+        }
+        .journey-steps li {
+          text-align: left;
+          padding-left: 2rem;
+          position: relative;
+        }
+        .journey-steps li::before {
+          counter-increment: step;
+          content: counter(step);
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 50%;
+          background: var(--crimson);
+          color: #fff;
+          font-size: 0.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .cs-mark {
+          font-size: 3.5rem;
+        }
+        .cs-quote {
+          padding-left: 2.4rem;
+        }
+      }
+
+      /* competitive analysis: its own clearly labelled block */
+      .ca {
+        margin-top: 3rem;
+      }
+      .ca-title {
+        font-family: var(--display) !important;
+        font-size: 1.6rem !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.03em !important;
+        margin: 0 0 0.4rem;
+        color: #0a0a0a;
+      }
+      .ca-intro {
+        margin: 0 0 1.6rem;
+        font-size: 1rem;
+        color: #6b6b6b;
+      }
+      .ca-table {
+        display: grid;
+        grid-template-columns: 1.1fr repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .ca-labels,
+      .ca-col {
+        display: grid;
+        grid-template-rows: auto 1fr 1fr auto;
+        gap: 0;
+      }
+      .ca-col {
+        background: #f6f6f6;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .ca-col.is-align {
+        background: var(--blush);
+        box-shadow: inset 0 0 0 1.5px var(--crimson);
+      }
+      .ca-name {
+        padding: 1rem 1.1rem 0.6rem;
+        font-family: var(--display) !important;
+        font-size: 1.35rem;
+        letter-spacing: -0.03em;
+        color: #0a0a0a;
+      }
+      .ca-col.is-align .ca-name {
+        color: var(--crimson);
+      }
+      .ca-cell {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.93rem;
+        line-height: 1.45;
+        color: #333;
+      }
+      .ca-labels .ca-cell {
+        padding-left: 0;
+        color: #6b6b6b;
+        font-size: 0.88rem;
+      }
+      .ca-rowlabel {
+        display: none;
+      }
+      .ca-no,
+      .ca-yes {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+      .ca-no {
+        background: #e9e9e9;
+        color: #555;
+      }
+      .ca-yes {
+        background: var(--crimson);
+        color: #fff;
+      }
+      @media (max-width: 900px) {
+        .ca-table {
+          grid-template-columns: 1fr;
+        }
+        .ca-labels {
+          display: none;
+        }
+        .ca-col {
+          grid-template-rows: none;
+        }
+        .ca-cell {
+          padding: 0.35rem 1.1rem;
+        }
+        .ca-cell:last-child {
+          padding-bottom: 1rem;
+        }
+        .ca-rowlabel {
+          display: block;
+          font-size: 0.8rem;
+          color: #8a8a8a;
+        }
+      }
+
+      /* competitors */
+      .cs-compare {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+      }
+      .cs-compare h3 {
+        font-family: var(--display) !important;
+        font-size: 1.5rem !important;
+        letter-spacing: -0.03em !important;
+        font-weight: 400 !important;
+        margin: 0 0 0.9rem;
+      }
+      .cs-compare p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #333;
+      }
+      .cs-compare p + p {
+        margin-top: 0.6rem;
+      }
+      .cs-compare strong {
+        font-weight: 500;
+        color: #0a0a0a;
+      }
+      .cs-gap {
+        max-width: 640px;
+        margin: 2.5rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #0a0a0a;
+      }
+
+      /* decisions: learned, designed, solves (no lines) */
+      .decisions {
+        margin-top: 2.5rem;
+      }
+      .decision-head,
+      .decision {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.75rem;
+        align-items: start;
+      }
+      .decision-head {
+        padding-bottom: 0.6rem;
+        font-size: 0.85rem;
+        color: #6b6b6b;
+      }
+      .decision-head span:first-child {
+        grid-column: 2;
+      }
+      .decision {
+        padding: 1.4rem 0;
+      }
+      .decision p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #555;
+      }
+      .decision .decision-choice {
+        color: #0a0a0a;
+        font-weight: 500;
+      }
+      .decision-num {
+        font-family: var(--display) !important;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: #0a0a0a;
+      }
+
+      /* what came out of it */
+      .cs-list {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+        max-width: 640px;
+      }
+      .cs-list li {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #0a0a0a;
+        padding: 0.35rem 0;
+      }
+
+      /* next project */
+      .cs-next {
+        margin-top: 2rem;
+      }
+      .cs-next span {
+        display: block;
+        font-size: 0.9rem;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+      .cs-next a {
+        font-family: var(--display) !important;
+        font-size: clamp(2rem, 3.4vw, 3.1rem);
+        letter-spacing: -0.04em;
+        color: #0a0a0a;
+        text-decoration: none;
+      }
+
+      @media (max-width: 900px) {
+        .cs-hero {
+          padding: 120px 20px 0;
+        }
+        .cs-facts {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2.5rem;
+        }
+        .cs-cover {
+          margin: 2.5rem 20px 0;
+        }
+        .content {
+          padding: 3rem 20px 4rem !important;
+        }
+        .section {
+          margin-bottom: 4.5rem !important;
+        }
+        .cs-pair,
+        .cs-compare {
+          grid-template-columns: 1fr;
+          gap: 1.75rem;
+        }
+        .decision-head {
+          display: none;
+        }
+        .decision {
+          grid-template-columns: 2rem minmax(0, 1fr);
+          gap: 0.45rem 0.75rem;
+        }
+        .decision p {
+          grid-column: 2;
+        }
+        .decision-num {
+          grid-row: 1 / span 3;
+        }
+        .decision-insight::before { content: "Learned: "; color: #0a0a0a; }
+        .decision-choice::before { content: "Designed: "; }
+        .decision-result::before { content: "Solves: "; color: #0a0a0a; }
+      }
+
+      /* ---------- Superpower Mentors: blue accent from the client's brand ---------- */
+      :root {
+        --crimson: #2f5fd0;
+        --blush: #eef3fd;
+      }
+      .sp-stat {
+        margin: 3.5rem 0 0;
+        padding: 2rem 2.2rem;
+        background: var(--blush);
+        border-radius: 12px;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 1.75rem;
+        align-items: center;
+      }
+      .sp-stat-num {
+        font-family: var(--display) !important;
+        font-size: clamp(3rem, 6vw, 5rem);
+        letter-spacing: -0.05em;
+        line-height: 0.9;
+        color: var(--crimson);
+        white-space: nowrap;
+      }
+      .sp-stat p {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #333;
+        max-width: 34rem;
+      }
+      .sp-stat-text,
+      .section-title,
+      .cs-quote,
+      .ca-title {
+        text-wrap: balance; /* no single word left hanging on its own line */
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      .sp-wire {
+        max-width: 960px;
+      }
+      .sp-team {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+      }
+      .sp-team li {
+        padding: 0.8rem 0.9rem;
+        border-radius: 12px;
+        background: #f6f6f6;
+        font-size: 0.92rem;
+        line-height: 1.35;
+        color: #0a0a0a;
+      }
+      .sp-team li span {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.82rem;
+        color: #6b6b6b;
+      }
+      .sp-team li.is-me {
+        background: var(--crimson);
+        color: #fff;
+      }
+      .sp-team li.is-me span {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .cs-thirds {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin-top: 2.5rem;
+        align-items: start;
+      }
+      .cs-thirds .cs-img {
+        margin: 0;
+      }
+      @media (max-width: 900px) {
+        .sp-stat {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          padding: 1.5rem 1.2rem;
+        }
+        .sp-team {
+          grid-template-columns: 1fr 1fr;
+        }
+        .cs-thirds {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="align-page superhero-page" id="page-top">
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container nav-container">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          Menu
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
+            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-    <a href="index.html#work" class="sidebar-back">Back to work</a>
-  </aside>
 
-  <main class="content">
-
-    <!-- 01 OVERVIEW -->
-    <section class="section" id="overview">
-      <div class="section-label">01 - Overview</div>
-      <h2 class="section-title">Relate. Empower. <em>Transform.</em></h2>
-      <div class="section-body">
-        <p>Superpower Mentors needed a brand and website that could speak to three very different audiences at once: parents of neurodivergent students, prospective mentors, and partner schools. The existing identity felt safe and generic, we needed to make it expressive and hopeful.</p>
-        <p>As UX Design Lead and Stakeholder Liaison, I led the design direction across the full project, from weekly client meetings through lo-fi wireframes, iteration cycles, mentoring junior designers through work sessions, and final high-fidelity delivery.</p>
+    <!-- HERO -->
+    <header class="cs-hero">
+      <h1 class="cs-title">Superpower Mentors</h1>
+      <p class="cs-lede">
+        A brand and website redesign for a mentorship program that pairs
+        neurodivergent students with mentors who actually get them.
+      </p>
+      <!-- soundtrack: paste the Spotify song link in data-spotify (Spotify: ••• > Share > Copy song link) -->
+      <div class="cs-song" data-spotify="https://open.spotify.com/track/3U5JVgI2x4rDyHGObzJfNf" data-search="unwritten natasha bedingfield">
+        <button type="button" class="cs-song-btn" aria-expanded="false" data-cursor-label="Play">
+          <span class="cs-cd" aria-hidden="true"></span>
+          <span class="cs-song-text">On repeat while making this: <strong>Unwritten</strong> · Natasha Bedingfield</span>
+        </button>
       </div>
 
-      <div class="deliverables">
-        <div class="deliverable-item"><span class="deliverable-num">01</span><span class="deliverable-name">Brand Identity</span></div>
-        <div class="deliverable-item"><span class="deliverable-num">02</span><span class="deliverable-name">UX Research</span></div>
-        <div class="deliverable-item"><span class="deliverable-num">03</span><span class="deliverable-name">Lo-fi Wireframes</span></div>
-        <div class="deliverable-item"><span class="deliverable-num">04</span><span class="deliverable-name">Design System</span></div>
-        <div class="deliverable-item"><span class="deliverable-num">05</span><span class="deliverable-name">Hi-fi Prototype</span></div>
-        <div class="deliverable-item"><span class="deliverable-num">06</span><span class="deliverable-name">Website</span></div>
+      <div class="cs-facts">
+        <div>
+          <span class="cs-fact-label">My role</span>
+          <p class="cs-fact-value">UX design lead, senior designer and stakeholder liaison</p>
+        </div>
+        <div>
+          <span class="cs-fact-label">Team</span>
+          <p class="cs-fact-value">10 people across design, development and project management</p>
+        </div>
+        <div>
+          <span class="cs-fact-label">Tools</span>
+          <p class="cs-fact-value">Figma, HTML, CSS, JavaScript</p>
+        </div>
+        <div>
+          <span class="cs-fact-label">Type</span>
+          <p class="cs-fact-value">Client work: brand identity, UX and web</p>
+        </div>
       </div>
+    </header>
 
-      <!-- TEAM
-      <div class="team-section">
-        <div class="team-section-label">The Team</div>
-        <div class="team-grid">
-          <div class="team-item">
-            <div class="team-name">Jessica Luo</div>
-            <div class="team-role">Project Lead</div>
+    <figure class="cs-cover">
+      <img src="assets/superpowerheader.png" alt="The redesigned Superpower Mentors website" />
+    </figure>
+
+    <div class="case-study">
+      <aside class="sidebar">
+        <nav class="sidebar-nav" aria-label="Case study sections">
+          <a href="#client" class="sidebar-link active">The client</a>
+          <a href="#problem" class="sidebar-link">The problem</a>
+          <a href="#who" class="sidebar-link">Who we designed for</a>
+          <a href="#role" class="sidebar-link">My role</a>
+          <a href="#process" class="sidebar-link">How we worked</a>
+          <a href="#brand" class="sidebar-link">Finding the brand</a>
+          <a href="#website" class="sidebar-link">The website</a>
+          <a href="#showcase" class="sidebar-link">Looking back</a>
+        </nav>
+        <a href="index.html#work" class="sidebar-back">Back to work</a>
+      </aside>
+
+      <main class="content">
+        <!-- CLIENT -->
+        <section class="section" id="client">
+          <h2 class="section-title">Mentors who’ve been <em>in your shoes.</em></h2>
+          <div class="section-body">
+            <p>Superpower Mentors pairs neurodivergent students, ages 7 to 14, with mentors who have been through similar things, so they can help with stuff like confidence, big transitions and figuring out their direction.</p>
+            <p>The program was already doing amazing work, but their brand and website didn’t really show that, which is where we came in.</p>
           </div>
-          <div class="team-item team-item-me">
-            <div class="team-name">Rachel Chen</div>
-            <div class="team-role">Senior Designer</div>
+          <div class="sp-stat">
+            <span class="sp-stat-num">30% → 0%</span>
+            <p class="sp-stat-text">In their program, the freshman dropout rate went from <span class="nowrap">30% to 0%.</span></p>
           </div>
-          <div class="team-item">
-            <div class="team-name">Ivy Tang</div>
-            <div class="team-role">Senior Developer</div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section class="section" id="problem">
+          <h2 class="section-title">Their brand didn’t match <em>how good the program is.</em></h2>
+          <div class="section-body">
+            <p>When we first looked at their old brand, it felt really safe and generic, and it didn’t say much about who they are or why the program works. The website also had to work for three really different groups of people, and each of them was coming to the site looking for something different.</p>
+            <p>So our goal was to make the brand feel more expressive and hopeful, and to make sure everyone who landed on the site knew exactly where to go.</p>
           </div>
-          <div class="team-item">
-            <div class="team-name">Adrian Rodriguez</div>
-            <div class="team-role">Junior Developer</div>
+        </section>
+
+        <!-- WHO -->
+        <section class="section" id="who">
+          <h2 class="section-title">One website for <em>three kinds of people.</em></h2>
+          <div class="cs-made">
+            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Parents</strong><span>Families looking for more than generic tutoring for their neurodivergent kids.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>Mentors</strong><span>People who have navigated learning differences themselves and want to give back.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>Partner schools</strong><span>Schools looking for a mentorship program with real, proven results.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">♥</span><strong>And the kids</strong><span>Students ages 7 to 14 with all kinds of learning profiles, who the whole thing is really for.</span></div>
           </div>
-          <div class="team-item">
-            <div class="team-name">Esha Kanakapura</div>
-            <div class="team-role">Junior Developer</div>
+        </section>
+
+        <!-- ROLE -->
+        <section class="section" id="role">
+          <h2 class="section-title">What it was like <em>being the lead.</em></h2>
+          <div class="section-body">
+            <p>I was the UX design lead and the stakeholder liaison, so I was the bridge between our team and the client, and the spokesperson for my teammates. Every week I met with the founder to present our progress, listen to their feedback and bring it back to the team.</p>
+            <p>On the team side, I held design crits and reviews every week. I would talk through every wireframe our designers made, ask why they made their design choices, give suggestions, and help fix anything that wasn’t working yet. I also held design office hours, so anyone could come to me in between, and I led the design direction from the wireframes all the way to the final hi fi screens.</p>
           </div>
-          <div class="team-item">
-            <div class="team-name">Diana Rudolph</div>
-            <div class="team-role">Junior Designer</div>
+
+          <ul class="sp-team" aria-label="Team">
+            <li>Jessica Luo<span>Project lead</span></li>
+            <li class="is-me">Rachel Chen (me)<span>Senior designer</span></li>
+            <li>Ivy Tang<span>Senior developer</span></li>
+            <li>Diana Rudolph<span>Junior designer</span></li>
+            <li>Katherine Jiang<span>Junior designer</span></li>
+            <li>Nina Roshe<span>Junior designer</span></li>
+            <li>Carolyn Hoa<span>Junior dev and design</span></li>
+            <li>Adrian Rodriguez<span>Junior developer</span></li>
+            <li>Esha Kanakapura<span>Junior developer</span></li>
+            <li>Kaelynn Lackey<span>Junior developer</span></li>
+          </ul>
+
+          <h3 class="ca-title" style="margin-top: 3.5rem">The biggest thing I learned</h3>
+          <div class="section-body">
+            <p>Knowing when to put a hard stop on iterations. Every time we came back with something new, the client had something new to say. By round three, we were running out of time in the semester, so I had to put my foot down: we had given them so many options and opportunities, and this would be our last iteration round.</p>
+            <p>It wasn’t easy to say, but being a lead means speaking up for your team and keeping the project moving, not just saying yes to every change.</p>
           </div>
-          <div class="team-item">
-            <div class="team-name">Kaelynn Lackey</div>
-            <div class="team-role">Junior Developer</div>
+          <p class="cs-quote"><span class="cs-mark" aria-hidden="true">“</span>We’ve given you so many options, so this is our <em>last round.</em>”</p>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="section" id="process">
+          <h2 class="section-title">Checking in with the client <em>every week.</em></h2>
+          <div class="section-body">
+            <p>Every week we showed the client where we were at, got their feedback, and made changes right away, so we were always designing around what they actually needed and not what we assumed.</p>
+            <p>We started with user flows and a sitemap, then wireframed all six pages: Home, How It Works, Mentors, Insights, About Us and Community. We got critiques at every step before moving into hi fi.</p>
           </div>
-          <div class="team-item">
-            <div class="team-name">Carolyn Hoa</div>
-            <div class="team-role">Junior Dev/Design</div>
+          <figure class="cs-img sp-wire">
+            <img src="assets/LOFIS.png" alt="Wireframes for the six pages" />
+            <figcaption class="cs-caption">Wireframes for all six pages</figcaption>
+          </figure>
+        </section>
+
+        <!-- BRAND -->
+        <section class="section" id="brand">
+          <h2 class="section-title">Finding the <em>right look.</em></h2>
+          <div class="section-body">
+            <p>We explored five different logo directions, from hand illustrated figures to more abstract marks, before landing on the final one. The colors went through a few rounds too. The original palette felt really busy, so we narrowed it down to black, purple, orange and yellow, with lavender, gold and blue as supporting colors.</p>
+            <p>The UI components took three rounds before the client signed off.</p>
           </div>
-          <div class="team-item">
-            <div class="team-name">Katherine Jiang</div>
-            <div class="team-role">Junior Designer</div>
+          <div class="cs-thirds">
+            <figure class="cs-img"><img src="assets/round1.png" alt="Round one" /><figcaption class="cs-caption">Round one</figcaption></figure>
+            <figure class="cs-img"><img src="assets/round2nd.png" alt="Round two" /><figcaption class="cs-caption">Round two</figcaption></figure>
+            <figure class="cs-img"><img src="assets/Branding Guide.jpg" alt="Final brand guide" /><figcaption class="cs-caption">Final brand guide</figcaption></figure>
           </div>
-          <div class="team-item">
-            <div class="team-name">Nina Roshe</div>
-            <div class="team-role">Junior Designer</div>
+        </section>
+
+        <!-- WEBSITE -->
+        <section class="section" id="website">
+          <h2 class="section-title">A website where everyone <em>knows where to go.</em></h2>
+          <div class="section-body">
+            <p>The final website brings everything together, with bold type, a warm and energetic palette, and navigation that takes parents, mentors and schools exactly where they need to go.</p>
           </div>
-        </div>
-      </div>
-    </section> -->
+          <figure class="cs-img"><img src="assets/Final Hi-Fiss.png" alt="Final website pages" /></figure>
+          <div class="cs-made">
+            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Home</strong><span>The program at a glance: stats, mentor profiles, how it works and parent stories.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>How It Works</strong><span>Five clear steps, from getting matched to what parents can expect.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>Insights and Stories</strong><span>Articles and resources that bring the community together around neurodiversity.</span></div>
+          </div>
+        </section>
 
-    <div class="section-rule"></div>
-
-    <!-- 02 THE CLIENT -->
-    <section class="section" id="client">
-      <div class="section-label">02 - The Client</div>
-      <h2 class="section-title">Connecting students with mentors who <em>actually get them.</em></h2>
-      <div class="section-body">
-        <p>Superpower Mentors connects neurodivergent students with relatable mentors and role models who understand their unique challenges, helping them discover their own strengths and find their path forward.</p>
-        <p>The platform serves students ages 7-14 across neurodiversity, transitions, confidence, and direction, matching kids and teens with mentors who've walked a similar road and can show them what's possible.</p>
-      </div>
-
-      <div class="callout">
-        <p>Superpower Mentors reduced freshman dropout rates by 30% to 0% for students in their program , we're seeing real impact, real numbers.</p>
-      </div>
-
-      <div class="audience-grid">
-        <div class="audience-item">
-          <div class="audience-label">Parents</div>
-          <div class="audience-body">Families seeking support for neurodivergent children who need more than generic tutoring.</div>
-        </div>
-        <div class="audience-item">
-          <div class="audience-label">Mentors</div>
-          <div class="audience-body">Prospective mentors who've navigated learning differences and want to give back.</div>
-        </div>
-        <div class="audience-item">
-          <div class="audience-label">Partner Schools</div>
-          <div class="audience-body">Schools seeking evidence-based mentorship programs with demonstrated outcomes.</div>
-        </div>
-        <div class="audience-item">
-          <div class="audience-label">Ages 7-14</div>
-          <div class="audience-body">Students spanning elementary through high school, across diverse learning profiles.</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-rule"></div>
-
-    <!-- 03 GOALS -->
-    <section class="section" id="goals">
-      <div class="section-label">03 - Goals</div>
-      <h2 class="section-title">Safe and generic to <em>expressive and hopeful.</em></h2>
-      <div class="section-body">
-        <p>Weekly client meetings with the Superpower Mentors founder shaped our understanding of the brief. Two parallel tracks emerged: the brand needed to connect through storytelling and build trust, while the website needed to create a clear, distinct path for each audience.</p>
-      </div>
-
-      <div class="process-steps">
-        <div class="step">
-          <div class="step-num">Brand Goal</div>
-          <div class="step-title">Connect Through Storytelling</div>
-          <div class="step-body">Build trust and engagement through authentic narrative, inclusive but specialized, not generic.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">Web Goal</div>
-          <div class="step-title">Clear Paths for All Users</div>
-          <div class="step-body">Build distinct journeys for parents, prospective mentors, and partner schools from the first click.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">Design Goal</div>
-          <div class="step-title">Expressive, Not Safe</div>
-          <div class="step-body">Move from a generic, cautious visual identity to something bold, hopeful, and memorable.</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-rule"></div>
-
-    <!-- 04 PROCESS -->
-    <section class="section" id="process">
-      <div class="section-label">04 - Process</div>
-      <h2 class="section-title">Weekly client meetings, <em>constant iteration.</em></h2>
-      <div class="section-body">
-        <p>The process was structured around weekly client syncs — presenting progress, collecting feedback, and iterating in real time. This kept the work grounded in actual client needs rather than assumptions.</p>
-        <p>We moved from user flows and site mapping through lo-fi wireframes across all six pages, collecting design critiques at each stage before committing to high-fidelity.</p>
-      </div>
-
-      <div class="process-steps">
-        <div class="step">
-          <div class="step-num">Phase 01</div>
-          <div class="step-title">Discovery</div>
-          <div class="step-body">Client meetings, competitive analysis, user flow mapping, and sitemap definition across all pages.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">Phase 02</div>
-          <div class="step-title">Lo-fi Wireframes</div>
-          <div class="step-body">Six pages wireframed: Home, How It Works, Mentors, Insights, About Us, Community. Iterated with client feedback.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">Phase 03</div>
-          <div class="step-title">Design System</div>
-          <div class="step-body">Logo exploration across 5 directions, color palette refinement, typography system, and UI components.</div>
-        </div>
-      </div>
-
-      <div class="img-block"><img src = "assets/LOFIS.png"></div>
-    </section>
-
-  <div class="section-rule"></div>
-
-<!-- 05 ITERATION -->
-<section class="section" id="iteration">
-  <div class="section-label">05 - Iteration</div>
-  <h2 class="section-title">Multiple rounds, one <em>design system.</em></h2>
-  <div class="section-body">
-    <p>We explored five distinct logo directions, from hand-illustrated figures to abstract marks, before landing on the final identity. Color palettes went through multiple rounds, moving from the original busy palette toward a focused purple, blue, and gold system. Typography was set across heading, body, and accent roles.</p>
-    <p>The final design system used primary colors of black, purple, orange, and yellow, with secondary tones in lavender, gold, and blue. UI components were iterated across three rounds before sign-off.</p>
-  </div>
-
-  <div class="img-thirds">
-    <div class="img-with-caption">
-      <div class="img-block"><img src="assets/round1.png" alt="Round 1"></div>
-    </div>
-    <div class="img-with-caption">
-      <div class="img-block"><img src="assets/round2nd.png" alt="Round 2"></div>
-    </div>
-    <div class="img-with-caption">
-      <div class="img-block"><img src="assets/Branding Guide.jpg" alt="Round 2"></div>
-    </div>
-  </div>
-</section>
-
-    <div class="section-rule"></div>
-
-    <!-- 06 WEBSITE -->
-    <section class="section" id="website">
-      <div class="section-label">06 - Website</div>
-      <h2 class="section-title">Six pages, one <em>cohesive experience.</em></h2>
-      <div class="section-body">
-        <p>The final website brings together every design decision into a live, cohesive experience — bold typography, a warm but energetic color palette, and clear navigation paths for every audience type.</p>
-      </div>
-
-<div class="img-block"><img src="assets/Final Hi-Fiss.png" alt="description"></div>
-      <div class="process-steps">
-        <div class="step">
-          <div class="step-num">Page 01</div>
-          <div class="step-title">Home</div>
-          <div class="step-body">Hero, program stats (16K+ students, 100%, 93%), mentor profiles, how it works, parent testimonials.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">Page 02</div>
-          <div class="step-title">How It Works</div>
-          <div class="step-body">Get Matched, Meet Your Mentor, In the Session, Family Matters, For the Parents — a clear 5-step flow.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">Page 03</div>
-          <div class="step-title">Insights & Stories</div>
-          <div class="step-body">Articles, resources, and blog content connecting the community around neurodiversity.</div>
-        </div>
-      </div>
-
-      <!-- <div class="img-half">
-        <div class="img-block">[ home page ]</div>
-        <div class="img-block">[ how it works page ]</div>
-      </div>
-      <div class="img-half">
-        <div class="img-block">[ insights page ]</div>
-        <div class="img-block">[ about us page ]</div>
-      </div> -->
-    </section>
-
-    <div class="section-rule"></div>
-
-    <!-- 07 SHOWCASE -->
-    <section class="section" id="showcase">
-      <div class="section-label">07 - Showcase Presentation</div>
-      <h2 class="section-title">Presented at <em>showcase.</em></h2>
-      <div class="section-body">
-        <p>At the end of the semester, we presented the full Superpower Mentors project at the end-of-year showcase, walking stakeholders through the full design process, from initial client briefs through the final live website. The presentation covered brand strategy, UX decisions, wireframe evolution, and the final product.</p>
-        <p>Leading the design team through weekly client meetings to a polished, client-approved product was one of the most challenging and rewarding experiences of my time at Northeastern.</p>
-      </div>
-
-      <div class="outcomes-grid">
-        <div class="outcome-item">
-          <div class="outcome-label">My Role</div>
-          <div class="outcome-value">Led all UX and design decisions as Senior Designer: directing, mentoring junior designers, and managing quality</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-label">Client Work</div>
-          <div class="outcome-value">Weekly client meetings with the Superpower Mentors team throughout the semester</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-label">Outcome</div>
-          <div class="outcome-value">Complete brand identity and six-page website delivered and presented at end-of-year showcase</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-label">Team</div>
-          <div class="outcome-value">10-person cross-functional team spanning design, development, and project management</div>
-        </div>
-      </div>
-
-      <div class="img-block"> <img src = "assets/presenting.jpg"></div>
-    </section>
-
-    <!-- NEXT PROJECT -->
-    <div class="next-project">
-      <div>
-        <div class="next-label">Next project</div>
-        <a href="rx.html" class="next-title">RX Energy -></a>
-      </div>
-      <span class="next-arrow">-></span>
+        <!-- SHOWCASE -->
+        <section class="section" id="showcase">
+          <h2 class="section-title">Showing it off <em>at showcase.</em></h2>
+          <div class="section-body">
+            <p>At the end of the semester, we presented the whole project to the entire club and our stakeholders, and walked everyone through it from the very first client brief to the final website.</p>
+            <p>Leading the design team through weekly client meetings and ending with something the client was really happy with was one of the most challenging but rewarding things I did at Northeastern.</p>
+          </div>
+          <figure class="cs-img">
+            <img src="assets/presenting.jpg" alt="Our team presenting Superpower Mentors in a conference room" />
+            <figcaption class="cs-caption">Presenting to the whole club and our stakeholders in a conference room.</figcaption>
+          </figure>
+          <div class="cs-next">
+            <span>Next project</span>
+            <a href="rx.html">RX Energy</a>
+          </div>
+        </section>
+      </main>
     </div>
 
-  </main>
-</div>
-
-<!-- FOOTER -->
-<footer style="background:#0e0e0e; color:#ccc; font-size:0.88rem; padding: 2rem 0;">
-  <div style="max-width:100%; padding: 0 4rem;">
-    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding-top:2rem;">
-      <div>
-        <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">About</h5>
-        <p style="font-size:0.82rem; color:#666; font-family:'DM Sans',sans-serif; font-weight:300;">A passionate creator blending creativity and technology.<br>Based in Los Angeles and Durham.</p>
-      </div>
-      <div style="text-align:right;">
-        <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">Follow Me</h5>
-        <div style="display:flex; gap:1.5rem; justify-content:flex-end;">
-          <a href="https://github.com/rachhel" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Github</a>
-          <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">LinkedIn</a>
-          <a href="mailto:chen.rachel1@northeastern.edu" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Email</a>
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-4 aboutfooter">
+            <h5>About</h5>
+            <p class="small">
+              A passionate creator blending creativity and technology.<br />Based
+              in Los Angeles and Durham.
+            </p>
+          </div>
+          <div class="col-md-4 text-end">
+            <h5>Follow Me</h5>
+            <a
+              href="https://github.com/rachhel"
+              target="_blank"
+              class="text-light me-3"
+              >Github</a
+            >
+            <a
+              href="https://www.linkedin.com/in/rachelchen1016/"
+              target="_blank"
+              class="text-light me-3"
+              >LinkedIn</a
+            >
+            <a
+              href="mailto:rachelmchen16@gmail.com"
+              target="_blank"
+              class="text-light"
+              >Email</a
+            >
+          </div>
+        </div>
+        <div class="text-center mt-4 small">
+          &copy; 2026 Rachel Chen
         </div>
       </div>
-    </div>
-    <div style="text-align:center; margin-top:2rem; font-size:0.75rem; color:#444; font-family:'DM Sans',sans-serif;">
-      Copyright &copy; 2026; Designed and Developed with Love by Rachel
-    </div>
-  </div>
-</footer>
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove', e => {
-    mx=e.clientX; my=e.clientY;
-    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
-  });
-  (function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        /**
+         * Chrome-star cursor.
+         *
+         *  - Normal state: a small dot + ring, and a trail of chrome four-point stars.
+         *  - Over anything clickable: stars stop, the ring grows into a chrome lens
+         *    with an arrow, so it reads as "this is a link".
+         *  - Click on empty space: a small burst of stars.
+         *  - Inside [data-no-stars]: no trail (used on the sequin wall so the two
+         *    effects don't compete).
+         *  - Inside [data-cursor-theme="dark"]: the dot and ring turn light.
+         *  - Touch devices: does nothing, the normal cursor stays.
+         *  - prefers-reduced-motion: dot + ring + link state only, no stars.
+         *
+         * Expects #cursor and #cursorRing elements (already in index.html).
+         */
 
-  const sections = document.querySelectorAll('.section[id]');
-  const links = document.querySelectorAll('.sidebar-link');
-  function updateActive() {
-    const scrollY = window.scrollY + 120;
-    let current = '';
-    sections.forEach(s => { if (s.offsetTop <= scrollY) current = s.id; });
-    links.forEach(l => {
-      l.classList.remove('active');
-      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
-    });
-  }
-  window.addEventListener('scroll', updateActive, { passive: true });
-  updateActive();
-</script>
-</body>
+        const CLICKABLE =
+          'a, button, [role="button"], input, select, textarea, label, summary, .project-card, [data-cursor="link"]';
+
+        function initChromeCursor({
+          dot = document.getElementById("cursor"),
+          ring = document.getElementById("cursorRing"),
+          spacing = 14, // px of mouse travel between stars
+          maxStars = 90,
+        } = {}) {
+          const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+          ).matches;
+          if (!finePointer || !dot || !ring) {
+            document.documentElement.classList.add("native-cursor");
+            return () => {};
+          }
+          const reduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          document.documentElement.classList.add("chrome-cursor");
+
+          // Arrow that appears inside the ring in link state.
+          if (!ring.querySelector(".cursor-arrow")) {
+            ring.insertAdjacentHTML(
+              "beforeend",
+              '<svg class="cursor-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M4.5 3 H9 V7.5"/></svg>',
+            );
+          }
+
+          // Full-screen canvas for the star trail.
+          const c = document.createElement("canvas");
+          c.className = "cursor-stars";
+          c.setAttribute("aria-hidden", "true");
+          document.body.appendChild(c);
+          const ctx = c.getContext("2d");
+          let W = 0,
+            H = 0,
+            dpr = 1;
+          const resize = () => {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth;
+            H = window.innerHeight;
+            c.width = W * dpr;
+            c.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          };
+          resize();
+          window.addEventListener("resize", resize);
+
+          // Pre-render a few chrome star sprites so drawing stays cheap.
+          const sprites = [
+            ["#e8e8e6", "#8a8a87", "#2c2c2a"],
+            ["#ffffff", "#6e6d69", "#1a1a1a"],
+            ["#d3d1c7", "#9a9993", "#444441"],
+            ["#f1efe8", "#5f5e5a", "#0e0e0e"],
+          ].map(([a, b, d]) => {
+            const S = 64;
+            const s = document.createElement("canvas");
+            s.width = s.height = S;
+            const x = s.getContext("2d");
+            const g = x.createLinearGradient(0, 0, S, S);
+            g.addColorStop(0, a);
+            g.addColorStop(0.42, b);
+            g.addColorStop(0.5, "#ffffff");
+            g.addColorStop(0.62, b);
+            g.addColorStop(1, d);
+            x.translate(S / 2, S / 2);
+            x.beginPath();
+            const R = S / 2 - 1,
+              r = S * 0.07;
+            for (let i = 0; i < 8; i++) {
+              const ang = (i * Math.PI) / 4 - Math.PI / 2;
+              const rad = i % 2 ? r : R;
+              x.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+            }
+            x.closePath();
+            x.fillStyle = g;
+            x.fill();
+            x.lineWidth = 1.2;
+            x.strokeStyle = "rgba(20,20,20,0.55)";
+            x.stroke();
+            return s;
+          });
+
+          const stars = [];
+          const spawn = (x, y, burst) => {
+            if (reduced) return;
+            const a = burst
+              ? Math.random() * Math.PI * 2
+              : Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+            const sp = burst
+              ? 2 + Math.random() * 3
+              : 0.4 + Math.random() * 0.9;
+            stars.push({
+              x,
+              y,
+              vx: Math.cos(a) * sp,
+              vy: Math.sin(a) * sp,
+              size: (burst ? 12 : 9) + Math.random() * 11,
+              rot: Math.random() * Math.PI,
+              vr: (Math.random() - 0.5) * 0.12,
+              life: 1,
+              decay: 0.011 + Math.random() * 0.009,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+            if (stars.length > maxStars) stars.shift();
+          };
+
+          let mx = -100,
+            my = -100,
+            rx = -100,
+            ry = -100;
+          let lastX = null,
+            lastY = null,
+            travel = 0;
+          let mode = "default";
+          let trail = true;
+          let shown = false;
+
+          const label = document.createElement("div");
+          label.className = "cursor-label";
+          label.setAttribute("aria-hidden", "true");
+          document.body.appendChild(label);
+          const labelFor = (hit) => {
+            const own = hit.closest("[data-cursor-label]");
+            if (own) return own.getAttribute("data-cursor-label");
+            if (hit.closest(".hang-tag"))
+              return hit.closest(".hang-tag").classList.contains("is-flipped")
+                ? "Flip back"
+                : "Flip me";
+            if (hit.closest(".project-card")) return "See the project";
+            if (hit.closest(".tl-filter")) return "Show";
+            if (hit.closest(".navbar-brand"))
+              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+                ? "Back to top"
+                : "Home";
+            const a = hit.closest("a");
+            if (a) {
+              const href = a.getAttribute("href") || "";
+              if (href.startsWith("mailto:")) return "Say hi";
+              if (/linkedin/i.test(href)) return "Let\u2019s connect";
+              if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
+              if (href.startsWith("#")) return "Take me there";
+              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              return "Go";
+            }
+            if (hit.closest(".navbar-toggler")) return "Menu";
+            return "Click";
+          };
+          let labelText = "";
+          const setLabel = (t) => {
+            if (t === labelText) return;
+            labelText = t;
+            if (t) label.textContent = t; // keep old text while it fades out
+            label.classList.toggle("has-text", !!t);
+          };
+
+          const setMode = (target) => {
+            const el = target && target.closest ? target : null;
+            const hit = el && el.closest(CLICKABLE);
+            const link = !!hit;
+            setLabel(hit ? labelFor(el) : "");
+            const next = link ? "link" : "default";
+            if (next !== mode) {
+              mode = next;
+              document.body.classList.toggle("hovering", link); // keeps your existing CSS hook
+              document.body.classList.toggle("cursor-link", link);
+            }
+            trail = !link && !(el && el.closest("[data-no-stars]"));
+            document.body.classList.toggle(
+              "cursor-dark",
+              !!(el && el.closest('[data-cursor-theme="dark"]')),
+            );
+          };
+
+          const onMove = (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (!shown) {
+              shown = true;
+              rx = mx;
+              ry = my;
+              document.body.classList.add("cursor-visible");
+            }
+            setMode(e.target);
+            dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            label.style.transform = `translate3d(${mx + 12}px, ${my + 14}px, 0)`;
+            if (trail && lastX !== null) {
+              travel += Math.hypot(mx - lastX, my - lastY);
+              while (travel > spacing) {
+                travel -= spacing;
+                spawn(
+                  mx + (Math.random() - 0.5) * 6,
+                  my + (Math.random() - 0.5) * 6,
+                );
+              }
+            }
+            lastX = mx;
+            lastY = my;
+          };
+          const onDown = (e) => {
+            document.body.classList.add("cursor-press");
+            if (trail)
+              for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
+          };
+          const onUp = () => {
+            document.body.classList.remove("cursor-press");
+            // a click can change what the label should say (e.g. a tag flipping)
+            setTimeout(() => setMode(document.elementFromPoint(mx, my)), 0);
+          };
+          const onLeave = () => {
+            shown = false;
+            lastX = null;
+            document.body.classList.remove("cursor-visible");
+          };
+          // Re-check what's under the cursor after scroll (links move under a still mouse).
+          const onScroll = () => {
+            if (!shown) return;
+            setMode(document.elementFromPoint(mx, my));
+          };
+
+          document.addEventListener("pointermove", onMove, { passive: true });
+          document.addEventListener("pointerdown", onDown);
+          document.addEventListener("pointerup", onUp);
+          document.documentElement.addEventListener("mouseleave", onLeave);
+          window.addEventListener("scroll", onScroll, { passive: true });
+
+          let raf = 0;
+          const loop = () => {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+
+            ctx.clearRect(0, 0, W, H);
+            for (let i = stars.length - 1; i >= 0; i--) {
+              const s = stars[i];
+              s.x += s.vx;
+              s.y += s.vy;
+              s.vx *= 0.96;
+              s.vy = s.vy * 0.96 + 0.04;
+              s.rot += s.vr;
+              s.life -= s.decay;
+              if (s.life <= 0) {
+                stars.splice(i, 1);
+                continue;
+              }
+              const k = s.life;
+              const sz = s.size * (0.35 + 0.65 * k);
+              ctx.save();
+              ctx.globalAlpha = Math.min(1, k * 1.4);
+              ctx.translate(s.x, s.y);
+              ctx.rotate(s.rot);
+              ctx.drawImage(s.sprite, -sz / 2, -sz / 2, sz, sz);
+              ctx.restore();
+            }
+            raf = requestAnimationFrame(loop);
+          };
+          loop();
+
+          return () => {
+            cancelAnimationFrame(raf);
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerdown", onDown);
+            document.removeEventListener("pointerup", onUp);
+            document.documentElement.removeEventListener("mouseleave", onLeave);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", resize);
+            c.remove();
+          };
+        }
+
+        window.initChromeCursor = initChromeCursor;
+      })();
+    </script>
+    <script>
+      initChromeCursor();
+
+      // soundtrack: nothing plays until someone clicks. Then it keeps playing
+      // in a small player in the corner while they scroll the case study.
+      (function () {
+        const song = document.querySelector(".cs-song");
+        if (!song) return;
+        const btn = song.querySelector(".cs-song-btn");
+        const title = song.querySelector(".cs-song-text strong").textContent;
+        const artist = song.querySelector(".cs-song-text").textContent.split("·").pop().trim();
+        const getId = () => ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) || [])[1];
+        let id = null;
+        let controller = null, dock = null, playing = false;
+
+        const setPlaying = (on) => {
+          playing = on;
+          song.classList.toggle("is-playing", on);
+          if (dock) dock.classList.toggle("is-playing", on);
+          btn.setAttribute("aria-pressed", String(on));
+          btn.setAttribute("data-cursor-label", on ? "Pause" : "Play");
+        };
+
+        // the Spotify player opens right under the chip (no floating box)
+        // and keeps playing while the page scrolls
+        const buildDock = () => {
+          dock = document.createElement("div");
+          dock.className = "cs-inline-player";
+          dock.innerHTML = '<div id="csSpotify"></div>';
+          song.appendChild(dock);
+          requestAnimationFrame(() => dock.classList.add("is-shown"));
+        };
+
+        const start = () => {
+          window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            IFrameAPI.createController(
+              document.getElementById("csSpotify"),
+              { uri: "spotify:track:" + id, width: "100%", height: 80 },
+              (c) => {
+                controller = c;
+                c.addListener("playback_update", (e) => setPlaying(!e.data.isPaused));
+                c.addListener("ready", () => c.play());
+              },
+            );
+          };
+          const sc = document.createElement("script");
+          sc.src = "https://open.spotify.com/embed/iframe-api/v1";
+          sc.async = true;
+          document.body.appendChild(sc);
+        };
+
+        btn.addEventListener("click", () => {
+          id = getId();
+          if (!id) {
+            // no song link pasted yet: open it on Spotify instead
+            window.open("https://open.spotify.com/search/" + encodeURIComponent(song.dataset.search || ""), "_blank", "noopener");
+            return;
+          }
+          if (!dock) {
+            buildDock();
+            start();
+            return;
+          }
+          if (controller) controller.togglePlay();
+        });
+      })();
+
+      // journey map: draw the mood line when it comes into view
+      const journey = document.querySelector(".journey");
+      if (journey && "IntersectionObserver" in window) {
+        const jo = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) { journey.classList.add("is-in"); jo.disconnect(); }
+        }, { threshold: 0.4 });
+        jo.observe(journey);
+      } else if (journey) journey.classList.add("is-in");
+
+      // highlight the section you're reading in the sticky contents
+      const sections = document.querySelectorAll(".section[id]");
+      const links = document.querySelectorAll(".sidebar-link");
+      function updateActive() {
+        let current = sections[0] ? sections[0].id : "";
+        sections.forEach((sec) => {
+          if (sec.getBoundingClientRect().top <= 180) current = sec.id;
+        });
+        links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + current));
+      }
+      window.addEventListener("scroll", updateActive, { passive: true });
+      updateActive();
+    </script>
+  </body>
 </html>

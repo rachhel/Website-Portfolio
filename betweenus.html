@@ -1,304 +1,1737 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Between Us - Rachel Chen</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="betweenus.css" />
-  <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
-</head>
-<body class="bu-page">
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="ring"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Between Us · Rachel Chen</title>
+    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="align.css" />
+    <style>
+      /* chrome-star cursor, same as the home page */
+      /* ---------- chrome cursor ---------- */
+      /* Only hide the system cursor when the custom one is running
+   (touch devices keep their normal behaviour). */
+      * {
+        cursor: auto;
+      }
+      html.chrome-cursor,
+      html.chrome-cursor * {
+        cursor: none !important;
+      }
+      html.native-cursor .cursor,
+      html.native-cursor .cursor-ring {
+        display: none;
+      }
 
-  <!-- NAV -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container nav-container">
-      <a class="navbar-brand" href="index.html">
-        <img src="assets/LOGO.png" alt="Logo" style="height: 70px" />
-      </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-          <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
-          <li class="nav-item"><a class="nav-link" href="mailto:chen.rachel1@northeastern.edu">Contact</a></li>
-        </ul>
+      .cursor,
+      .cursor-ring {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        will-change: transform;
+      }
+      body.cursor-visible .cursor,
+      body.cursor-visible .cursor-ring {
+        opacity: 1;
+      }
+
+      .cursor {
+        transition:
+          width 0.25s,
+          height 0.25s,
+          background 0.25s,
+          opacity 0.2s;
+      }
+      .cursor-ring {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          border-color 0.3s,
+          background 0.3s,
+          opacity 0.2s;
+      }
+      .cursor-arrow {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: #0e0e0e;
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0;
+        transform: scale(0.4) rotate(-45deg);
+        transition:
+          opacity 0.25s,
+          transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* link state: the dot disappears, the ring becomes a chrome lens with an arrow */
+      body.cursor-link .cursor {
+        width: 0;
+        height: 0;
+      }
+      body.cursor-link .cursor-ring.__old {
+        border: 1px solid transparent;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
+            padding-box,
+          linear-gradient(
+              135deg,
+              #c8c8c8 0%,
+              #ffffff 22%,
+              #7a7a7a 42%,
+              #f2f2f2 58%,
+              #5a5a5a 78%,
+              #d8d8d8 100%
+            )
+            border-box;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+      }
+      body.cursor-link .cursor-arrow {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      body.cursor-press .cursor-ring {
+        width: 24px;
+        height: 24px;
+      }
+      body.cursor-link.cursor-press .cursor-ring {
+        width: 48px;
+        height: 48px;
+      }
+
+      /* over the dark sequin band */
+      body.cursor-dark:not(.cursor-link) .cursor {
+        background: #f0efeb;
+      }
+      body.cursor-dark:not(.cursor-link) .cursor-ring {
+        border-color: rgba(240, 239, 235, 0.45);
+      }
+
+      /* star trail canvas */
+      .cursor-stars {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 9997;
+      }
+
+      /* ---------- hover label: the cursor tells you what a click does ---------- */
+      .cursor-label {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+        pointer-events: none;
+        padding: 7px 12px 7px 11px;
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Inter Tight", "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.12s linear;
+        will-change: transform;
+      }
+      body.cursor-link .cursor-label.has-text {
+        opacity: 1;
+      }
+      /* in link state: the ring simply fades (no resizing, so nothing bounces);
+         the dot stays the same size at the exact click point */
+      body.cursor-link .cursor-ring,
+      body.cursor-press .cursor-ring {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      body.cursor-link .cursor-ring {
+        opacity: 0 !important;
+        transition: opacity 0.12s linear !important;
+      }
+      body.cursor-link .cursor {
+        width: 9px !important;
+        height: 9px !important;
+        background: #0a0a0a !important;
+        transition: none !important;
+      }
+      body.cursor-link .cursor-arrow {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
+    <!-- site-wide look: keep this as the last stylesheet -->
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      /* ============================================================
+         Align case study, in the home page style:
+         black and white, big grotesk titles, no rules, no eyebrows,
+         one left edge (80px), sticky contents on the left.
+         ============================================================ */
+      :root {
+        --crimson: #8b1a1a; /* Align's brand red, used as this case study's accent */
+        --blush: #f7f1ee;
+      }
+      body.align-page {
+        background: #fff !important;
+        color: #0a0a0a;
+      }
+
+      /* hero */
+      .cs-hero {
+        padding: 240px 80px 0;
+      }
+      .cs-title .cs-a {
+        color: inherit;
+      }
+      .cs-title {
+        font-family: var(--display) !important;
+        font-size: clamp(3.5rem, 9vw, 9rem) !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.05em !important;
+        line-height: 0.88 !important;
+        margin: 0 0 2.2rem;
+        color: #0a0a0a;
+      }
+      .cs-lede {
+        max-width: 36rem;
+        margin: 0;
+        font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+        line-height: 1.5;
+        color: #0a0a0a;
+      }
+      .cs-facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin: 3.5rem 0 0;
+      }
+      .cs-fact-label {
+        display: block;
+        font-size: 0.85rem;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+      .cs-fact-value {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.5;
+        color: #0a0a0a;
+      }
+      .cs-cover {
+        margin: 3.5rem 80px 0;
+      }
+      .cs-cover img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      /* soundtrack chip */
+      .cs-song {
+        margin-top: 1.8rem;
+      }
+      .cs-song-btn {
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 18px 8px 8px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--blush);
+        color: #0a0a0a;
+        font: inherit;
+        font-size: 0.95rem;
+        transition: background 0.25s;
+      }
+      .cs-song-btn:hover {
+        background: #f1e6e1;
+      }
+      .cs-song-btn strong {
+        font-weight: 500;
+      }
+      /* little iridescent CD */
+      .cs-cd {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        flex: none;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, #fff 0 3px, #d9d9d9 3.5px 6px, rgba(255, 255, 255, 0.35) 6.5px 7.5px, transparent 8px),
+          conic-gradient(from 20deg, #e9e9e9, #cdeeff, #f4d3ff, #fff2c2, #d1ffe0, #cfe2ff, #ffd6e8, #e9e9e9);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+      }
+      .cs-cd::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 45%, transparent 60%, rgba(255, 255, 255, 0.5));
+      }
+      .is-playing .cs-cd {
+        animation: cs-spin 2.4s linear infinite;
+      }
+      @keyframes cs-spin {
+        to { transform: rotate(360deg); }
+      }
+      .cs-song-btn .cs-song-state {
+        color: #8a6f68;
+      }
+
+      /* the player opens right under the chip */
+      .cs-inline-player {
+        max-width: 420px;
+        margin-top: 12px;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.3s ease, transform 0.35s ease;
+      }
+      .cs-inline-player.is-shown {
+        opacity: 1;
+        transform: none;
+      }
+      .cs-inline-player iframe {
+        display: block;
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+      }
+
+      /* layout: sticky contents + story */
+      .case-study {
+        margin-top: 2rem;
+      }
+      .sidebar {
+        border: 0 !important;
+        padding: 3rem 1.5rem 3rem 80px !important;
+      }
+      .sidebar-link {
+        border: 0 !important;
+        padding: 0.45rem 0 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        line-height: 1.3 !important;
+        color: #9a9a9a !important;
+      }
+      .sidebar-link:hover,
+      .sidebar-link.active {
+        color: #0a0a0a !important;
+      }
+      .sidebar-back {
+        margin-top: 2rem !important;
+        font-size: 0.9rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        color: #6b6b6b !important;
+      }
+      .sidebar-back::before {
+        content: "\2190" !important;
+      }
+      .content {
+        padding: 3rem 80px 5rem 40px !important;
+        max-width: 1100px;
+      }
+      .section {
+        margin-bottom: 7rem !important;
+        scroll-margin-top: 110px;
+      }
+      .section-title {
+        font-family: var(--display) !important;
+        font-size: clamp(2rem, 3.4vw, 3.1rem) !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+        letter-spacing: -0.04em !important;
+        line-height: 1.02 !important;
+        margin: 0 0 1.6rem !important;
+        max-width: 22ch;
+        color: #0a0a0a !important;
+      }
+      .section-title em {
+        font-style: normal !important;
+        color: var(--crimson) !important;
+      }
+      .section-body {
+        max-width: 700px !important;
+        font-size: 1.05rem !important;
+        line-height: 1.7 !important;
+        color: #333 !important;
+      }
+      .section-body p {
+        margin: 0;
+      }
+      .section-body p + p {
+        margin-top: 1.1rem;
+      }
+      .cs-quote {
+        position: relative;
+        max-width: 820px;
+        margin: 3.5rem 0 0;
+        padding-left: 3.2rem;
+        font-family: var(--display) !important;
+        font-size: clamp(1.3rem, 2vw, 1.7rem) !important;
+        letter-spacing: -0.03em !important;
+        line-height: 1.3 !important;
+        color: #0a0a0a;
+      }
+
+      /* images: no frames, no lines */
+      .cs-img {
+        margin: 2.5rem 0 0;
+      }
+      .cs-img img,
+      .cs-img video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        background: #f4f4f4;
+      }
+      .cs-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin: 2.5rem 0 0;
+        align-items: start;
+      }
+      .cs-pair .cs-img {
+        margin: 0;
+      }
+      .cs-pair video {
+        max-height: 78vh;
+        object-fit: contain;
+      }
+      .cs-caption {
+        margin: 10px 0 0;
+        font-size: 0.9rem;
+        color: #6b6b6b;
+      }
+      /* process images stay small on purpose */
+      .cs-pair.is-small {
+        max-width: 640px;
+      }
+
+      /* big crimson quote mark */
+      .cs-mark {
+        position: absolute;
+        left: 0;
+        top: -0.2em;
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 5rem;
+        line-height: 1;
+        color: var(--crimson);
+      }
+      .cs-quote em {
+        font-style: normal;
+        color: var(--crimson);
+      }
+
+      /* journey map */
+      .journey {
+        margin: 3.5rem 0 0;
+        padding: 2.2rem 2.2rem 1.8rem;
+        background: var(--blush);
+        border-radius: 12px;
+      }
+      .journey-mood {
+        position: relative;
+        height: 120px;
+        margin: 0 0 1.4rem;
+      }
+      .journey-mood svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .journey-mood path {
+        fill: none;
+        stroke: var(--crimson);
+        stroke-width: 2;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 1400;
+        stroke-dashoffset: 1400;
+        transition: stroke-dashoffset 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .journey.is-in .journey-mood path {
+        stroke-dashoffset: 0;
+      }
+      .journey-dot {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        margin: -7px 0 0 -7px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--crimson);
+      }
+      .journey-dot.is-low {
+        background: var(--crimson);
+      }
+      .journey-axis-top,
+      .journey-axis-bottom {
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+        color: #8a7a74;
+      }
+      .journey-axis-top {
+        top: 4px;
+      }
+      .journey-axis-bottom {
+        bottom: 0;
+      }
+      .journey-steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1rem;
+        counter-reset: step;
+      }
+      .journey-steps li {
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        color: #5a4a44;
+      }
+      .journey-steps strong {
+        display: block;
+        margin-bottom: 4px;
+        font-family: var(--display) !important;
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: #0a0a0a;
+      }
+      .journey .cs-caption {
+        margin-top: 1.6rem;
+      }
+
+      /* what I made: four cards that jump to the work */
+      .cs-made {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 2.5rem;
+      }
+      .cs-made-card {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 1.3rem 1.2rem 1.4rem;
+        background: var(--blush);
+        border-radius: 12px;
+        color: #5a4a44;
+        text-decoration: none;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s;
+      }
+      .cs-made-card:hover {
+        transform: translateY(-3px);
+        background: #f1e6e1;
+      }
+      .cs-made-num {
+        font-family: var(--display) !important;
+        font-size: 1rem;
+        color: var(--crimson);
+      }
+      .cs-made-card strong {
+        font-family: var(--display) !important;
+        font-size: 1.45rem;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: #0a0a0a;
+      }
+      @media (max-width: 900px) {
+        .cs-hero {
+          padding-top: 150px !important;
+        }
+        .cs-made {
+          grid-template-columns: 1fr 1fr;
+        }
+        .journey {
+          padding: 1.5rem 1.2rem;
+        }
+        .journey-mood {
+          display: none;
+        }
+        .journey-steps {
+          grid-template-columns: 1fr;
+          gap: 0.9rem;
+          counter-reset: step;
+        }
+        .journey-steps li {
+          text-align: left;
+          padding-left: 2rem;
+          position: relative;
+        }
+        .journey-steps li::before {
+          counter-increment: step;
+          content: counter(step);
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 50%;
+          background: var(--crimson);
+          color: #fff;
+          font-size: 0.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .cs-mark {
+          font-size: 3.5rem;
+        }
+        .cs-quote {
+          padding-left: 2.4rem;
+        }
+      }
+
+      /* competitive analysis: its own clearly labelled block */
+      .ca {
+        margin-top: 3rem;
+      }
+      .ca-title {
+        font-family: var(--display) !important;
+        font-size: 1.6rem !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.03em !important;
+        margin: 0 0 0.4rem;
+        color: #0a0a0a;
+      }
+      .ca-intro {
+        margin: 0 0 1.6rem;
+        font-size: 1rem;
+        color: #6b6b6b;
+      }
+      .ca-table {
+        display: grid;
+        grid-template-columns: 1.1fr repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .ca-labels,
+      .ca-col {
+        display: grid;
+        grid-template-rows: auto 1fr 1fr auto;
+        gap: 0;
+      }
+      .ca-col {
+        background: #f6f6f6;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .ca-col.is-align {
+        background: var(--blush);
+        box-shadow: inset 0 0 0 1.5px var(--crimson);
+      }
+      .ca-name {
+        padding: 1rem 1.1rem 0.6rem;
+        font-family: var(--display) !important;
+        font-size: 1.35rem;
+        letter-spacing: -0.03em;
+        color: #0a0a0a;
+      }
+      .ca-col.is-align .ca-name {
+        color: var(--crimson);
+      }
+      .ca-cell {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.93rem;
+        line-height: 1.45;
+        color: #333;
+      }
+      .ca-labels .ca-cell {
+        padding-left: 0;
+        color: #6b6b6b;
+        font-size: 0.88rem;
+      }
+      .ca-rowlabel {
+        display: none;
+      }
+      .ca-no,
+      .ca-yes {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+      .ca-no {
+        background: #e9e9e9;
+        color: #555;
+      }
+      .ca-yes {
+        background: var(--crimson);
+        color: #fff;
+      }
+      @media (max-width: 900px) {
+        .ca-table {
+          grid-template-columns: 1fr;
+        }
+        .ca-labels {
+          display: none;
+        }
+        .ca-col {
+          grid-template-rows: none;
+        }
+        .ca-cell {
+          padding: 0.35rem 1.1rem;
+        }
+        .ca-cell:last-child {
+          padding-bottom: 1rem;
+        }
+        .ca-rowlabel {
+          display: block;
+          font-size: 0.8rem;
+          color: #8a8a8a;
+        }
+      }
+
+      /* competitors */
+      .cs-compare {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+      }
+      .cs-compare h3 {
+        font-family: var(--display) !important;
+        font-size: 1.5rem !important;
+        letter-spacing: -0.03em !important;
+        font-weight: 400 !important;
+        margin: 0 0 0.9rem;
+      }
+      .cs-compare p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #333;
+      }
+      .cs-compare p + p {
+        margin-top: 0.6rem;
+      }
+      .cs-compare strong {
+        font-weight: 500;
+        color: #0a0a0a;
+      }
+      .cs-gap {
+        max-width: 640px;
+        margin: 2.5rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #0a0a0a;
+      }
+
+      /* decisions: learned, designed, solves (no lines) */
+      .decisions {
+        margin-top: 2.5rem;
+      }
+      .decision-head,
+      .decision {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.75rem;
+        align-items: start;
+      }
+      .decision-head {
+        padding-bottom: 0.6rem;
+        font-size: 0.85rem;
+        color: #6b6b6b;
+      }
+      .decision-head span:first-child {
+        grid-column: 2;
+      }
+      .decision {
+        padding: 1.4rem 0;
+      }
+      .decision p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #555;
+      }
+      .decision .decision-choice {
+        color: #0a0a0a;
+        font-weight: 500;
+      }
+      .decision-num {
+        font-family: var(--display) !important;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: #0a0a0a;
+      }
+
+      /* what came out of it */
+      .cs-list {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+        max-width: 640px;
+      }
+      .cs-list li {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #0a0a0a;
+        padding: 0.35rem 0;
+      }
+
+      /* next project */
+      .cs-next {
+        margin-top: 2rem;
+      }
+      .cs-next span {
+        display: block;
+        font-size: 0.9rem;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+      .cs-next a {
+        font-family: var(--display) !important;
+        font-size: clamp(2rem, 3.4vw, 3.1rem);
+        letter-spacing: -0.04em;
+        color: #0a0a0a;
+        text-decoration: none;
+      }
+
+      @media (max-width: 900px) {
+        .cs-hero {
+          padding: 120px 20px 0;
+        }
+        .cs-facts {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2.5rem;
+        }
+        .cs-cover {
+          margin: 2.5rem 20px 0;
+        }
+        .content {
+          padding: 3rem 20px 4rem !important;
+        }
+        .section {
+          margin-bottom: 4.5rem !important;
+        }
+        .cs-pair,
+        .cs-compare {
+          grid-template-columns: 1fr;
+          gap: 1.75rem;
+        }
+        .decision-head {
+          display: none;
+        }
+        .decision {
+          grid-template-columns: 2rem minmax(0, 1fr);
+          gap: 0.45rem 0.75rem;
+        }
+        .decision p {
+          grid-column: 2;
+        }
+        .decision-num {
+          grid-row: 1 / span 3;
+        }
+        .decision-insight::before { content: "Learned: "; color: #0a0a0a; }
+        .decision-choice::before { content: "Designed: "; }
+        .decision-result::before { content: "Solves: "; color: #0a0a0a; }
+      }
+
+      /* ---------- Between Us: its own accent (lavender, from the brand) ---------- */
+      :root {
+        --crimson: #6b4fbf;
+        --blush: #f4f1fb;
+      }
+      .cs-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        margin-top: 1.8rem;
+      }
+      .cs-links a {
+        color: #0a0a0a;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 1px;
+      }
+
+      /* far from home: distance map */
+      .bu-map {
+        position: relative;
+        margin: 3.5rem 0 0;
+        padding: 2rem 2.2rem 1.6rem;
+        background: var(--blush);
+        border-radius: 12px;
+      }
+      .bu-map-stage {
+        position: relative;
+        height: 270px;
+        margin-bottom: 0.5rem;
+      }
+      .bu-map svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .bu-map path {
+        fill: none;
+        stroke: var(--crimson);
+        stroke-width: 2;
+        stroke-dasharray: 2 9;
+        stroke-linecap: round;
+        vector-effect: non-scaling-stroke;
+      }
+      .bu-pin {
+        position: absolute;
+        transform: translate(-7px, -7px);
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        width: 240px;
+      }
+      .bu-pin::before {
+        content: "";
+        flex: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--crimson);
+      }
+      .bu-pin.is-home::before {
+        background: var(--crimson);
+      }
+      .bu-pin.is-right {
+        flex-direction: row-reverse;
+        text-align: right;
+        transform: translate(calc(-100% + 7px), -7px);
+      }
+      .bu-pin strong {
+        display: block;
+        font-family: var(--display) !important;
+        font-size: 1.3rem;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: #0a0a0a;
+      }
+      .bu-pin span {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.88rem;
+        line-height: 1.4;
+        color: #5a5266;
+      }
+      .bu-envelope {
+        position: absolute;
+        left: 46%;
+        top: 30%;
+        font-size: 1.6rem;
+        transform: rotate(-12deg);
+        animation: bu-float 3.2s ease-in-out infinite;
+      }
+      @keyframes bu-float {
+        50% { transform: rotate(-6deg) translateY(-6px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bu-envelope { animation: none; }
+      }
+
+      /* interaction videos */
+      .bu-videos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* two by two, so you can actually see them */
+        gap: 2.5rem 1.75rem;
+        margin-top: 2.5rem;
+        max-width: 900px;
+      }
+      /* the recordings are wide with a small phone in the middle,
+         so crop in on the phone */
+      .bu-vid {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border-radius: 12px;
+        background: linear-gradient(90deg, #f6f7fd, #cfd3f6);
+      }
+      .bu-videos .bu-vid video {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 132%; /* phone fills about 80% of the frame */
+        width: auto !important;
+        max-width: none;
+        transform: translate(-50%, -50%);
+        border-radius: 0;
+        background: none;
+      }
+      .bu-videos .cs-caption {
+        font-size: 1rem;
+        color: #0a0a0a;
+      }
+      .bu-videos video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        background: #f4f4f4;
+      }
+
+      /* team */
+      .bu-team {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bu-team li {
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--blush);
+        font-size: 0.95rem;
+        color: #0a0a0a;
+      }
+      .bu-team li.is-me {
+        background: var(--crimson);
+        color: #fff;
+      }
+
+      .bu-reflect {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 3rem;
+        align-items: center;
+      }
+      .bu-mine {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 2px 10px;
+        border-radius: 999px;
+        background: var(--crimson);
+        color: #fff;
+        font-size: 0.8rem;
+        vertical-align: 2px;
+      }
+      #team strong {
+        font-weight: 500;
+        color: #0a0a0a;
+      }
+      .bu-photo {
+        margin: 0;
+      }
+      .bu-photo .cs-caption {
+        margin-top: 12px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .bu-reflect img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+      }
+
+      @media (max-width: 900px) {
+        .bu-map {
+          padding: 1.5rem 1.2rem;
+        }
+        .bu-map-stage {
+          height: auto;
+          display: grid;
+          gap: 1.2rem;
+        }
+        .bu-map svg,
+        .bu-envelope {
+          display: none;
+        }
+        .bu-pin,
+        .bu-pin.is-right {
+          position: static;
+          width: auto;
+          transform: none;
+          flex-direction: row;
+          text-align: left;
+          max-width: none;
+        }
+        .bu-videos {
+          grid-template-columns: 1fr;
+        }
+        .bu-reflect {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="align-page betweenus-page" id="page-top">
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container nav-container">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          Menu
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
+            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-line"></div>
-      <span class="hero-eyebrow-text">CreateSC Designathon · Spring 2025 · 24 hours</span>
-    </div>
-    <h1 class="bu-title">Between Us.</h1>
-    <div class="hero-rule"></div>
-    <div class="hero-strip">
-      <div class="meta-block">
-        <span class="meta-label">Role</span>
-        <span class="meta-value">UX Designer</span>
+    <!-- HERO -->
+    <header class="cs-hero">
+      <h1 class="cs-title">Between Us</h1>
+      <p class="cs-lede">
+        A letter writing app for the people you love who live far away, so you
+        can take your time and send something that actually means something.
+      </p>
+      <!-- soundtrack: paste the Spotify song link in data-spotify (Spotify: ••• > Share > Copy song link) -->
+      <div class="cs-song" data-spotify="https://open.spotify.com/track/43zr9kKkeiQrshvYuvNtfM" data-search="someone to call my lover janet jackson">
+        <button type="button" class="cs-song-btn" aria-expanded="false" data-cursor-label="Play">
+          <span class="cs-cd" aria-hidden="true"></span>
+          <span class="cs-song-text">On repeat while making this: <strong>Someone to Call My Lover</strong> · Janet Jackson</span>
+        </button>
       </div>
-      <div class="meta-block">
-        <span class="meta-label">Timeline</span>
-        <span class="meta-value">24 Hours<br />Spring 2025</span>
+
+      <div class="cs-links">
+        <a href="https://devpost.com/software/between-us-pi9k20" target="_blank" rel="noopener" data-cursor-label="View on Devpost">Devpost submission</a>
+        <a href="#" target="_blank" rel="noopener" data-cursor-label="Open in Figma">Figma prototype</a>
       </div>
-      <div class="meta-block">
-        <span class="meta-label">Skills</span>
-        <span class="meta-value">Prototyping · Visual<br />Interaction Design</span>
-      </div>
-      <div class="meta-block">
-        <span class="meta-label">Team</span>
-        <span class="meta-value">Autumn Fung<br />Rachel Chen<br />Valerie Irawan<br />Tiffany Zheng</span>
-      </div>
-    </div>
-    <p class="hero-tagline">A digital letter-writing experience that puts emotional depth back into the way we communicate online.</p>
-  </div>
-
-  <!-- HERO IMAGE SHOWCASE -->
-  <div class="hero-showcase">
-    <img src="assets/betweenus/between us.png" alt="Between Us App">
-  </div>
-
-  <!-- CASE STUDY -->
-  <div class="case-study">
-    <aside class="sidebar">
-      <span class="sidebar-label">Contents</span>
-      <nav class="sidebar-nav">
-        <a href="#overview" class="sidebar-link active">01. Overview</a>
-        <a href="#problem" class="sidebar-link">02. Problem</a>
-        <a href="#solution" class="sidebar-link">03. Solution</a>
-        <a href="#features" class="sidebar-link">04. Features</a>
-        <a href="#interaction" class="sidebar-link">05. Interaction</a>
-        <a href="#brand" class="sidebar-link">06. Brand</a>
-        <a href="#reflection" class="sidebar-link">07. Reflection</a>
-      </nav>
-      <a href="index.html#work" class="sidebar-back">Back to work</a>
-    </aside>
-
-    <main class="content">
-
-      <!-- 01 OVERVIEW -->
-      <section class="section" id="overview">
-        <div class="section-label">01 - Overview</div>
-        <h2 class="section-title">Take your time.<br /><em>Say something real.</em></h2>
-        <div class="section-body">
-          <p>Between Us is a mobile-first platform that translates the care and weight of a handwritten letter into something you can send from your phone. We built the entire thing in under 24 hours at the CreateSC Designathon, working through the night to get every interaction feeling right.</p>
-          <p>Users can build rich, layered messages using photos, voice memos, sketches, and mood customization, then set them to arrive at a specific moment in the future. No notifications. No read receipts. Just the letter, when it's ready.</p>
-        </div>
-        <div class="link-strip">
-          <a href="https://devpost.com/software/between-us-pi9k20" target="_blank" class="case-link">View Devpost submission</a>
-          <a href="#" target="_blank" class="case-link">View Figma prototype</a>
-        </div>
-      </section>
-
-      <div class="section-rule"></div>
-
-      <!-- 02 PROBLEM -->
-      <section class="section" id="problem">
-        <div class="section-label">02 - Problem</div>
-        <h2 class="section-title">We text constantly and yet somehow feel <em>further apart.</em></h2>
-        <div class="section-body">
-          <p>The designathon brief asked us to take a physical, tangible experience and bring it into a digital format without losing what makes it special. We kept coming back to the experience of handwriting letters. Not emails. Not DMs. </p>
-          <p>Modern messaging is built for speed. You send a text in three seconds and the conversation moves on before either person has really said anything. The emotional weight that used to live in written communication has been compressed out of existence.</p>
-          <p>Our team felt this personally. We were all studying far from home, and the friendships that mattered most were the ones hardest to maintain across different schedules and time zones.</p>
-        </div>
-        <div class="callout">
-          <p>What would it feel like if sending a message to someone required you to slow down, sit with your thoughts, and actually mean what you wrote?</p>
-        </div>
-      </section>
-
-      <div class="section-rule"></div>
-
-      <!-- 03 SOLUTION -->
-      <section class="section" id="solution">
-        <div class="section-label">03 - Solution</div>
-        <h2 class="section-title">The feeling of opening something <em>made just for you.</em></h2>
-        <div class="section-body">
-          <p>Between Us is designed to resist the urge to rush. Every step of the experience, from writing to sending to receiving, is built with friction that feels good. The kind of pause that makes you think twice about what you actually want to say.</p>
-        </div>
-      </section>
-
-      <div class="section-rule"></div>
-
-      <!-- 04 FEATURES -->
-      <section class="section" id="features">
-        <div class="section-label">04 - Features</div>
-        <h2 class="section-title">Four ways to make it <em>yours.</em></h2>
-        <div class="features-grid">
-          <div class="feature-item">
-            <div class="feature-icon">💌</div>
-            <div class="feature-title">Time-Locked Letters</div>
-            <div class="feature-body">Schedule delivery for a specific moment, a birthday, a rough week, an anniversary, or no reason at all except that you wanted them to have it then.</div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✍️</div>
-            <div class="feature-title">Reflective Prompts</div>
-            <div class="feature-body">Optional writing prompts pulled from the spirit of We're Not Really Strangers, nudging you past small talk into something worth saying.</div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">🎙️</div>
-            <div class="feature-title">Multimedia Messages</div>
-            <div class="feature-body">Layer in voice memos, letter opening noise effects, hand-drawn sketches, and photos so the letter feels like something they can hold rather than just read.</div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✉️</div>
-            <div class="feature-title">Envelope Customization</div>
-            <div class="feature-body">Choose stamps, stickers, and a mood palette so the outside of the letter is customized just like how you can customize physically. </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-rule"></div>
-
-      <!-- 05 INTERACTION -->
-      <section class="section" id="interaction">
-        <div class="section-label">05 - Interaction Design</div>
-        <h2 class="section-title">Designed to feel like <em>the real thing.</em></h2>
-        <div class="process-steps">
-          <div class="step">
-            <div class="step-num"> 01</div>
-            <div class="step-title">The Inbox</div>
-            <div class="step-body">Letters sit sealed until you're ready. You scroll through them the way you'd flip through a stack of mail, each one waiting to be opened.</div>
-          </div>
-          <div class="step">
-            <div class="step-num"> 02</div>
-            <div class="step-title">Writing a Letter</div>
-            <div class="step-body">Build your message layer by layer, add a voice note, a doodle, a photo, choose your stamp, and decide when it goes out.</div>
-          </div>
-          <div class="step">
-            <div class="step-num"> 03</div>
-            <div class="step-title">Opening a Letter</div>
-            <div class="step-body">The envelope animates open to reveal the full message in a full-screen view that asks you to stop scrolling and just read.</div>
-          </div>
-        </div>
-        <div class="img-half">
-  <div class="img-with-caption">
-    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/inbox.mp4" type="video/mp4"></video></div>
-    <span class="img-caption">Checking your inbox</span>
-  </div>
-  <div class="img-with-caption">
-    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/betweenus/archive.mp4" type="video/mp4"></video></div>
-    <span class="img-caption">Archive view</span>
-  </div>
-</div>
-<div class="img-half">
-  <div class="img-with-caption">
-    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/create.mp4" type="video/mp4"></video></div>
-    <span class="img-caption">Writing a letter</span>
-  </div>
-  <div class="img-with-caption">
-    <div class="img-block"><video autoplay loop muted playsinline><source src="assets/open.mp4" type="video/mp4"></video></div>
-    <span class="img-caption">Opening a letter</span>
-  </div>
-</div>
-      </section>
-
-      <div class="section-rule"></div>
-
-      <!-- 06 BRAND -->
-      <section class="section" id="brand">
-        <div class="section-label">06 - Brand Identity</div>
-        <h2 class="section-title">Soft, personal, <em>analog at heart.</em></h2>
-        <div class="section-body">
-          <p>The visual identity pulls from the tactile world of paper and ink. Warm neutrals, subtle textures, and type choices that feel like they were chosen by hand rather than generated from a template.</p>
-          <p>Nothing in the brand should feel clinical or tech-forward. Between Us is supposed to feel like something your grandmother might recognize and your best friend would love.</p>
-        </div>
-        <div class="img-block"> <img src = "assets/betweenus/brand.png" ></div>
-        <div class="img-half">
-        <div class="img-block"> <img src = "assets/betweenus/logo.png" ></div>
-        <div class="img-block"> <img src = "assets/betweenus/ui components.png" ></div>
-        </div>
-      </section>
-
-      <div class="section-rule"></div>
-
-   <!-- 07 REFLECTION -->
-<section class="section" id="reflection">
-  <div class="section-label">07 - Reflection</div>
-  <div class="reflection-split">
-    <div class="section-body">
-      <h2 class="section-title" style="margin-bottom: 1rem;">Make it.<br /><em>Matter.</em></h2>
-      <p>We came in with a list of twenty ideas and left with four. That constraint was the best thing that happened to the project. Every feature we kept had to earn its place, and the ones we cut would have diluted what made the core idea worth building in the first place.</p>
-      <p>We had no idea if it would work. That's the honest answer. We had a concept, a tight deadline, and a team running on coffee and conviction. What surprised me most wasn't that we shipped it, but how good it felt to ship something I was actually proud of. Between Us didn't happen because the conditions were perfect. It happened because we decided it would.
-
-</p>
-    </div>
-    <div class="reflection-img">
-      <img src="assets/doingit.png" alt="Between Us Logo">
-    </div>
-  </div>
-</section>
-
-      <!-- NEXT PROJECT -->
-      <div class="next-project">
+      <div class="cs-facts">
         <div>
-          <div class="next-label">Next project</div>
-          <a href="superhero.html" class="next-title">Superpower Mentors</a>
+          <span class="cs-fact-label">Role</span>
+          <p class="cs-fact-value">UX designer</p>
         </div>
-        <span class="next-arrow">→</span>
-      </div>
-
-    </main>
-  </div>
-
-  <!-- FOOTER -->
-  <footer style="background:#0e0e0e; color:#ccc; font-size:0.88rem; padding: 2rem 0;">
-    <div style="max-width:100%; padding: 0 4rem;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding-top:2rem;">
         <div>
-          <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">About</h5>
-          <p style="font-size:0.82rem; color:#666; font-family:'DM Sans',sans-serif; font-weight:300;">A passionate creator blending creativity and technology.<br>Based in Los Angeles and Durham.</p>
+          <span class="cs-fact-label">When</span>
+          <p class="cs-fact-value">Spring 2025, 24 hours at the CreateSC Designathon</p>
         </div>
-        <div style="text-align:right;">
-          <h5 style="color:#fff; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">Follow Me</h5>
-          <div style="display:flex; gap:1.5rem; justify-content:flex-end;">
-            <a href="https://github.com/rachhel" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Github</a>
-            <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">LinkedIn</a>
-            <a href="mailto:chen.rachel1@northeastern.edu" style="color:#666; text-decoration:none; font-size:0.82rem; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#ddd'" onmouseout="this.style.color='#666'">Email</a>
+        <div>
+          <span class="cs-fact-label">Skills</span>
+          <p class="cs-fact-value">Prototyping, visual and interaction design</p>
+        </div>
+        <div>
+          <span class="cs-fact-label">Team</span>
+          <p class="cs-fact-value">Autumn Fung, Rachel Chen, Valerie Irawan, Tiffany Zheng</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- FINAL LOOK UP FRONT -->
+    <figure class="cs-cover">
+      <img src="assets/betweenus/between us.png" alt="Between Us app screens" />
+    </figure>
+
+    <!-- CASE STUDY -->
+    <div class="case-study">
+      <aside class="sidebar">
+        <nav class="sidebar-nav" aria-label="Case study sections">
+          <a href="#why" class="sidebar-link active">Why we made this</a>
+          <a href="#idea" class="sidebar-link">The idea</a>
+          <a href="#features" class="sidebar-link">What makes it yours</a>
+          <a href="#feel" class="sidebar-link">Making it feel real</a>
+          <a href="#brand" class="sidebar-link">The brand</a>
+          <a href="#team" class="sidebar-link">Who did what</a>
+          <a href="#reflection" class="sidebar-link">Looking back</a>
+        </nav>
+        <a href="index.html#work" class="sidebar-back">Back to work</a>
+      </aside>
+
+      <main class="content">
+        <!-- WHY -->
+        <section class="section" id="why">
+          <h2 class="section-title">We all live a long way <em>from home.</em></h2>
+          <div class="section-body">
+            <p>Home for me is California. My family is still there, and so are a lot of my high school friends, but I went to school in Boston and now I’m in North Carolina. So the people I care about the most are also the ones who are the hardest to keep in touch with.</p>
+            <p>Our whole team felt the same way, since we were all studying far from home and juggling different schedules and time zones. One of us was even an international student from Malaysia, so home for her was halfway across the world. We text each other all the time, but somehow it still feels like we’re further apart, because a text takes three seconds to send and the conversation moves on before anyone really says anything.</p>
+            <p>Sending a text is easy, and don’t get me wrong, I love getting a happy birthday text with the balloons on iMessage. But it means so much more when it’s a letter someone actually designed and made just for you, especially for a birthday or a big accomplishment. That feeling is what we wanted to bring back.</p>
+          </div>
+
+          <!-- distance map -->
+          <figure class="bu-map" aria-label="How far I live from home">
+            <div class="bu-map-stage">
+              <svg viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M40,190 C300,40 700,20 940,40" />
+                <path d="M40,190 C330,150 620,200 860,182" />
+              </svg>
+              <div class="bu-pin is-home" style="left:4%;top:73%">
+                <div><strong>Los Angeles</strong><span>Home. My family and my high school friends.</span></div>
+              </div>
+              <div class="bu-pin is-right" style="left:94%;top:15%">
+                <div><strong>Boston</strong><span>Where I went to college, about 2,600 miles away.</span></div>
+              </div>
+              <div class="bu-pin is-right" style="left:86%;top:70%">
+                <div><strong>Durham</strong><span>Where I am now, about 2,200 miles away.</span></div>
+              </div>
+              <span class="bu-envelope" aria-hidden="true">💌</span>
+            </div>
+            <figcaption class="cs-caption">My people are spread across both coasts, and our group chat never quite catches up.</figcaption>
+          </figure>
+
+          <div class="section-body" style="margin-top: 3rem">
+            <p>So when the CreateSC Designathon challenged us to design something personal that felt like an actual experience, we kept coming back to handwritten letters, and how special it feels to get one in the mail.</p>
+          </div>
+          <p class="cs-quote"><span class="cs-mark" aria-hidden="true">“</span>What would it feel like if sending a message made you slow down and actually mean what you <em>wrote?</em>”</p>
+        </section>
+
+        <!-- IDEA -->
+        <section class="section" id="idea">
+          <h2 class="section-title">The feeling of opening something <em>made just for you.</em></h2>
+          <div class="section-body">
+            <p>Between Us brings the feeling of a handwritten letter onto your phone. You build your own letter with photos, voice memos and sketches, then choose the exact moment you want it to arrive, so it feels like traditional letter writing, just digital.</p>
+            <p>There are no notifications and no read receipts, just a letter that’s there whenever you’re ready to open it, and whenever they wanted to send it to you. We wanted the whole experience to slow you down a little, so you really think about what you want to say to someone.</p>
+          </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="section" id="features">
+          <h2 class="section-title">Four ways to make it <em>yours.</em></h2>
+          <div class="cs-made">
+            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Time locked letters</strong><span>Pick when your letter arrives, like on their birthday, during a rough week, on an anniversary, or just whenever you want them to have it.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>Reflective prompts</strong><span>If you don’t know what to write, there are optional prompts inspired by We’re Not Really Strangers to help you go deeper than small talk.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>Multimedia letters</strong><span>Add voice memos, sketches and photos, plus the sound of a letter opening, so it feels like something you can actually hold.</span></div>
+            <div class="cs-made-card"><span class="cs-made-num">04</span><strong>Envelope customization</strong><span>Pick stamps, stickers and colors for your envelope, the same way you’d decorate a real one.</span></div>
+          </div>
+        </section>
+
+        <!-- FEEL -->
+        <section class="section" id="feel">
+          <h2 class="section-title">Designed to feel like <em>the real thing.</em></h2>
+          <div class="section-body">
+            <p>We wanted every step to feel like you’re doing it in person, even though it’s all on your phone. The letter seals and opens, you hear the sound of the paper ripping when you tear into it, the letter unravels, and you get to decorate your own envelope. Every detail was designed on purpose so it feels like a real experience and not just another message.</p>
+            <p>Letters stay sealed in your inbox until you’re ready to open them, kind of like a stack of mail waiting for you. And when you open one, it takes up the whole screen so you can just focus on reading it.</p>
+          </div>
+          <div class="bu-videos">
+            <figure class="cs-img">
+              <div class="bu-vid"><video autoplay loop muted playsinline><source src="assets/inbox.mp4" type="video/mp4" /></video></div>
+              <figcaption class="cs-caption">Checking your inbox <span class="bu-mine">The part I led</span></figcaption>
+            </figure>
+            <figure class="cs-img">
+              <div class="bu-vid"><video autoplay loop muted playsinline><source src="assets/betweenus/archive.mp4" type="video/mp4" /></video></div>
+              <figcaption class="cs-caption">Your archive</figcaption>
+            </figure>
+            <figure class="cs-img">
+              <div class="bu-vid"><video autoplay loop muted playsinline><source src="assets/create.mp4" type="video/mp4" /></video></div>
+              <figcaption class="cs-caption">Writing a letter</figcaption>
+            </figure>
+            <figure class="cs-img">
+              <div class="bu-vid"><video autoplay loop muted playsinline><source src="assets/open.mp4" type="video/mp4" /></video></div>
+              <figcaption class="cs-caption">Opening a letter</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- BRAND -->
+        <section class="section" id="brand">
+          <h2 class="section-title">Soft, personal, <em>analog at heart.</em></h2>
+          <div class="section-body">
+            <p>We wanted the look to feel like paper and ink, with warm colors, soft textures and type that feels handpicked instead of coming from a template.</p>
+            <p>We didn’t want anything to feel too techy. Between Us should feel like something your grandma would recognize and your best friend would love.</p>
+          </div>
+          <figure class="cs-img"><img src="assets/betweenus/brand.png" alt="Between Us brand guide" /></figure>
+          <div class="cs-pair">
+            <figure class="cs-img"><img src="assets/betweenus/logo.png" alt="Between Us logo" /></figure>
+            <figure class="cs-img"><img src="assets/betweenus/ui components.png" alt="Between Us UI components" /></figure>
+          </div>
+        </section>
+
+        <!-- TEAM -->
+        <section class="section" id="team">
+          <h2 class="section-title">We made it <em>together.</em></h2>
+          <div class="section-body">
+            <p>Between Us was made by a team of four: Autumn, Valerie, Tiffany and me. We all worked on every screen and every design together, from coming up with the idea to finishing the final prototype, and we spent the whole night sketching, giving each other feedback and refining it.</p>
+            <p>We also each took one part of the app and worked on it the most. Mine was <strong>checking your inbox</strong>: how your letters sit sealed and waiting, and how you scroll through them like a stack of mail.</p>
+          </div>
+          <ul class="bu-team" aria-label="Team">
+            <li>Autumn Fung</li>
+            <li class="is-me">Rachel Chen (me)</li>
+            <li>Valerie Irawan</li>
+            <li>Tiffany Zheng</li>
+          </ul>
+        </section>
+
+        <!-- REFLECTION -->
+        <section class="section" id="reflection">
+          <div class="bu-reflect">
+            <div>
+              <h2 class="section-title">Make it <em>matter.</em></h2>
+              <div class="section-body">
+                <p>We came in with a list of twenty ideas and left with four. That limit was the best thing that happened to the project. Every feature we kept had to earn its place, and the ones we cut would have watered down what made the idea worth building.</p>
+                <p>Honestly, we had no idea if it would work. We had a concept, a tight deadline, and a team running on coffee and conviction. What surprised me most wasn’t that we shipped it, but how good it felt to ship something I was actually proud of. Between Us didn’t happen because the conditions were perfect. It happened because we decided it would.</p>
+              </div>
+            </div>
+            <figure class="bu-photo">
+              <img src="assets/doingit.png" alt="Our team right after we submitted Between Us" />
+              <figcaption class="cs-caption">This was taken right after we submitted. It shows how happy we were to have made something that actually meant so much to us.</figcaption>
+            </figure>
+          </div>
+          <div class="cs-next">
+            <span>Next project</span>
+            <a href="superhero.html">Superpower Mentors</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-4 aboutfooter">
+            <h5>About</h5>
+            <p class="small">
+              A passionate creator blending creativity and technology.<br />Based
+              in Los Angeles and Durham.
+            </p>
+          </div>
+          <div class="col-md-4 text-end">
+            <h5>Follow Me</h5>
+            <a
+              href="https://github.com/rachhel"
+              target="_blank"
+              class="text-light me-3"
+              >Github</a
+            >
+            <a
+              href="https://www.linkedin.com/in/rachelchen1016/"
+              target="_blank"
+              class="text-light me-3"
+              >LinkedIn</a
+            >
+            <a
+              href="mailto:rachelmchen16@gmail.com"
+              target="_blank"
+              class="text-light"
+              >Email</a
+            >
           </div>
         </div>
+        <div class="text-center mt-4 small">
+          &copy; 2026 Rachel Chen
+        </div>
       </div>
-      <div style="text-align:center; margin-top:2rem; font-size:0.75rem; color:#444; font-family:'DM Sans',sans-serif;">
-        Copyright &copy; 2026; Designed and Developed with Love by Rachel ♡
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const cursor = document.getElementById("cursor");
-    const ring = document.getElementById("ring");
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener("mousemove", (e) => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + "px"; cursor.style.top = my + "px";
-    });
-    (function loop() {
-      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
-      ring.style.left = rx + "px"; ring.style.top = ry + "px";
-      requestAnimationFrame(loop);
-    })();
-    const sections = document.querySelectorAll(".section[id]");
-    const links = document.querySelectorAll(".sidebar-link");
-    function updateActive() {
-      const scrollY = window.scrollY + 120;
-      let current = "";
-      sections.forEach((s) => { if (s.offsetTop <= scrollY) current = s.id; });
-      links.forEach((l) => {
-        l.classList.remove("active");
-        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
-      });
-    }
-    window.addEventListener("scroll", updateActive, { passive: true });
-    updateActive();
-  </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        /**
+         * Chrome-star cursor.
+         *
+         *  - Normal state: a small dot + ring, and a trail of chrome four-point stars.
+         *  - Over anything clickable: stars stop, the ring grows into a chrome lens
+         *    with an arrow, so it reads as "this is a link".
+         *  - Click on empty space: a small burst of stars.
+         *  - Inside [data-no-stars]: no trail (used on the sequin wall so the two
+         *    effects don't compete).
+         *  - Inside [data-cursor-theme="dark"]: the dot and ring turn light.
+         *  - Touch devices: does nothing, the normal cursor stays.
+         *  - prefers-reduced-motion: dot + ring + link state only, no stars.
+         *
+         * Expects #cursor and #cursorRing elements (already in index.html).
+         */
+
+        const CLICKABLE =
+          'a, button, [role="button"], input, select, textarea, label, summary, .project-card, [data-cursor="link"]';
+
+        function initChromeCursor({
+          dot = document.getElementById("cursor"),
+          ring = document.getElementById("cursorRing"),
+          spacing = 14, // px of mouse travel between stars
+          maxStars = 90,
+        } = {}) {
+          const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+          ).matches;
+          if (!finePointer || !dot || !ring) {
+            document.documentElement.classList.add("native-cursor");
+            return () => {};
+          }
+          const reduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          document.documentElement.classList.add("chrome-cursor");
+
+          // Arrow that appears inside the ring in link state.
+          if (!ring.querySelector(".cursor-arrow")) {
+            ring.insertAdjacentHTML(
+              "beforeend",
+              '<svg class="cursor-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M4.5 3 H9 V7.5"/></svg>',
+            );
+          }
+
+          // Full-screen canvas for the star trail.
+          const c = document.createElement("canvas");
+          c.className = "cursor-stars";
+          c.setAttribute("aria-hidden", "true");
+          document.body.appendChild(c);
+          const ctx = c.getContext("2d");
+          let W = 0,
+            H = 0,
+            dpr = 1;
+          const resize = () => {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth;
+            H = window.innerHeight;
+            c.width = W * dpr;
+            c.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          };
+          resize();
+          window.addEventListener("resize", resize);
+
+          // Pre-render a few chrome star sprites so drawing stays cheap.
+          const sprites = [
+            ["#e8e8e6", "#8a8a87", "#2c2c2a"],
+            ["#ffffff", "#6e6d69", "#1a1a1a"],
+            ["#d3d1c7", "#9a9993", "#444441"],
+            ["#f1efe8", "#5f5e5a", "#0e0e0e"],
+          ].map(([a, b, d]) => {
+            const S = 64;
+            const s = document.createElement("canvas");
+            s.width = s.height = S;
+            const x = s.getContext("2d");
+            const g = x.createLinearGradient(0, 0, S, S);
+            g.addColorStop(0, a);
+            g.addColorStop(0.42, b);
+            g.addColorStop(0.5, "#ffffff");
+            g.addColorStop(0.62, b);
+            g.addColorStop(1, d);
+            x.translate(S / 2, S / 2);
+            x.beginPath();
+            const R = S / 2 - 1,
+              r = S * 0.07;
+            for (let i = 0; i < 8; i++) {
+              const ang = (i * Math.PI) / 4 - Math.PI / 2;
+              const rad = i % 2 ? r : R;
+              x.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+            }
+            x.closePath();
+            x.fillStyle = g;
+            x.fill();
+            x.lineWidth = 1.2;
+            x.strokeStyle = "rgba(20,20,20,0.55)";
+            x.stroke();
+            return s;
+          });
+
+          const stars = [];
+          const spawn = (x, y, burst) => {
+            if (reduced) return;
+            const a = burst
+              ? Math.random() * Math.PI * 2
+              : Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+            const sp = burst
+              ? 2 + Math.random() * 3
+              : 0.4 + Math.random() * 0.9;
+            stars.push({
+              x,
+              y,
+              vx: Math.cos(a) * sp,
+              vy: Math.sin(a) * sp,
+              size: (burst ? 12 : 9) + Math.random() * 11,
+              rot: Math.random() * Math.PI,
+              vr: (Math.random() - 0.5) * 0.12,
+              life: 1,
+              decay: 0.011 + Math.random() * 0.009,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+            if (stars.length > maxStars) stars.shift();
+          };
+
+          let mx = -100,
+            my = -100,
+            rx = -100,
+            ry = -100;
+          let lastX = null,
+            lastY = null,
+            travel = 0;
+          let mode = "default";
+          let trail = true;
+          let shown = false;
+
+          const label = document.createElement("div");
+          label.className = "cursor-label";
+          label.setAttribute("aria-hidden", "true");
+          document.body.appendChild(label);
+          const labelFor = (hit) => {
+            const own = hit.closest("[data-cursor-label]");
+            if (own) return own.getAttribute("data-cursor-label");
+            if (hit.closest(".hang-tag"))
+              return hit.closest(".hang-tag").classList.contains("is-flipped")
+                ? "Flip back"
+                : "Flip me";
+            if (hit.closest(".project-card")) return "See the project";
+            if (hit.closest(".tl-filter")) return "Show";
+            if (hit.closest(".navbar-brand"))
+              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+                ? "Back to top"
+                : "Home";
+            const a = hit.closest("a");
+            if (a) {
+              const href = a.getAttribute("href") || "";
+              if (href.startsWith("mailto:")) return "Say hi";
+              if (/linkedin/i.test(href)) return "Let\u2019s connect";
+              if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
+              if (href.startsWith("#")) return "Take me there";
+              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              return "Go";
+            }
+            if (hit.closest(".navbar-toggler")) return "Menu";
+            return "Click";
+          };
+          let labelText = "";
+          const setLabel = (t) => {
+            if (t === labelText) return;
+            labelText = t;
+            if (t) label.textContent = t; // keep old text while it fades out
+            label.classList.toggle("has-text", !!t);
+          };
+
+          const setMode = (target) => {
+            const el = target && target.closest ? target : null;
+            const hit = el && el.closest(CLICKABLE);
+            const link = !!hit;
+            setLabel(hit ? labelFor(el) : "");
+            const next = link ? "link" : "default";
+            if (next !== mode) {
+              mode = next;
+              document.body.classList.toggle("hovering", link); // keeps your existing CSS hook
+              document.body.classList.toggle("cursor-link", link);
+            }
+            trail = !link && !(el && el.closest("[data-no-stars]"));
+            document.body.classList.toggle(
+              "cursor-dark",
+              !!(el && el.closest('[data-cursor-theme="dark"]')),
+            );
+          };
+
+          const onMove = (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (!shown) {
+              shown = true;
+              rx = mx;
+              ry = my;
+              document.body.classList.add("cursor-visible");
+            }
+            setMode(e.target);
+            dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            label.style.transform = `translate3d(${mx + 12}px, ${my + 14}px, 0)`;
+            if (trail && lastX !== null) {
+              travel += Math.hypot(mx - lastX, my - lastY);
+              while (travel > spacing) {
+                travel -= spacing;
+                spawn(
+                  mx + (Math.random() - 0.5) * 6,
+                  my + (Math.random() - 0.5) * 6,
+                );
+              }
+            }
+            lastX = mx;
+            lastY = my;
+          };
+          const onDown = (e) => {
+            document.body.classList.add("cursor-press");
+            if (trail)
+              for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
+          };
+          const onUp = () => {
+            document.body.classList.remove("cursor-press");
+            // a click can change what the label should say (e.g. a tag flipping)
+            setTimeout(() => setMode(document.elementFromPoint(mx, my)), 0);
+          };
+          const onLeave = () => {
+            shown = false;
+            lastX = null;
+            document.body.classList.remove("cursor-visible");
+          };
+          // Re-check what's under the cursor after scroll (links move under a still mouse).
+          const onScroll = () => {
+            if (!shown) return;
+            setMode(document.elementFromPoint(mx, my));
+          };
+
+          document.addEventListener("pointermove", onMove, { passive: true });
+          document.addEventListener("pointerdown", onDown);
+          document.addEventListener("pointerup", onUp);
+          document.documentElement.addEventListener("mouseleave", onLeave);
+          window.addEventListener("scroll", onScroll, { passive: true });
+
+          let raf = 0;
+          const loop = () => {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+
+            ctx.clearRect(0, 0, W, H);
+            for (let i = stars.length - 1; i >= 0; i--) {
+              const s = stars[i];
+              s.x += s.vx;
+              s.y += s.vy;
+              s.vx *= 0.96;
+              s.vy = s.vy * 0.96 + 0.04;
+              s.rot += s.vr;
+              s.life -= s.decay;
+              if (s.life <= 0) {
+                stars.splice(i, 1);
+                continue;
+              }
+              const k = s.life;
+              const sz = s.size * (0.35 + 0.65 * k);
+              ctx.save();
+              ctx.globalAlpha = Math.min(1, k * 1.4);
+              ctx.translate(s.x, s.y);
+              ctx.rotate(s.rot);
+              ctx.drawImage(s.sprite, -sz / 2, -sz / 2, sz, sz);
+              ctx.restore();
+            }
+            raf = requestAnimationFrame(loop);
+          };
+          loop();
+
+          return () => {
+            cancelAnimationFrame(raf);
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerdown", onDown);
+            document.removeEventListener("pointerup", onUp);
+            document.documentElement.removeEventListener("mouseleave", onLeave);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", resize);
+            c.remove();
+          };
+        }
+
+        window.initChromeCursor = initChromeCursor;
+      })();
+    </script>
+    <script>
+      initChromeCursor();
+
+      // soundtrack: nothing plays until someone clicks. Then it keeps playing
+      // in a small player in the corner while they scroll the case study.
+      (function () {
+        const song = document.querySelector(".cs-song");
+        if (!song) return;
+        const btn = song.querySelector(".cs-song-btn");
+        const title = song.querySelector(".cs-song-text strong").textContent;
+        const artist = song.querySelector(".cs-song-text").textContent.split("·").pop().trim();
+        const getId = () => ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) || [])[1];
+        let id = null;
+        let controller = null, dock = null, playing = false;
+
+        const setPlaying = (on) => {
+          playing = on;
+          song.classList.toggle("is-playing", on);
+          if (dock) dock.classList.toggle("is-playing", on);
+          btn.setAttribute("aria-pressed", String(on));
+          btn.setAttribute("data-cursor-label", on ? "Pause" : "Play");
+        };
+
+        // the Spotify player opens right under the chip (no floating box)
+        // and keeps playing while the page scrolls
+        const buildDock = () => {
+          dock = document.createElement("div");
+          dock.className = "cs-inline-player";
+          dock.innerHTML = '<div id="csSpotify"></div>';
+          song.appendChild(dock);
+          requestAnimationFrame(() => dock.classList.add("is-shown"));
+        };
+
+        const start = () => {
+          window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            IFrameAPI.createController(
+              document.getElementById("csSpotify"),
+              { uri: "spotify:track:" + id, width: "100%", height: 80 },
+              (c) => {
+                controller = c;
+                c.addListener("playback_update", (e) => setPlaying(!e.data.isPaused));
+                c.addListener("ready", () => c.play());
+              },
+            );
+          };
+          const sc = document.createElement("script");
+          sc.src = "https://open.spotify.com/embed/iframe-api/v1";
+          sc.async = true;
+          document.body.appendChild(sc);
+        };
+
+        btn.addEventListener("click", () => {
+          id = getId();
+          if (!id) {
+            // no song link pasted yet: open it on Spotify instead
+            window.open("https://open.spotify.com/search/" + encodeURIComponent(song.dataset.search || ""), "_blank", "noopener");
+            return;
+          }
+          if (!dock) {
+            buildDock();
+            start();
+            return;
+          }
+          if (controller) controller.togglePlay();
+        });
+      })();
+
+      // journey map: draw the mood line when it comes into view
+      const journey = document.querySelector(".journey");
+      if (journey && "IntersectionObserver" in window) {
+        const jo = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) { journey.classList.add("is-in"); jo.disconnect(); }
+        }, { threshold: 0.4 });
+        jo.observe(journey);
+      } else if (journey) journey.classList.add("is-in");
+
+      // highlight the section you're reading in the sticky contents
+      const sections = document.querySelectorAll(".section[id]");
+      const links = document.querySelectorAll(".sidebar-link");
+      function updateActive() {
+        let current = sections[0] ? sections[0].id : "";
+        sections.forEach((sec) => {
+          if (sec.getBoundingClientRect().top <= 180) current = sec.id;
+        });
+        links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + current));
+      }
+      window.addEventListener("scroll", updateActive, { passive: true });
+      updateActive();
+    </script>
+  </body>
 </html>

@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boozy Treats — Rachel Chen</title>
+    <title>Boozy Treats · Rachel Chen</title>
+    <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -11,21 +12,1027 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="boozy.css" />
-    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
-</head>
-  <body class="boozy-page">
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="ring"></div>
+    <link rel="stylesheet" href="align.css" />
+    <style>
+      /* chrome-star cursor, same as the home page */
+      /* ---------- chrome cursor ---------- */
+      /* Only hide the system cursor when the custom one is running
+   (touch devices keep their normal behaviour). */
+      * {
+        cursor: auto;
+      }
+      html.chrome-cursor,
+      html.chrome-cursor * {
+        cursor: none !important;
+      }
+      html.native-cursor .cursor,
+      html.native-cursor .cursor-ring {
+        display: none;
+      }
 
-    <!-- NAV -->
+      .cursor,
+      .cursor-ring {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        will-change: transform;
+      }
+      body.cursor-visible .cursor,
+      body.cursor-visible .cursor-ring {
+        opacity: 1;
+      }
+
+      .cursor {
+        transition:
+          width 0.25s,
+          height 0.25s,
+          background 0.25s,
+          opacity 0.2s;
+      }
+      .cursor-ring {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+          border-color 0.3s,
+          background 0.3s,
+          opacity 0.2s;
+      }
+      .cursor-arrow {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: #0e0e0e;
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0;
+        transform: scale(0.4) rotate(-45deg);
+        transition:
+          opacity 0.25s,
+          transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* link state: the dot disappears, the ring becomes a chrome lens with an arrow */
+      body.cursor-link .cursor {
+        width: 0;
+        height: 0;
+      }
+      body.cursor-link .cursor-ring.__old {
+        border: 1px solid transparent;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82))
+            padding-box,
+          linear-gradient(
+              135deg,
+              #c8c8c8 0%,
+              #ffffff 22%,
+              #7a7a7a 42%,
+              #f2f2f2 58%,
+              #5a5a5a 78%,
+              #d8d8d8 100%
+            )
+            border-box;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+      }
+      body.cursor-link .cursor-arrow {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      body.cursor-press .cursor-ring {
+        width: 24px;
+        height: 24px;
+      }
+      body.cursor-link.cursor-press .cursor-ring {
+        width: 48px;
+        height: 48px;
+      }
+
+      /* over the dark sequin band */
+      body.cursor-dark:not(.cursor-link) .cursor {
+        background: #f0efeb;
+      }
+      body.cursor-dark:not(.cursor-link) .cursor-ring {
+        border-color: rgba(240, 239, 235, 0.45);
+      }
+
+      /* star trail canvas */
+      .cursor-stars {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 9997;
+      }
+
+      /* ---------- hover label: the cursor tells you what a click does ---------- */
+      .cursor-label {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+        pointer-events: none;
+        padding: 7px 12px 7px 11px;
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Inter Tight", "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.12s linear;
+        will-change: transform;
+      }
+      body.cursor-link .cursor-label.has-text {
+        opacity: 1;
+      }
+      /* in link state: the ring simply fades (no resizing, so nothing bounces);
+         the dot stays the same size at the exact click point */
+      body.cursor-link .cursor-ring,
+      body.cursor-press .cursor-ring {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      body.cursor-link .cursor-ring {
+        opacity: 0 !important;
+        transition: opacity 0.12s linear !important;
+      }
+      body.cursor-link .cursor {
+        width: 9px !important;
+        height: 9px !important;
+        background: #0a0a0a !important;
+        transition: none !important;
+      }
+      body.cursor-link .cursor-arrow {
+        display: none;
+      }
+    </style>
+    <script
+      src="https://cdn.databuddy.cc/databuddy.js"
+      data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
+      data-track-web-vitals="true"
+      data-track-errors="true"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <!-- site-wide look: keep this as the last stylesheet -->
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      /* ============================================================
+         Align case study, in the home page style:
+         black and white, big grotesk titles, no rules, no eyebrows,
+         one left edge (80px), sticky contents on the left.
+         ============================================================ */
+      :root {
+        --crimson: #8b1a1a; /* Align's brand red, used as this case study's accent */
+        --blush: #f7f1ee;
+      }
+      body.align-page {
+        background: #fff !important;
+        color: #0a0a0a;
+      }
+
+      /* hero */
+      .cs-hero {
+        padding: 240px 80px 0;
+      }
+      .cs-title .cs-a {
+        color: inherit;
+      }
+      .cs-title {
+        font-family: var(--display) !important;
+        font-size: clamp(3.5rem, 9vw, 9rem) !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.05em !important;
+        line-height: 0.88 !important;
+        margin: 0 0 2.2rem;
+        color: #0a0a0a;
+      }
+      .cs-lede {
+        max-width: 36rem;
+        margin: 0;
+        font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+        line-height: 1.5;
+        color: #0a0a0a;
+      }
+      .cs-facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin: 3.5rem 0 0;
+      }
+      .cs-fact-label {
+        display: block;
+        font-size: 0.85rem;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+      .cs-fact-value {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.5;
+        color: #0a0a0a;
+      }
+      .cs-cover {
+        margin: 3.5rem 80px 0;
+      }
+      .cs-cover img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      /* soundtrack chip */
+      .cs-song {
+        margin-top: 1.8rem;
+      }
+      .cs-song-btn {
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 18px 8px 8px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--blush);
+        color: #0a0a0a;
+        font: inherit;
+        font-size: 0.95rem;
+        transition: background 0.25s;
+      }
+      .cs-song-btn:hover {
+        background: #f1e6e1;
+      }
+      .cs-song-btn strong {
+        font-weight: 500;
+      }
+      /* little iridescent CD */
+      .cs-cd {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        flex: none;
+        border-radius: 50%;
+        background:
+          radial-gradient(
+            circle,
+            #fff 0 3px,
+            #d9d9d9 3.5px 6px,
+            rgba(255, 255, 255, 0.35) 6.5px 7.5px,
+            transparent 8px
+          ),
+          conic-gradient(
+            from 20deg,
+            #e9e9e9,
+            #cdeeff,
+            #f4d3ff,
+            #fff2c2,
+            #d1ffe0,
+            #cfe2ff,
+            #ffd6e8,
+            #e9e9e9
+          );
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+      }
+      .cs-cd::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.7),
+          transparent 45%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.5)
+        );
+      }
+      .is-playing .cs-cd {
+        animation: cs-spin 2.4s linear infinite;
+      }
+      @keyframes cs-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .cs-song-btn .cs-song-state {
+        color: #8a6f68;
+      }
+
+      /* the player opens right under the chip */
+      .cs-inline-player {
+        max-width: 420px;
+        margin-top: 12px;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition:
+          opacity 0.3s ease,
+          transform 0.35s ease;
+      }
+      .cs-inline-player.is-shown {
+        opacity: 1;
+        transform: none;
+      }
+      .cs-inline-player iframe {
+        display: block;
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+      }
+
+      /* layout: sticky contents + story */
+      .case-study {
+        margin-top: 2rem;
+      }
+      .sidebar {
+        border: 0 !important;
+        padding: 3rem 1.5rem 3rem 80px !important;
+      }
+      .sidebar-link {
+        border: 0 !important;
+        padding: 0.45rem 0 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        line-height: 1.3 !important;
+        color: #9a9a9a !important;
+      }
+      .sidebar-link:hover,
+      .sidebar-link.active {
+        color: #0a0a0a !important;
+      }
+      .sidebar-back {
+        margin-top: 2rem !important;
+        font-size: 0.9rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        color: #6b6b6b !important;
+      }
+      .sidebar-back::before {
+        content: "\2190" !important;
+      }
+      .content {
+        padding: 3rem 80px 5rem 40px !important;
+        max-width: 1100px;
+      }
+      .section {
+        margin-bottom: 7rem !important;
+        scroll-margin-top: 110px;
+      }
+      .section-title {
+        font-family: var(--display) !important;
+        font-size: clamp(2rem, 3.4vw, 3.1rem) !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+        letter-spacing: -0.04em !important;
+        line-height: 1.02 !important;
+        margin: 0 0 1.6rem !important;
+        max-width: 22ch;
+        color: #0a0a0a !important;
+      }
+      .section-title em {
+        font-style: normal !important;
+        color: var(--crimson) !important;
+      }
+      .section-body {
+        max-width: 700px !important;
+        font-size: 1.05rem !important;
+        line-height: 1.7 !important;
+        color: #333 !important;
+      }
+      .section-body p {
+        margin: 0;
+      }
+      .section-body p + p {
+        margin-top: 1.1rem;
+      }
+      .cs-quote {
+        position: relative;
+        max-width: 820px;
+        margin: 3.5rem 0 0;
+        padding-left: 3.2rem;
+        font-family: var(--display) !important;
+        font-size: clamp(1.3rem, 2vw, 1.7rem) !important;
+        letter-spacing: -0.03em !important;
+        line-height: 1.3 !important;
+        color: #0a0a0a;
+      }
+
+      /* images: no frames, no lines */
+      .cs-img {
+        margin: 2.5rem 0 0;
+      }
+      .cs-img img,
+      .cs-img video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        background: #f4f4f4;
+      }
+      .cs-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin: 2.5rem 0 0;
+        align-items: start;
+      }
+      .cs-pair .cs-img {
+        margin: 0;
+      }
+      .cs-pair video {
+        max-height: 78vh;
+        object-fit: contain;
+      }
+      .cs-caption {
+        margin: 10px 0 0;
+        font-size: 0.9rem;
+        color: #6b6b6b;
+      }
+      /* process images stay small on purpose */
+      .cs-pair.is-small {
+        max-width: 640px;
+      }
+
+      /* big crimson quote mark */
+      .cs-mark {
+        position: absolute;
+        left: 0;
+        top: -0.2em;
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 5rem;
+        line-height: 1;
+        color: var(--crimson);
+      }
+      .cs-quote em {
+        font-style: normal;
+        color: var(--crimson);
+      }
+
+      /* journey map */
+      .journey {
+        margin: 3.5rem 0 0;
+        padding: 2.2rem 2.2rem 1.8rem;
+        background: var(--blush);
+        border-radius: 12px;
+      }
+      .journey-mood {
+        position: relative;
+        height: 120px;
+        margin: 0 0 1.4rem;
+      }
+      .journey-mood svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .journey-mood path {
+        fill: none;
+        stroke: var(--crimson);
+        stroke-width: 2;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 1400;
+        stroke-dashoffset: 1400;
+        transition: stroke-dashoffset 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .journey.is-in .journey-mood path {
+        stroke-dashoffset: 0;
+      }
+      .journey-dot {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        margin: -7px 0 0 -7px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--crimson);
+      }
+      .journey-dot.is-low {
+        background: var(--crimson);
+      }
+      .journey-axis-top,
+      .journey-axis-bottom {
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+        color: #8a7a74;
+      }
+      .journey-axis-top {
+        top: 4px;
+      }
+      .journey-axis-bottom {
+        bottom: 0;
+      }
+      .journey-steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1rem;
+        counter-reset: step;
+      }
+      .journey-steps li {
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        color: #5a4a44;
+      }
+      .journey-steps strong {
+        display: block;
+        margin-bottom: 4px;
+        font-family: var(--display) !important;
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: #0a0a0a;
+      }
+      .journey .cs-caption {
+        margin-top: 1.6rem;
+      }
+
+      /* what I made: four cards that jump to the work */
+      .cs-made {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 2.5rem;
+      }
+      .cs-made-card {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 1.3rem 1.2rem 1.4rem;
+        background: var(--blush);
+        border-radius: 12px;
+        color: #5a4a44;
+        text-decoration: none;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        transition:
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+          background 0.3s;
+      }
+      .cs-made-card:hover {
+        transform: translateY(-3px);
+        background: #f1e6e1;
+      }
+      .cs-made-num {
+        font-family: var(--display) !important;
+        font-size: 1rem;
+        color: var(--crimson);
+      }
+      .cs-made-card strong {
+        font-family: var(--display) !important;
+        font-size: 1.45rem;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: #0a0a0a;
+      }
+      @media (max-width: 900px) {
+        .cs-hero {
+          padding-top: 150px !important;
+        }
+        .cs-made {
+          grid-template-columns: 1fr 1fr;
+        }
+        .journey {
+          padding: 1.5rem 1.2rem;
+        }
+        .journey-mood {
+          display: none;
+        }
+        .journey-steps {
+          grid-template-columns: 1fr;
+          gap: 0.9rem;
+          counter-reset: step;
+        }
+        .journey-steps li {
+          text-align: left;
+          padding-left: 2rem;
+          position: relative;
+        }
+        .journey-steps li::before {
+          counter-increment: step;
+          content: counter(step);
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 50%;
+          background: var(--crimson);
+          color: #fff;
+          font-size: 0.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .cs-mark {
+          font-size: 3.5rem;
+        }
+        .cs-quote {
+          padding-left: 2.4rem;
+        }
+      }
+
+      /* competitive analysis: its own clearly labelled block */
+      .ca {
+        margin-top: 3rem;
+      }
+      .ca-title {
+        font-family: var(--display) !important;
+        font-size: 1.6rem !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.03em !important;
+        margin: 0 0 0.4rem;
+        color: #0a0a0a;
+      }
+      .ca-intro {
+        margin: 0 0 1.6rem;
+        font-size: 1rem;
+        color: #6b6b6b;
+      }
+      .ca-table {
+        display: grid;
+        grid-template-columns: 1.1fr repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .ca-labels,
+      .ca-col {
+        display: grid;
+        grid-template-rows: auto 1fr 1fr auto;
+        gap: 0;
+      }
+      .ca-col {
+        background: #f6f6f6;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .ca-col.is-align {
+        background: var(--blush);
+        box-shadow: inset 0 0 0 1.5px var(--crimson);
+      }
+      .ca-name {
+        padding: 1rem 1.1rem 0.6rem;
+        font-family: var(--display) !important;
+        font-size: 1.35rem;
+        letter-spacing: -0.03em;
+        color: #0a0a0a;
+      }
+      .ca-col.is-align .ca-name {
+        color: var(--crimson);
+      }
+      .ca-cell {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.93rem;
+        line-height: 1.45;
+        color: #333;
+      }
+      .ca-labels .ca-cell {
+        padding-left: 0;
+        color: #6b6b6b;
+        font-size: 0.88rem;
+      }
+      .ca-rowlabel {
+        display: none;
+      }
+      .ca-no,
+      .ca-yes {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+      .ca-no {
+        background: #e9e9e9;
+        color: #555;
+      }
+      .ca-yes {
+        background: var(--crimson);
+        color: #fff;
+      }
+      @media (max-width: 900px) {
+        .ca-table {
+          grid-template-columns: 1fr;
+        }
+        .ca-labels {
+          display: none;
+        }
+        .ca-col {
+          grid-template-rows: none;
+        }
+        .ca-cell {
+          padding: 0.35rem 1.1rem;
+        }
+        .ca-cell:last-child {
+          padding-bottom: 1rem;
+        }
+        .ca-rowlabel {
+          display: block;
+          font-size: 0.8rem;
+          color: #8a8a8a;
+        }
+      }
+
+      /* competitors */
+      .cs-compare {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+      }
+      .cs-compare h3 {
+        font-family: var(--display) !important;
+        font-size: 1.5rem !important;
+        letter-spacing: -0.03em !important;
+        font-weight: 400 !important;
+        margin: 0 0 0.9rem;
+      }
+      .cs-compare p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #333;
+      }
+      .cs-compare p + p {
+        margin-top: 0.6rem;
+      }
+      .cs-compare strong {
+        font-weight: 500;
+        color: #0a0a0a;
+      }
+      .cs-gap {
+        max-width: 640px;
+        margin: 2.5rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #0a0a0a;
+      }
+
+      /* decisions: learned, designed, solves (no lines) */
+      .decisions {
+        margin-top: 2.5rem;
+      }
+      .decision-head,
+      .decision {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(
+            0,
+            1fr
+          );
+        gap: 1.75rem;
+        align-items: start;
+      }
+      .decision-head {
+        padding-bottom: 0.6rem;
+        font-size: 0.85rem;
+        color: #6b6b6b;
+      }
+      .decision-head span:first-child {
+        grid-column: 2;
+      }
+      .decision {
+        padding: 1.4rem 0;
+      }
+      .decision p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #555;
+      }
+      .decision .decision-choice {
+        color: #0a0a0a;
+        font-weight: 500;
+      }
+      .decision-num {
+        font-family: var(--display) !important;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: #0a0a0a;
+      }
+
+      /* what came out of it */
+      .cs-list {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+        max-width: 640px;
+      }
+      .cs-list li {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #0a0a0a;
+        padding: 0.35rem 0;
+      }
+
+      /* next project */
+      .cs-next {
+        margin-top: 2rem;
+      }
+      .cs-next span {
+        display: block;
+        font-size: 0.9rem;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+      .cs-next a {
+        font-family: var(--display) !important;
+        font-size: clamp(2rem, 3.4vw, 3.1rem);
+        letter-spacing: -0.04em;
+        color: #0a0a0a;
+        text-decoration: none;
+      }
+
+      @media (max-width: 900px) {
+        .cs-hero {
+          padding: 120px 20px 0;
+        }
+        .cs-facts {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2.5rem;
+        }
+        .cs-cover {
+          margin: 2.5rem 20px 0;
+        }
+        .content {
+          padding: 3rem 20px 4rem !important;
+        }
+        .section {
+          margin-bottom: 4.5rem !important;
+        }
+        .cs-pair,
+        .cs-compare {
+          grid-template-columns: 1fr;
+          gap: 1.75rem;
+        }
+        .decision-head {
+          display: none;
+        }
+        .decision {
+          grid-template-columns: 2rem minmax(0, 1fr);
+          gap: 0.45rem 0.75rem;
+        }
+        .decision p {
+          grid-column: 2;
+        }
+        .decision-num {
+          grid-row: 1 / span 3;
+        }
+        .decision-insight::before {
+          content: "Learned: ";
+          color: #0a0a0a;
+        }
+        .decision-choice::before {
+          content: "Designed: ";
+        }
+        .decision-result::before {
+          content: "Solves: ";
+          color: #0a0a0a;
+        }
+      }
+
+      /* ---------- Boozy Treats: burgundy and cream, from the new brand ---------- */
+      :root {
+        --crimson: #8c1c34;
+        --blush: #f8eff0;
+      }
+      .section-title,
+      .cs-quote,
+      .ca-title {
+        text-wrap: balance;
+      }
+      .section-body p {
+        text-wrap: pretty;
+      }
+      .bz-values {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+      }
+      .bz-values li {
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: var(--blush);
+        font-family: var(--display) !important;
+        font-size: 1.15rem;
+        letter-spacing: -0.02em;
+        color: var(--crimson);
+      }
+      .bz-team {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+      }
+      .bz-team li {
+        padding: 1rem 1.1rem;
+        border-radius: 12px;
+        background: #f6f6f6;
+        font-size: 1rem;
+        color: #0a0a0a;
+      }
+      .bz-team li span {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.88rem;
+        color: #6b6b6b;
+      }
+      .bz-team li.is-me {
+        background: var(--crimson);
+        color: #fff;
+      }
+      .bz-team li.is-me span {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .bz-award {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 1.75rem;
+        align-items: center;
+        margin-top: 2.5rem;
+        padding: 2rem 2.2rem;
+        border-radius: 12px;
+        background: var(--blush);
+      }
+      .bz-award .bz-award-place {
+        font-family: var(--display) !important;
+        font-size: clamp(3.5rem, 7vw, 5.5rem);
+        letter-spacing: -0.05em;
+        line-height: 0.9;
+        color: var(--crimson);
+      }
+      .bz-award strong {
+        display: block;
+        font-family: var(--display) !important;
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        color: #0a0a0a;
+      }
+      .bz-award span {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.98rem;
+        color: #555;
+      }
+      .bz-video video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        background: #f4f4f4;
+      }
+      .bz-plan {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+      @media (max-width: 900px) {
+        .bz-team {
+          grid-template-columns: 1fr;
+        }
+        .bz-plan {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .bz-award {
+          grid-template-columns: 1fr;
+          gap: 0.8rem;
+          padding: 1.5rem 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="align-page boozy-page" id="page-top">
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container nav-container">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/LOGO.png" alt="Logo" style="height: 70px" />
+          <img
+            src="assets/LOGO.png"
+            alt="Rachel Chen home"
+            style="height: 100px"
+          />
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -50,7 +1057,7 @@
               <a class="nav-link" href="creative.html">Creative</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:chen.rachel1@northeastern.edu"
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com"
                 >Contact</a
               >
             </li>
@@ -60,594 +1067,791 @@
     </nav>
 
     <!-- HERO -->
-    <div class="hero">
-      <div class="hero-eyebrow">
-        <div class="hero-eyebrow-line"></div>
-        <span class="hero-eyebrow-text"
-          >Brand Strategy · Visual Rebrand · Web Design · March 2025</span
-        >
-      </div>
-      <h1 class="boozy-title">Boozy Treats.</h1>
-      <div class="hero-rule"></div>
-      <div class="hero-strip">
-        <div class="meta-block">
-          <span class="meta-label">Role</span>
-          <span class="meta-value">Web Designer</span>
-        </div>
-        <div class="meta-block">
-          <span class="meta-label">Team</span>
-          <span class="meta-value"
-            >Cami MacMillin<br />Rachel Chen<br />Ruhri Lee</span
-          >
-        </div>
-        <div class="meta-block">
-          <span class="meta-label">Tools</span>
-          <span class="meta-value">Figma · Web Design<br />Brand Strategy</span>
-        </div>
-        <div class="meta-block">
-          <span class="meta-label">Type</span>
-          <span class="meta-value">Rebrand ·<br />Marketing Strategy</span>
-        </div>
-      </div>
-      <p class="hero-tagline">
-        A complete rebrand for Boozy Treats - handcrafted alcohol-infused
-        gummies - moving from playful pastels to a mature, upscale identity that
-        still brings the fun.
+    <header class="cs-hero">
+      <h1 class="cs-title">Boozy Treats</h1>
+      <p class="cs-lede">
+        A rebrand for handmade, alcohol infused gummies, taking them from
+        playful pastels to something more grown up, without losing the fun.
       </p>
-    </div>
+      <!-- soundtrack: the Spotify song link lives in data-spotify.
+           Put the song title and artist in the <strong> below. -->
+      <div
+        class="cs-song"
+        data-spotify="https://open.spotify.com/track/5wDAjZj8V36iuCuT0KsBmz"
+        data-search=""
+      >
+        <button
+          type="button"
+          class="cs-song-btn"
+          aria-expanded="false"
+          data-cursor-label="Play"
+        >
+          <span class="cs-cd" aria-hidden="true"></span>
+          <span class="cs-song-text"
+            >On repeat while making this: <strong>AM:PM</strong> · NOTD</span
+          >
+        </button>
+      </div>
 
-    <!-- HERO IMAGE -->
-    <div class="hero-showcase">
-      <img src="assets/btreats.png" alt="Boozy Treats Rebrand" />
-    </div>
+      <div class="cs-facts">
+        <div>
+          <span class="cs-fact-label">My role</span>
+          <p class="cs-fact-value">
+            Web designer, and I led the website redesign
+          </p>
+        </div>
+        <div>
+          <span class="cs-fact-label">When</span>
+          <p class="cs-fact-value">March 2025</p>
+        </div>
+        <div>
+          <span class="cs-fact-label">Team</span>
+          <p class="cs-fact-value">Cami MacMillin, Rachel Chen, Ruhri Lee</p>
+        </div>
+        <div>
+          <span class="cs-fact-label">Result</span>
+          <p class="cs-fact-value">
+            2nd place and $1,200 at CAMD Beyond the Logo
+          </p>
+        </div>
+      </div>
+    </header>
 
-    <!-- CASE STUDY -->
+    <figure class="cs-cover">
+      <img src="assets/btreats.png" alt="The Boozy Treats rebrand" />
+    </figure>
+
     <div class="case-study">
       <aside class="sidebar">
-        <span class="sidebar-label">Contents</span>
-        <nav class="sidebar-nav">
-          <a href="#overview" class="sidebar-link active">01. Overview</a>
-          <a href="#company" class="sidebar-link">02. The Company</a>
-          <a href="#strategy" class="sidebar-link">03. Brand Strategy</a>
-          <a href="#audience" class="sidebar-link">04. Audience</a>
-          <a href="#visual" class="sidebar-link">05. Visual Rebrand</a>
-          <a href="#website" class="sidebar-link">06. Website</a>
-          <a href="#marketing" class="sidebar-link">07. Marketing Plan</a>
-          <a href="#awards" class="sidebar-link">08. Awards</a>
+        <nav class="sidebar-nav" aria-label="Case study sections">
+          <a href="#bettina" class="sidebar-link active">Meeting Bettina</a>
+          <a href="#problem" class="sidebar-link">What needed to change</a>
+          <a href="#audience" class="sidebar-link">Who it’s for</a>
+          <a href="#look" class="sidebar-link">The new look</a>
+          <a href="#website" class="sidebar-link">The website</a>
+          <a href="#marketing" class="sidebar-link">The marketing plan</a>
+          <a href="#won" class="sidebar-link">We won</a>
         </nav>
         <a href="index.html#work" class="sidebar-back">Back to work</a>
       </aside>
 
       <main class="content">
-        <!-- 01 OVERVIEW -->
-        <section class="section" id="overview">
-          <div class="section-label">01 - Overview</div>
-          <h2 class="section-title">From pastel to <em>premium.</em></h2>
-          <div class="section-body">
-            <p>
-              Boozy Treats needed a full rebrand, the existing identity used
-              pastel gradients that felt playful but didn't communicate that
-              this was a premium adult product. The goal was to move toward a
-              more mature, upscale feel while keeping the brand's core joy and
-              indulgence.
-            </p>
-            <p>
-              Working as a team of three, we tackled brand strategy, visual
-              identity, web design, and a 4-week social media marketing plan.
-            </p>
-          </div>
-          <div class="deliverables">
-            <div class="deliverable-item">
-              <span class="deliverable-num">01</span
-              ><span class="deliverable-name">Logo Redesign</span>
-            </div>
-            <div class="deliverable-item">
-              <span class="deliverable-num">02</span
-              ><span class="deliverable-name">Brand Book</span>
-            </div>
-            <div class="deliverable-item">
-              <span class="deliverable-num">03</span
-              ><span class="deliverable-name">Website Redesign</span>
-            </div>
-            <div class="deliverable-item">
-              <span class="deliverable-num">04</span
-              ><span class="deliverable-name">Marketing Plan</span>
-            </div>
-            <div class="deliverable-item">
-              <span class="deliverable-num">05</span
-              ><span class="deliverable-name">Merch Design</span>
-            </div>
-            <div class="deliverable-item">
-              <span class="deliverable-num">06</span
-              ><span class="deliverable-name">Social Media Strategy</span>
-            </div>
-          </div>
-
-          <div class="team-grid">
-            <div class="team-block">
-              <div class="team-label">Camille MacMillin</div>
-              <div class="team-value">Graphic Designer</div>
-            </div>
-            <div class="team-block">
-              <div class="team-label">Rachel Chen</div>
-              <div class="team-value">Web Designer</div>
-            </div>
-            <div class="team-block">
-              <div class="team-label">Ruhri Lee</div>
-              <div class="team-value">Marketing Strategist</div>
-            </div>
-          </div>
-        </section>
-
-        <div class="section-rule"></div>
-
-        <!-- 02 THE COMPANY -->
-        <section class="section" id="company">
-          <div class="section-label">02 - The Company</div>
+        <!-- BETTINA -->
+        <section class="section" id="bettina">
           <h2 class="section-title">
-            Nostalgia with a <em>grown-up twist.</em>
+            Meeting the sweetest <em>client ever.</em>
           </h2>
           <div class="section-body">
             <p>
-              Boozy Treats brings nostalgia with a grown-up twist: handmade
-              gummies infused with real alcohol. Founded by Bettina Slaughter
-              during the pandemic, what started as a passion project has become
-              a go-to for fun, flavorful indulgence.
+              Boozy Treats makes handmade gummies infused with real alcohol,
+              kind of like nostalgia with a grown up twist. It was started by
+              Bettina Slaughter during the pandemic as a side hustle, just
+              because she genuinely loves making them, and it’s grown into a go
+              to for fun, flavorful treats. She even dreams of opening a classic
+              candy shop on Chicago’s South Side someday, so kids have a safe
+              place to enjoy treats too.
             </p>
             <p>
-              While crafting boozy sweets for adults, Bettina also dreams of
-              opening a traditional candy shop on Chicago's South Side, giving
-              kids a safe space to enjoy classic treats. Every bite is made with
-              care, creativity, and a splash of spirits. Must be 21+ to enjoy.
+              We met with her every single week. She lives in Chicago, so it was
+              all virtual, but she was honestly the sweetest person ever.
+              Hearing her story and her background, and seeing how much she
+              cares about what she makes, made it such a joy to work with her.
             </p>
           </div>
-
-          <div class="callout">
-            <p>
-              Boozy Treats fills the gap for fun, flavorful, high-quality
-              alcohol-infused candies - an exciting way for adults to enjoy a
-              treat that blends nostalgia with indulgence.
-            </p>
-          </div>
-
-          <div class="values-grid">
-            <div class="value-item">
-              <div class="value-word">Creativity</div>
-            </div>
-            <div class="value-item">
-              <div class="value-word">Quality</div>
-            </div>
-            <div class="value-item">
-              <div class="value-word">Community</div>
-            </div>
-            <div class="value-item">
-              <div class="value-word">Joy</div>
-            </div>
-          </div>
+          <p class="cs-quote">
+            <span class="cs-mark" aria-hidden="true">“</span>Every bite is made
+            with care, creativity, and a splash of <em>spirits.</em>”
+          </p>
+          <ul class="bz-values" aria-label="Brand values">
+            <li>Creativity</li>
+            <li>Quality</li>
+            <li>Community</li>
+            <li>Joy</li>
+          </ul>
+          <ul class="bz-team" aria-label="Team">
+            <li>Cami MacMillin<span>Graphic designer</span></li>
+            <li class="is-me">Rachel Chen (me)<span>Web designer</span></li>
+            <li>Ruhri Lee<span>Marketing strategist</span></li>
+          </ul>
         </section>
 
-        <div class="section-rule"></div>
-
-        <!-- 03 BRAND STRATEGY -->
-        <section class="section" id="strategy">
-          <div class="section-label">03 - Brand Strategy</div>
-          <h2 class="section-title">Existing <em>visuals.</em></h2>
+        <!-- PROBLEM -->
+        <section class="section" id="problem">
+          <h2 class="section-title">
+            Fun, but not quite <em>grown up yet.</em>
+          </h2>
           <div class="section-body">
             <p>
-              The brand before used many pastel gradients, giving a very playful
-              personality. The rebrand goal was to move toward a more mature
-              color palette indicating this is a product for adults - while
-              keeping an aspect of fun indulgence through the brand identity.
+              The old brand used a lot of pastel gradients. It felt playful, but
+              it didn’t really tell you this was a premium product for adults.
+              There was also a lot of confusion about the name, since the old
+              logo made it look like the brand was called “Be Delicious Sweets”
+              instead of Boozy Treats.
+            </p>
+            <p>
+              So our goal was to make it feel more mature and upscale, while
+              keeping the joy that makes Boozy Treats, Boozy Treats.
             </p>
           </div>
-
-          <div class="process-steps">
-            <div class="step">
-              <div class="step-num">Goal 01</div>
-              <div class="step-title">Color Refinement</div>
-              <div class="step-body">
-                Moving from pastel gradients to a rich, deep color palette -
-                burgundy and cream - that signals premium quality.
-              </div>
+          <figure class="cs-img">
+            <img src="assets/before.png" alt="The old Boozy Treats branding" />
+            <figcaption class="cs-caption">
+              The brand before the rebrand
+            </figcaption>
+          </figure>
+          <div class="cs-made bz-plan" style="margin-top: 2.5rem">
+            <div class="cs-made-card">
+              <span class="cs-made-num">01</span><strong>Richer colors</strong
+              ><span
+                >From pastel gradients to a deep burgundy and cream that feels
+                premium.</span
+              >
             </div>
-            <div class="step">
-              <div class="step-num">Goal 02</div>
-              <div class="step-title">Consistent Typography</div>
-              <div class="step-body">
-                Establishing a clear typographic system across logo, packaging,
-                web, and social - eliminating the confusion between "Be
-                Delicious Sweets" and "Boozy Treats."
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">02</span><strong>One clear name</strong
+              ><span
+                >Consistent type everywhere, so nobody wonders what the brand is
+                called.</span
+              >
             </div>
-            <div class="step">
-              <div class="step-num">Goal 03</div>
-              <div class="step-title">Mature Yet Fun Feel</div>
-              <div class="step-body">
-                Replicating the impression of higher-end alcohol brands while
-                keeping the playful, indulgent spirit that makes Boozy Treats
-                unique.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">03</span
+              ><strong>Mature, still fun</strong
+              ><span
+                >The feel of a high end liquor brand, with the playful spirit
+                kept in.</span
+              >
             </div>
           </div>
-
-          <div class="img-block"><img src="assets/before.png" /></div>
         </section>
 
-        <div class="section-rule"></div>
-
-        <!-- 04 AUDIENCE -->
+        <!-- AUDIENCE -->
         <section class="section" id="audience">
-          <div class="section-label">04 - Target Audience</div>
-          <h2 class="section-title">Who we <em>serve.</em></h2>
+          <h2 class="section-title">Who it’s <em>for.</em></h2>
           <div class="section-body">
             <p>
-              Ages 21-45. Urban and suburban professionals, social event-goers,
-              and gift shoppers. Foodies, cocktail enthusiasts, party hosts, and
-              experiential consumers who enjoy premium, artisanal, and novelty
-              treats - and seek unique, Instagram-worthy products.
+              Adults 21 to 45: professionals, party hosts, foodies, cocktail
+              lovers and people shopping for a fun gift. Basically anyone who
+              loves a unique, Instagram worthy treat.
             </p>
           </div>
-
-          <div class="audience-grid">
-            <div class="audience-item">
-              <div class="audience-label">Handcrafted with care</div>
-              <div class="audience-body">
-                Small-batch, artisanal approach sets Boozy Treats apart from
-                generic boozy candies.
-              </div>
+          <div class="cs-made">
+            <div class="cs-made-card">
+              <span class="cs-made-num">01</span><strong>Handmade</strong
+              ><span
+                >Small batches, made with care, not generic boozy candy.</span
+              >
             </div>
-            <div class="audience-item">
-              <div class="audience-label">Creative and Instagrammable</div>
-              <div class="audience-body">
-                Playful branding that enhances social appeal and encourages
-                sharing.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">02</span><strong>Instagrammable</strong
+              ><span>Branding fun enough that people want to share it.</span>
             </div>
-            <div class="audience-item">
-              <div class="audience-label">Authentic alcohol infusion</div>
-              <div class="audience-body">
-                Real liquor, not just artificial flavoring - a genuine adult
-                indulgence.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">03</span><strong>Real alcohol</strong
+              ><span>Real liquor, not just artificial flavoring.</span>
             </div>
-            <div class="audience-item">
-              <div class="audience-label">Inclusive and social</div>
-              <div class="audience-body">
-                Encourages shared experiences and celebrations - perfect for
-                gifting and events.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">04</span
+              ><strong>Made for sharing</strong
+              ><span>Perfect for gifts, parties and celebrations.</span>
             </div>
           </div>
         </section>
 
-        <div class="section-rule"></div>
-
-        <!-- 05 VISUAL REBRAND -->
-        <section class="section" id="visual">
-          <div class="section-label">05 - Visual Rebrand</div>
-          <h2 class="section-title">A new <em>identity.</em></h2>
-          <div class="section-body">
-            <p>
-              A complete logo update was done to establish consistent typography
-              and better align with the brand's goals - leaning into a mature,
-              upscale impression that still incorporates fun. The original logo
-              created confusion as to whether the brand was called "Be Delicious
-              Sweets" or "Boozy Treats."
-            </p>
-            <p>
-              In the new logo, "Boozy Treats" is dramatically scaled up to
-              eliminate this confusion. The founder wanted to replicate
-              higher-end alcohol brands, so an establishment date (Est. 2020)
-              was added - a common device for premium spirits branding.
-            </p>
-          </div>
-
-          <div class="img-half">
-            <div class="img-block"><img src="assets/boozylogos.png" /></div>
-            <div class="img-block"><img src="assets/logoatuse.png" /></div>
-          </div>
-
-          <div class="img-block"><img src="assets/branding.png" /></div>
-
-          <div class="section-body" style="margin-top: 2rem">
-            <p>
-              The merch line, t-shirts and tote bags, was designed for Boozy
-              Treats' presence at farmer's markets and private events.
-              Previously inconsistent branding meant a recognizable image wasn't
-              established. The new merch creates a cohesive, wearable brand
-              presence.
-            </p>
-          </div>
-        </section>
-
-        <div class="section-rule"></div>
-
-        <!-- 06 WEBSITE -->
-        <section class="section" id="website">
-          <div class="section-label">06 - Website Redesign</div>
+        <!-- LOOK -->
+        <section class="section" id="look">
           <h2 class="section-title">
-            Consistent across every <em>touchpoint.</em>
+            A new look that’s a little <em>more grown up.</em>
           </h2>
           <div class="section-body">
             <p>
-              The existing website had inconsistent logos, colors, and
-              navigation. Using the new brand strategy, I redesigned the website
-              to reflect a consistent, premium experience that matches the
-              visual identity across all platforms.
+              In the new logo, “Boozy Treats” is way bigger, so there’s no more
+              confusion about the name. Bettina wanted it to feel like a higher
+              end liquor brand, so we added “Est. 2020,” which is something you
+              see a lot on premium spirits.
+            </p>
+            <p>
+              We also designed merch, like t shirts and tote bags, for her
+              farmers markets and private events, so the brand finally has a
+              look people recognize.
             </p>
           </div>
+          <div class="cs-pair">
+            <figure class="cs-img">
+              <img src="assets/boozylogos.png" alt="Logo before and after" />
+            </figure>
+            <figure class="cs-img">
+              <img src="assets/logoatuse.png" alt="The new logo in use" />
+            </figure>
+          </div>
+          <figure class="cs-img">
+            <img
+              src="assets/branding.png"
+              alt="The new brand system and merch"
+            />
+          </figure>
+        </section>
 
-          <div class="img-block">
+        <!-- WEBSITE -->
+        <section class="section" id="website">
+          <h2 class="section-title">Then I redesigned <em>the website.</em></h2>
+          <div class="section-body">
+            <p>
+              This was my part. The old website had different logos, different
+              colors and confusing navigation, so it didn’t feel like one brand.
+              I redesigned it around the new brand strategy, so it feels just as
+              premium and consistent as everything else, from the logo to the
+              packaging to Instagram.
+            </p>
+          </div>
+          <figure class="cs-img bz-video">
             <video autoplay loop muted playsinline>
               <source src="assets/boozyfinalrecor.mov" type="video/mp4" />
             </video>
-          </div>
+            <figcaption class="cs-caption">The redesigned website</figcaption>
+          </figure>
         </section>
 
-        <div class="section-rule"></div>
-
-        <!-- 07 MARKETING -->
+        <!-- MARKETING -->
         <section class="section" id="marketing">
-          <div class="section-label">07 - Marketing Plan</div>
-          <h2 class="section-title">Four weeks to <em>grow.</em></h2>
+          <h2 class="section-title">Four weeks <em>to grow.</em></h2>
           <div class="section-body">
             <p>
-              A 4-week social media strategy focused on Instagram and TikTok -
-              building brand awareness, driving website traffic, and converting
-              followers into customers.
+              We also put together a four week plan for Instagram and TikTok, to
+              get people to know the brand, visit the website and actually buy.
             </p>
           </div>
-
-          <div class="process-steps">
-            <div class="step">
-              <div class="step-num">Week 01</div>
-              <div class="step-title">Brand Story</div>
-              <div class="step-body">
-                Introduce the brand, showcase the product range, and set the
-                tone with luxurious product reels, carousels, and story polls.
-              </div>
+          <div class="cs-made bz-plan">
+            <div class="cs-made-card">
+              <span class="cs-made-num">Week 1</span
+              ><strong>The brand story</strong
+              ><span
+                >Introduce Boozy Treats with luxe product reels, carousels and
+                story polls.</span
+              >
             </div>
-            <div class="step">
-              <div class="step-num">Week 02</div>
-              <div class="step-title">Engaging Experiences</div>
-              <div class="step-body">
-                Gourmet pairing reels, user-generated content features,
-                giveaways, and behind-the-scenes story series.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">Week 2</span><strong>Experiences</strong
+              ><span
+                >Pairing reels, customer posts, giveaways and behind the
+                scenes.</span
+              >
             </div>
-            <div class="step">
-              <div class="step-num">Week 03</div>
-              <div class="step-title">Lifestyle and Education</div>
-              <div class="step-body">
-                Lifestyle integration content, cocktail-inspired imagery, and
-                infographics explaining how alcohol-infused treats work.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">Week 3</span><strong>Lifestyle</strong
+              ><span
+                >Cocktail inspired photos and posts explaining how the gummies
+                work.</span
+              >
             </div>
-          </div>
-
-          <div class="process-steps" style="margin-top: 1rem">
-            <div class="step">
-              <div class="step-num">Week 04</div>
-              <div class="step-title">Urgency and Conversion</div>
-              <div class="step-body">
-                Limited-edition flavor drops, countdown timers, last-chance
-                CTAs, and testimonial graphics to drive purchases.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">Week 4</span><strong>Buy now</strong
+              ><span
+                >Limited flavor drops, countdowns and customer reviews.</span
+              >
             </div>
-            <div class="step">
-              <div class="step-num">Growth</div>
-              <div class="step-title">Subscriptions and Events</div>
-              <div class="step-body">
-                Monthly subscription boxes, hotel and bar partnerships, and
-                airport gift shop expansion for brand visibility.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">Later</span
+              ><strong>Growing bigger</strong
+              ><span
+                >Subscription boxes, hotel and bar partnerships, and airport
+                gift shops.</span
+              >
             </div>
-            <div class="step">
-              <div class="step-num">Metrics</div>
-              <div class="step-title">Tracking Success</div>
-              <div class="step-body">
-                Follower growth, reach, click-through rates, engagement, and
-                sales conversions via discount code tracking.
-              </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">Tracking</span
+              ><strong>Is it working?</strong
+              ><span
+                >Followers, reach, clicks, engagement and sales through discount
+                codes.</span
+              >
             </div>
           </div>
         </section>
 
-        <div class="section-rule"></div>
-
-        <!-- 08 PRESENTING & AWARDS -->
-        <section class="section" id="awards">
-          <div class="section-label">08 - Presenting & Awards</div>
-          <h2 class="section-title">2nd Place. <em>We won!</em></h2>
+        <!-- WON -->
+        <section class="section" id="won">
+          <h2 class="section-title">2nd place. <em>We won!</em></h2>
           <div class="section-body">
             <p>
-              After weeks of research, strategy, and design, we presented the
-              full Boozy Treats rebrand to a panel of judges, covering brand
-              strategy, visual identity, website redesign, and a 4-week social
-              media plan. The presentation brought together every element of the
-              rebrand into a cohesive, professional pitch.
+              After weeks of meeting with Bettina, researching and designing, we
+              presented the whole rebrand to a panel of judges: the brand
+              strategy, the new look, the website and the marketing plan.
             </p>
             <p>
-              We placed 2nd overall with $1200: a huge win for a project built
-              from scratch in a short timeframe.
+              We placed 2nd overall and won $1,200, which was such a huge win
+              for something we built from scratch in such a short time. Between
+              getting to know Bettina and winning with my team, it was honestly
+              such a great experience.
             </p>
           </div>
-
-          <div class="award-block">
-            <div class="award-place">2nd</div>
-            <div class="award-info">
-              <div class="award-title">
-                2nd Place: Boozy Treats Rebrand Presentation
-              </div>
-              <div class="award-sub">
-                March 2025 · Cami MacMillin, Rachel Chen, Ruhri Lee
-              </div>
+          <div class="bz-award">
+            <span class="bz-award-place">2nd</span>
+            <div>
+              <strong>CAMD Beyond the Logo</strong>
+              <span>March 2025 · Cami MacMillin, Rachel Chen, Ruhri Lee</span>
             </div>
           </div>
-
-          <div class="img-block"><img src="assets/presetingbooz.jpeg" /></div>
-        </section>
-
-        <!-- NEXT PROJECT -->
-        <div class="next-project">
-          <div>
-            <div class="next-label">Next project</div>
-            <a href="ALIGN.html" class="next-title">Align -></a>
+          <figure class="cs-img">
+            <img
+              src="assets/presetingbooz.jpeg"
+              alt="Our team presenting the Boozy Treats rebrand"
+            />
+            <figcaption class="cs-caption">
+              Presenting the rebrand to the judges
+            </figcaption>
+          </figure>
+          <div class="cs-next">
+            <span>Next project</span>
+            <a href="ALIGN.html">Align</a>
           </div>
-          <span class="next-arrow">-></span>
-        </div>
+        </section>
       </main>
     </div>
 
-    <!-- FOOTER -->
-    <footer
-      style="
-        background: #0e0e0e;
-        color: #ccc;
-        font-size: 0.88rem;
-        padding: 2rem 0;
-      "
-    >
-      <div style="max-width: 100%; padding: 0 4rem">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding-top: 2rem;
-          "
-        >
-          <div>
-            <h5
-              style="
-                color: #fff;
-                font-size: 0.8rem;
-                letter-spacing: 0.15em;
-                text-transform: uppercase;
-                margin-bottom: 1rem;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-              "
-            >
-              About
-            </h5>
-            <p
-              style="
-                font-size: 0.82rem;
-                color: #666;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-                font-weight: 300;
-              "
-            >
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-4 aboutfooter">
+            <h5>About</h5>
+            <p class="small">
               A passionate creator blending creativity and technology.<br />Based
               in Los Angeles and Durham.
             </p>
           </div>
-          <div style="text-align: right">
-            <h5
-              style="
-                color: #fff;
-                font-size: 0.8rem;
-                letter-spacing: 0.15em;
-                text-transform: uppercase;
-                margin-bottom: 1rem;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-              "
+          <div class="col-md-4 text-end">
+            <h5>Follow Me</h5>
+            <a
+              href="https://github.com/rachhel"
+              target="_blank"
+              class="text-light me-3"
+              >Github</a
             >
-              Follow Me
-            </h5>
-            <div style="display: flex; gap: 1.5rem; justify-content: flex-end">
-              <a
-                href="https://github.com/rachhel"
-                target="_blank"
-                style="
-                  color: #666;
-                  text-decoration: none;
-                  font-size: 0.82rem;
-                  font-family: &quot;DM Sans&quot;, sans-serif;
-                "
-                onmouseover="this.style.color = '#ddd'"
-                onmouseout="this.style.color = '#666'"
-                >Github</a
-              >
-              <a
-                href="https://www.linkedin.com/in/rachelchen1016/"
-                target="_blank"
-                style="
-                  color: #666;
-                  text-decoration: none;
-                  font-size: 0.82rem;
-                  font-family: &quot;DM Sans&quot;, sans-serif;
-                "
-                onmouseover="this.style.color = '#ddd'"
-                onmouseout="this.style.color = '#666'"
-                >LinkedIn</a
-              >
-              <a
-                href="mailto:chen.rachel1@northeastern.edu"
-                style="
-                  color: #666;
-                  text-decoration: none;
-                  font-size: 0.82rem;
-                  font-family: &quot;DM Sans&quot;, sans-serif;
-                "
-                onmouseover="this.style.color = '#ddd'"
-                onmouseout="this.style.color = '#666'"
-                >Email</a
-              >
-            </div>
+            <a
+              href="https://www.linkedin.com/in/rachelchen1016/"
+              target="_blank"
+              class="text-light me-3"
+              >LinkedIn</a
+            >
+            <a
+              href="mailto:rachelmchen16@gmail.com"
+              target="_blank"
+              class="text-light"
+              >Email</a
+            >
           </div>
         </div>
-        <div
-          style="
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            color: #444;
-            font-family: &quot;DM Sans&quot;, sans-serif;
-          "
-        >
-          Copyright &copy; 2026; Designed and Developed with Love by Rachel
-        </div>
+        <div class="text-center mt-4 small">&copy; 2026 Rachel Chen</div>
       </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      const cursor = document.getElementById("cursor");
-      const ring = document.getElementById("ring");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        cursor.style.left = mx + "px";
-        cursor.style.top = my + "px";
-      });
-      (function loop() {
-        rx += (mx - rx) * 0.1;
-        ry += (my - ry) * 0.1;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(loop);
+      (function () {
+        /**
+         * Chrome-star cursor.
+         *
+         *  - Normal state: a small dot + ring, and a trail of chrome four-point stars.
+         *  - Over anything clickable: stars stop, the ring grows into a chrome lens
+         *    with an arrow, so it reads as "this is a link".
+         *  - Click on empty space: a small burst of stars.
+         *  - Inside [data-no-stars]: no trail (used on the sequin wall so the two
+         *    effects don't compete).
+         *  - Inside [data-cursor-theme="dark"]: the dot and ring turn light.
+         *  - Touch devices: does nothing, the normal cursor stays.
+         *  - prefers-reduced-motion: dot + ring + link state only, no stars.
+         *
+         * Expects #cursor and #cursorRing elements (already in index.html).
+         */
+
+        const CLICKABLE =
+          'a, button, [role="button"], input, select, textarea, label, summary, .project-card, [data-cursor="link"]';
+
+        function initChromeCursor({
+          dot = document.getElementById("cursor"),
+          ring = document.getElementById("cursorRing"),
+          spacing = 14, // px of mouse travel between stars
+          maxStars = 90,
+        } = {}) {
+          const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+          ).matches;
+          if (!finePointer || !dot || !ring) {
+            document.documentElement.classList.add("native-cursor");
+            return () => {};
+          }
+          const reduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          document.documentElement.classList.add("chrome-cursor");
+
+          // Arrow that appears inside the ring in link state.
+          if (!ring.querySelector(".cursor-arrow")) {
+            ring.insertAdjacentHTML(
+              "beforeend",
+              '<svg class="cursor-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M4.5 3 H9 V7.5"/></svg>',
+            );
+          }
+
+          // Full-screen canvas for the star trail.
+          const c = document.createElement("canvas");
+          c.className = "cursor-stars";
+          c.setAttribute("aria-hidden", "true");
+          document.body.appendChild(c);
+          const ctx = c.getContext("2d");
+          let W = 0,
+            H = 0,
+            dpr = 1;
+          const resize = () => {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth;
+            H = window.innerHeight;
+            c.width = W * dpr;
+            c.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          };
+          resize();
+          window.addEventListener("resize", resize);
+
+          // Pre-render a few chrome star sprites so drawing stays cheap.
+          const sprites = [
+            ["#e8e8e6", "#8a8a87", "#2c2c2a"],
+            ["#ffffff", "#6e6d69", "#1a1a1a"],
+            ["#d3d1c7", "#9a9993", "#444441"],
+            ["#f1efe8", "#5f5e5a", "#0e0e0e"],
+          ].map(([a, b, d]) => {
+            const S = 64;
+            const s = document.createElement("canvas");
+            s.width = s.height = S;
+            const x = s.getContext("2d");
+            const g = x.createLinearGradient(0, 0, S, S);
+            g.addColorStop(0, a);
+            g.addColorStop(0.42, b);
+            g.addColorStop(0.5, "#ffffff");
+            g.addColorStop(0.62, b);
+            g.addColorStop(1, d);
+            x.translate(S / 2, S / 2);
+            x.beginPath();
+            const R = S / 2 - 1,
+              r = S * 0.07;
+            for (let i = 0; i < 8; i++) {
+              const ang = (i * Math.PI) / 4 - Math.PI / 2;
+              const rad = i % 2 ? r : R;
+              x.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+            }
+            x.closePath();
+            x.fillStyle = g;
+            x.fill();
+            x.lineWidth = 1.2;
+            x.strokeStyle = "rgba(20,20,20,0.55)";
+            x.stroke();
+            return s;
+          });
+
+          const stars = [];
+          const spawn = (x, y, burst) => {
+            if (reduced) return;
+            const a = burst
+              ? Math.random() * Math.PI * 2
+              : Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+            const sp = burst
+              ? 2 + Math.random() * 3
+              : 0.4 + Math.random() * 0.9;
+            stars.push({
+              x,
+              y,
+              vx: Math.cos(a) * sp,
+              vy: Math.sin(a) * sp,
+              size: (burst ? 12 : 9) + Math.random() * 11,
+              rot: Math.random() * Math.PI,
+              vr: (Math.random() - 0.5) * 0.12,
+              life: 1,
+              decay: 0.011 + Math.random() * 0.009,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+            if (stars.length > maxStars) stars.shift();
+          };
+
+          let mx = -100,
+            my = -100,
+            rx = -100,
+            ry = -100;
+          let lastX = null,
+            lastY = null,
+            travel = 0;
+          let mode = "default";
+          let trail = true;
+          let shown = false;
+
+          const label = document.createElement("div");
+          label.className = "cursor-label";
+          label.setAttribute("aria-hidden", "true");
+          document.body.appendChild(label);
+          const labelFor = (hit) => {
+            const own = hit.closest("[data-cursor-label]");
+            if (own) return own.getAttribute("data-cursor-label");
+            if (hit.closest(".hang-tag"))
+              return hit.closest(".hang-tag").classList.contains("is-flipped")
+                ? "Flip back"
+                : "Flip me";
+            if (hit.closest(".project-card")) return "See the project";
+            if (hit.closest(".tl-filter")) return "Show";
+            if (hit.closest(".navbar-brand"))
+              return (
+                hit.closest(".navbar-brand").getAttribute("href") || ""
+              ).startsWith("#")
+                ? "Back to top"
+                : "Home";
+            const a = hit.closest("a");
+            if (a) {
+              const href = a.getAttribute("href") || "";
+              if (href.startsWith("mailto:")) return "Say hi";
+              if (/linkedin/i.test(href)) return "Let\u2019s connect";
+              if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
+              if (href.startsWith("#")) return "Take me there";
+              if (a.target === "_blank" || /^https?:/i.test(href))
+                return "Open";
+              return "Go";
+            }
+            if (hit.closest(".navbar-toggler")) return "Menu";
+            return "Click";
+          };
+          let labelText = "";
+          const setLabel = (t) => {
+            if (t === labelText) return;
+            labelText = t;
+            if (t) label.textContent = t; // keep old text while it fades out
+            label.classList.toggle("has-text", !!t);
+          };
+
+          const setMode = (target) => {
+            const el = target && target.closest ? target : null;
+            const hit = el && el.closest(CLICKABLE);
+            const link = !!hit;
+            setLabel(hit ? labelFor(el) : "");
+            const next = link ? "link" : "default";
+            if (next !== mode) {
+              mode = next;
+              document.body.classList.toggle("hovering", link); // keeps your existing CSS hook
+              document.body.classList.toggle("cursor-link", link);
+            }
+            trail = !link && !(el && el.closest("[data-no-stars]"));
+            document.body.classList.toggle(
+              "cursor-dark",
+              !!(el && el.closest('[data-cursor-theme="dark"]')),
+            );
+          };
+
+          const onMove = (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (!shown) {
+              shown = true;
+              rx = mx;
+              ry = my;
+              document.body.classList.add("cursor-visible");
+            }
+            setMode(e.target);
+            dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+            label.style.transform = `translate3d(${mx + 12}px, ${my + 14}px, 0)`;
+            if (trail && lastX !== null) {
+              travel += Math.hypot(mx - lastX, my - lastY);
+              while (travel > spacing) {
+                travel -= spacing;
+                spawn(
+                  mx + (Math.random() - 0.5) * 6,
+                  my + (Math.random() - 0.5) * 6,
+                );
+              }
+            }
+            lastX = mx;
+            lastY = my;
+          };
+          const onDown = (e) => {
+            document.body.classList.add("cursor-press");
+            if (trail)
+              for (let i = 0; i < 12; i++) spawn(e.clientX, e.clientY, true);
+          };
+          const onUp = () => {
+            document.body.classList.remove("cursor-press");
+            // a click can change what the label should say (e.g. a tag flipping)
+            setTimeout(() => setMode(document.elementFromPoint(mx, my)), 0);
+          };
+          const onLeave = () => {
+            shown = false;
+            lastX = null;
+            document.body.classList.remove("cursor-visible");
+          };
+          // Re-check what's under the cursor after scroll (links move under a still mouse).
+          const onScroll = () => {
+            if (!shown) return;
+            setMode(document.elementFromPoint(mx, my));
+          };
+
+          document.addEventListener("pointermove", onMove, { passive: true });
+          document.addEventListener("pointerdown", onDown);
+          document.addEventListener("pointerup", onUp);
+          document.documentElement.addEventListener("mouseleave", onLeave);
+          window.addEventListener("scroll", onScroll, { passive: true });
+
+          let raf = 0;
+          const loop = () => {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+
+            ctx.clearRect(0, 0, W, H);
+            for (let i = stars.length - 1; i >= 0; i--) {
+              const s = stars[i];
+              s.x += s.vx;
+              s.y += s.vy;
+              s.vx *= 0.96;
+              s.vy = s.vy * 0.96 + 0.04;
+              s.rot += s.vr;
+              s.life -= s.decay;
+              if (s.life <= 0) {
+                stars.splice(i, 1);
+                continue;
+              }
+              const k = s.life;
+              const sz = s.size * (0.35 + 0.65 * k);
+              ctx.save();
+              ctx.globalAlpha = Math.min(1, k * 1.4);
+              ctx.translate(s.x, s.y);
+              ctx.rotate(s.rot);
+              ctx.drawImage(s.sprite, -sz / 2, -sz / 2, sz, sz);
+              ctx.restore();
+            }
+            raf = requestAnimationFrame(loop);
+          };
+          loop();
+
+          return () => {
+            cancelAnimationFrame(raf);
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerdown", onDown);
+            document.removeEventListener("pointerup", onUp);
+            document.documentElement.removeEventListener("mouseleave", onLeave);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", resize);
+            c.remove();
+          };
+        }
+
+        window.initChromeCursor = initChromeCursor;
+      })();
+    </script>
+    <script>
+      initChromeCursor();
+
+      // soundtrack: nothing plays until someone clicks. Then it keeps playing
+      // in a small player in the corner while they scroll the case study.
+      (function () {
+        const song = document.querySelector(".cs-song");
+        if (!song) return;
+        const btn = song.querySelector(".cs-song-btn");
+        const title = song.querySelector(".cs-song-text strong").textContent;
+        const artist = song
+          .querySelector(".cs-song-text")
+          .textContent.split("·")
+          .pop()
+          .trim();
+        const getId = () =>
+          ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) ||
+            [])[1];
+        let id = null;
+        let controller = null,
+          dock = null,
+          playing = false;
+
+        const setPlaying = (on) => {
+          playing = on;
+          song.classList.toggle("is-playing", on);
+          if (dock) dock.classList.toggle("is-playing", on);
+          btn.setAttribute("aria-pressed", String(on));
+          btn.setAttribute("data-cursor-label", on ? "Pause" : "Play");
+        };
+
+        // the Spotify player opens right under the chip (no floating box)
+        // and keeps playing while the page scrolls
+        const buildDock = () => {
+          dock = document.createElement("div");
+          dock.className = "cs-inline-player";
+          dock.innerHTML = '<div id="csSpotify"></div>';
+          song.appendChild(dock);
+          requestAnimationFrame(() => dock.classList.add("is-shown"));
+        };
+
+        const start = () => {
+          window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            IFrameAPI.createController(
+              document.getElementById("csSpotify"),
+              { uri: "spotify:track:" + id, width: "100%", height: 80 },
+              (c) => {
+                controller = c;
+                c.addListener("playback_update", (e) =>
+                  setPlaying(!e.data.isPaused),
+                );
+                c.addListener("ready", () => c.play());
+              },
+            );
+          };
+          const sc = document.createElement("script");
+          sc.src = "https://open.spotify.com/embed/iframe-api/v1";
+          sc.async = true;
+          document.body.appendChild(sc);
+        };
+
+        btn.addEventListener("click", () => {
+          id = getId();
+          if (!id) {
+            // no song link pasted yet: open it on Spotify instead
+            window.open(
+              "https://open.spotify.com/search/" +
+                encodeURIComponent(song.dataset.search || ""),
+              "_blank",
+              "noopener",
+            );
+            return;
+          }
+          if (!dock) {
+            buildDock();
+            start();
+            return;
+          }
+          if (controller) controller.togglePlay();
+        });
       })();
 
+      // journey map: draw the mood line when it comes into view
+      const journey = document.querySelector(".journey");
+      if (journey && "IntersectionObserver" in window) {
+        const jo = new IntersectionObserver(
+          ([e]) => {
+            if (e.isIntersecting) {
+              journey.classList.add("is-in");
+              jo.disconnect();
+            }
+          },
+          { threshold: 0.4 },
+        );
+        jo.observe(journey);
+      } else if (journey) journey.classList.add("is-in");
+
+      // highlight the section you're reading in the sticky contents
       const sections = document.querySelectorAll(".section[id]");
       const links = document.querySelectorAll(".sidebar-link");
       function updateActive() {
-        const scrollY = window.scrollY + 120;
-        let current = "";
-        sections.forEach((s) => {
-          if (s.offsetTop <= scrollY) current = s.id;
+        let current = sections[0] ? sections[0].id : "";
+        sections.forEach((sec) => {
+          if (sec.getBoundingClientRect().top <= 180) current = sec.id;
         });
-        links.forEach((l) => {
-          l.classList.remove("active");
-          if (l.getAttribute("href") === "#" + current)
-            l.classList.add("active");
-        });
+        links.forEach((l) =>
+          l.classList.toggle(
+            "active",
+            l.getAttribute("href") === "#" + current,
+          ),
+        );
       }
       window.addEventListener("scroll", updateActive, { passive: true });
       updateActive();
