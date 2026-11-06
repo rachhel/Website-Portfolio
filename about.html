@@ -300,10 +300,13 @@
       @media (min-width: 901px) {
         .about-hero {
           align-items: start !important;
-          padding-top: 130px !important;
+          padding-top: 210px !important;
         }
+        /* pin + shelf sit in the middle of the photo's height */
+        .about-hero-left,
         .about-hero-right {
-          padding-top: 40px;
+          align-self: center;
+          padding-top: 0;
         }
       }
       .pin-stage {
@@ -504,6 +507,26 @@
           right: 0;
           transform: none;
         }
+      }
+      /* each photo sits right under its charm (placed by the script below) */
+      .shelf-row.is-placed {
+        display: block;
+        position: relative;
+        max-width: none;
+        padding: 0;
+      }
+      @media (max-width: 900px) {
+        .shelf-empty {
+          font-size: 0 !important;
+        }
+      }
+      .shelf-row.is-placed .shelf-item {
+        position: absolute;
+        bottom: 0;
+        flex: none;
+      }
+      .shelf-ledge {
+        max-width: none !important;
       }
     </style>
   </head>
@@ -1054,7 +1077,7 @@
               <div class="shelf-lift">
                 <div class="shelf-frame">
                   <img
-                    src="assets/about/dance.png"
+                    src="assets/dance.jpeg"
                     alt="Dance"
                     loading="lazy"
                     onerror="this.remove()"
@@ -1072,7 +1095,7 @@
               <div class="shelf-lift">
                 <div class="shelf-frame">
                   <img
-                    src="assets/about/coffee.png"
+                    src="assets/coffeee.jpeg"
                     alt="Iced coffee"
                     loading="lazy"
                     onerror="this.remove()"
@@ -1088,7 +1111,7 @@
               <div class="shelf-lift">
                 <div class="shelf-frame">
                   <img
-                    src="assets/about/tennis.png"
+                    src="assets/tennis.jpeg"
                     alt="Tennis"
                     loading="lazy"
                     onerror="this.remove()"
@@ -1102,7 +1125,7 @@
               <div class="shelf-lift">
                 <div class="shelf-frame">
                   <img
-                    src="assets/about/travel.png"
+                    src="assets/travel.jpeg"
                     alt="Travel"
                     loading="lazy"
                     onerror="this.remove()"
@@ -1120,7 +1143,7 @@
               <div class="shelf-lift">
                 <div class="shelf-frame">
                   <img
-                    src="assets/about/food.png"
+                    src="assets/food.jpeg"
                     alt="Trying new foods"
                     loading="lazy"
                     onerror="this.remove()"
@@ -1136,7 +1159,7 @@
               <div class="shelf-lift">
                 <div class="shelf-frame">
                   <img
-                    src="assets/about/concerts.png"
+                    src="assets/concert.jpeg"
                     alt="Concerts"
                     loading="lazy"
                     onerror="this.remove()"
@@ -1149,7 +1172,6 @@
           </div>
           <div class="shelf-ledge" aria-hidden="true"></div>
         </section>
-        <p class="about-tagline">The parts that make me, me.</p>
       </div>
 
       <div class="about-hero-right">
@@ -1166,9 +1188,7 @@
       <!-- WHO I AM -->
       <section class="about-section" id="who">
         <div class="about-section-content">
-          <h2 class="about-section-title">
-            Where creativity and <em>engineering overlap.</em>
-          </h2>
+          <h2 class="about-section-title">A little <em>more about me</em></h2>
           <div class="about-text">
             <p>
               I'm a graduate student at Duke pursuing a Master of Engineering in
@@ -1206,7 +1226,9 @@
       <!-- EXPERIENCE TIMELINE -->
       <section class="about-section" id="experience">
         <div class="about-section-content">
-          <h2 class="about-section-title">Where I've <em>worked.</em></h2>
+          <h2 class="about-section-title">
+            Take a look at my <em>experience</em>
+          </h2>
 
           <div class="vt" id="timeline">
             <div class="tl-filters" role="group" aria-label="Filter roles">
@@ -1337,7 +1359,7 @@
       <!-- SKILLS -->
       <section class="about-section" id="skills">
         <div class="about-section-content">
-          <h2 class="about-section-title">What I <em>work with.</em></h2>
+          <h2 class="about-section-title">What I <em>work with</em></h2>
           <div class="skills-grid">
             <div class="skill-group">
               <div class="skill-group-label">Languages &amp; frameworks</div>
@@ -1356,7 +1378,8 @@
             <div class="skill-group">
               <div class="skill-group-label">Tools</div>
               <div class="skill-list">
-                Xcode · VS Code · Visual Studio · Git · Jira · Netlify
+                Xcode · VS Code · Visual Studio · Git · Jira · Netlify · Miro ·
+                Tableau · Slack · Google Workspace
               </div>
             </div>
             <div class="skill-group">
@@ -1376,7 +1399,7 @@
       <section class="about-section" id="involvement">
         <div class="about-section-content">
           <h2 class="about-section-title">
-            Getting involved <em id="invTitle">at Duke.</em>
+            Getting involved <em id="invTitle">at Duke</em>
           </h2>
           <div
             class="tl-filters inv-switch"
@@ -1467,7 +1490,7 @@
       <section class="about-section" id="approach">
         <div class="about-section-content">
           <h2 class="about-section-title">
-            <em>Design. Develop. Delight.</em>
+            <em>Design! Develop! Create!</em>
           </h2>
           <div class="about-text">
             <p>
@@ -1875,7 +1898,7 @@
           ".involvement-grid[data-school]",
         );
         const title = document.getElementById("invTitle");
-        const names = { duke: "at Duke.", neu: "at Northeastern." };
+        const names = { duke: "at Duke", neu: "at Northeastern" };
         btns.forEach((btn) =>
           btn.addEventListener("click", () => {
             const s = btn.dataset.school;
@@ -1954,6 +1977,42 @@
           );
           row.classList.toggle("has-lit", e.detail >= 0);
         });
+
+        // line every photo up right under its own charm
+        const stage = document.getElementById("pinStage");
+        const ledge = document.querySelector(".shelf-ledge");
+        const place = () => {
+          if (!window.pinAnchors || !stage) return;
+          const xs = window.pinAnchors();
+          const off =
+            stage.getBoundingClientRect().left -
+            row.getBoundingClientRect().left;
+          const gap = xs.length > 1 ? xs[1] - xs[0] : 100;
+          let tallest = 0,
+            minL = Infinity,
+            maxR = -Infinity;
+          items.forEach((it, i) => {
+            const shape = it.classList.contains("is-wide")
+              ? 0.96
+              : it.classList.contains("is-square")
+                ? 0.86
+                : 0.78;
+            const w = gap * shape;
+            const cx = off + xs[i];
+            it.style.width = w + "px";
+            it.style.left = cx - w / 2 + "px";
+            tallest = Math.max(tallest, it.offsetHeight);
+            minL = Math.min(minL, cx - w / 2);
+            maxR = Math.max(maxR, cx + w / 2);
+          });
+          row.style.height = tallest + "px";
+          ledge.style.marginLeft = minL - 12 + "px";
+          ledge.style.width = maxR - minL + 24 + "px";
+          row.classList.add("is-placed");
+        };
+        window.addEventListener("load", place);
+        window.addEventListener("resize", place);
+        setTimeout(place, 0);
       })();
     </script>
     <!-- chrome pin: physics for the charms -->
@@ -2179,6 +2238,11 @@
           requestAnimationFrame(frame);
         };
         let lastHi = -1;
+        // the shelf lines each photo up under its charm
+        window.pinAnchors = () => {
+          const k = stage.getBoundingClientRect().width / 1000;
+          return charms.map((c) => rot(c.x, BAR_Y, BASE_TILT).x * k);
+        };
         // the shelf calls this so a charm jingles when you hover its photo
         window.pinNudge = (i) => {
           const c = charms[i];
