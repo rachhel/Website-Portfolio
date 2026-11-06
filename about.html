@@ -186,7 +186,7 @@
       async
     ></script>
     <!-- site-wide look: keep this as the last stylesheet -->
-  <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="theme.css" />
     <!-- no eyebrows; one left edge for everything (same as the home page) -->
     <style>
       .about-kicker,
@@ -244,7 +244,269 @@
         }
       }
     </style>
-</head>
+    <style>
+      /* ---------- chrome pin in place of the name ---------- */
+      .about-hero .about-name {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      .pin-stage {
+        position: relative;
+        width: 100%;
+        max-width: 760px;
+        margin: 0 0 1.5rem -2%;
+      }
+      .pin-stage svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        touch-action: pan-y;
+      }
+      .charm-tip {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 3;
+        pointer-events: none;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Inter Tight", "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+      .charm-tip.on {
+        opacity: 1;
+      }
+    </style>
+    <style>
+      /* ---------- the shelf: photos stand on a chrome ledge and pop out on hover ---------- */
+      .shelf {
+        padding: 0;
+        margin: -0.5rem 0 0;
+        position: relative;
+      }
+      /* pin sits a little higher, shelf right under it, tagline under the shelf */
+      @media (min-width: 901px) {
+        .about-hero {
+          align-items: start !important;
+          padding-top: 130px !important;
+        }
+        .about-hero-right {
+          padding-top: 40px;
+        }
+      }
+      .pin-stage {
+        margin-bottom: 0.5rem !important;
+      }
+      /* small, a little closing moment at the end of the page */
+      .shelf-row,
+      .shelf-ledge {
+        max-width: 560px;
+      }
+      .shelf-note {
+        margin: 0 0 5.5rem;
+        font-size: 1rem;
+        color: #6b6b6b;
+      }
+      .shelf-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 2%;
+        perspective: 1200px;
+      }
+      .shelf-item {
+        position: relative;
+        flex: 1 1 0;
+        margin: 0;
+        z-index: 1;
+        transition:
+          opacity 0.3s,
+          filter 0.3s;
+      }
+      .shelf-lift {
+        transform-origin: 50% 100%;
+        transform: rotate(var(--tilt));
+        transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.25);
+      }
+      .shelf-item.is-tall {
+        flex-grow: 0.9;
+      }
+      .shelf-item.is-wide {
+        flex-grow: 1.35;
+      }
+      .shelf-item.is-square {
+        flex-grow: 1.05;
+      }
+      .shelf-frame {
+        position: relative;
+        padding: 4px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow:
+          0 1px 0 rgba(0, 0, 0, 0.06),
+          0 10px 22px -14px rgba(0, 0, 0, 0.45);
+        transition: box-shadow 0.4s;
+      }
+      .shelf-frame::after {
+        /* a little chrome rim, like a metal frame */
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 3px;
+        padding: 1.5px;
+        background: linear-gradient(
+          135deg,
+          #e6e6e6,
+          #ffffff 25%,
+          #8d8d8d 45%,
+          #f4f4f4 60%,
+          #6f6f6f 80%,
+          #dcdcdc
+        );
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+      .shelf-frame img,
+      .shelf-empty {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+        background: #f1f1f1;
+      }
+      .is-tall .shelf-frame img,
+      .is-tall .shelf-empty {
+        aspect-ratio: 3 / 4;
+      }
+      .is-wide .shelf-frame img,
+      .is-wide .shelf-empty {
+        aspect-ratio: 4 / 3;
+      }
+      .is-square .shelf-frame img,
+      .is-square .shelf-empty {
+        aspect-ratio: 1;
+      }
+      .shelf-empty {
+        display: grid;
+        place-items: center;
+        color: #9a9a9a;
+        font-size: 0.65rem;
+        text-align: center;
+        padding: 0.5rem;
+      }
+      .shelf-frame img + .shelf-empty {
+        display: none;
+      }
+      .shelf-item figcaption {
+        position: absolute;
+        left: 50%;
+        top: calc(100% + 18px);
+        transform: translateX(-50%);
+        white-space: nowrap;
+        font-size: 0.75rem;
+        color: #8a8a8a;
+        opacity: 0;
+        transition: color 0.3s;
+      }
+      .shelf-ledge {
+        height: 10px;
+        margin: 0 0 2.6rem;
+        border-radius: 2px;
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #d9d9d9 30%,
+          #8c8c8c 55%,
+          #eeeeee 75%,
+          #a7a7a7 100%
+        );
+        box-shadow: 0 10px 18px -12px rgba(0, 0, 0, 0.5);
+      }
+      /* hover (or hovering its charm): the photo lifts off the shelf toward you */
+      .shelf-item:hover,
+      .shelf-item.is-lit {
+        z-index: 5;
+      }
+      .shelf-item:hover .shelf-lift,
+      .shelf-item.is-lit .shelf-lift {
+        transform: translateY(-34px) rotate(0deg) scale(1.9);
+      }
+      .shelf-item:hover .shelf-frame,
+      .shelf-item.is-lit .shelf-frame {
+        box-shadow: 0 30px 50px -22px rgba(0, 0, 0, 0.55);
+      }
+      .shelf-item:hover figcaption,
+      .shelf-item.is-lit figcaption {
+        color: #0a0a0a;
+        opacity: 1;
+      }
+      .shelf-item figcaption {
+        transition:
+          opacity 0.25s,
+          color 0.25s;
+      }
+      .shelf-row:hover .shelf-item:not(:hover),
+      .shelf-row.has-lit .shelf-item:not(.is-lit) {
+        opacity: 0.55;
+        filter: grayscale(0.4);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .shelf-lift {
+          transition: none;
+        }
+      }
+      /* phones: one small shelf of six, same as desktop */
+      @media (max-width: 900px) {
+        .shelf-row {
+          gap: 6px;
+          padding: 0;
+        }
+        .shelf-frame {
+          padding: 3px;
+        }
+        .shelf-item figcaption {
+          font-size: 0.72rem;
+          top: calc(100% + 12px);
+        }
+        .shelf-item:hover .shelf-lift,
+        .shelf-item.is-lit .shelf-lift {
+          transform: translateY(-14px) scale(1.7);
+        }
+        /* the end photos grow inward so they stay on screen */
+        .shelf-item:first-child .shelf-lift {
+          transform-origin: 0 100%;
+        }
+        .shelf-item:last-child .shelf-lift {
+          transform-origin: 100% 100%;
+        }
+        .shelf-item:first-child figcaption {
+          left: 0;
+          transform: none;
+        }
+        .shelf-item:last-child figcaption {
+          left: auto;
+          right: 0;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
 
   <body class="about-page" id="page-top">
     <div class="cursor" id="cursor"></div>
@@ -254,7 +516,11 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container nav-container">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
+          <img
+            src="assets/LOGO.png"
+            alt="Rachel Chen home"
+            style="height: 100px"
+          />
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -269,11 +535,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#work">Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="creative.html">Creative</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com"
+                >Contact</a
+              >
             </li>
           </ul>
         </div>
@@ -287,9 +561,595 @@
           <span class="about-name-line" id="nameLine1">Rachel</span>
           <span class="about-name-line" id="nameLine2">Chen</span>
         </h1>
-        <p class="about-tagline">
-          Building thoughtful digital products where design and engineering meet.
-        </p>
+        <!-- your name as a chrome safety pin, with a charm for each thing you love -->
+        <div class="pin-stage" id="pinStage">
+          <svg id="pin" viewBox="0 120 1000 450" aria-hidden="true">
+            <defs>
+              <!-- chrome reflects a bright sky, a dark horizon and a bright floor -->
+              <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff" />
+                <stop offset=".2" stop-color="#e3e7ec" />
+                <stop offset=".36" stop-color="#8b929b" />
+                <stop offset=".46" stop-color="#262a30" />
+                <stop offset=".53" stop-color="#f9fbfd" />
+                <stop offset=".66" stop-color="#bcc2ca" />
+                <stop offset=".82" stop-color="#5a6069" />
+                <stop offset="1" stop-color="#eef1f5" />
+              </linearGradient>
+              <linearGradient id="metalH" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffffff" />
+                <stop offset=".25" stop-color="#b9bfc7" />
+                <stop offset=".42" stop-color="#3a3f46" />
+                <stop offset=".5" stop-color="#fbfcfe" />
+                <stop offset=".68" stop-color="#9aa1aa" />
+                <stop offset=".85" stop-color="#4b5058" />
+                <stop offset="1" stop-color="#e9edf2" />
+              </linearGradient>
+              <!-- a bright band that sweeps across the name on hover -->
+              <linearGradient
+                id="sweep"
+                gradientUnits="userSpaceOnUse"
+                x1="-400"
+                y1="0"
+                x2="-240"
+                y2="0"
+              >
+                <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                <stop offset=".5" stop-color="#fff" stop-opacity=".85" />
+                <stop offset="1" stop-color="#fff" stop-opacity="0" />
+              </linearGradient>
+              <filter
+                id="chrome"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="170%"
+                color-interpolation-filters="sRGB"
+              >
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="b" />
+                <!-- broad sheen -->
+                <feSpecularLighting
+                  in="b"
+                  surfaceScale="4.5"
+                  specularConstant="1.1"
+                  specularExponent="34"
+                  lighting-color="#fff"
+                  result="s1"
+                >
+                  <feDistantLight azimuth="240" elevation="32" />
+                </feSpecularLighting>
+                <!-- sharp glints -->
+                <feSpecularLighting
+                  in="b"
+                  surfaceScale="4.5"
+                  specularConstant="1.2"
+                  specularExponent="120"
+                  lighting-color="#fff"
+                  result="s2"
+                >
+                  <feDistantLight azimuth="60" elevation="40" />
+                </feSpecularLighting>
+                <feComposite
+                  in="s1"
+                  in2="s2"
+                  operator="arithmetic"
+                  k2="1"
+                  k3="1"
+                  result="s"
+                />
+                <feComposite
+                  in="s"
+                  in2="SourceAlpha"
+                  operator="in"
+                  result="si"
+                />
+                <!-- dark rims where the surface turns away -->
+                <feDiffuseLighting
+                  in="b"
+                  surfaceScale="4.5"
+                  diffuseConstant="1.15"
+                  lighting-color="#fff"
+                  result="d"
+                >
+                  <feDistantLight azimuth="240" elevation="58" />
+                </feDiffuseLighting>
+                <feComposite
+                  in="d"
+                  in2="SourceAlpha"
+                  operator="in"
+                  result="di"
+                />
+                <feBlend
+                  in="SourceGraphic"
+                  in2="di"
+                  mode="multiply"
+                  result="m"
+                />
+                <feComposite
+                  in="m"
+                  in2="si"
+                  operator="arithmetic"
+                  k2="1"
+                  k3="1"
+                  result="lit"
+                />
+                <feComponentTransfer in="lit" result="pop">
+                  <feFuncR type="linear" slope="1.04" intercept="-0.02" />
+                  <feFuncG type="linear" slope="1.04" intercept="-0.02" />
+                  <feFuncB type="linear" slope="1.04" intercept="0" />
+                </feComponentTransfer>
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="sh" />
+                <feOffset in="sh" dx="2" dy="8" result="sho" />
+                <feComponentTransfer in="sho" result="shf">
+                  <feFuncA type="linear" slope=".1" />
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode in="shf" />
+                  <feMergeNode in="pop" />
+                </feMerge>
+              </filter>
+              <filter
+                id="chromeSm"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="170%"
+                color-interpolation-filters="sRGB"
+              >
+                <feGaussianBlur
+                  in="SourceAlpha"
+                  stdDeviation="1.5"
+                  result="b"
+                />
+                <!-- broad sheen -->
+                <feSpecularLighting
+                  in="b"
+                  surfaceScale="3.5"
+                  specularConstant="1.1"
+                  specularExponent="34"
+                  lighting-color="#fff"
+                  result="s1"
+                >
+                  <feDistantLight azimuth="240" elevation="32" />
+                </feSpecularLighting>
+                <!-- sharp glints -->
+                <feSpecularLighting
+                  in="b"
+                  surfaceScale="3.5"
+                  specularConstant="1.2"
+                  specularExponent="120"
+                  lighting-color="#fff"
+                  result="s2"
+                >
+                  <feDistantLight azimuth="60" elevation="40" />
+                </feSpecularLighting>
+                <feComposite
+                  in="s1"
+                  in2="s2"
+                  operator="arithmetic"
+                  k2="1"
+                  k3="1"
+                  result="s"
+                />
+                <feComposite
+                  in="s"
+                  in2="SourceAlpha"
+                  operator="in"
+                  result="si"
+                />
+                <!-- dark rims where the surface turns away -->
+                <feDiffuseLighting
+                  in="b"
+                  surfaceScale="3.5"
+                  diffuseConstant="1.15"
+                  lighting-color="#fff"
+                  result="d"
+                >
+                  <feDistantLight azimuth="240" elevation="58" />
+                </feDiffuseLighting>
+                <feComposite
+                  in="d"
+                  in2="SourceAlpha"
+                  operator="in"
+                  result="di"
+                />
+                <feBlend
+                  in="SourceGraphic"
+                  in2="di"
+                  mode="multiply"
+                  result="m"
+                />
+                <feComposite
+                  in="m"
+                  in2="si"
+                  operator="arithmetic"
+                  k2="1"
+                  k3="1"
+                  result="lit"
+                />
+                <feComponentTransfer in="lit" result="pop">
+                  <feFuncR type="linear" slope="1.04" intercept="-0.02" />
+                  <feFuncG type="linear" slope="1.04" intercept="-0.02" />
+                  <feFuncB type="linear" slope="1.04" intercept="0" />
+                </feComponentTransfer>
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="sh" />
+                <feOffset in="sh" dx="2" dy="8" result="sho" />
+                <feComponentTransfer in="sho" result="shf">
+                  <feFuncA type="linear" slope=".1" />
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode in="shf" />
+                  <feMergeNode in="pop" />
+                </feMerge>
+              </filter>
+
+              <!-- the charms, drawn so the jump ring sits at 0,0 -->
+              <g id="c-tutu">
+                <circle
+                  cx="0"
+                  cy="6"
+                  r="6"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3.5"
+                />
+                <rect
+                  x="-2.5"
+                  y="11"
+                  width="5"
+                  height="22"
+                  rx="2.5"
+                  fill="url(#metal)"
+                />
+                <!-- bodice with a sweetheart neckline -->
+                <path
+                  fill="url(#metalH)"
+                  d="M-16 34 C-11 28 -4 30 0 36 C4 30 11 28 16 34 C18 48 15 60 12 70 L-12 70 C-15 60 -18 48 -16 34 Z"
+                />
+                <!-- a full, layered skirt -->
+                <path
+                  fill="url(#metal)"
+                  d="M-13 68 L13 68 C40 72 64 82 76 98 Q70 108 61 102 Q55 112 45 105 Q38 115 28 107 Q20 116 10 108 Q0 117 -10 108 Q-20 116 -28 107 Q-38 115 -45 105 Q-55 112 -61 102 Q-70 108 -76 98 C-64 82 -40 72 -13 68 Z"
+                />
+                <path
+                  fill="url(#metalH)"
+                  d="M-13 66 L13 66 C34 70 52 77 62 90 Q57 98 49 93 Q43 101 35 95 Q28 103 19 96 Q10 104 0 97 Q-10 104 -19 96 Q-28 103 -35 95 Q-43 101 -49 93 Q-57 98 -62 90 C-52 77 -34 70 -13 66 Z"
+                />
+                <rect
+                  x="-14"
+                  y="63"
+                  width="28"
+                  height="7"
+                  rx="3.5"
+                  fill="url(#metal)"
+                />
+              </g>
+              <g id="c-coffee">
+                <circle
+                  cx="0"
+                  cy="6"
+                  r="6"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3.5"
+                />
+                <path fill="url(#metalH)" d="M4 12 L12 12 L10 36 L2 36 Z" />
+                <path
+                  fill="url(#metalH)"
+                  d="M-32 46 L32 46 L32 40 C32 26 -32 26 -32 40 Z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  fill="url(#metalH)"
+                  d="M-28 50 L28 50 L21 124 L-21 124 Z"
+                />
+                <rect
+                  x="-26"
+                  y="98"
+                  width="51"
+                  height="10"
+                  fill="url(#metal)"
+                />
+              </g>
+              <g id="c-racket">
+                <circle
+                  cx="0"
+                  cy="6"
+                  r="6"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3.5"
+                />
+                <rect
+                  x="-4.5"
+                  y="10"
+                  width="9"
+                  height="44"
+                  rx="3.5"
+                  fill="url(#metalH)"
+                />
+                <path
+                  fill="url(#metalH)"
+                  d="M-4 50 L-16 62 L-11 65 L0 56 L11 65 L16 62 L4 50 Z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  fill="url(#metalH)"
+                  d="M-27 94 a27 34 0 1 0 54 0 a27 34 0 1 0 -54 0 Z M-21 94 a21 28 0 1 0 42 0 a21 28 0 1 0 -42 0 Z"
+                />
+                <path
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="1.3"
+                  d="M-14 70 L-14 118 M-7 66 L-7 122 M0 66 L0 122 M7 66 L7 122 M14 70 L14 118 M-19 78 L19 78 M-21 86 L21 86 M-21 94 L21 94 M-21 102 L21 102 M-19 110 L19 110"
+                />
+              </g>
+              <g id="c-suitcase">
+                <circle
+                  cx="0"
+                  cy="6"
+                  r="6"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3.5"
+                />
+                <path
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="4.5"
+                  stroke-linejoin="round"
+                  d="M-11 30 L-11 14 L11 14 L11 30"
+                />
+                <rect
+                  x="-32"
+                  y="28"
+                  width="64"
+                  height="74"
+                  rx="9"
+                  fill="url(#metalH)"
+                />
+                <rect x="-18" y="28" width="7" height="74" fill="url(#metal)" />
+                <rect x="11" y="28" width="7" height="74" fill="url(#metal)" />
+                <circle cx="-22" cy="106" r="4.5" fill="url(#metal)" />
+                <circle cx="22" cy="106" r="4.5" fill="url(#metal)" />
+              </g>
+              <g id="c-bowl">
+                <circle
+                  cx="0"
+                  cy="6"
+                  r="6"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3.5"
+                />
+                <!-- chopsticks hold the bowl to the ring -->
+                <path
+                  fill="none"
+                  stroke="url(#metalH)"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  d="M-3 11 L22 62 M3 11 L32 58"
+                />
+                <path
+                  fill="url(#metal)"
+                  d="M-30 54 C-20 44 -8 52 0 46 C8 52 20 44 30 54 Z"
+                />
+                <path
+                  fill="url(#metalH)"
+                  d="M-38 54 L38 54 C36 86 20 102 0 102 C-20 102 -36 86 -38 54 Z"
+                />
+                <rect
+                  x="-12"
+                  y="100"
+                  width="24"
+                  height="6"
+                  rx="2"
+                  fill="url(#metal)"
+                />
+              </g>
+              <g id="c-mic">
+                <circle
+                  cx="0"
+                  cy="6"
+                  r="6"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3.5"
+                />
+                <path
+                  fill-rule="evenodd"
+                  fill="url(#metalH)"
+                  d="M-18 32 a18 18 0 1 0 36 0 a18 18 0 1 0 -36 0 Z M-8 24 L-4 24 L-4 28 L-8 28 Z M2 24 L6 24 L6 28 L2 28 Z M-3 34 L1 34 L1 38 L-3 38 Z M7 34 L11 34 L11 38 L7 38 Z M-13 34 L-9 34 L-9 38 L-13 38 Z"
+                />
+                <rect
+                  x="-13"
+                  y="48"
+                  width="26"
+                  height="7"
+                  rx="2"
+                  fill="url(#metal)"
+                />
+                <path fill="url(#metalH)" d="M-11 55 L11 55 L6 120 L-6 120 Z" />
+                <path
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  d="M0 120 C0 132 16 128 14 138 C12 148 -4 144 -2 152"
+                />
+              </g>
+            </defs>
+
+            <!-- the pin, tilted; it wobbles when you hover it -->
+            <g id="pinGroup">
+              <g filter="url(#chrome)">
+                <circle
+                  cx="92"
+                  cy="258"
+                  r="44"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="10"
+                />
+                <path
+                  d="M92 214 C300 210 600 204 850 200"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M104 301 L850 306"
+                  fill="none"
+                  stroke="url(#metal)"
+                  stroke-width="9"
+                  stroke-linecap="round"
+                />
+                <path
+                  fill-rule="evenodd"
+                  fill="url(#metalH)"
+                  d="M826 186 C856 164 936 160 962 200 C986 238 972 300 930 318 C900 330 860 326 832 320 C820 290 818 220 826 186 Z "
+                />
+              </g>
+              <g filter="url(#chrome)">
+                <path
+                  id="name"
+                  d="M106.9970703125 -101.6845703125Q108.2421875 -101.6845703125 109.19677734375 -100.81298828125Q110.1513671875 -99.94140625 110.1513671875 -98.5302734375Q110.1513671875 -96.7041015625 108.57421875 -95.791015625Q108.3251953125 -95.625 106.37451171875 -94.2138671875Q104.423828125 -92.802734375 102.099609375 -89.6484375Q99.775390625 -86.494140625 97.6171875 -81.30615234375Q95.458984375 -76.1181640625 94.8779296875 -68.4814453125Q94.7119140625 -67.1533203125 94.67041015625 -65.8251953125Q94.62890625 -64.4970703125 94.5458984375 -63.1689453125Q96.0400390625 -63.3349609375 97.65869140625 -63.45947265625Q99.27734375 -63.583984375 101.103515625 -63.583984375Q107.080078125 -63.583984375 112.6416015625 -62.255859375Q118.203125 -60.927734375 122.8515625 -58.4375Q134.8876953125 -63.251953125 141.279296875 -71.220703125Q147.6708984375 -79.189453125 147.6708984375 -88.984375Q147.6708984375 -96.2890625 144.0185546875 -101.97509765625Q140.3662109375 -107.6611328125 133.76708984375 -111.5625Q127.16796875 -115.4638671875 117.99560546875 -117.5390625Q108.8232421875 -119.6142578125 97.8662109375 -119.6142578125Q88.3203125 -119.6142578125 78.40087890625 -118.16162109375Q68.4814453125 -116.708984375 59.22607421875 -113.8037109375Q49.970703125 -110.8984375 41.8359375 -106.58203125Q33.701171875 -102.265625 27.6416015625 -96.66259765625Q21.58203125 -91.0595703125 18.095703125 -84.169921875Q14.609375 -77.2802734375 14.609375 -69.228515625Q14.609375 -63.251953125 16.6845703125 -58.72802734375Q18.759765625 -54.2041015625 22.20458984375 -51.17431640625Q25.6494140625 -48.14453125 30.1318359375 -46.60888671875Q34.6142578125 -45.0732421875 39.51171875 -45.0732421875Q45.322265625 -45.0732421875 49.7216796875 -46.2353515625Q54.12109375 -47.3974609375 57.109375 -48.76708984375Q60.09765625 -50.13671875 61.63330078125 -51.34033203125Q63.1689453125 -52.5439453125 63.3349609375 -52.7099609375Q63.916015625 -53.125 64.6630859375 -53.66455078125Q65.41015625 -54.2041015625 66.240234375 -54.2041015625Q67.4853515625 -54.2041015625 68.3984375 -53.33251953125Q69.3115234375 -52.4609375 69.3115234375 -51.1328125Q69.3115234375 -49.8046875 68.3984375 -48.974609375Q68.232421875 -48.80859375 66.28173828125 -47.18994140625Q64.3310546875 -45.5712890625 60.6787109375 -43.7451171875Q57.0263671875 -41.9189453125 51.75537109375 -40.4248046875Q46.484375 -38.9306640625 39.677734375 -38.9306640625Q33.369140625 -38.9306640625 27.68310546875 -41.005859375Q21.9970703125 -43.0810546875 17.6806640625 -46.982421875Q13.3642578125 -50.8837890625 10.83251953125 -56.48681640625Q8.30078125 -62.08984375 8.30078125 -69.228515625Q8.30078125 -77.1142578125 11.5380859375 -84.37744140625Q14.775390625 -91.640625 20.6689453125 -97.94921875Q26.5625 -104.2578125 34.7802734375 -109.36279296875Q42.998046875 -114.4677734375 52.91748046875 -118.1201171875Q62.8369140625 -121.7724609375 74.208984375 -123.7646484375Q85.5810546875 -125.7568359375 97.7001953125 -125.7568359375Q110.068359375 -125.7568359375 120.40283203125 -123.30810546875Q130.7373046875 -120.859375 138.2080078125 -116.25244140625Q145.6787109375 -111.6455078125 149.8291015625 -104.96337890625Q153.9794921875 -98.28125 153.9794921875 -89.814453125Q153.9794921875 -78.6083984375 147.54638671875 -69.4775390625Q141.11328125 -60.3466796875 128.662109375 -54.287109375Q133.2275390625 -50.3857421875 135.84228515625 -45.19775390625Q138.45703125 -40.009765625 139.74365234375 -34.697265625Q141.0302734375 -29.384765625 141.40380859375 -24.5703125Q141.77734375 -19.755859375 141.943359375 -16.5185546875Q142.109375 -11.787109375 142.81494140625 -8.84033203125Q143.5205078125 -5.8935546875 144.80712890625 -4.2333984375Q146.09375 -2.5732421875 147.96142578125 -1.95068359375Q149.8291015625 -1.328125 152.4853515625 -1.328125Q156.220703125 -1.328125 159.375 -3.11279296875Q162.529296875 -4.8974609375 165.06103515625 -7.5537109375Q167.5927734375 -10.2099609375 169.54345703125 -13.32275390625Q171.494140625 -16.435546875 172.822265625 -19.13330078125Q174.150390625 -21.8310546875 174.85595703125 -23.61572265625Q175.5615234375 -25.400390625 175.5615234375 -25.4833984375Q176.3916015625 -27.55859375 178.466796875 -27.55859375Q179.8779296875 -27.55859375 180.74951171875 -26.60400390625Q181.62109375 -25.6494140625 181.62109375 -24.404296875Q181.62109375 -23.9892578125 181.455078125 -23.3251953125Q181.3720703125 -22.9931640625 180.50048828125 -20.79345703125Q179.62890625 -18.59375 177.96875 -15.48095703125Q176.30859375 -12.3681640625 173.818359375 -8.798828125Q171.328125 -5.2294921875 168.04931640625 -2.19970703125Q164.7705078125 0.830078125 160.66162109375 2.822265625Q156.552734375 4.814453125 151.572265625 4.814453125Q147.1728515625 4.814453125 144.22607421875 3.4033203125Q141.279296875 1.9921875 139.41162109375 -0.70556640625Q137.5439453125 -3.4033203125 136.67236328125 -7.26318359375Q135.80078125 -11.123046875 135.634765625 -16.103515625Q135.5517578125 -18.1787109375 135.3857421875 -21.04248046875Q135.2197265625 -23.90625 134.76318359375 -27.10205078125Q134.306640625 -30.2978515625 133.4765625 -33.701171875Q132.646484375 -37.1044921875 131.15234375 -40.341796875Q129.658203125 -43.5791015625 127.4169921875 -46.484375Q125.17578125 -49.3896484375 121.9384765625 -51.5478515625Q115.546875 -49.3896484375 108.69873046875 -48.18603515625Q101.8505859375 -46.982421875 94.5458984375 -46.8994140625V-44.4091796875Q94.5458984375 -34.19921875 92.51220703125 -25.27587890625Q90.478515625 -16.3525390625 85.9130859375 -9.75341796875Q81.34765625 -3.154296875 74.1259765625 0.62255859375Q66.904296875 4.3994140625 56.5283203125 4.3994140625Q51.3818359375 4.3994140625 46.35986328125 3.02978515625Q41.337890625 1.66015625 36.97998046875 -0.7470703125Q32.6220703125 -3.154296875 29.17724609375 -6.43310546875Q25.732421875 -9.7119140625 23.740234375 -13.5302734375Q23.3251953125 -14.1943359375 23.3251953125 -15.0244140625Q23.3251953125 -16.1865234375 24.19677734375 -17.14111328125Q25.068359375 -18.095703125 26.4794921875 -18.095703125Q28.3056640625 -18.095703125 29.21875 -16.5185546875Q31.044921875 -13.28125 33.9501953125 -10.5419921875Q36.85546875 -7.802734375 40.46630859375 -5.85205078125Q44.0771484375 -3.9013671875 48.18603515625 -2.822265625Q52.294921875 -1.7431640625 56.5283203125 -1.7431640625Q65.078125 -1.7431640625 71.1376953125 -4.77294921875Q77.197265625 -7.802734375 81.015625 -13.40576171875Q84.833984375 -19.0087890625 86.5771484375 -26.85302734375Q88.3203125 -34.697265625 88.3203125 -44.4091796875V-47.646484375Q85.5810546875 -48.5595703125 83.9208984375 -50.2197265625Q82.2607421875 -51.8798828125 82.2607421875 -54.287109375Q82.2607421875 -56.6943359375 83.837890625 -58.5205078125Q85.4150390625 -60.3466796875 88.3203125 -61.5087890625Q88.3203125 -63.41796875 88.4033203125 -65.28564453125Q88.486328125 -67.1533203125 88.65234375 -68.9794921875Q89.150390625 -74.9560546875 90.52001953125 -79.6875Q91.8896484375 -84.4189453125 93.75732421875 -87.98828125Q95.625 -91.5576171875 97.6171875 -94.0478515625Q99.609375 -96.5380859375 101.3525390625 -98.15673828125Q103.095703125 -99.775390625 104.2578125 -100.5224609375Q105.419921875 -101.26953125 105.5859375 -101.3525390625Q106.1669921875 -101.6845703125 106.9970703125 -101.6845703125ZM114.7998046875 -55.3662109375Q113.388671875 -55.78125 112.060546875 -56.1962890625Q110.732421875 -56.611328125 109.19677734375 -56.90185546875Q107.6611328125 -57.1923828125 105.79345703125 -57.39990234375Q103.92578125 -57.607421875 101.5185546875 -57.607421875Q97.2021484375 -57.607421875 94.462890625 -57.109375V-57.0263671875V-53.0419921875Q99.5263671875 -53.0419921875 104.88037109375 -53.623046875Q110.234375 -54.2041015625 114.7998046875 -55.3662109375Z M239.39453125 -23.1591796875Q239.0625 -22.4951171875 238.02490234375 -20.37841796875Q236.9873046875 -18.26171875 235.36865234375 -15.5224609375Q233.75 -12.783203125 231.591796875 -9.794921875Q229.43359375 -6.806640625 226.77734375 -4.31640625Q224.12109375 -1.826171875 221.0498046875 -0.20751953125Q217.978515625 1.4111328125 214.5751953125 1.4111328125Q209.7607421875 1.4111328125 206.48193359375 -1.66015625Q203.203125 -4.7314453125 201.708984375 -9.3798828125Q198.88671875 -4.6484375 194.9853515625 -1.86767578125Q191.083984375 0.9130859375 187.1826171875 0.9130859375Q184.111328125 0.9130859375 181.62109375 -0.20751953125Q179.130859375 -1.328125 177.3876953125 -3.36181640625Q175.64453125 -5.3955078125 174.68994140625 -8.134765625Q173.7353515625 -10.8740234375 173.7353515625 -14.111328125Q173.7353515625 -20.5859375 175.93505859375 -25.52490234375Q178.134765625 -30.4638671875 181.5380859375 -33.7841796875Q184.94140625 -37.1044921875 189.05029296875 -38.7646484375Q193.1591796875 -40.4248046875 196.9775390625 -40.4248046875Q199.55078125 -40.4248046875 201.708984375 -39.71923828125Q203.8671875 -39.013671875 205.40283203125 -38.18359375Q206.9384765625 -37.353515625 207.7685546875 -36.64794921875Q208.5986328125 -35.9423828125 208.681640625 -35.859375Q209.5947265625 -34.7802734375 209.5947265625 -33.6181640625Q209.5947265625 -32.373046875 208.681640625 -31.41845703125Q207.7685546875 -30.4638671875 206.5234375 -30.4638671875Q205.1953125 -30.4638671875 204.2822265625 -31.376953125Q204.1162109375 -31.54296875 203.53515625 -31.99951171875Q202.9541015625 -32.4560546875 201.9580078125 -32.9541015625Q200.9619140625 -33.4521484375 199.59228515625 -33.82568359375Q198.22265625 -34.19921875 196.4794921875 -34.19921875Q193.90625 -34.19921875 191.0009765625 -33.037109375Q188.095703125 -31.875 185.6884765625 -29.42626953125Q183.28125 -26.9775390625 181.66259765625 -23.28369140625Q180.0439453125 -19.58984375 180.0439453125 -14.5263671875Q180.0439453125 -12.94921875 180.3759765625 -11.33056640625Q180.7080078125 -9.7119140625 181.5380859375 -8.3837890625Q182.3681640625 -7.0556640625 183.779296875 -6.2255859375Q185.1904296875 -5.3955078125 187.265625 -5.3955078125Q188.759765625 -5.3955078125 190.71044921875 -6.3916015625Q192.6611328125 -7.3876953125 194.44580078125 -9.462890625Q196.23046875 -11.5380859375 197.68310546875 -14.6923828125Q199.1357421875 -17.8466796875 199.716796875 -22.1630859375Q199.8828125 -23.3251953125 200.7958984375 -24.11376953125Q201.708984375 -24.90234375 202.9541015625 -24.90234375Q204.1162109375 -24.90234375 204.98779296875 -23.9892578125Q205.859375 -23.076171875 205.9423828125 -21.9140625Q206.025390625 -20.3369140625 206.2744140625 -17.47314453125Q206.5234375 -14.609375 207.39501953125 -11.787109375Q208.2666015625 -8.96484375 210.009765625 -6.8896484375Q211.7529296875 -4.814453125 214.82421875 -4.814453125Q216.81640625 -4.814453125 218.76708984375 -5.8935546875Q220.7177734375 -6.97265625 222.58544921875 -8.75732421875Q224.453125 -10.5419921875 226.15478515625 -12.82470703125Q227.8564453125 -15.107421875 229.267578125 -17.431640625Q230.6787109375 -19.755859375 231.7578125 -21.9140625Q232.8369140625 -24.072265625 233.583984375 -25.6494140625Q233.9990234375 -26.5625 234.78759765625 -27.060546875Q235.576171875 -27.55859375 236.4892578125 -27.55859375Q237.900390625 -27.55859375 238.77197265625 -26.52099609375Q239.6435546875 -25.4833984375 239.6435546875 -24.3212890625Q239.6435546875 -23.740234375 239.39453125 -23.1591796875Z M287.9541015625 -22.9931640625Q287.4560546875 -22.080078125 286.25244140625 -19.6728515625Q285.048828125 -17.265625 283.01513671875 -14.23583984375Q280.9814453125 -11.2060546875 278.1591796875 -7.96875Q275.3369140625 -4.7314453125 271.6845703125 -2.03369140625Q268.0322265625 0.6640625 263.50830078125 2.4072265625Q258.984375 4.150390625 253.671875 4.150390625Q248.9404296875 4.150390625 245.2880859375 2.44873046875Q241.6357421875 0.7470703125 239.0625 -2.36572265625Q236.4892578125 -5.478515625 235.1611328125 -9.7119140625Q233.8330078125 -13.9453125 233.8330078125 -19.091796875Q233.8330078125 -24.072265625 235.244140625 -28.43017578125Q236.6552734375 -32.7880859375 239.10400390625 -36.025390625Q241.552734375 -39.2626953125 244.7900390625 -41.13037109375Q248.02734375 -42.998046875 251.6796875 -42.998046875Q254.4189453125 -42.998046875 256.66015625 -42.04345703125Q258.9013671875 -41.0888671875 260.43701171875 -39.51171875Q261.97265625 -37.9345703125 262.84423828125 -36.025390625Q263.7158203125 -34.1162109375 263.7158203125 -32.20703125Q263.7158203125 -30.380859375 263.25927734375 -28.8037109375Q262.802734375 -27.2265625 262.09716796875 -26.02294921875Q261.3916015625 -24.8193359375 260.478515625 -24.11376953125Q259.5654296875 -23.408203125 258.65234375 -23.408203125Q257.2412109375 -23.408203125 256.36962890625 -24.3212890625Q255.498046875 -25.234375 255.498046875 -26.5625Q255.498046875 -27.2265625 255.78857421875 -27.724609375Q256.0791015625 -28.22265625 256.45263671875 -28.76220703125Q256.826171875 -29.3017578125 257.11669921875 -30.09033203125Q257.4072265625 -30.87890625 257.4072265625 -32.1240234375Q257.4072265625 -33.8671875 255.78857421875 -35.2783203125Q254.169921875 -36.689453125 251.6796875 -36.689453125Q249.35546875 -36.689453125 247.23876953125 -35.2783203125Q245.1220703125 -33.8671875 243.544921875 -31.50146484375Q241.9677734375 -29.1357421875 241.01318359375 -25.93994140625Q240.05859375 -22.744140625 240.05859375 -19.1748046875Q240.05859375 -15.771484375 240.888671875 -12.7001953125Q241.71875 -9.62890625 243.37890625 -7.26318359375Q245.0390625 -4.8974609375 247.57080078125 -3.486328125Q250.1025390625 -2.0751953125 253.5888671875 -2.0751953125Q258.0712890625 -2.0751953125 261.8896484375 -3.69384765625Q265.7080078125 -5.3125 268.8623046875 -7.802734375Q272.0166015625 -10.29296875 274.423828125 -13.23974609375Q276.8310546875 -16.1865234375 278.53271484375 -18.80126953125Q280.234375 -21.416015625 281.18896484375 -23.36669921875Q282.1435546875 -25.3173828125 282.3095703125 -25.8154296875Q282.6416015625 -26.6455078125 283.43017578125 -27.10205078125Q284.21875 -27.55859375 285.1318359375 -27.55859375Q286.54296875 -27.55859375 287.41455078125 -26.5625Q288.2861328125 -25.56640625 288.2861328125 -24.3212890625Q288.2861328125 -23.8232421875 287.9541015625 -22.9931640625Z M288.8671875 -7.0556640625Q290.1953125 -9.8779296875 291.9384765625 -13.15673828125Q293.681640625 -16.435546875 295.673828125 -19.88037109375Q297.666015625 -23.3251953125 299.9072265625 -26.728515625Q302.1484375 -30.1318359375 304.5556640625 -33.1201171875Q306.962890625 -36.025390625 309.41162109375 -37.31201171875Q311.8603515625 -38.5986328125 314.0185546875 -38.5986328125Q316.1767578125 -38.5986328125 317.79541015625 -37.72705078125Q319.4140625 -36.85546875 320.45166015625 -35.361328125Q321.4892578125 -33.8671875 322.02880859375 -31.875Q322.568359375 -29.8828125 322.568359375 -27.55859375Q322.568359375 -25.6494140625 322.19482421875 -22.45361328125Q321.8212890625 -19.2578125 321.8212890625 -15.771484375Q321.8212890625 -13.779296875 322.02880859375 -11.82861328125Q322.236328125 -9.8779296875 322.77587890625 -8.34228515625Q323.3154296875 -6.806640625 324.39453125 -5.85205078125Q325.4736328125 -4.8974609375 327.216796875 -4.8974609375Q329.208984375 -4.8974609375 331.201171875 -6.01806640625Q333.193359375 -7.138671875 335.1025390625 -9.00634765625Q337.01171875 -10.8740234375 338.7548828125 -13.15673828125Q340.498046875 -15.439453125 341.9091796875 -17.72216796875Q343.3203125 -20.0048828125 344.3994140625 -22.12158203125Q345.478515625 -24.23828125 346.142578125 -25.6494140625Q346.97265625 -27.55859375 349.0478515625 -27.55859375Q350.458984375 -27.55859375 351.2890625 -26.5625Q352.119140625 -25.56640625 352.119140625 -24.404296875Q352.119140625 -23.740234375 351.8701171875 -23.1591796875Q351.5380859375 -22.4951171875 350.58349609375 -20.419921875Q349.62890625 -18.3447265625 348.01025390625 -15.60546875Q346.3916015625 -12.8662109375 344.2333984375 -9.8779296875Q342.0751953125 -6.8896484375 339.46044921875 -4.35791015625Q336.845703125 -1.826171875 333.81591796875 -0.20751953125Q330.7861328125 1.4111328125 327.4658203125 1.4111328125Q323.6474609375 1.4111328125 321.3232421875 -0.20751953125Q318.9990234375 -1.826171875 317.71240234375 -4.31640625Q316.42578125 -6.806640625 315.96923828125 -9.8779296875Q315.5126953125 -12.94921875 315.5126953125 -15.8544921875Q315.5126953125 -17.3486328125 315.63720703125 -19.05029296875Q315.76171875 -20.751953125 315.927734375 -22.412109375Q316.09375 -24.072265625 316.21826171875 -25.52490234375Q316.3427734375 -26.9775390625 316.3427734375 -27.9736328125Q316.3427734375 -30.546875 315.63720703125 -31.4599609375Q314.931640625 -32.373046875 314.0185546875 -32.373046875Q312.6904296875 -32.373046875 310.98876953125 -30.83740234375Q309.287109375 -29.3017578125 307.41943359375 -26.8115234375Q305.5517578125 -24.3212890625 303.68408203125 -21.20849609375Q301.81640625 -18.095703125 300.0732421875 -15.0244140625Q298.330078125 -11.953125 296.9189453125 -9.17236328125Q295.5078125 -6.3916015625 294.5947265625 -4.5654296875Q292.8515625 -1.0791015625 291.06689453125 0.12451171875Q289.2822265625 1.328125 287.87109375 1.328125Q285.2978515625 1.328125 283.92822265625 -0.70556640625Q282.55859375 -2.7392578125 282.55859375 -5.64453125V-10.8740234375Q282.55859375 -26.5625 282.60009765625 -40.79833984375Q282.6416015625 -55.0341796875 283.01513671875 -67.27783203125Q283.388671875 -79.521484375 284.26025390625 -89.44091796875Q285.1318359375 -99.3603515625 286.875 -106.37451171875Q288.6181640625 -113.388671875 291.31591796875 -117.20703125Q294.013671875 -121.025390625 298.0810546875 -121.025390625Q301.5673828125 -121.025390625 303.974609375 -119.1162109375Q306.3818359375 -117.20703125 307.8759765625 -113.92822265625Q309.3701171875 -110.6494140625 310.0341796875 -106.29150390625Q310.6982421875 -101.93359375 310.6982421875 -97.119140625Q310.6982421875 -87.32421875 308.91357421875 -77.90283203125Q307.12890625 -68.4814453125 304.140625 -59.5166015625Q301.15234375 -50.5517578125 297.16796875 -42.04345703125Q293.18359375 -33.53515625 288.7841796875 -25.4833984375Q288.7841796875 -23.9892578125 288.7841796875 -21.9140625Q288.7841796875 -19.8388671875 288.7841796875 -17.763671875Q288.7841796875 -15.6884765625 288.7841796875 -13.8623046875Q288.7841796875 -12.0361328125 288.7841796875 -10.95703125ZM288.8671875 -37.685546875Q292.353515625 -45.322265625 295.21728515625 -52.58544921875Q298.0810546875 -59.8486328125 300.11474609375 -67.0703125Q302.1484375 -74.2919921875 303.310546875 -81.72119140625Q304.47265625 -89.150390625 304.47265625 -97.2021484375Q304.47265625 -98.5302734375 304.34814453125 -101.435546875Q304.2236328125 -104.3408203125 303.60107421875 -107.3291015625Q302.978515625 -110.3173828125 301.69189453125 -112.55859375Q300.4052734375 -114.7998046875 298.0810546875 -114.7998046875Q296.2548828125 -114.7998046875 294.9267578125 -112.35107421875Q293.5986328125 -109.90234375 292.6025390625 -105.71044921875Q291.6064453125 -101.5185546875 290.9423828125 -95.95703125Q290.2783203125 -90.3955078125 289.86328125 -84.169921875Q289.4482421875 -77.9443359375 289.24072265625 -71.38671875Q289.033203125 -64.8291015625 288.9501953125 -58.64501953125Q288.8671875 -52.4609375 288.8671875 -47.0654296875Q288.8671875 -41.669921875 288.8671875 -37.685546875Z M356.103515625 -9.130859375Q357.8466796875 -6.7236328125 360.5859375 -5.27099609375Q363.3251953125 -3.818359375 367.3095703125 -3.818359375Q371.376953125 -3.818359375 374.697265625 -5.76904296875Q378.017578125 -7.7197265625 380.7568359375 -10.8740234375Q383.49609375 -14.0283203125 385.654296875 -17.9296875Q387.8125 -21.8310546875 389.5556640625 -25.732421875Q389.970703125 -26.6455078125 390.7177734375 -27.10205078125Q391.46484375 -27.55859375 392.3779296875 -27.55859375Q393.7890625 -27.55859375 394.66064453125 -26.5625Q395.5322265625 -25.56640625 395.5322265625 -24.404296875Q395.5322265625 -23.9892578125 395.44921875 -23.69873046875Q395.3662109375 -23.408203125 395.2001953125 -23.076171875Q389.47265625 -10.458984375 382.70751953125 -4.0673828125Q375.9423828125 2.32421875 367.392578125 2.490234375Q361.9140625 2.490234375 357.9296875 0.37353515625Q353.9453125 -1.7431640625 351.3720703125 -5.10498046875Q348.798828125 -8.466796875 347.5537109375 -12.7001953125Q346.30859375 -16.93359375 346.30859375 -21.1669921875Q346.30859375 -25.400390625 347.34619140625 -28.9697265625Q348.3837890625 -32.5390625 350.33447265625 -35.1953125Q352.28515625 -37.8515625 354.98291015625 -39.345703125Q357.6806640625 -40.83984375 360.91796875 -40.83984375Q362.8271484375 -40.83984375 364.69482421875 -40.05126953125Q366.5625 -39.2626953125 368.056640625 -37.81005859375Q369.55078125 -36.357421875 370.4638671875 -34.2822265625Q371.376953125 -32.20703125 371.376953125 -29.55078125Q371.376953125 -26.1474609375 370.21484375 -23.1591796875Q369.052734375 -20.1708984375 367.01904296875 -17.59765625Q364.9853515625 -15.0244140625 362.1630859375 -12.8662109375Q359.3408203125 -10.7080078125 356.103515625 -9.130859375ZM353.61328125 -14.5263671875Q356.1865234375 -15.60546875 358.30322265625 -17.265625Q360.419921875 -18.92578125 361.9140625 -20.91796875Q363.408203125 -22.91015625 364.23828125 -25.10986328125Q365.068359375 -27.3095703125 365.068359375 -29.55078125Q365.068359375 -32.041015625 363.8232421875 -33.32763671875Q362.578125 -34.6142578125 360.91796875 -34.6142578125Q358.6767578125 -34.6142578125 357.099609375 -33.369140625Q355.5224609375 -32.1240234375 354.5263671875 -30.1318359375Q353.5302734375 -28.1396484375 353.07373046875 -25.69091796875Q352.6171875 -23.2421875 352.6171875 -20.8349609375Q352.6171875 -19.3408203125 352.90771484375 -17.6806640625Q353.1982421875 -16.0205078125 353.61328125 -14.5263671875Z M436.787109375 -22.9931640625Q435.8740234375 -21.083984375 434.50439453125 -18.46923828125Q433.134765625 -15.8544921875 431.3916015625 -13.0322265625Q429.6484375 -10.2099609375 427.490234375 -7.42919921875Q425.33203125 -4.6484375 422.80029296875 -2.44873046875Q420.2685546875 -0.2490234375 417.40478515625 1.12060546875Q414.541015625 2.490234375 411.3037109375 2.490234375Q406.3232421875 2.490234375 402.75390625 -0.5810546875Q399.1845703125 -3.65234375 396.6943359375 -8.6328125Q394.2041015625 -13.61328125 392.66845703125 -19.96337890625Q391.1328125 -26.3134765625 390.302734375 -32.91259765625Q389.47265625 -39.51171875 389.18212890625 -45.7373046875Q388.8916015625 -51.962890625 388.8916015625 -56.77734375Q388.8916015625 -63.75 389.34814453125 -71.220703125Q389.8046875 -78.69140625 390.80078125 -85.830078125Q391.796875 -92.96875 393.33251953125 -99.3603515625Q394.8681640625 -105.751953125 396.98486328125 -110.56640625Q399.1015625 -115.380859375 401.8408203125 -118.203125Q404.580078125 -121.025390625 408.06640625 -121.025390625Q410.8056640625 -121.025390625 413.00537109375 -119.73876953125Q415.205078125 -118.4521484375 416.69921875 -115.546875Q418.193359375 -112.6416015625 419.0234375 -107.9931640625Q419.853515625 -103.3447265625 419.853515625 -96.62109375Q419.853515625 -88.3203125 418.1103515625 -79.47998046875Q416.3671875 -70.6396484375 413.37890625 -61.6748046875Q410.390625 -52.7099609375 406.3232421875 -43.78662109375Q402.255859375 -34.86328125 397.607421875 -26.396484375Q399.6826171875 -15.8544921875 403.1689453125 -9.83642578125Q406.6552734375 -3.818359375 411.552734375 -3.818359375Q414.873046875 -3.818359375 417.9443359375 -6.43310546875Q421.015625 -9.0478515625 423.5888671875 -12.6171875Q426.162109375 -16.1865234375 428.11279296875 -19.88037109375Q430.0634765625 -23.57421875 431.142578125 -25.8154296875Q431.5576171875 -26.6455078125 432.3046875 -27.10205078125Q433.0517578125 -27.55859375 433.96484375 -27.55859375Q435.3759765625 -27.55859375 436.24755859375 -26.5625Q437.119140625 -25.56640625 437.119140625 -24.3212890625Q437.119140625 -23.8232421875 436.787109375 -22.9931640625ZM395.2001953125 -56.3623046875Q395.2001953125 -51.0498046875 395.44921875 -46.15234375Q395.6982421875 -41.2548828125 396.11328125 -36.7724609375Q399.599609375 -43.49609375 402.75390625 -51.09130859375Q405.908203125 -58.6865234375 408.3154296875 -66.44775390625Q410.72265625 -74.208984375 412.17529296875 -81.88720703125Q413.6279296875 -89.5654296875 413.6279296875 -96.5380859375Q413.6279296875 -106.3330078125 412.05078125 -110.56640625Q410.4736328125 -114.7998046875 407.8173828125 -114.7998046875Q406.07421875 -114.7998046875 404.45556640625 -112.392578125Q402.8369140625 -109.9853515625 401.42578125 -105.8349609375Q400.0146484375 -101.6845703125 398.8525390625 -96.0400390625Q397.6904296875 -90.3955078125 396.90185546875 -83.9208984375Q396.11328125 -77.4462890625 395.65673828125 -70.390625Q395.2001953125 -63.3349609375 395.2001953125 -56.3623046875Z  M604.296875 -30.7958984375Q600.3955078125 -24.4873046875 593.7548828125 -18.30322265625Q587.1142578125 -12.119140625 578.60595703125 -7.18017578125Q570.09765625 -2.2412109375 560.0537109375 0.78857421875Q550.009765625 3.818359375 539.3017578125 3.818359375Q530.91796875 3.818359375 522.57568359375 2.32421875Q514.2333984375 0.830078125 506.55517578125 -2.2412109375Q498.876953125 -5.3125 492.27783203125 -10.00244140625Q485.6787109375 -14.6923828125 480.78125 -21.083984375Q475.8837890625 -27.4755859375 473.10302734375 -35.6103515625Q470.322265625 -43.7451171875 470.322265625 -53.7060546875Q470.322265625 -63.41796875 473.18603515625 -72.1337890625Q476.0498046875 -80.849609375 481.1962890625 -88.27880859375Q486.3427734375 -95.7080078125 493.3984375 -101.6845703125Q500.4541015625 -107.6611328125 508.837890625 -111.85302734375Q517.2216796875 -116.044921875 526.5185546875 -118.2861328125Q535.8154296875 -120.52734375 545.52734375 -120.52734375Q556.2353515625 -120.52734375 565.65673828125 -117.99560546875Q575.078125 -115.4638671875 582.1337890625 -110.85693359375Q589.189453125 -106.25 593.29833984375 -99.81689453125Q597.4072265625 -93.3837890625 597.4072265625 -85.498046875Q597.4072265625 -78.193359375 594.00390625 -71.59423828125Q590.6005859375 -64.9951171875 584.66552734375 -60.0146484375Q578.73046875 -55.0341796875 570.80322265625 -52.12890625Q562.8759765625 -49.2236328125 553.9111328125 -49.2236328125Q546.689453125 -49.2236328125 541.1279296875 -51.00830078125Q535.56640625 -52.79296875 531.8310546875 -55.947265625Q528.095703125 -59.1015625 526.1865234375 -63.3349609375Q524.27734375 -67.568359375 524.27734375 -72.4658203125Q524.27734375 -76.533203125 525.56396484375 -79.89501953125Q526.8505859375 -83.2568359375 528.38623046875 -85.6640625Q529.921875 -88.0712890625 531.29150390625 -89.44091796875Q532.6611328125 -90.810546875 532.8271484375 -90.9765625Q533.2421875 -91.3916015625 533.78173828125 -91.51611328125Q534.3212890625 -91.640625 534.8193359375 -91.640625Q536.1474609375 -91.640625 537.060546875 -90.810546875Q537.9736328125 -89.98046875 537.9736328125 -88.65234375Q537.9736328125 -87.158203125 536.89453125 -86.162109375Q536.728515625 -86.0791015625 535.732421875 -85.04150390625Q534.736328125 -84.00390625 533.57421875 -82.21923828125Q532.412109375 -80.4345703125 531.45751953125 -77.9443359375Q530.5029296875 -75.4541015625 530.5029296875 -72.4658203125Q530.5029296875 -67.734375 532.61962890625 -64.4970703125Q534.736328125 -61.259765625 538.1396484375 -59.22607421875Q541.54296875 -57.1923828125 545.693359375 -56.32080078125Q549.84375 -55.44921875 553.994140625 -55.44921875Q561.7138671875 -55.44921875 568.47900390625 -57.939453125Q575.244140625 -60.4296875 580.3076171875 -64.580078125Q585.37109375 -68.73046875 588.2763671875 -74.1259765625Q591.181640625 -79.521484375 591.181640625 -85.4150390625Q591.181640625 -91.8896484375 587.529296875 -97.24365234375Q583.876953125 -102.59765625 577.6513671875 -106.37451171875Q571.42578125 -110.1513671875 563.08349609375 -112.2265625Q554.7412109375 -114.3017578125 545.2783203125 -114.3017578125Q538.1396484375 -114.3017578125 530.29541015625 -112.60009765625Q522.451171875 -110.8984375 514.814453125 -107.4951171875Q507.177734375 -104.091796875 500.24658203125 -99.0283203125Q493.3154296875 -93.96484375 488.0859375 -87.19970703125Q482.8564453125 -80.4345703125 479.74365234375 -72.05078125Q476.630859375 -63.6669921875 476.630859375 -53.7060546875Q476.630859375 -44.658203125 479.16259765625 -37.353515625Q481.6943359375 -30.048828125 486.1767578125 -24.36279296875Q490.6591796875 -18.6767578125 496.67724609375 -14.5263671875Q502.6953125 -10.3759765625 509.62646484375 -7.67822265625Q516.5576171875 -4.98046875 524.111328125 -3.69384765625Q531.6650390625 -2.4072265625 539.1357421875 -2.4072265625Q549.0966796875 -2.4072265625 558.310546875 -5.18798828125Q567.5244140625 -7.96875 575.36865234375 -12.49267578125Q583.212890625 -17.0166015625 589.2724609375 -22.6611328125Q595.33203125 -28.3056640625 598.9013671875 -34.033203125Q599.31640625 -34.7802734375 600.0634765625 -35.15380859375Q600.810546875 -35.52734375 601.640625 -35.52734375Q603.0517578125 -35.52734375 603.8818359375 -34.57275390625Q604.7119140625 -33.6181640625 604.7119140625 -32.4560546875Q604.7119140625 -32.041015625 604.62890625 -31.6259765625Q604.5458984375 -31.2109375 604.296875 -30.7958984375Z M619.404296875 -7.0556640625Q620.732421875 -9.8779296875 622.4755859375 -13.15673828125Q624.21875 -16.435546875 626.2109375 -19.88037109375Q628.203125 -23.3251953125 630.4443359375 -26.728515625Q632.685546875 -30.1318359375 635.0927734375 -33.1201171875Q637.5 -36.025390625 639.94873046875 -37.31201171875Q642.3974609375 -38.5986328125 644.5556640625 -38.5986328125Q646.7138671875 -38.5986328125 648.33251953125 -37.72705078125Q649.951171875 -36.85546875 650.98876953125 -35.361328125Q652.0263671875 -33.8671875 652.56591796875 -31.875Q653.10546875 -29.8828125 653.10546875 -27.55859375Q653.10546875 -25.6494140625 652.73193359375 -22.45361328125Q652.3583984375 -19.2578125 652.3583984375 -15.771484375Q652.3583984375 -13.779296875 652.56591796875 -11.82861328125Q652.7734375 -9.8779296875 653.31298828125 -8.34228515625Q653.8525390625 -6.806640625 654.931640625 -5.85205078125Q656.0107421875 -4.8974609375 657.75390625 -4.8974609375Q659.74609375 -4.8974609375 661.73828125 -6.01806640625Q663.73046875 -7.138671875 665.6396484375 -9.00634765625Q667.548828125 -10.8740234375 669.2919921875 -13.15673828125Q671.03515625 -15.439453125 672.4462890625 -17.72216796875Q673.857421875 -20.0048828125 674.9365234375 -22.12158203125Q676.015625 -24.23828125 676.6796875 -25.6494140625Q677.509765625 -27.55859375 679.5849609375 -27.55859375Q680.99609375 -27.55859375 681.826171875 -26.5625Q682.65625 -25.56640625 682.65625 -24.404296875Q682.65625 -23.740234375 682.4072265625 -23.1591796875Q682.0751953125 -22.4951171875 681.12060546875 -20.419921875Q680.166015625 -18.3447265625 678.54736328125 -15.60546875Q676.9287109375 -12.8662109375 674.7705078125 -9.8779296875Q672.6123046875 -6.8896484375 669.99755859375 -4.35791015625Q667.3828125 -1.826171875 664.35302734375 -0.20751953125Q661.3232421875 1.4111328125 658.0029296875 1.4111328125Q654.1845703125 1.4111328125 651.8603515625 -0.20751953125Q649.5361328125 -1.826171875 648.24951171875 -4.31640625Q646.962890625 -6.806640625 646.50634765625 -9.8779296875Q646.0498046875 -12.94921875 646.0498046875 -15.8544921875Q646.0498046875 -17.3486328125 646.17431640625 -19.05029296875Q646.298828125 -20.751953125 646.46484375 -22.412109375Q646.630859375 -24.072265625 646.75537109375 -25.52490234375Q646.8798828125 -26.9775390625 646.8798828125 -27.9736328125Q646.8798828125 -30.546875 646.17431640625 -31.4599609375Q645.46875 -32.373046875 644.5556640625 -32.373046875Q643.2275390625 -32.373046875 641.52587890625 -30.83740234375Q639.82421875 -29.3017578125 637.95654296875 -26.8115234375Q636.0888671875 -24.3212890625 634.22119140625 -21.20849609375Q632.353515625 -18.095703125 630.6103515625 -15.0244140625Q628.8671875 -11.953125 627.4560546875 -9.17236328125Q626.044921875 -6.3916015625 625.1318359375 -4.5654296875Q623.388671875 -1.0791015625 621.60400390625 0.12451171875Q619.8193359375 1.328125 618.408203125 1.328125Q615.8349609375 1.328125 614.46533203125 -0.70556640625Q613.095703125 -2.7392578125 613.095703125 -5.64453125V-10.8740234375Q613.095703125 -26.5625 613.13720703125 -40.79833984375Q613.1787109375 -55.0341796875 613.55224609375 -67.27783203125Q613.92578125 -79.521484375 614.79736328125 -89.44091796875Q615.6689453125 -99.3603515625 617.412109375 -106.37451171875Q619.1552734375 -113.388671875 621.85302734375 -117.20703125Q624.55078125 -121.025390625 628.6181640625 -121.025390625Q632.1044921875 -121.025390625 634.51171875 -119.1162109375Q636.9189453125 -117.20703125 638.4130859375 -113.92822265625Q639.9072265625 -110.6494140625 640.5712890625 -106.29150390625Q641.2353515625 -101.93359375 641.2353515625 -97.119140625Q641.2353515625 -87.32421875 639.45068359375 -77.90283203125Q637.666015625 -68.4814453125 634.677734375 -59.5166015625Q631.689453125 -50.5517578125 627.705078125 -42.04345703125Q623.720703125 -33.53515625 619.3212890625 -25.4833984375Q619.3212890625 -23.9892578125 619.3212890625 -21.9140625Q619.3212890625 -19.8388671875 619.3212890625 -17.763671875Q619.3212890625 -15.6884765625 619.3212890625 -13.8623046875Q619.3212890625 -12.0361328125 619.3212890625 -10.95703125ZM619.404296875 -37.685546875Q622.890625 -45.322265625 625.75439453125 -52.58544921875Q628.6181640625 -59.8486328125 630.65185546875 -67.0703125Q632.685546875 -74.2919921875 633.84765625 -81.72119140625Q635.009765625 -89.150390625 635.009765625 -97.2021484375Q635.009765625 -98.5302734375 634.88525390625 -101.435546875Q634.7607421875 -104.3408203125 634.13818359375 -107.3291015625Q633.515625 -110.3173828125 632.22900390625 -112.55859375Q630.9423828125 -114.7998046875 628.6181640625 -114.7998046875Q626.7919921875 -114.7998046875 625.4638671875 -112.35107421875Q624.1357421875 -109.90234375 623.1396484375 -105.71044921875Q622.1435546875 -101.5185546875 621.4794921875 -95.95703125Q620.8154296875 -90.3955078125 620.400390625 -84.169921875Q619.9853515625 -77.9443359375 619.77783203125 -71.38671875Q619.5703125 -64.8291015625 619.4873046875 -58.64501953125Q619.404296875 -52.4609375 619.404296875 -47.0654296875Q619.404296875 -41.669921875 619.404296875 -37.685546875Z M686.640625 -9.130859375Q688.3837890625 -6.7236328125 691.123046875 -5.27099609375Q693.8623046875 -3.818359375 697.8466796875 -3.818359375Q701.9140625 -3.818359375 705.234375 -5.76904296875Q708.5546875 -7.7197265625 711.2939453125 -10.8740234375Q714.033203125 -14.0283203125 716.19140625 -17.9296875Q718.349609375 -21.8310546875 720.0927734375 -25.732421875Q720.5078125 -26.6455078125 721.2548828125 -27.10205078125Q722.001953125 -27.55859375 722.9150390625 -27.55859375Q724.326171875 -27.55859375 725.19775390625 -26.5625Q726.0693359375 -25.56640625 726.0693359375 -24.404296875Q726.0693359375 -23.9892578125 725.986328125 -23.69873046875Q725.9033203125 -23.408203125 725.7373046875 -23.076171875Q720.009765625 -10.458984375 713.24462890625 -4.0673828125Q706.4794921875 2.32421875 697.9296875 2.490234375Q692.451171875 2.490234375 688.466796875 0.37353515625Q684.482421875 -1.7431640625 681.9091796875 -5.10498046875Q679.3359375 -8.466796875 678.0908203125 -12.7001953125Q676.845703125 -16.93359375 676.845703125 -21.1669921875Q676.845703125 -25.400390625 677.88330078125 -28.9697265625Q678.9208984375 -32.5390625 680.87158203125 -35.1953125Q682.822265625 -37.8515625 685.52001953125 -39.345703125Q688.2177734375 -40.83984375 691.455078125 -40.83984375Q693.3642578125 -40.83984375 695.23193359375 -40.05126953125Q697.099609375 -39.2626953125 698.59375 -37.81005859375Q700.087890625 -36.357421875 701.0009765625 -34.2822265625Q701.9140625 -32.20703125 701.9140625 -29.55078125Q701.9140625 -26.1474609375 700.751953125 -23.1591796875Q699.58984375 -20.1708984375 697.55615234375 -17.59765625Q695.5224609375 -15.0244140625 692.7001953125 -12.8662109375Q689.8779296875 -10.7080078125 686.640625 -9.130859375ZM684.150390625 -14.5263671875Q686.7236328125 -15.60546875 688.84033203125 -17.265625Q690.95703125 -18.92578125 692.451171875 -20.91796875Q693.9453125 -22.91015625 694.775390625 -25.10986328125Q695.60546875 -27.3095703125 695.60546875 -29.55078125Q695.60546875 -32.041015625 694.3603515625 -33.32763671875Q693.115234375 -34.6142578125 691.455078125 -34.6142578125Q689.2138671875 -34.6142578125 687.63671875 -33.369140625Q686.0595703125 -32.1240234375 685.0634765625 -30.1318359375Q684.0673828125 -28.1396484375 683.61083984375 -25.69091796875Q683.154296875 -23.2421875 683.154296875 -20.8349609375Q683.154296875 -19.3408203125 683.44482421875 -17.6806640625Q683.7353515625 -16.0205078125 684.150390625 -14.5263671875Z M738.5205078125 -7.470703125Q739.8486328125 -10.2099609375 741.591796875 -13.48876953125Q743.3349609375 -16.767578125 745.3271484375 -20.12939453125Q747.3193359375 -23.4912109375 749.51904296875 -26.8115234375Q751.71875 -30.1318359375 754.1259765625 -33.1201171875Q756.533203125 -36.025390625 758.98193359375 -37.31201171875Q761.4306640625 -38.5986328125 763.5888671875 -38.5986328125Q767.9052734375 -38.5986328125 769.98046875 -35.4443359375Q772.0556640625 -32.2900390625 772.0556640625 -27.6416015625Q772.0556640625 -26.5625 771.93115234375 -25.02685546875Q771.806640625 -23.4912109375 771.68212890625 -21.748046875Q771.5576171875 -20.0048828125 771.43310546875 -18.22021484375Q771.30859375 -16.435546875 771.30859375 -14.8583984375Q771.30859375 -12.8662109375 771.51611328125 -11.0400390625Q771.7236328125 -9.2138671875 772.3046875 -7.84423828125Q772.8857421875 -6.474609375 773.96484375 -5.68603515625Q775.0439453125 -4.8974609375 776.787109375 -4.8974609375Q779.94140625 -4.8974609375 782.9296875 -7.34619140625Q785.91796875 -9.794921875 788.44970703125 -13.15673828125Q790.9814453125 -16.5185546875 792.84912109375 -20.0048828125Q794.716796875 -23.4912109375 795.6298828125 -25.6494140625Q796.044921875 -26.5625 796.83349609375 -27.060546875Q797.6220703125 -27.55859375 798.53515625 -27.55859375Q799.9462890625 -27.55859375 800.81787109375 -26.52099609375Q801.689453125 -25.4833984375 801.689453125 -24.3212890625Q801.689453125 -23.740234375 801.4404296875 -23.1591796875Q801.1083984375 -22.4951171875 800.1123046875 -20.419921875Q799.1162109375 -18.3447265625 797.49755859375 -15.64697265625Q795.87890625 -12.94921875 793.720703125 -9.91943359375Q791.5625 -6.8896484375 788.94775390625 -4.3994140625Q786.3330078125 -1.9091796875 783.30322265625 -0.2490234375Q780.2734375 1.4111328125 776.953125 1.4111328125Q773.2177734375 1.4111328125 770.8935546875 -0.04150390625Q768.5693359375 -1.494140625 767.2412109375 -3.85986328125Q765.9130859375 -6.2255859375 765.45654296875 -9.08935546875Q765.0 -11.953125 765.0 -14.8583984375Q765.0 -16.103515625 765.12451171875 -17.6806640625Q765.2490234375 -19.2578125 765.45654296875 -21.0009765625Q765.6640625 -22.744140625 765.78857421875 -24.4873046875Q765.9130859375 -26.23046875 765.9130859375 -27.8076171875Q765.9130859375 -30.4638671875 765.0830078125 -31.41845703125Q764.2529296875 -32.373046875 763.5888671875 -32.373046875Q762.2607421875 -32.373046875 760.55908203125 -30.83740234375Q758.857421875 -29.3017578125 756.98974609375 -26.8115234375Q755.1220703125 -24.3212890625 753.17138671875 -21.20849609375Q751.220703125 -18.095703125 749.51904296875 -15.0244140625Q747.8173828125 -11.953125 746.36474609375 -9.17236328125Q744.912109375 -6.3916015625 744.08203125 -4.5654296875Q742.421875 -1.0791015625 740.76171875 0.12451171875Q739.1015625 1.328125 737.3583984375 1.328125Q734.951171875 1.328125 733.49853515625 -0.12451171875Q732.0458984375 -1.5771484375 732.0458984375 -4.2333984375Q732.0458984375 -4.814453125 732.2119140625 -6.51611328125Q732.3779296875 -8.2177734375 732.626953125 -10.58349609375Q732.8759765625 -12.94921875 733.125 -15.6884765625Q733.3740234375 -18.427734375 733.623046875 -21.12548828125Q733.8720703125 -23.8232421875 734.0380859375 -26.1474609375Q734.2041015625 -28.4716796875 734.2041015625 -30.048828125Q734.2041015625 -32.1240234375 734.0380859375 -34.033203125Q733.8720703125 -35.9423828125 733.3740234375 -36.357421875Q732.626953125 -36.1083984375 730.7177734375 -33.24462890625Q728.80859375 -30.380859375 725.8203125 -23.1591796875Q725.4052734375 -22.24609375 724.5751953125 -21.748046875Q723.7451171875 -21.25 722.83203125 -21.25Q721.4208984375 -21.25 720.5908203125 -22.20458984375Q719.7607421875 -23.1591796875 719.7607421875 -24.404296875Q719.7607421875 -24.9853515625 720.009765625 -25.6494140625Q723.7451171875 -34.53125 727.02392578125 -38.72314453125Q730.302734375 -42.9150390625 733.5400390625 -42.9150390625Q735.44921875 -42.9150390625 736.77734375 -41.96044921875Q738.10546875 -41.005859375 738.89404296875 -39.4287109375Q739.6826171875 -37.8515625 740.05615234375 -35.9423828125Q740.4296875 -34.033203125 740.4296875 -32.041015625Q740.4296875 -30.546875 740.22216796875 -27.392578125Q740.0146484375 -24.23828125 739.6826171875 -20.62744140625Q739.3505859375 -17.0166015625 739.06005859375 -13.447265625Q738.76953125 -9.8779296875 738.5205078125 -7.470703125Z"
+                  fill="url(#metal)"
+                  stroke="url(#metal)"
+                  stroke-width="7"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                />
+              </g>
+              <path
+                id="nameShine"
+                fill="url(#sweep)"
+                stroke="url(#sweep)"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                style="mix-blend-mode: screen; pointer-events: none"
+              />
+              <!-- an invisible strip so the whole pin is easy to hover -->
+              <rect
+                x="40"
+                y="150"
+                width="940"
+                height="190"
+                fill="transparent"
+              />
+            </g>
+
+            <g id="charms"></g>
+          </svg>
+          <div class="charm-tip" id="charmTip"></div>
+        </div>
+
+        <!-- SHELF: one photo for each charm on the pin.
+             Add your photos as assets/about/dance.png, coffee.png, tennis.png,
+             travel.png, food.png and concerts.png -->
+        <section class="shelf" aria-label="The parts that make me, me">
+          <div class="shelf-row">
+            <figure class="shelf-item is-tall" style="--tilt: -2deg" data-i="0">
+              <div class="shelf-lift">
+                <div class="shelf-frame">
+                  <img
+                    src="assets/about/dance.png"
+                    alt="Dance"
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                  <span class="shelf-empty" aria-hidden="true">Dance</span>
+                </div>
+              </div>
+              <figcaption>Dance</figcaption>
+            </figure>
+            <figure
+              class="shelf-item is-wide"
+              style="--tilt: 1.5deg"
+              data-i="1"
+            >
+              <div class="shelf-lift">
+                <div class="shelf-frame">
+                  <img
+                    src="assets/about/coffee.png"
+                    alt="Iced coffee"
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                  <span class="shelf-empty" aria-hidden="true"
+                    >Iced coffee</span
+                  >
+                </div>
+              </div>
+              <figcaption>Iced coffee</figcaption>
+            </figure>
+            <figure class="shelf-item is-tall" style="--tilt: -1deg" data-i="2">
+              <div class="shelf-lift">
+                <div class="shelf-frame">
+                  <img
+                    src="assets/about/tennis.png"
+                    alt="Tennis"
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                  <span class="shelf-empty" aria-hidden="true">Tennis</span>
+                </div>
+              </div>
+              <figcaption>Tennis</figcaption>
+            </figure>
+            <figure class="shelf-item is-wide" style="--tilt: 2deg" data-i="3">
+              <div class="shelf-lift">
+                <div class="shelf-frame">
+                  <img
+                    src="assets/about/travel.png"
+                    alt="Travel"
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                  <span class="shelf-empty" aria-hidden="true">Travel</span>
+                </div>
+              </div>
+              <figcaption>Travel</figcaption>
+            </figure>
+            <figure
+              class="shelf-item is-square"
+              style="--tilt: -1.5deg"
+              data-i="4"
+            >
+              <div class="shelf-lift">
+                <div class="shelf-frame">
+                  <img
+                    src="assets/about/food.png"
+                    alt="Trying new foods"
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                  <span class="shelf-empty" aria-hidden="true"
+                    >Trying new foods</span
+                  >
+                </div>
+              </div>
+              <figcaption>Trying new foods</figcaption>
+            </figure>
+            <figure class="shelf-item is-tall" style="--tilt: 1deg" data-i="5">
+              <div class="shelf-lift">
+                <div class="shelf-frame">
+                  <img
+                    src="assets/about/concerts.png"
+                    alt="Concerts"
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                  <span class="shelf-empty" aria-hidden="true">Concerts</span>
+                </div>
+              </div>
+              <figcaption>Concerts</figcaption>
+            </figure>
+          </div>
+          <div class="shelf-ledge" aria-hidden="true"></div>
+        </section>
+        <p class="about-tagline">The parts that make me, me.</p>
       </div>
 
       <div class="about-hero-right">
@@ -350,87 +1210,123 @@
 
           <div class="vt" id="timeline">
             <div class="tl-filters" role="group" aria-label="Filter roles">
-              <button class="tl-filter" type="button" data-filter="all" aria-pressed="true">All</button>
-              <button class="tl-filter" type="button" data-filter="coop" aria-pressed="false">Co-ops</button>
-              <button class="tl-filter" type="button" data-filter="leadership" aria-pressed="false">Leadership</button>
-              <button class="tl-filter" type="button" data-filter="community" aria-pressed="false">Teaching &amp; community</button>
+              <button
+                class="tl-filter"
+                type="button"
+                data-filter="all"
+                aria-pressed="true"
+              >
+                All
+              </button>
+              <button
+                class="tl-filter"
+                type="button"
+                data-filter="coop"
+                aria-pressed="false"
+              >
+                Co-ops
+              </button>
+              <button
+                class="tl-filter"
+                type="button"
+                data-filter="leadership"
+                aria-pressed="false"
+              >
+                Leadership
+              </button>
+              <button
+                class="tl-filter"
+                type="button"
+                data-filter="community"
+                aria-pressed="false"
+              >
+                Teaching &amp; community
+              </button>
             </div>
 
             <ol class="vt-list">
-                <li class="vt-marker vt-now" aria-hidden="true"><span>Now</span></li>
-                <li class="vt-marker" aria-hidden="true"><span>2025</span></li>
-                <li class="vt-item" data-type="leadership">
-                  <div class="vt-date">Sep 2025 –<br />May 2026</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Figma</div>
-                    <div class="vt-role">Campus Leader</div>
-                    <div class="vt-date-inline">Sep 2025 – May 2026</div>
-                    <span class="vt-tag">Leadership</span>
+              <li class="vt-marker vt-now" aria-hidden="true">
+                <span>Now</span>
+              </li>
+              <li class="vt-marker" aria-hidden="true"><span>2025</span></li>
+              <li class="vt-item" data-type="leadership">
+                <div class="vt-date">Sep 2025 –<br />May 2026</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Figma</div>
+                  <div class="vt-role">Campus Leader</div>
+                  <div class="vt-date-inline">Sep 2025 – May 2026</div>
+                  <span class="vt-tag">Leadership</span>
+                </div>
+              </li>
+              <li class="vt-item" data-type="coop">
+                <div class="vt-date">Jul 2025 –<br />Dec 2025</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Delsys</div>
+                  <div class="vt-role">
+                    UI/UX Software Engineering Co-op · Biomedical
                   </div>
-                </li>
-                <li class="vt-item" data-type="coop">
-                  <div class="vt-date">Jul 2025 –<br />Dec 2025</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Delsys</div>
-                    <div class="vt-role">UI/UX Software Engineering Co-op · Biomedical</div>
-                    <div class="vt-date-inline">Jul 2025 – Dec 2025</div>
-                    <span class="vt-tag">Co-op</span>
+                  <div class="vt-date-inline">Jul 2025 – Dec 2025</div>
+                  <span class="vt-tag">Co-op</span>
+                </div>
+              </li>
+              <li class="vt-item" data-type="coop">
+                <div class="vt-date">Jul 2025 –<br />Sep 2025</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Sift</div>
+                  <div class="vt-role">
+                    Software Engineering Co-op · Fashion Tech
                   </div>
-                </li>
-                <li class="vt-item" data-type="coop">
-                  <div class="vt-date">Jul 2025 –<br />Sep 2025</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Sift</div>
-                    <div class="vt-role">Software Engineering Co-op · Fashion Tech</div>
-                    <div class="vt-date-inline">Jul 2025 – Sep 2025</div>
-                    <span class="vt-tag">Co-op</span>
+                  <div class="vt-date-inline">Jul 2025 – Sep 2025</div>
+                  <span class="vt-tag">Co-op</span>
+                </div>
+              </li>
+              <li class="vt-item" data-type="community">
+                <div class="vt-date">Jan 2025 –<br />Apr 2025</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Khoury College</div>
+                  <div class="vt-role">Teaching Assistant</div>
+                  <div class="vt-date-inline">Jan 2025 – Apr 2025</div>
+                  <span class="vt-tag">Teaching</span>
+                </div>
+              </li>
+              <li class="vt-marker" aria-hidden="true"><span>2024</span></li>
+              <li class="vt-item" data-type="coop">
+                <div class="vt-date">Jul 2024 –<br />Dec 2024</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Bose</div>
+                  <div class="vt-role">
+                    Mobile App Software Engineering Co-op · iOS &amp; Android
                   </div>
-                </li>
-                <li class="vt-item" data-type="community">
-                  <div class="vt-date">Jan 2025 –<br />Apr 2025</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Khoury College</div>
-                    <div class="vt-role">Teaching Assistant</div>
-                    <div class="vt-date-inline">Jan 2025 – Apr 2025</div>
-                    <span class="vt-tag">Teaching</span>
-                  </div>
-                </li>
-                <li class="vt-marker" aria-hidden="true"><span>2024</span></li>
-                <li class="vt-item" data-type="coop">
-                  <div class="vt-date">Jul 2024 –<br />Dec 2024</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Bose</div>
-                    <div class="vt-role">Mobile App Software Engineering Co-op · iOS &amp; Android</div>
-                    <div class="vt-date-inline">Jul 2024 – Dec 2024</div>
-                    <span class="vt-tag">Co-op</span>
-                  </div>
-                </li>
-                <li class="vt-marker" aria-hidden="true"><span>2023</span></li>
-                <li class="vt-item" data-type="leadership">
-                  <div class="vt-date">Jul 2023 –<br />May 2025</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Northeastern Admissions</div>
-                    <div class="vt-role">Husky Ambassador · Tour Guide</div>
-                    <div class="vt-date-inline">Jul 2023 – May 2025</div>
-                    <span class="vt-tag">Leadership</span>
-                  </div>
-                </li>
-                <li class="vt-item" data-type="community">
-                  <div class="vt-date">Jul 2023 –<br />May 2024</div>
-                  <span class="vt-node" aria-hidden="true"></span>
-                  <div class="vt-card">
-                    <div class="vt-company">Kode With Klossy</div>
-                    <div class="vt-role">Content Community Ambassador</div>
-                    <div class="vt-date-inline">Jul 2023 – May 2024</div>
-                    <span class="vt-tag">Community</span>
-                  </div>
-                </li>
+                  <div class="vt-date-inline">Jul 2024 – Dec 2024</div>
+                  <span class="vt-tag">Co-op</span>
+                </div>
+              </li>
+              <li class="vt-marker" aria-hidden="true"><span>2023</span></li>
+              <li class="vt-item" data-type="leadership">
+                <div class="vt-date">Jul 2023 –<br />May 2025</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Northeastern Admissions</div>
+                  <div class="vt-role">Husky Ambassador · Tour Guide</div>
+                  <div class="vt-date-inline">Jul 2023 – May 2025</div>
+                  <span class="vt-tag">Leadership</span>
+                </div>
+              </li>
+              <li class="vt-item" data-type="community">
+                <div class="vt-date">Jul 2023 –<br />May 2024</div>
+                <span class="vt-node" aria-hidden="true"></span>
+                <div class="vt-card">
+                  <div class="vt-company">Kode With Klossy</div>
+                  <div class="vt-role">Content Community Ambassador</div>
+                  <div class="vt-date-inline">Jul 2023 – May 2024</div>
+                  <span class="vt-tag">Community</span>
+                </div>
+              </li>
             </ol>
           </div>
         </div>
@@ -446,13 +1342,15 @@
             <div class="skill-group">
               <div class="skill-group-label">Languages &amp; frameworks</div>
               <div class="skill-list">
-                Java · Swift · Kotlin · Python · JavaScript · React · HTML · CSS · C# · SQL
+                Java · Swift · Kotlin · Python · JavaScript · React · HTML · CSS
+                · C# · SQL
               </div>
             </div>
             <div class="skill-group">
               <div class="skill-group-label">Design</div>
               <div class="skill-list">
-                Figma · Illustrator · InDesign · Miro · Canva · Prototyping · Brand design · Video editing
+                Figma · Illustrator · InDesign · Miro · Canva · Prototyping ·
+                Brand design · Video editing
               </div>
             </div>
             <div class="skill-group">
@@ -464,7 +1362,8 @@
             <div class="skill-group">
               <div class="skill-group-label">Expertise</div>
               <div class="skill-list">
-                UX design · Product management · Full-stack web · Mobile development · Brand identity · Graphic design
+                UX design · Product management · Full-stack web · Mobile
+                development · Brand identity · Graphic design
               </div>
             </div>
           </div>
@@ -479,9 +1378,27 @@
           <h2 class="about-section-title">
             Getting involved <em id="invTitle">at Duke.</em>
           </h2>
-          <div class="tl-filters inv-switch" role="group" aria-label="Choose a school">
-            <button class="tl-filter" type="button" data-school="duke" aria-pressed="true">Duke</button>
-            <button class="tl-filter" type="button" data-school="neu" aria-pressed="false">Northeastern</button>
+          <div
+            class="tl-filters inv-switch"
+            role="group"
+            aria-label="Choose a school"
+          >
+            <button
+              class="tl-filter"
+              type="button"
+              data-school="duke"
+              aria-pressed="true"
+            >
+              Duke
+            </button>
+            <button
+              class="tl-filter"
+              type="button"
+              data-school="neu"
+              aria-pressed="false"
+            >
+              Northeastern
+            </button>
           </div>
 
           <div class="involvement-grid" data-school="duke">
@@ -495,7 +1412,9 @@
             </div>
             <div class="involvement-item is-soon">
               <div class="involvement-org">More this year</div>
-              <div class="involvement-role">First year at Duke · in progress</div>
+              <div class="involvement-role">
+                First year at Duke · in progress
+              </div>
             </div>
           </div>
 
@@ -506,7 +1425,9 @@
             </div>
             <div class="involvement-item">
               <div class="involvement-org">The Avenue</div>
-              <div class="involvement-role">Communications Designer · Associate Set Design Director</div>
+              <div class="involvement-role">
+                Communications Designer · Associate Set Design Director
+              </div>
             </div>
             <div class="involvement-item">
               <div class="involvement-org">NUCOSMO</div>
@@ -545,7 +1466,9 @@
       <!-- APPROACH -->
       <section class="about-section" id="approach">
         <div class="about-section-content">
-          <h2 class="about-section-title"><em>Design. Develop. Delight.</em></h2>
+          <h2 class="about-section-title">
+            <em>Design. Develop. Delight.</em>
+          </h2>
           <div class="about-text">
             <p>
               I like pushing technology and design to make digital experiences
@@ -554,9 +1477,21 @@
             </p>
           </div>
           <div class="contact-strip">
-            <a href="mailto:rachelmchen16@gmail.com" class="contact-link">rachelmchen16@gmail.com</a>
-            <a href="https://www.linkedin.com/in/rachelchen1016/" target="_blank" class="contact-link">LinkedIn</a>
-            <a href="https://github.com/rachhel" target="_blank" class="contact-link">GitHub</a>
+            <a href="mailto:rachelmchen16@gmail.com" class="contact-link"
+              >rachelmchen16@gmail.com</a
+            >
+            <a
+              href="https://www.linkedin.com/in/rachelchen1016/"
+              target="_blank"
+              class="contact-link"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/rachhel"
+              target="_blank"
+              class="contact-link"
+              >GitHub</a
+            >
           </div>
         </div>
       </section>
@@ -595,9 +1530,7 @@
             >
           </div>
         </div>
-        <div class="text-center mt-4 small">
-          &copy; 2026 Rachel Chen
-        </div>
+        <div class="text-center mt-4 small">&copy; 2026 Rachel Chen</div>
       </div>
     </footer>
 
@@ -753,7 +1686,9 @@
             if (hit.closest(".project-card")) return "See the project";
             if (hit.closest(".tl-filter")) return "Show";
             if (hit.closest(".navbar-brand"))
-              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+              return (
+                hit.closest(".navbar-brand").getAttribute("href") || ""
+              ).startsWith("#")
                 ? "Back to top"
                 : "Home";
             const a = hit.closest("a");
@@ -763,7 +1698,8 @@
               if (/linkedin/i.test(href)) return "Let\u2019s connect";
               if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
               if (href.startsWith("#")) return "Take me there";
-              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              if (a.target === "_blank" || /^https?:/i.test(href))
+                return "Open";
               return "Go";
             }
             if (hit.closest(".navbar-toggler")) return "Menu";
@@ -935,13 +1871,17 @@
       /* ---------- Beyond work: Duke / Northeastern switch ---------- */
       (function () {
         const btns = document.querySelectorAll(".inv-switch .tl-filter");
-        const grids = document.querySelectorAll(".involvement-grid[data-school]");
+        const grids = document.querySelectorAll(
+          ".involvement-grid[data-school]",
+        );
         const title = document.getElementById("invTitle");
         const names = { duke: "at Duke.", neu: "at Northeastern." };
         btns.forEach((btn) =>
           btn.addEventListener("click", () => {
             const s = btn.dataset.school;
-            btns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            btns.forEach((b) =>
+              b.setAttribute("aria-pressed", String(b === btn)),
+            );
             grids.forEach((g) => (g.hidden = g.dataset.school !== s));
             title.textContent = names[s];
           }),
@@ -966,7 +1906,9 @@
                 io.disconnect();
                 // after the entrance, make hover/filter changes feel instant
                 setTimeout(() => {
-                  tl.querySelectorAll(".vt-item, .vt-marker").forEach((el) => (el.style.transitionDelay = "0s"));
+                  tl.querySelectorAll(".vt-item, .vt-marker").forEach(
+                    (el) => (el.style.transitionDelay = "0s"),
+                  );
                 }, 1800);
               }
             },
@@ -982,12 +1924,267 @@
         btns.forEach((btn) =>
           btn.addEventListener("click", () => {
             const f = btn.dataset.filter;
-            btns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            btns.forEach((b) =>
+              b.setAttribute("aria-pressed", String(b === btn)),
+            );
             items.forEach((it) =>
-              it.classList.toggle("is-dim", f !== "all" && it.dataset.type !== f),
+              it.classList.toggle(
+                "is-dim",
+                f !== "all" && it.dataset.type !== f,
+              ),
             );
           }),
         );
+      })();
+    </script>
+    <script>
+      // shelf: hovering a photo jingles its charm; hovering a charm lifts its photo
+      (function () {
+        const row = document.querySelector(".shelf-row");
+        if (!row) return;
+        const items = [...row.querySelectorAll(".shelf-item")];
+        items.forEach((it) =>
+          it.addEventListener("pointerenter", () => {
+            if (window.pinNudge) window.pinNudge(+it.dataset.i);
+          }),
+        );
+        document.addEventListener("charmhover", (e) => {
+          items.forEach((it, i) =>
+            it.classList.toggle("is-lit", i === e.detail),
+          );
+          row.classList.toggle("has-lit", e.detail >= 0);
+        });
+      })();
+    </script>
+    <!-- chrome pin: physics for the charms -->
+    <script>
+      (() => {
+        const svg = document.getElementById("pin");
+        const NS = "http://www.w3.org/2000/svg";
+        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // fit the name between the coil and the clasp, sitting on the wires
+        const name = document.getElementById("name");
+        const bb = name.getBBox();
+        const k = 640 / bb.width;
+        const nameT = `translate(${160 - bb.x * k} ${236 - (bb.y + bb.height / 2) * k}) scale(${k})`;
+        name.setAttribute("transform", nameT);
+        name.setAttribute("stroke-width", 7 / k);
+        const shine = document.getElementById("nameShine");
+        shine.setAttribute("d", name.getAttribute("d"));
+        shine.setAttribute("transform", nameT);
+        shine.setAttribute("stroke-width", 7 / k);
+        const sweep = document.getElementById("sweep");
+
+        // the pin's tilt, and a spring so it wobbles
+        const PIVOT = { x: 520, y: 260 };
+        const BASE_TILT = (-7 * Math.PI) / 180; // up to the right, like the photo
+        let tilt = BASE_TILT,
+          tiltV = 0,
+          lift = 0,
+          liftV = 0;
+        const pinGroup = document.getElementById("pinGroup");
+        const rot = (x, y, a) => {
+          const c = Math.cos(a),
+            s = Math.sin(a),
+            dx = x - PIVOT.x,
+            dy = y - PIVOT.y;
+          return { x: PIVOT.x + dx * c - dy * s, y: PIVOT.y + dx * s + dy * c };
+        };
+
+        // a piece of you on each charm
+        const CHARMS = [
+          { id: "c-tutu", label: "Dance", x: 190, len: 56 },
+          { id: "c-coffee", label: "Iced coffee", x: 310, len: 104 },
+          { id: "c-racket", label: "Tennis", x: 430, len: 60 },
+          { id: "c-suitcase", label: "Travel", x: 550, len: 100 },
+          { id: "c-bowl", label: "Trying new foods", x: 670, len: 58 },
+          { id: "c-mic", label: "Concerts", x: 785, len: 96 },
+        ];
+        const SCALE = 0.86,
+          BAR_Y = 304;
+        const layer = document.getElementById("charms");
+        const charms = CHARMS.map((c, i) => {
+          const g = document.createElementNS(NS, "g");
+          g.setAttribute("class", "charm");
+          g.setAttribute("filter", "url(#chromeSm)");
+          let chain = `<ellipse cx="0" cy="0" rx="6" ry="9" fill="none" stroke="url(#metal)" stroke-width="3.5"/>`;
+          for (let y = 12, n = 0; y < c.len; y += 11, n++) {
+            chain +=
+              n % 2
+                ? `<rect x="-1.8" y="${y - 6}" width="3.6" height="13" rx="1.8" fill="url(#metal)"/>`
+                : `<ellipse cx="0" cy="${y}" rx="4.5" ry="7" fill="none" stroke="url(#metal)" stroke-width="3"/>`;
+          }
+          g.innerHTML =
+            chain +
+            `<use href="#${c.id}" transform="translate(0 ${c.len}) scale(${SCALE})"/>`;
+          layer.appendChild(g);
+          return { ...c, g, ang: 0, vel: 0, drag: false, ax: null };
+        });
+
+        // pointer in svg units
+        const pt = svg.createSVGPoint();
+        const toSvg = (e) => {
+          pt.x = e.clientX;
+          pt.y = e.clientY;
+          return pt.matrixTransform(svg.getScreenCTM().inverse());
+        };
+        let m = null,
+          pm = null,
+          overPin = false,
+          sweepT = -1;
+        const tip = document.getElementById("charmTip");
+        const stage = document.getElementById("pinStage");
+        svg.addEventListener("pointermove", (e) => {
+          m = toSvg(e);
+        });
+        svg.addEventListener("pointerleave", () => {
+          m = null;
+          pm = null;
+        });
+        pinGroup.addEventListener("pointerenter", () => {
+          overPin = true;
+          tiltV += 0.012;
+          liftV -= 1.6; // a little jolt, so everything jingles
+          sweepT = 0; // and a shine runs across your name
+        });
+        pinGroup.addEventListener("pointerleave", () => {
+          overPin = false;
+        });
+        pinGroup.addEventListener("click", () => {
+          tiltV -= 0.02;
+          liftV -= 2.5;
+          sweepT = 0;
+        });
+        charms.forEach((c) => {
+          c.g.addEventListener("pointerdown", (e) => {
+            c.drag = true;
+            c.g.classList.add("is-drag");
+            svg.setPointerCapture(e.pointerId);
+            e.preventDefault();
+          });
+        });
+        const stop = () =>
+          charms.forEach((c) => {
+            c.drag = false;
+            c.g.classList.remove("is-drag");
+          });
+        svg.addEventListener("pointerup", stop);
+        svg.addEventListener("pointercancel", stop);
+
+        const t0 = performance.now();
+        const frame = (now) => {
+          const t = (now - t0) / 1000;
+          const mv =
+            m && pm ? { x: m.x - pm.x, y: m.y - pm.y } : { x: 0, y: 0 };
+
+          // pin: leans a touch toward the cursor while hovered, springs back after
+          const want =
+            BASE_TILT + (overPin && m ? ((m.x - PIVOT.x) / 500) * 0.035 : 0);
+          tiltV += (want - tilt) * 0.06;
+          tiltV *= 0.86;
+          tilt += tiltV;
+          liftV += -lift * 0.08;
+          liftV *= 0.84;
+          lift += liftV;
+          pinGroup.setAttribute(
+            "transform",
+            `translate(0 ${lift}) rotate(${(tilt * 180) / Math.PI} ${PIVOT.x} ${PIVOT.y})`,
+          );
+
+          // shine sweep
+          if (sweepT >= 0) {
+            sweepT += 0.022;
+            const x = -200 + sweepT * 1100;
+            sweep.setAttribute("x1", x);
+            sweep.setAttribute("x2", x + 160);
+            if (sweepT > 1) {
+              sweepT = -1;
+              sweep.setAttribute("x1", -400);
+              sweep.setAttribute("x2", -240);
+            }
+          }
+
+          let hover = null;
+          charms.forEach((c, i) => {
+            const a = rot(c.x, BAR_Y, tilt);
+            a.y += lift;
+            const L = c.len + 62 * SCALE;
+            // when the bar moves, the charm lags behind it
+            if (c.ax !== null) {
+              const dvx = a.x - c.ax.x,
+                dvy = a.y - c.ax.y;
+              const acc = {
+                x: dvx - (c.av ? c.av.x : 0),
+                y: dvy - (c.av ? c.av.y : 0),
+              };
+              c.vel -=
+                (acc.x * Math.cos(c.ang) + acc.y * Math.sin(c.ang) * 0.3) *
+                0.02;
+              c.av = { x: dvx, y: dvy };
+            }
+            c.ax = a;
+            if (c.drag && m) {
+              const na = Math.atan2(m.x - a.x, Math.max(20, m.y - a.y));
+              c.vel = (na - c.ang) * 0.5;
+              c.ang += (na - c.ang) * 0.5;
+            } else {
+              if (m) {
+                const p = {
+                  x: a.x + Math.sin(c.ang) * L,
+                  y: a.y + Math.cos(c.ang) * L,
+                };
+                if (Math.hypot(m.x - p.x, m.y - p.y) < 60) {
+                  hover = { c, p };
+                  c.vel +=
+                    (mv.x * Math.cos(c.ang) - mv.y * Math.sin(c.ang)) * 0.0008;
+                  c.vel = Math.max(-0.06, Math.min(0.06, c.vel));
+                }
+              }
+              c.vel += -0.0042 * Math.sin(c.ang);
+              if (!reduced) c.vel += Math.sin(t * 0.8 + i * 1.7) * 0.00004;
+              c.vel *= 0.985;
+              c.ang += c.vel;
+            }
+            c.ang = Math.max(-1.1, Math.min(1.1, c.ang));
+            c.g.setAttribute(
+              "transform",
+              `translate(${a.x} ${a.y}) rotate(${(-c.ang * 180) / Math.PI})`,
+            );
+            if (c.drag && m)
+              hover = {
+                c,
+                p: {
+                  x: a.x + Math.sin(c.ang) * L,
+                  y: a.y + Math.cos(c.ang) * L,
+                },
+              };
+          });
+
+          if (hover) {
+            const s = stage.getBoundingClientRect().width / 1000;
+            tip.textContent = hover.c.label;
+            tip.style.transform = `translate(${hover.p.x * s}px, ${(hover.p.y - 120 + 84) * s}px) translate(-50%, 0)`;
+            tip.classList.add("on");
+          } else tip.classList.remove("on");
+          // tell the shelf which charm you're on, so its photo can light up
+          const hi = hover ? charms.indexOf(hover.c) : -1;
+          if (hi !== lastHi) {
+            lastHi = hi;
+            document.dispatchEvent(
+              new CustomEvent("charmhover", { detail: hi }),
+            );
+          }
+          pm = m;
+          requestAnimationFrame(frame);
+        };
+        let lastHi = -1;
+        // the shelf calls this so a charm jingles when you hover its photo
+        window.pinNudge = (i) => {
+          const c = charms[i];
+          if (c) c.vel += (Math.random() < 0.5 ? -1 : 1) * 0.035;
+        };
+        requestAnimationFrame(frame);
       })();
     </script>
   </body>

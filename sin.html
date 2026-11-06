@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sustainable Innovation Network · Rachel Chen</title>
     <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="align.css" />
     <style>
       /* chrome-star cursor, same as the home page */
@@ -171,7 +177,14 @@
         display: none;
       }
     </style>
-    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
+    <script
+      src="https://cdn.databuddy.cc/databuddy.js"
+      data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
+      data-track-web-vitals="true"
+      data-track-errors="true"
+      crossorigin="anonymous"
+      async
+    ></script>
     <!-- site-wide look: keep this as the last stylesheet -->
     <link rel="stylesheet" href="theme.css" />
     <style>
@@ -272,8 +285,24 @@
         flex: none;
         border-radius: 50%;
         background:
-          radial-gradient(circle, #fff 0 3px, #d9d9d9 3.5px 6px, rgba(255, 255, 255, 0.35) 6.5px 7.5px, transparent 8px),
-          conic-gradient(from 20deg, #e9e9e9, #cdeeff, #f4d3ff, #fff2c2, #d1ffe0, #cfe2ff, #ffd6e8, #e9e9e9);
+          radial-gradient(
+            circle,
+            #fff 0 3px,
+            #d9d9d9 3.5px 6px,
+            rgba(255, 255, 255, 0.35) 6.5px 7.5px,
+            transparent 8px
+          ),
+          conic-gradient(
+            from 20deg,
+            #e9e9e9,
+            #cdeeff,
+            #f4d3ff,
+            #fff2c2,
+            #d1ffe0,
+            #cfe2ff,
+            #ffd6e8,
+            #e9e9e9
+          );
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
       }
       .cs-cd::after {
@@ -281,13 +310,21 @@
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 45%, transparent 60%, rgba(255, 255, 255, 0.5));
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.7),
+          transparent 45%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.5)
+        );
       }
       .is-playing .cs-cd {
         animation: cs-spin 2.4s linear infinite;
       }
       @keyframes cs-spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
       .cs-song-btn .cs-song-state {
         color: #8a6f68;
@@ -299,7 +336,9 @@
         margin-top: 12px;
         opacity: 0;
         transform: translateY(-6px);
-        transition: opacity 0.3s ease, transform 0.35s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.35s ease;
       }
       .cs-inline-player.is-shown {
         opacity: 1;
@@ -543,7 +582,9 @@
         text-decoration: none;
         font-size: 0.9rem;
         line-height: 1.45;
-        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s;
+        transition:
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+          background 0.3s;
       }
       .cs-made-card:hover {
         transform: translateY(-3px);
@@ -750,7 +791,10 @@
       .decision-head,
       .decision {
         display: grid;
-        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(
+            0,
+            1fr
+          );
         gap: 1.75rem;
         align-items: start;
       }
@@ -850,9 +894,17 @@
         .decision-num {
           grid-row: 1 / span 3;
         }
-        .decision-insight::before { content: "Learned: "; color: #0a0a0a; }
-        .decision-choice::before { content: "Designed: "; }
-        .decision-result::before { content: "Solves: "; color: #0a0a0a; }
+        .decision-insight::before {
+          content: "Learned: ";
+          color: #0a0a0a;
+        }
+        .decision-choice::before {
+          content: "Designed: ";
+        }
+        .decision-result::before {
+          content: "Solves: ";
+          color: #0a0a0a;
+        }
       }
 
       /* ---------- SIN: teal accent ---------- */
@@ -879,7 +931,9 @@
         color: #fff;
         text-decoration: none;
         font-size: 1rem;
-        transition: transform 0.25s ease, background 0.25s;
+        transition:
+          transform 0.25s ease,
+          background 0.25s;
       }
       .sin-live:hover {
         transform: translateY(-2px);
@@ -981,7 +1035,11 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container nav-container">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
+          <img
+            src="assets/LOGO.png"
+            alt="Rachel Chen home"
+            style="height: 100px"
+          />
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -996,11 +1054,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#work">Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="creative.html">Creative</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com"
+                >Contact</a
+              >
             </li>
           </ul>
         </div>
@@ -1015,36 +1081,57 @@
         sustainability organization, where I got to both design it and code it.
       </p>
       <!-- soundtrack: the Spotify song link lives in data-spotify -->
-      <div class="cs-song" data-spotify="https://open.spotify.com/track/040I32EKLxQrkuxQu1pqvT" data-search="saturn sza">
-        <button type="button" class="cs-song-btn" aria-expanded="false" data-cursor-label="Play">
+      <div
+        class="cs-song"
+        data-spotify="https://open.spotify.com/track/040I32EKLxQrkuxQu1pqvT"
+        data-search="saturn sza"
+      >
+        <button
+          type="button"
+          class="cs-song-btn"
+          aria-expanded="false"
+          data-cursor-label="Play"
+        >
           <span class="cs-cd" aria-hidden="true"></span>
-          <span class="cs-song-text">On repeat while making this: <strong>Saturn</strong> · SZA</span>
+          <span class="cs-song-text"
+            >On repeat while making this: <strong>Saturn</strong> · SZA</span
+          >
         </button>
       </div>
 
       <div class="cs-facts">
         <div>
-          <span class="cs-fact-label">My role</span>
           <p class="cs-fact-value">UI and UX designer, and web developer</p>
         </div>
         <div>
-          <span class="cs-fact-label">Team</span>
-          <p class="cs-fact-value">A design team and a dev team, and I was on both</p>
+          <p class="cs-fact-value">
+            A design team and a dev team, and I was on both
+          </p>
         </div>
         <div>
-          <span class="cs-fact-label">Tools</span>
-          <p class="cs-fact-value">Figma, HTML, CSS, JavaScript, Git, Netlify</p>
+          <p class="cs-fact-value">
+            Figma, HTML, CSS, JavaScript, Git, Netlify
+          </p>
         </div>
         <div>
-          <span class="cs-fact-label">Type</span>
           <p class="cs-fact-value">Brand identity and web development</p>
         </div>
       </div>
-      <a class="sin-live" href="https://sin-neu.netlify.app/" target="_blank" rel="noopener" data-cursor-label="Visit the site">Visit the live site <span aria-hidden="true">↗</span></a>
+      <a
+        class="sin-live"
+        href="https://sin-neu.netlify.app/"
+        target="_blank"
+        rel="noopener"
+        data-cursor-label="Visit the site"
+        >Visit the live site <span aria-hidden="true">↗</span></a
+      >
     </header>
 
     <figure class="cs-cover">
-      <img src="assets/sin/SINbanner.png" alt="Sustainable Innovation Network brand and website" />
+      <img
+        src="assets/sin/SINbanner.png"
+        alt="Sustainable Innovation Network brand and website"
+      />
     </figure>
 
     <div class="case-study">
@@ -1064,67 +1151,163 @@
         <section class="section" id="client">
           <h2 class="section-title">A brand starting <em>from nothing.</em></h2>
           <div class="section-body">
-            <p>The Sustainable Innovation Network needed a whole brand from the ground up: a logo, a brand book and a website, so people would actually remember them.</p>
-            <p>The hard part was making sure everything looked and sounded like their values, spoke to the right people, and stayed consistent everywhere they show up. It was a really cool chance to build the foundation they would grow from.</p>
+            <p>
+              The Sustainable Innovation Network needed a whole brand from the
+              ground up: a logo, a brand book and a website, so people would
+              actually remember them.
+            </p>
+            <p>
+              The hard part was making sure everything looked and sounded like
+              their values, spoke to the right people, and stayed consistent
+              everywhere they show up. It was a really cool chance to build the
+              foundation they would grow from.
+            </p>
           </div>
           <div class="cs-made">
-            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Logo and identity</strong><span>The mark, colors and type</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>Brand book</strong><span>How to use all of it, consistently</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>Website design</strong><span>From sitemap to final screens</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">04</span><strong>Development</strong><span>Coded and deployed live on Netlify</span></div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">01</span
+              ><strong>Logo and identity</strong
+              ><span>The mark, colors and type</span>
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">02</span><strong>Brand book</strong
+              ><span>How to use all of it, consistently</span>
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">03</span><strong>Website design</strong
+              ><span>From sitemap to final screens</span>
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">04</span><strong>Development</strong
+              ><span>Coded and deployed live on Netlify</span>
+            </div>
           </div>
         </section>
 
         <!-- PROCESS -->
         <section class="section" id="process">
-          <h2 class="section-title">Starting with research <em>and the client.</em></h2>
+          <h2 class="section-title">
+            Starting with research <em>and the client.</em>
+          </h2>
           <div class="section-body">
-            <p>We started by looking at what other organizations were doing and meeting with the client to get on the same page about their vision, values and goals. From there, we brainstormed logo ideas and put together the sitemap and moodboard.</p>
+            <p>
+              We started by looking at what other organizations were doing and
+              meeting with the client to get on the same page about their
+              vision, values and goals. From there, we brainstormed logo ideas
+              and put together the sitemap and moodboard.
+            </p>
           </div>
-          <h3 class="ca-title" style="margin-top: 3rem">Competitive analysis</h3>
-          <p class="ca-intro">Four other Northeastern orgs we looked at, what they do well, and what we took from each.</p>
+          <h3 class="ca-title" style="margin-top: 3rem">
+            Competitive analysis
+          </h3>
+          <p class="ca-intro">
+            Four other Northeastern orgs we looked at, what they do well, and
+            what we took from each.
+          </p>
           <div class="sin-compare">
             <div class="sin-org">
               <strong>WISE</strong>
-              <p><b>Does well:</b> every team has its own signature color that stays the same on the website and Instagram, so it feels quirky, fun and approachable, almost like a scrapbook.</p>
-              <p><b>We took:</b> a broad but coordinated palette, and one symbol used across everything.</p>
+              <p>
+                <b>Does well:</b> every team has its own signature color that
+                stays the same on the website and Instagram, so it feels quirky,
+                fun and approachable, almost like a scrapbook.
+              </p>
+              <p>
+                <b>We took:</b> a broad but coordinated palette, and one symbol
+                used across everything.
+              </p>
             </div>
             <div class="sin-org">
               <strong>REV</strong>
-              <p><b>Does well:</b> a really consistent black and white look, and a funny voice made for college students (their pitch workshop was literally called a “Rizz workshop”).</p>
-              <p><b>We took:</b> the witty voice, but not the look. It can feel exclusive and intimidating, which is the opposite of what SIN wants.</p>
+              <p>
+                <b>Does well:</b> a really consistent black and white look, and
+                a funny voice made for college students (their pitch workshop
+                was literally called a “Rizz workshop”).
+              </p>
+              <p>
+                <b>We took:</b> the witty voice, but not the look. It can feel
+                exclusive and intimidating, which is the opposite of what SIN
+                wants.
+              </p>
             </div>
             <div class="sin-org">
               <strong>Generate</strong>
-              <p><b>Does well:</b> bold color coding that stays consistent across their whole brand and website.</p>
-              <p><b>We took:</b> using color on purpose, so every part of the brand feels connected.</p>
+              <p>
+                <b>Does well:</b> bold color coding that stays consistent across
+                their whole brand and website.
+              </p>
+              <p>
+                <b>We took:</b> using color on purpose, so every part of the
+                brand feels connected.
+              </p>
             </div>
             <div class="sin-org">
               <strong>NU Impact</strong>
-              <p><b>Does well:</b> a strong, simple logo and super consistent Instagram templates.</p>
-              <p><b>We took:</b> a lesson. It’s more finance focused and the brand doesn’t have much personality, so there was a gap for something warmer.</p>
+              <p>
+                <b>Does well:</b> a strong, simple logo and super consistent
+                Instagram templates.
+              </p>
+              <p>
+                <b>We took:</b> a lesson. It’s more finance focused and the
+                brand doesn’t have much personality, so there was a gap for
+                something warmer.
+              </p>
             </div>
           </div>
 
-          <h3 class="ca-title" style="margin-top: 3.5rem">What that meant for SIN</h3>
+          <h3 class="ca-title" style="margin-top: 3.5rem">
+            What that meant for SIN
+          </h3>
           <div class="cs-made">
-            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Colorful, but coordinated</strong><span>A friendly palette instead of serious black and white.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>Simple, organic shapes</strong><span>Less intimidating, which led to our sprout, tree and root logo sketches.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>A Gen Z voice</strong><span>Witty and approachable, so everyone feels welcome.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">04</span><strong>One symbol</strong><span>Used everywhere, so people recognize SIN right away.</span></div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">01</span
+              ><strong>Colorful, but coordinated</strong
+              ><span
+                >A friendly palette instead of serious black and white.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">02</span
+              ><strong>Simple, organic shapes</strong
+              ><span
+                >Less intimidating, which led to our sprout, tree and root logo
+                sketches.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">03</span><strong>A Gen Z voice</strong
+              ><span>Witty and approachable, so everyone feels welcome.</span>
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">04</span><strong>One symbol</strong
+              ><span>Used everywhere, so people recognize SIN right away.</span>
+            </div>
           </div>
 
           <figure class="cs-img">
-            <img src="assets/sin/research.png" alt="Moodboard, sitemap and logo sketches" />
-            <figcaption class="cs-caption">Our moodboard, sitemap and logo sketches. The sprouts, trees and roots were all about SIN being a network that grows.</figcaption>
+            <img
+              src="assets/sin/research.png"
+              alt="Moodboard, sitemap and logo sketches"
+            />
+            <figcaption class="cs-caption">
+              Our moodboard, sitemap and logo sketches. The sprouts, trees and
+              roots were all about SIN being a network that grows.
+            </figcaption>
           </figure>
         </section>
 
         <!-- FEEDBACK -->
         <section class="section" id="feedback">
-          <h2 class="section-title">Lots of crits <em>and lots of rounds.</em></h2>
+          <h2 class="section-title">
+            Lots of crits <em>and lots of rounds.</em>
+          </h2>
           <div class="section-body">
-            <p>Design critiques really shaped where this went. We kept iterating on the wireframes and refining the brand book with feedback from both our team and the client, before moving into hi fi and development.</p>
+            <p>
+              Design critiques really shaped where this went. We kept iterating
+              on the wireframes and refining the brand book with feedback from
+              both our team and the client, before moving into hi fi and
+              development.
+            </p>
           </div>
         </section>
 
@@ -1132,13 +1315,26 @@
         <section class="section" id="build">
           <h2 class="section-title">Then I got <em>to build it.</em></h2>
           <div class="section-body">
-            <p>I was on both the design team and the dev team, so after helping design the site, I got to help code it too, using HTML, CSS and JavaScript, with Git to work together and Netlify to put it live.</p>
+            <p>
+              I was on both the design team and the dev team, so after helping
+              design the site, I got to help code it too, using HTML, CSS and
+              JavaScript, with Git to work together and Netlify to put it live.
+            </p>
           </div>
           <figure class="cs-img sin-video">
-            <video autoplay muted loop playsinline><source src="assets/sin/demo.mov" type="video/mp4" /></video>
+            <video autoplay muted loop playsinline>
+              <source src="assets/sin/demo.mov" type="video/mp4" />
+            </video>
             <figcaption class="cs-caption">The live site</figcaption>
           </figure>
-          <a class="sin-live" href="https://sin-neu.netlify.app/" target="_blank" rel="noopener" data-cursor-label="Visit the site">Visit the live site <span aria-hidden="true">↗</span></a>
+          <a
+            class="sin-live"
+            href="https://sin-neu.netlify.app/"
+            target="_blank"
+            rel="noopener"
+            data-cursor-label="Visit the site"
+            >Visit the live site <span aria-hidden="true">↗</span></a
+          >
         </section>
 
         <!-- TEAM -->
@@ -1147,7 +1343,9 @@
           <div class="sin-teams">
             <div class="sin-team">
               <strong>Project lead</strong>
-              <ul><li>Albee Mote</li></ul>
+              <ul>
+                <li>Albee Mote</li>
+              </ul>
             </div>
             <div class="sin-team">
               <strong>Design team</strong>
@@ -1210,9 +1408,7 @@
             >
           </div>
         </div>
-        <div class="text-center mt-4 small">
-          &copy; 2026 Rachel Chen
-        </div>
+        <div class="text-center mt-4 small">&copy; 2026 Rachel Chen</div>
       </div>
     </footer>
 
@@ -1368,7 +1564,9 @@
             if (hit.closest(".project-card")) return "See the project";
             if (hit.closest(".tl-filter")) return "Show";
             if (hit.closest(".navbar-brand"))
-              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+              return (
+                hit.closest(".navbar-brand").getAttribute("href") || ""
+              ).startsWith("#")
                 ? "Back to top"
                 : "Home";
             const a = hit.closest("a");
@@ -1378,7 +1576,8 @@
               if (/linkedin/i.test(href)) return "Let\u2019s connect";
               if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
               if (href.startsWith("#")) return "Take me there";
-              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              if (a.target === "_blank" || /^https?:/i.test(href))
+                return "Open";
               return "Go";
             }
             if (hit.closest(".navbar-toggler")) return "Menu";
@@ -1519,10 +1718,18 @@
         if (!song) return;
         const btn = song.querySelector(".cs-song-btn");
         const title = song.querySelector(".cs-song-text strong").textContent;
-        const artist = song.querySelector(".cs-song-text").textContent.split("·").pop().trim();
-        const getId = () => ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) || [])[1];
+        const artist = song
+          .querySelector(".cs-song-text")
+          .textContent.split("·")
+          .pop()
+          .trim();
+        const getId = () =>
+          ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) ||
+            [])[1];
         let id = null;
-        let controller = null, dock = null, playing = false;
+        let controller = null,
+          dock = null,
+          playing = false;
 
         const setPlaying = (on) => {
           playing = on;
@@ -1549,7 +1756,9 @@
               { uri: "spotify:track:" + id, width: "100%", height: 80 },
               (c) => {
                 controller = c;
-                c.addListener("playback_update", (e) => setPlaying(!e.data.isPaused));
+                c.addListener("playback_update", (e) =>
+                  setPlaying(!e.data.isPaused),
+                );
                 c.addListener("ready", () => c.play());
               },
             );
@@ -1564,7 +1773,12 @@
           id = getId();
           if (!id) {
             // no song link pasted yet: open it on Spotify instead
-            window.open("https://open.spotify.com/search/" + encodeURIComponent(song.dataset.search || ""), "_blank", "noopener");
+            window.open(
+              "https://open.spotify.com/search/" +
+                encodeURIComponent(song.dataset.search || ""),
+              "_blank",
+              "noopener",
+            );
             return;
           }
           if (!dock) {
@@ -1579,9 +1793,15 @@
       // journey map: draw the mood line when it comes into view
       const journey = document.querySelector(".journey");
       if (journey && "IntersectionObserver" in window) {
-        const jo = new IntersectionObserver(([e]) => {
-          if (e.isIntersecting) { journey.classList.add("is-in"); jo.disconnect(); }
-        }, { threshold: 0.4 });
+        const jo = new IntersectionObserver(
+          ([e]) => {
+            if (e.isIntersecting) {
+              journey.classList.add("is-in");
+              jo.disconnect();
+            }
+          },
+          { threshold: 0.4 },
+        );
         jo.observe(journey);
       } else if (journey) journey.classList.add("is-in");
 
@@ -1593,7 +1813,12 @@
         sections.forEach((sec) => {
           if (sec.getBoundingClientRect().top <= 180) current = sec.id;
         });
-        links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + current));
+        links.forEach((l) =>
+          l.classList.toggle(
+            "active",
+            l.getAttribute("href") === "#" + current,
+          ),
+        );
       }
       window.addEventListener("scroll", updateActive, { passive: true });
       updateActive();

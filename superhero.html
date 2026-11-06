@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Superpower Mentors · Rachel Chen</title>
     <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="align.css" />
     <style>
       /* chrome-star cursor, same as the home page */
@@ -171,7 +177,14 @@
         display: none;
       }
     </style>
-    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
+    <script
+      src="https://cdn.databuddy.cc/databuddy.js"
+      data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
+      data-track-web-vitals="true"
+      data-track-errors="true"
+      crossorigin="anonymous"
+      async
+    ></script>
     <!-- site-wide look: keep this as the last stylesheet -->
     <link rel="stylesheet" href="theme.css" />
     <style>
@@ -272,8 +285,24 @@
         flex: none;
         border-radius: 50%;
         background:
-          radial-gradient(circle, #fff 0 3px, #d9d9d9 3.5px 6px, rgba(255, 255, 255, 0.35) 6.5px 7.5px, transparent 8px),
-          conic-gradient(from 20deg, #e9e9e9, #cdeeff, #f4d3ff, #fff2c2, #d1ffe0, #cfe2ff, #ffd6e8, #e9e9e9);
+          radial-gradient(
+            circle,
+            #fff 0 3px,
+            #d9d9d9 3.5px 6px,
+            rgba(255, 255, 255, 0.35) 6.5px 7.5px,
+            transparent 8px
+          ),
+          conic-gradient(
+            from 20deg,
+            #e9e9e9,
+            #cdeeff,
+            #f4d3ff,
+            #fff2c2,
+            #d1ffe0,
+            #cfe2ff,
+            #ffd6e8,
+            #e9e9e9
+          );
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
       }
       .cs-cd::after {
@@ -281,13 +310,21 @@
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 45%, transparent 60%, rgba(255, 255, 255, 0.5));
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.7),
+          transparent 45%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.5)
+        );
       }
       .is-playing .cs-cd {
         animation: cs-spin 2.4s linear infinite;
       }
       @keyframes cs-spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
       .cs-song-btn .cs-song-state {
         color: #8a6f68;
@@ -299,7 +336,9 @@
         margin-top: 12px;
         opacity: 0;
         transform: translateY(-6px);
-        transition: opacity 0.3s ease, transform 0.35s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.35s ease;
       }
       .cs-inline-player.is-shown {
         opacity: 1;
@@ -543,7 +582,9 @@
         text-decoration: none;
         font-size: 0.9rem;
         line-height: 1.45;
-        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s;
+        transition:
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+          background 0.3s;
       }
       .cs-made-card:hover {
         transform: translateY(-3px);
@@ -750,7 +791,10 @@
       .decision-head,
       .decision {
         display: grid;
-        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(
+            0,
+            1fr
+          );
         gap: 1.75rem;
         align-items: start;
       }
@@ -850,9 +894,17 @@
         .decision-num {
           grid-row: 1 / span 3;
         }
-        .decision-insight::before { content: "Learned: "; color: #0a0a0a; }
-        .decision-choice::before { content: "Designed: "; }
-        .decision-result::before { content: "Solves: "; color: #0a0a0a; }
+        .decision-insight::before {
+          content: "Learned: ";
+          color: #0a0a0a;
+        }
+        .decision-choice::before {
+          content: "Designed: ";
+        }
+        .decision-result::before {
+          content: "Solves: ";
+          color: #0a0a0a;
+        }
       }
 
       /* ---------- Superpower Mentors: blue accent from the client's brand ---------- */
@@ -958,7 +1010,11 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container nav-container">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
+          <img
+            src="assets/LOGO.png"
+            alt="Rachel Chen home"
+            style="height: 100px"
+          />
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -973,11 +1029,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#work">Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="creative.html">Creative</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com"
+                >Contact</a
+              >
             </li>
           </ul>
         </div>
@@ -992,35 +1056,50 @@
         neurodivergent students with mentors who actually get them.
       </p>
       <!-- soundtrack: paste the Spotify song link in data-spotify (Spotify: ••• > Share > Copy song link) -->
-      <div class="cs-song" data-spotify="https://open.spotify.com/track/3U5JVgI2x4rDyHGObzJfNf" data-search="unwritten natasha bedingfield">
-        <button type="button" class="cs-song-btn" aria-expanded="false" data-cursor-label="Play">
+      <div
+        class="cs-song"
+        data-spotify="https://open.spotify.com/track/3U5JVgI2x4rDyHGObzJfNf"
+        data-search="unwritten natasha bedingfield"
+      >
+        <button
+          type="button"
+          class="cs-song-btn"
+          aria-expanded="false"
+          data-cursor-label="Play"
+        >
           <span class="cs-cd" aria-hidden="true"></span>
-          <span class="cs-song-text">On repeat while making this: <strong>Unwritten</strong> · Natasha Bedingfield</span>
+          <span class="cs-song-text"
+            >On repeat while making this: <strong>Unwritten</strong> · Natasha
+            Bedingfield</span
+          >
         </button>
       </div>
 
       <div class="cs-facts">
         <div>
-          <span class="cs-fact-label">My role</span>
-          <p class="cs-fact-value">UX design lead, senior designer and stakeholder liaison</p>
+          <p class="cs-fact-value">
+            UX design lead, senior designer and stakeholder liaison
+          </p>
         </div>
         <div>
-          <span class="cs-fact-label">Team</span>
-          <p class="cs-fact-value">10 people across design, development and project management</p>
+          <p class="cs-fact-value">
+            10 people across design, development and project management
+          </p>
         </div>
         <div>
-          <span class="cs-fact-label">Tools</span>
           <p class="cs-fact-value">Figma, HTML, CSS, JavaScript</p>
         </div>
         <div>
-          <span class="cs-fact-label">Type</span>
           <p class="cs-fact-value">Client work: brand identity, UX and web</p>
         </div>
       </div>
     </header>
 
     <figure class="cs-cover">
-      <img src="assets/superpowerheader.png" alt="The redesigned Superpower Mentors website" />
+      <img
+        src="assets/superpowerheader.png"
+        alt="The redesigned Superpower Mentors website"
+      />
     </figure>
 
     <div class="case-study">
@@ -1041,43 +1120,109 @@
       <main class="content">
         <!-- CLIENT -->
         <section class="section" id="client">
-          <h2 class="section-title">Mentors who’ve been <em>in your shoes.</em></h2>
+          <h2 class="section-title">
+            Mentors who’ve been <em>in your shoes.</em>
+          </h2>
           <div class="section-body">
-            <p>Superpower Mentors pairs neurodivergent students, ages 7 to 14, with mentors who have been through similar things, so they can help with stuff like confidence, big transitions and figuring out their direction.</p>
-            <p>The program was already doing amazing work, but their brand and website didn’t really show that, which is where we came in.</p>
+            <p>
+              Superpower Mentors pairs neurodivergent students, ages 7 to 14,
+              with mentors who have been through similar things, so they can
+              help with stuff like confidence, big transitions and figuring out
+              their direction.
+            </p>
+            <p>
+              The program was already doing amazing work, but their brand and
+              website didn’t really show that, which is where we came in.
+            </p>
           </div>
           <div class="sp-stat">
             <span class="sp-stat-num">30% → 0%</span>
-            <p class="sp-stat-text">In their program, the freshman dropout rate went from <span class="nowrap">30% to 0%.</span></p>
+            <p class="sp-stat-text">
+              In their program, the freshman dropout rate went from
+              <span class="nowrap">30% to 0%.</span>
+            </p>
           </div>
         </section>
 
         <!-- PROBLEM -->
         <section class="section" id="problem">
-          <h2 class="section-title">Their brand didn’t match <em>how good the program is.</em></h2>
+          <h2 class="section-title">
+            Their brand didn’t match <em>how good the program is.</em>
+          </h2>
           <div class="section-body">
-            <p>When we first looked at their old brand, it felt really safe and generic, and it didn’t say much about who they are or why the program works. The website also had to work for three really different groups of people, and each of them was coming to the site looking for something different.</p>
-            <p>So our goal was to make the brand feel more expressive and hopeful, and to make sure everyone who landed on the site knew exactly where to go.</p>
+            <p>
+              When we first looked at their old brand, it felt really safe and
+              generic, and it didn’t say much about who they are or why the
+              program works. The website also had to work for three really
+              different groups of people, and each of them was coming to the
+              site looking for something different.
+            </p>
+            <p>
+              So our goal was to make the brand feel more expressive and
+              hopeful, and to make sure everyone who landed on the site knew
+              exactly where to go.
+            </p>
           </div>
         </section>
 
         <!-- WHO -->
         <section class="section" id="who">
-          <h2 class="section-title">One website for <em>three kinds of people.</em></h2>
+          <h2 class="section-title">
+            One website for <em>three kinds of people.</em>
+          </h2>
           <div class="cs-made">
-            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Parents</strong><span>Families looking for more than generic tutoring for their neurodivergent kids.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>Mentors</strong><span>People who have navigated learning differences themselves and want to give back.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>Partner schools</strong><span>Schools looking for a mentorship program with real, proven results.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">♥</span><strong>And the kids</strong><span>Students ages 7 to 14 with all kinds of learning profiles, who the whole thing is really for.</span></div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">01</span><strong>Parents</strong
+              ><span
+                >Families looking for more than generic tutoring for their
+                neurodivergent kids.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">02</span><strong>Mentors</strong
+              ><span
+                >People who have navigated learning differences themselves and
+                want to give back.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">03</span><strong>Partner schools</strong
+              ><span
+                >Schools looking for a mentorship program with real, proven
+                results.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">♥</span><strong>And the kids</strong
+              ><span
+                >Students ages 7 to 14 with all kinds of learning profiles, who
+                the whole thing is really for.</span
+              >
+            </div>
           </div>
         </section>
 
         <!-- ROLE -->
         <section class="section" id="role">
-          <h2 class="section-title">What it was like <em>being the lead.</em></h2>
+          <h2 class="section-title">
+            What it was like <em>being the lead.</em>
+          </h2>
           <div class="section-body">
-            <p>I was the UX design lead and the stakeholder liaison, so I was the bridge between our team and the client, and the spokesperson for my teammates. Every week I met with the founder to present our progress, listen to their feedback and bring it back to the team.</p>
-            <p>On the team side, I held design crits and reviews every week. I would talk through every wireframe our designers made, ask why they made their design choices, give suggestions, and help fix anything that wasn’t working yet. I also held design office hours, so anyone could come to me in between, and I led the design direction from the wireframes all the way to the final hi fi screens.</p>
+            <p>
+              I was the UX design lead and the stakeholder liaison, so I was the
+              bridge between our team and the client, and the spokesperson for
+              my teammates. Every week I met with the founder to present our
+              progress, listen to their feedback and bring it back to the team.
+            </p>
+            <p>
+              On the team side, I held design crits and reviews every week. I
+              would talk through every wireframe our designers made, ask why
+              they made their design choices, give suggestions, and help fix
+              anything that wasn’t working yet. I also held design office hours,
+              so anyone could come to me in between, and I led the design
+              direction from the wireframes all the way to the final hi fi
+              screens.
+            </p>
           </div>
 
           <ul class="sp-team" aria-label="Team">
@@ -1093,24 +1238,52 @@
             <li>Kaelynn Lackey<span>Junior developer</span></li>
           </ul>
 
-          <h3 class="ca-title" style="margin-top: 3.5rem">The biggest thing I learned</h3>
+          <h3 class="ca-title" style="margin-top: 3.5rem">
+            The biggest thing I learned
+          </h3>
           <div class="section-body">
-            <p>Knowing when to put a hard stop on iterations. Every time we came back with something new, the client had something new to say. By round three, we were running out of time in the semester, so I had to put my foot down: we had given them so many options and opportunities, and this would be our last iteration round.</p>
-            <p>It wasn’t easy to say, but being a lead means speaking up for your team and keeping the project moving, not just saying yes to every change.</p>
+            <p>
+              Knowing when to put a hard stop on iterations. Every time we came
+              back with something new, the client had something new to say. By
+              round three, we were running out of time in the semester, so I had
+              to put my foot down: we had given them so many options and
+              opportunities, and this would be our last iteration round.
+            </p>
+            <p>
+              It wasn’t easy to say, but being a lead means speaking up for your
+              team and keeping the project moving, not just saying yes to every
+              change.
+            </p>
           </div>
-          <p class="cs-quote"><span class="cs-mark" aria-hidden="true">“</span>We’ve given you so many options, so this is our <em>last round.</em>”</p>
+          <p class="cs-quote">
+            <span class="cs-mark" aria-hidden="true">“</span>We’ve given you so
+            many options, so this is our <em>last round.</em>”
+          </p>
         </section>
 
         <!-- PROCESS -->
         <section class="section" id="process">
-          <h2 class="section-title">Checking in with the client <em>every week.</em></h2>
+          <h2 class="section-title">
+            Checking in with the client <em>every week.</em>
+          </h2>
           <div class="section-body">
-            <p>Every week we showed the client where we were at, got their feedback, and made changes right away, so we were always designing around what they actually needed and not what we assumed.</p>
-            <p>We started with user flows and a sitemap, then wireframed all six pages: Home, How It Works, Mentors, Insights, About Us and Community. We got critiques at every step before moving into hi fi.</p>
+            <p>
+              Every week we showed the client where we were at, got their
+              feedback, and made changes right away, so we were always designing
+              around what they actually needed and not what we assumed.
+            </p>
+            <p>
+              We started with user flows and a sitemap, then wireframed all six
+              pages: Home, How It Works, Mentors, Insights, About Us and
+              Community. We got critiques at every step before moving into hi
+              fi.
+            </p>
           </div>
           <figure class="cs-img sp-wire">
             <img src="assets/LOFIS.png" alt="Wireframes for the six pages" />
-            <figcaption class="cs-caption">Wireframes for all six pages</figcaption>
+            <figcaption class="cs-caption">
+              Wireframes for all six pages
+            </figcaption>
           </figure>
         </section>
 
@@ -1118,27 +1291,71 @@
         <section class="section" id="brand">
           <h2 class="section-title">Finding the <em>right look.</em></h2>
           <div class="section-body">
-            <p>We explored five different logo directions, from hand illustrated figures to more abstract marks, before landing on the final one. The colors went through a few rounds too. The original palette felt really busy, so we narrowed it down to black, purple, orange and yellow, with lavender, gold and blue as supporting colors.</p>
-            <p>The UI components took three rounds before the client signed off.</p>
+            <p>
+              We explored five different logo directions, from hand illustrated
+              figures to more abstract marks, before landing on the final one.
+              The colors went through a few rounds too. The original palette
+              felt really busy, so we narrowed it down to black, purple, orange
+              and yellow, with lavender, gold and blue as supporting colors.
+            </p>
+            <p>
+              The UI components took three rounds before the client signed off.
+            </p>
           </div>
           <div class="cs-thirds">
-            <figure class="cs-img"><img src="assets/round1.png" alt="Round one" /><figcaption class="cs-caption">Round one</figcaption></figure>
-            <figure class="cs-img"><img src="assets/round2nd.png" alt="Round two" /><figcaption class="cs-caption">Round two</figcaption></figure>
-            <figure class="cs-img"><img src="assets/Branding Guide.jpg" alt="Final brand guide" /><figcaption class="cs-caption">Final brand guide</figcaption></figure>
+            <figure class="cs-img">
+              <img src="assets/round1.png" alt="Round one" />
+              <figcaption class="cs-caption">Round one</figcaption>
+            </figure>
+            <figure class="cs-img">
+              <img src="assets/round2nd.png" alt="Round two" />
+              <figcaption class="cs-caption">Round two</figcaption>
+            </figure>
+            <figure class="cs-img">
+              <img src="assets/Branding Guide.jpg" alt="Final brand guide" />
+              <figcaption class="cs-caption">Final brand guide</figcaption>
+            </figure>
           </div>
         </section>
 
         <!-- WEBSITE -->
         <section class="section" id="website">
-          <h2 class="section-title">A website where everyone <em>knows where to go.</em></h2>
+          <h2 class="section-title">
+            A website where everyone <em>knows where to go.</em>
+          </h2>
           <div class="section-body">
-            <p>The final website brings everything together, with bold type, a warm and energetic palette, and navigation that takes parents, mentors and schools exactly where they need to go.</p>
+            <p>
+              The final website brings everything together, with bold type, a
+              warm and energetic palette, and navigation that takes parents,
+              mentors and schools exactly where they need to go.
+            </p>
           </div>
-          <figure class="cs-img"><img src="assets/Final Hi-Fiss.png" alt="Final website pages" /></figure>
+          <figure class="cs-img">
+            <img src="assets/Final Hi-Fiss.png" alt="Final website pages" />
+          </figure>
           <div class="cs-made">
-            <div class="cs-made-card"><span class="cs-made-num">01</span><strong>Home</strong><span>The program at a glance: stats, mentor profiles, how it works and parent stories.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">02</span><strong>How It Works</strong><span>Five clear steps, from getting matched to what parents can expect.</span></div>
-            <div class="cs-made-card"><span class="cs-made-num">03</span><strong>Insights and Stories</strong><span>Articles and resources that bring the community together around neurodiversity.</span></div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">01</span><strong>Home</strong
+              ><span
+                >The program at a glance: stats, mentor profiles, how it works
+                and parent stories.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">02</span><strong>How It Works</strong
+              ><span
+                >Five clear steps, from getting matched to what parents can
+                expect.</span
+              >
+            </div>
+            <div class="cs-made-card">
+              <span class="cs-made-num">03</span
+              ><strong>Insights and Stories</strong
+              ><span
+                >Articles and resources that bring the community together around
+                neurodiversity.</span
+              >
+            </div>
           </div>
         </section>
 
@@ -1146,12 +1363,26 @@
         <section class="section" id="showcase">
           <h2 class="section-title">Showing it off <em>at showcase.</em></h2>
           <div class="section-body">
-            <p>At the end of the semester, we presented the whole project to the entire club and our stakeholders, and walked everyone through it from the very first client brief to the final website.</p>
-            <p>Leading the design team through weekly client meetings and ending with something the client was really happy with was one of the most challenging but rewarding things I did at Northeastern.</p>
+            <p>
+              At the end of the semester, we presented the whole project to the
+              entire club and our stakeholders, and walked everyone through it
+              from the very first client brief to the final website.
+            </p>
+            <p>
+              Leading the design team through weekly client meetings and ending
+              with something the client was really happy with was one of the
+              most challenging but rewarding things I did at Northeastern.
+            </p>
           </div>
           <figure class="cs-img">
-            <img src="assets/presenting.jpg" alt="Our team presenting Superpower Mentors in a conference room" />
-            <figcaption class="cs-caption">Presenting to the whole club and our stakeholders in a conference room.</figcaption>
+            <img
+              src="assets/presenting.jpg"
+              alt="Our team presenting Superpower Mentors in a conference room"
+            />
+            <figcaption class="cs-caption">
+              Presenting to the whole club and our stakeholders in a conference
+              room.
+            </figcaption>
           </figure>
           <div class="cs-next">
             <span>Next project</span>
@@ -1193,9 +1424,7 @@
             >
           </div>
         </div>
-        <div class="text-center mt-4 small">
-          &copy; 2026 Rachel Chen
-        </div>
+        <div class="text-center mt-4 small">&copy; 2026 Rachel Chen</div>
       </div>
     </footer>
 
@@ -1351,7 +1580,9 @@
             if (hit.closest(".project-card")) return "See the project";
             if (hit.closest(".tl-filter")) return "Show";
             if (hit.closest(".navbar-brand"))
-              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+              return (
+                hit.closest(".navbar-brand").getAttribute("href") || ""
+              ).startsWith("#")
                 ? "Back to top"
                 : "Home";
             const a = hit.closest("a");
@@ -1361,7 +1592,8 @@
               if (/linkedin/i.test(href)) return "Let\u2019s connect";
               if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
               if (href.startsWith("#")) return "Take me there";
-              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              if (a.target === "_blank" || /^https?:/i.test(href))
+                return "Open";
               return "Go";
             }
             if (hit.closest(".navbar-toggler")) return "Menu";
@@ -1502,10 +1734,18 @@
         if (!song) return;
         const btn = song.querySelector(".cs-song-btn");
         const title = song.querySelector(".cs-song-text strong").textContent;
-        const artist = song.querySelector(".cs-song-text").textContent.split("·").pop().trim();
-        const getId = () => ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) || [])[1];
+        const artist = song
+          .querySelector(".cs-song-text")
+          .textContent.split("·")
+          .pop()
+          .trim();
+        const getId = () =>
+          ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) ||
+            [])[1];
         let id = null;
-        let controller = null, dock = null, playing = false;
+        let controller = null,
+          dock = null,
+          playing = false;
 
         const setPlaying = (on) => {
           playing = on;
@@ -1532,7 +1772,9 @@
               { uri: "spotify:track:" + id, width: "100%", height: 80 },
               (c) => {
                 controller = c;
-                c.addListener("playback_update", (e) => setPlaying(!e.data.isPaused));
+                c.addListener("playback_update", (e) =>
+                  setPlaying(!e.data.isPaused),
+                );
                 c.addListener("ready", () => c.play());
               },
             );
@@ -1547,7 +1789,12 @@
           id = getId();
           if (!id) {
             // no song link pasted yet: open it on Spotify instead
-            window.open("https://open.spotify.com/search/" + encodeURIComponent(song.dataset.search || ""), "_blank", "noopener");
+            window.open(
+              "https://open.spotify.com/search/" +
+                encodeURIComponent(song.dataset.search || ""),
+              "_blank",
+              "noopener",
+            );
             return;
           }
           if (!dock) {
@@ -1562,9 +1809,15 @@
       // journey map: draw the mood line when it comes into view
       const journey = document.querySelector(".journey");
       if (journey && "IntersectionObserver" in window) {
-        const jo = new IntersectionObserver(([e]) => {
-          if (e.isIntersecting) { journey.classList.add("is-in"); jo.disconnect(); }
-        }, { threshold: 0.4 });
+        const jo = new IntersectionObserver(
+          ([e]) => {
+            if (e.isIntersecting) {
+              journey.classList.add("is-in");
+              jo.disconnect();
+            }
+          },
+          { threshold: 0.4 },
+        );
         jo.observe(journey);
       } else if (journey) journey.classList.add("is-in");
 
@@ -1576,7 +1829,12 @@
         sections.forEach((sec) => {
           if (sec.getBoundingClientRect().top <= 180) current = sec.id;
         });
-        links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + current));
+        links.forEach((l) =>
+          l.classList.toggle(
+            "active",
+            l.getAttribute("href") === "#" + current,
+          ),
+        );
       }
       window.addEventListener("scroll", updateActive, { passive: true });
       updateActive();

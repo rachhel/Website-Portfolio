@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Align · Rachel Chen</title>
     <link rel="icon" type="image/x-icon" href="/assets/LOGO.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="align.css" />
     <style>
       /* chrome-star cursor, same as the home page */
@@ -171,7 +177,14 @@
         display: none;
       }
     </style>
-    <script src="https://cdn.databuddy.cc/databuddy.js" data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50" data-track-web-vitals="true" data-track-errors="true" crossorigin="anonymous" async></script>
+    <script
+      src="https://cdn.databuddy.cc/databuddy.js"
+      data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
+      data-track-web-vitals="true"
+      data-track-errors="true"
+      crossorigin="anonymous"
+      async
+    ></script>
     <!-- site-wide look: keep this as the last stylesheet -->
     <link rel="stylesheet" href="theme.css" />
     <style>
@@ -272,8 +285,24 @@
         flex: none;
         border-radius: 50%;
         background:
-          radial-gradient(circle, #fff 0 3px, #d9d9d9 3.5px 6px, rgba(255, 255, 255, 0.35) 6.5px 7.5px, transparent 8px),
-          conic-gradient(from 20deg, #e9e9e9, #cdeeff, #f4d3ff, #fff2c2, #d1ffe0, #cfe2ff, #ffd6e8, #e9e9e9);
+          radial-gradient(
+            circle,
+            #fff 0 3px,
+            #d9d9d9 3.5px 6px,
+            rgba(255, 255, 255, 0.35) 6.5px 7.5px,
+            transparent 8px
+          ),
+          conic-gradient(
+            from 20deg,
+            #e9e9e9,
+            #cdeeff,
+            #f4d3ff,
+            #fff2c2,
+            #d1ffe0,
+            #cfe2ff,
+            #ffd6e8,
+            #e9e9e9
+          );
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
       }
       .cs-cd::after {
@@ -281,13 +310,21 @@
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 45%, transparent 60%, rgba(255, 255, 255, 0.5));
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.7),
+          transparent 45%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.5)
+        );
       }
       .is-playing .cs-cd {
         animation: cs-spin 2.4s linear infinite;
       }
       @keyframes cs-spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
       .cs-song-btn .cs-song-state {
         color: #8a6f68;
@@ -299,7 +336,9 @@
         margin-top: 12px;
         opacity: 0;
         transform: translateY(-6px);
-        transition: opacity 0.3s ease, transform 0.35s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.35s ease;
       }
       .cs-inline-player.is-shown {
         opacity: 1;
@@ -543,7 +582,9 @@
         text-decoration: none;
         font-size: 0.9rem;
         line-height: 1.45;
-        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s;
+        transition:
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+          background 0.3s;
       }
       .cs-made-card:hover {
         transform: translateY(-3px);
@@ -750,7 +791,10 @@
       .decision-head,
       .decision {
         display: grid;
-        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: 2rem minmax(0, 1.2fr) minmax(0, 1fr) minmax(
+            0,
+            1fr
+          );
         gap: 1.75rem;
         align-items: start;
       }
@@ -850,9 +894,190 @@
         .decision-num {
           grid-row: 1 / span 3;
         }
-        .decision-insight::before { content: "Learned: "; color: #0a0a0a; }
-        .decision-choice::before { content: "Designed: "; }
-        .decision-result::before { content: "Solves: "; color: #0a0a0a; }
+        .decision-insight::before {
+          content: "Learned: ";
+          color: #0a0a0a;
+        }
+        .decision-choice::before {
+          content: "Designed: ";
+        }
+        .decision-result::before {
+          content: "Solves: ";
+          color: #0a0a0a;
+        }
+      }
+
+      /* the section title sits inside the journey box */
+      #why > .journey {
+        margin-top: 0;
+      }
+      .journey .journey-title {
+        margin: 0 0 1.8rem !important;
+        max-width: 24ch;
+        text-wrap: balance;
+      }
+
+      /* what shopping looked like on my phone */
+      .al-vs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+        max-width: 820px;
+      }
+      .al-vs-card {
+        margin: 0;
+      }
+      .al-vs-art {
+        position: relative;
+        display: grid;
+        place-items: center;
+        aspect-ratio: 16 / 10;
+        border-radius: 12px;
+        background: #f6f6f6;
+        overflow: hidden;
+      }
+      .al-vs-card figcaption {
+        margin-top: 12px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #6b6b6b;
+      }
+      .al-vs-card figcaption strong {
+        display: block;
+        font-family: var(--display) !important;
+        font-size: 1.3rem;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        color: #0a0a0a;
+      }
+      .al-chat {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+      }
+      .al-photo {
+        width: 92px;
+        height: 118px;
+        border-radius: 14px;
+        background: linear-gradient(160deg, #e7dcd6, #c9b7ae);
+        display: grid;
+        place-items: center;
+      }
+      .al-photo span {
+        width: 40px;
+        height: 56px;
+        background: var(--crimson);
+        clip-path: polygon(
+          30% 0,
+          70% 0,
+          100% 18%,
+          88% 34%,
+          88% 100%,
+          12% 100%,
+          12% 34%,
+          0 18%
+        );
+        opacity: 0.85;
+      }
+      .al-bubble {
+        padding: 8px 14px;
+        border-radius: 18px;
+        background: #2f7cf6;
+        color: #fff;
+        font-size: 0.95rem;
+      }
+      .al-fail {
+        font-size: 0.75rem;
+        color: #d23b3b;
+      }
+      .al-fail span {
+        display: inline-grid;
+        place-items: center;
+        width: 15px;
+        height: 15px;
+        margin-left: 3px;
+        border-radius: 50%;
+        background: #d23b3b;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .al-pile {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .al-pile span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 24%;
+        aspect-ratio: 3 / 4;
+        display: flex;
+        align-items: flex-end;
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.35);
+        font-size: 0.8rem;
+        color: #0a0a0a;
+        transform: translate(var(--x), var(--y)) rotate(var(--r));
+      }
+      /* your own images sit in the photo spots; the shapes show until they're added */
+      .al-photo {
+        position: relative;
+        overflow: hidden;
+      }
+      .al-photo img,
+      .al-pile span img {
+        position: absolute;
+        object-fit: cover;
+        z-index: 1;
+      }
+      .al-photo img {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .al-pile span img {
+        inset: 8px 8px 30px;
+        width: calc(100% - 16px);
+        height: calc(100% - 38px);
+        border-radius: 6px;
+      }
+      .al-pile span::before {
+        content: "";
+        position: absolute;
+        inset: 8px 8px 30px;
+        border-radius: 6px;
+        background: var(--blush);
+      }
+
+      /* posters and social posts */
+      .al-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin-top: 2.5rem;
+      }
+      .al-gallery:not(:has(figure)) {
+        display: none;
+      }
+      .al-gallery .cs-img {
+        margin: 0;
+      }
+      @media (max-width: 900px) {
+        .al-vs {
+          grid-template-columns: 1fr;
+        }
+        .al-gallery {
+          grid-template-columns: 1fr 1fr;
+        }
+        .journey .journey-title {
+          max-width: none;
+        }
       }
     </style>
   </head>
@@ -864,7 +1089,11 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container nav-container">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/LOGO.png" alt="Rachel Chen home" style="height: 100px" />
+          <img
+            src="assets/LOGO.png"
+            alt="Rachel Chen home"
+            style="height: 100px"
+          />
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -879,11 +1108,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.html#work">Work</a></li>
-            <li class="nav-item"><a class="nav-link" href="creative.html">Creative</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:rachelmchen16@gmail.com">Contact</a>
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#work">Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="creative.html">Creative</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:rachelmchen16@gmail.com"
+                >Contact</a
+              >
             </li>
           </ul>
         </div>
@@ -892,17 +1129,30 @@
 
     <!-- HERO -->
     <header class="cs-hero">
-      <h1 class="cs-title" aria-label="Align"><span class="cs-a">A</span>lign</h1>
+      <h1 class="cs-title" aria-label="Align">
+        <span class="cs-a">A</span>lign
+      </h1>
       <p class="cs-lede">
         A styling app for the moment you’re standing in the fitting room,
         holding something you like, and can’t decide if it’s worth buying.
       </p>
       <!-- soundtrack: the song on repeat while making this.
            Paste the Spotify song link in data-spotify (Spotify: ••• > Share > Copy song link). -->
-      <div class="cs-song" data-spotify="https://open.spotify.com/track/27QvYgBk0CHOVHthWnkuWt" data-search="vogue madonna">
-        <button type="button" class="cs-song-btn" aria-expanded="false" data-cursor-label="Play">
+      <div
+        class="cs-song"
+        data-spotify="https://open.spotify.com/track/27QvYgBk0CHOVHthWnkuWt"
+        data-search="vogue madonna"
+      >
+        <button
+          type="button"
+          class="cs-song-btn"
+          aria-expanded="false"
+          data-cursor-label="Play"
+        >
           <span class="cs-cd" aria-hidden="true"></span>
-          <span class="cs-song-text">On repeat while making this: <strong>Vogue</strong> · Madonna</span>
+          <span class="cs-song-text"
+            >On repeat while making this: <strong>Vogue</strong> · Madonna</span
+          >
         </button>
       </div>
 
@@ -928,7 +1178,7 @@
 
     <!-- FINAL LOOK UP FRONT -->
     <figure class="cs-cover">
-      <img src="assets/headeralign.png" alt="Final Align app screens" />
+      <img src="assets/alignhero.png" alt="Final Align app screens" />
     </figure>
 
     <!-- CASE STUDY -->
@@ -950,58 +1200,204 @@
       <main class="content">
         <!-- WHY: the story first -->
         <section class="section" id="why">
-          <h2 class="section-title">Have you ever been indecisive in a <em>dressing room?</em></h2>
-          <div class="section-body">
-            <p>You’re holding a piece you really like, none of your friends are answering, and you just can’t decide. Is this something you love right now, or something you’ll actually wear after today?</p>
-            <p>As a really indecisive person, I’ve been there so many times. I’d take photos and show my friends waiting outside the dressing room, or send them to friends who weren’t with me. But dressing rooms have terrible service, so my texts wouldn’t send, or my friends would answer after I’d already left. That’s when I realized I always need a second opinion before I buy something.</p>
-            <p>My whole process was taking a photo, asking my friends, and looking up inspo on Pinterest and TikTok. By the end, I had inspo saved all over my phone and none of it in one place. And it wasn’t just me. So many of my friends shop the exact same way.</p>
-          </div>
-
-          <!-- journey map: my dressing room routine, mood goes down at every step -->
-          <figure class="journey" aria-label="My dressing room routine before Align">
+          <!-- the title lives in the journey map: my dressing room routine, mood goes down at every step -->
+          <figure
+            class="journey"
+            aria-label="My dressing room routine before Align"
+          >
+            <h2 class="section-title journey-title">
+              Have you ever been indecisive in a <em>dressing&nbsp;room?</em>
+            </h2>
             <div class="journey-mood" aria-hidden="true">
               <svg viewBox="0 0 1000 140" preserveAspectRatio="none">
-                <path d="M100,24 C180,24 220,50 300,58 C380,66 420,104 500,108 C580,112 620,86 700,90 C780,94 820,126 900,128" />
+                <path
+                  d="M100,24 C180,24 220,50 300,58 C380,66 420,104 500,108 C580,112 620,86 700,90 C780,94 820,126 900,128"
+                />
               </svg>
-              <span class="journey-dot" style="left:10%;top:17%"></span>
-              <span class="journey-dot" style="left:30%;top:41%"></span>
-              <span class="journey-dot is-low" style="left:50%;top:77%"></span>
-              <span class="journey-dot is-low" style="left:70%;top:64%"></span>
-              <span class="journey-dot is-low" style="left:90%;top:91%"></span>
+              <span class="journey-dot" style="left: 10%; top: 17%"></span>
+              <span class="journey-dot" style="left: 30%; top: 41%"></span>
+              <span
+                class="journey-dot is-low"
+                style="left: 50%; top: 77%"
+              ></span>
+              <span
+                class="journey-dot is-low"
+                style="left: 70%; top: 64%"
+              ></span>
+              <span
+                class="journey-dot is-low"
+                style="left: 90%; top: 91%"
+              ></span>
               <span class="journey-axis-top">excited</span>
               <span class="journey-axis-bottom">stuck</span>
             </div>
             <ol class="journey-steps">
-              <li><strong>Try it on</strong><span>“Wait, I kind of love this.”</span></li>
-              <li><strong>Take a photo</strong><span>“I need a second opinion.”</span></li>
-              <li><strong>Text my friends</strong><span>No service. Not delivered.</span></li>
-              <li><strong>Search for inspo</strong><span>Pinterest, TikTok, screenshots everywhere.</span></li>
-              <li><strong>Leave the store</strong><span>Still not sure if I should’ve bought it.</span></li>
+              <li>
+                <strong>Try it on</strong
+                ><span>“Wait, I kind of love this.”</span>
+              </li>
+              <li>
+                <strong>Take a photo</strong
+                ><span>“I need a second opinion.”</span>
+              </li>
+              <li>
+                <strong>Text my friends</strong
+                ><span>No service. Not delivered.</span>
+              </li>
+              <li>
+                <strong>Search for inspo</strong
+                ><span>Pinterest, TikTok, screenshots everywhere.</span>
+              </li>
+              <li>
+                <strong>Leave the store</strong
+                ><span>Still not sure if I should’ve bought it.</span>
+              </li>
             </ol>
-            <figcaption class="cs-caption">My dressing room routine before Align. Every step was a guess, and none of it lived in one place.</figcaption>
           </figure>
-          <p class="cs-quote"><span class="cs-mark" aria-hidden="true">“</span>Existing wardrobe apps optimize for organization and long term efficiency, but my research shows the emotional pain point happens in the <em>dressing room.</em>”</p>
+
+          <div class="section-body" style="margin-top: 2.5rem">
+            <p>
+              You’re holding a piece you really like, none of your friends are
+              answering, and you just can’t decide. Is this something you love
+              right now, or something you’ll actually wear after today?
+            </p>
+            <p>
+              As a really indecisive person, I’ve been there so many times. I
+              always need a second opinion before I buy something, and so many
+              of my friends shop the exact same way.
+            </p>
+          </div>
+
+          <!-- what that actually looks like on my phone -->
+          <div class="al-vs" aria-label="What shopping looked like on my phone">
+            <figure class="al-vs-card">
+              <div class="al-vs-art">
+                <div class="al-chat">
+                  <!-- your photo: assets/align-dressingroom.png -->
+                  <div class="al-photo">
+                    <span aria-hidden="true"></span
+                    ><img
+                      src="assets/dressingroom.png"
+                      alt="A piece I was trying on"
+                      onerror="this.remove()"
+                    />
+                  </div>
+                  <div class="al-bubble">should i get this??</div>
+                  <div class="al-fail">
+                    Not Delivered <span aria-hidden="true">!</span>
+                  </div>
+                </div>
+              </div>
+              <figcaption>
+                <strong>Asking my friends</strong
+                ><span
+                  >Dressing rooms have terrible service, so my texts never
+                  sent.</span
+                >
+              </figcaption>
+            </figure>
+            <figure class="al-vs-card">
+              <div class="al-vs-art">
+                <div class="al-pile" aria-hidden="true">
+                  <span style="--r: -8deg; --x: -200%; --y: -40%"
+                    ><img
+                      src="assets/alignpinterest.jpg"
+                      alt=""
+                      onerror="this.remove()"
+                    />Pinterest</span
+                  >
+                  <span style="--r: 6deg; --x: -98%; --y: -54%"
+                    ><img
+                      src="assets/aligntiktok.PNG"
+                      alt=""
+                      onerror="this.remove()"
+                    />TikTok</span
+                  >
+                  <span style="--r: -5deg; --x: 4%; --y: -34%"
+                    ><img
+                      src="assets/camera.png"
+                      alt=""
+                      onerror="this.remove()"
+                    />Screenshots</span
+                  >
+                  <span style="--r: 9deg; --x: 104%; --y: -48%"
+                    ><img
+                      src="assets/screenshots.png"
+                      alt=""
+                      onerror="this.remove()"
+                    />Camera roll</span
+                  >
+                </div>
+              </div>
+              <figcaption>
+                <strong>Looking for inspo</strong
+                ><span
+                  >Saved all over my phone, and none of it in one place.</span
+                >
+              </figcaption>
+            </figure>
+          </div>
+
+          <p class="cs-quote">
+            <span class="cs-mark" aria-hidden="true">“</span>Existing wardrobe
+            apps optimize for organization and long term efficiency, but my
+            research shows the emotional pain point happens in the
+            <em>dressing room.</em>”
+          </p>
           <div class="section-body" style="margin-top: 3.5rem">
-            <p>So for my senior capstone, I made Align. It helps you decide, right there in the dressing room, if a piece is worth buying. It also shows you curated outfit inspo from fashion creators on TikTok, Instagram and Pinterest, including niche creators, so you see lots of different ways to style the same piece. Everything you find lives in one spot, the app, instead of being scattered across your phone.</p>
+            <p>
+              So for my senior capstone, I made Align. It helps you decide,
+              right there in the dressing room, if a piece is worth buying, and
+              brings outfit inspo from fashion creators on TikTok, Instagram and
+              Pinterest into one place.
+            </p>
           </div>
           <div class="cs-made">
-            <a href="#app" class="cs-made-card"><span class="cs-made-num">01</span><strong>Mobile app</strong><span>The full flow, from snapping a piece to swiping on outfits</span></a>
-            <a href="#brand" class="cs-made-card"><span class="cs-made-num">02</span><strong>Brand book</strong><span>Logo, color and type for a boutique feel</span></a>
-            <a href="#outcome" class="cs-made-card"><span class="cs-made-num">03</span><strong>Posters</strong><span>A launch campaign series</span></a>
-            <a href="#outcome" class="cs-made-card"><span class="cs-made-num">04</span><strong>Social media</strong><span>A content system for Instagram and TikTok</span></a>
+            <a href="#app" class="cs-made-card"
+              ><span class="cs-made-num">01</span><strong>Mobile app</strong
+              ><span
+                >The full flow, from snapping a piece to swiping on
+                outfits</span
+              ></a
+            >
+            <a href="#brand" class="cs-made-card"
+              ><span class="cs-made-num">02</span><strong>Brand book</strong
+              ><span>Logo, color and type for a boutique feel</span></a
+            >
+            <a href="#outcome" class="cs-made-card"
+              ><span class="cs-made-num">03</span><strong>Posters</strong
+              ><span>A launch campaign series</span></a
+            >
+            <a href="#outcome" class="cs-made-card"
+              ><span class="cs-made-num">04</span><strong>Social media</strong
+              ><span>A content system for Instagram and TikTok</span></a
+            >
           </div>
         </section>
 
         <!-- FOUND -->
         <section class="section" id="found">
-          <h2 class="section-title">Every app I looked at was built for the closet, <em>not the store.</em></h2>
+          <h2 class="section-title">
+            Every app I looked at was built for the closet,
+            <em>not the store.</em>
+          </h2>
           <div class="section-body">
-            <p>I compared the three wardrobe apps that came up most, then talked to shoppers through interviews and a survey to understand what that in store moment actually feels like.</p>
+            <p>
+              I compared the three wardrobe apps that came up most, then talked
+              to shoppers through interviews and a survey to understand what
+              that in store moment actually feels like.
+            </p>
           </div>
           <div class="ca">
             <h3 class="ca-title">Competitive analysis</h3>
-            <p class="ca-intro">How the three closest wardrobe apps compare, and where Align fits.</p>
-            <div class="ca-table" role="table" aria-label="Competitive analysis of wardrobe apps">
+            <p class="ca-intro">
+              How the three closest wardrobe apps compare, and where Align fits.
+            </p>
+            <div
+              class="ca-table"
+              role="table"
+              aria-label="Competitive analysis of wardrobe apps"
+            >
               <div class="ca-labels" aria-hidden="true">
                 <div class="ca-name">&nbsp;</div>
                 <div class="ca-cell">Built for</div>
@@ -1010,30 +1406,79 @@
               </div>
               <div class="ca-col" role="row">
                 <div class="ca-name" role="columnheader">Alta</div>
-                <div class="ca-cell" role="cell"><span class="ca-rowlabel">Built for</span>Organizing your closet with AI outfit ideas</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Setup</span>Upload your whole wardrobe first</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Helps you decide in the store?</span><span class='ca-no'>No</span></div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Built for</span>Organizing your
+                  closet with AI outfit ideas
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Setup</span>Upload your whole
+                  wardrobe first
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Helps you decide in the store?</span
+                  ><span class="ca-no">No</span>
+                </div>
               </div>
               <div class="ca-col" role="row">
                 <div class="ca-name" role="columnheader">Stylebook</div>
-                <div class="ca-cell" role="cell"><span class="ca-rowlabel">Built for</span>Planning outfits from clothes you own</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Setup</span>Lots of manual setup before it helps</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Helps you decide in the store?</span><span class='ca-no'>No</span></div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Built for</span>Planning outfits
+                  from clothes you own
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Setup</span>Lots of manual setup
+                  before it helps
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Helps you decide in the store?</span
+                  ><span class="ca-no">No</span>
+                </div>
               </div>
               <div class="ca-col" role="row">
                 <div class="ca-name" role="columnheader">Whering</div>
-                <div class="ca-cell" role="cell"><span class="ca-rowlabel">Built for</span>A social, playful way to style what you own</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Setup</span>Upload your whole wardrobe first</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Helps you decide in the store?</span><span class='ca-no'>No</span></div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Built for</span>A social, playful
+                  way to style what you own
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Setup</span>Upload your whole
+                  wardrobe first
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Helps you decide in the store?</span
+                  ><span class="ca-no">No</span>
+                </div>
               </div>
               <div class="ca-col is-align" role="row">
                 <div class="ca-name" role="columnheader">Align</div>
-                <div class="ca-cell" role="cell"><span class="ca-rowlabel">Built for</span>Deciding on one piece before you buy it</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Setup</span>One photo</div><div class="ca-cell" role="cell"><span class="ca-rowlabel">Helps you decide in the store?</span><span class='ca-yes'>Yes</span></div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Built for</span>Deciding on one
+                  piece before you buy it
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Setup</span>One photo
+                </div>
+                <div class="ca-cell" role="cell">
+                  <span class="ca-rowlabel">Helps you decide in the store?</span
+                  ><span class="ca-yes">Yes</span>
+                </div>
               </div>
             </div>
           </div>
-          <p class="cs-gap">The opening was clear: nobody was designing for the “should I buy this?” moment.</p>
+          <p class="cs-gap">
+            The opening was clear: nobody was designing for the “should I buy
+            this?” moment.
+          </p>
         </section>
 
         <!-- DECISIONS -->
         <section class="section" id="decisions">
           <h2 class="section-title">What the research <em>changed.</em></h2>
           <div class="section-body">
-            <p>Every core feature traces back to something I learned. These are the four decisions that shaped the app.</p>
+            <p>
+              Every core feature traces back to something I learned. These are
+              the four decisions that shaped the app.
+            </p>
           </div>
           <div class="decisions" role="table" aria-label="Key design decisions">
             <div class="decision-head" role="row">
@@ -1043,27 +1488,52 @@
             </div>
             <div class="decision" role="row">
               <span class="decision-num" aria-hidden="true">1</span>
-              <p class="decision-insight" role="cell">The decision happens in the store, often alone, in a few minutes. Other apps make you upload your whole closet first.</p>
-              <p class="decision-choice" role="cell">Start with one item. Snap or upload only the piece in your hand.</p>
-              <p class="decision-result" role="cell">No setup standing between you and an answer.</p>
+              <p class="decision-insight" role="cell">
+                The decision happens in the store, often alone, in a few
+                minutes.
+              </p>
+              <p class="decision-choice" role="cell">
+                Start with one photo of the piece in your hand.
+              </p>
+              <p class="decision-result" role="cell">
+                No closet upload before you get an answer.
+              </p>
             </div>
             <div class="decision" role="row">
               <span class="decision-num" aria-hidden="true">2</span>
-              <p class="decision-insight" role="cell">Shoppers couldn’t picture how a piece would fit into their real life.</p>
-              <p class="decision-choice" role="cell">Pick a vibe first: casual, professional or night out.</p>
-              <p class="decision-result" role="cell">Outfits show up for the place you’d actually wear them.</p>
+              <p class="decision-insight" role="cell">
+                Shoppers couldn’t picture a piece in their real life.
+              </p>
+              <p class="decision-choice" role="cell">
+                Pick a vibe first: casual, professional or night out.
+              </p>
+              <p class="decision-result" role="cell">
+                Outfits for where you’d actually wear it.
+              </p>
             </div>
             <div class="decision" role="row">
               <span class="decision-num" aria-hidden="true">3</span>
-              <p class="decision-insight" role="cell">Inspiration is scattered across Pinterest and TikTok, and slow to search in a store.</p>
-              <p class="decision-choice" role="cell">Bring curated looks from fashion creators into one feed.</p>
-              <p class="decision-result" role="cell">No more jumping between apps to find a reference.</p>
+              <p class="decision-insight" role="cell">
+                Inspo is scattered and slow to search in a store.
+              </p>
+              <p class="decision-choice" role="cell">
+                Looks from fashion creators in one feed.
+              </p>
+              <p class="decision-result" role="cell">
+                No jumping between apps.
+              </p>
             </div>
             <div class="decision" role="row">
               <span class="decision-num" aria-hidden="true">4</span>
-              <p class="decision-insight" role="cell">It’s a high pressure moment. People want a quick gut check, not a long analysis.</p>
-              <p class="decision-choice" role="cell">A yes or no swipe on each look.</p>
-              <p class="decision-result" role="cell">Deciding feels fast and low stakes, so you know before you leave the fitting room.</p>
+              <p class="decision-insight" role="cell">
+                People want a quick gut check, not a long analysis.
+              </p>
+              <p class="decision-choice" role="cell">
+                A yes or no swipe on each look.
+              </p>
+              <p class="decision-result" role="cell">
+                You know before you leave the fitting room.
+              </p>
             </div>
           </div>
         </section>
@@ -1072,17 +1542,28 @@
         <section class="section" id="app">
           <h2 class="section-title">Snap it, pick a vibe, <em>swipe.</em></h2>
           <div class="section-body">
-            <p>Take a photo of the piece, choose where you’d wear it, and swipe through outfits built around it. A few swipes in, you know if it fits your style, and if it’s worth buying.</p>
+            <p>
+              Take a photo of the piece, choose where you’d wear it, and swipe
+              through outfits built around it. A few swipes in, you know if it’s
+              worth buying.
+            </p>
           </div>
           <figure class="cs-img">
-            <img src="assets/onboard.png" alt="Align onboarding and main screens" />
+            <img
+              src="assets/onboard.png"
+              alt="Align onboarding and main screens"
+            />
           </figure>
           <div class="cs-pair">
             <figure class="cs-img">
-              <video autoplay loop muted playsinline><source src="assets/alignpt1.MOV" type="video/mp4" /></video>
+              <video autoplay loop muted playsinline>
+                <source src="assets/alignpt1.MOV" type="video/mp4" />
+              </video>
             </figure>
             <figure class="cs-img">
-              <video autoplay loop muted playsinline><source src="assets/alignpt2.mov" type="video/mp4" /></video>
+              <video autoplay loop muted playsinline>
+                <source src="assets/alignpt2.mov" type="video/mp4" />
+              </video>
             </figure>
           </div>
         </section>
@@ -1091,15 +1572,26 @@
         <section class="section" id="brand">
           <h2 class="section-title">Elegant, but <em>not untouchable.</em></h2>
           <div class="section-body">
-            <p>I wanted Align to feel like a boutique, not a utility app. A deep crimson, clean type and soft texture give it a high fashion feel without making it feel exclusive.</p>
-            <p>The logo pairs a calligraphic “A” with a clean wordmark: a little classic, a little modern, like the outfits it helps you build.</p>
+            <p>
+              I wanted Align to feel like a boutique, not a utility app. A deep
+              crimson, clean type and soft texture give it a high fashion feel
+              without making it feel exclusive.
+            </p>
+            <p>
+              The logo pairs a calligraphic “A” with a clean wordmark: a little
+              classic, a little modern, like the outfits it helps you build.
+            </p>
           </div>
           <figure class="cs-img">
             <img src="assets/alignmoodboard.png" alt="Align moodboard" />
           </figure>
           <div class="cs-pair">
-            <figure class="cs-img"><img src="assets/logo iterations.png" alt="Logo iterations" /></figure>
-            <figure class="cs-img"><img src="assets/type.png" alt="Typography" /></figure>
+            <figure class="cs-img">
+              <img src="assets/logo iterations.png" alt="Logo iterations" />
+            </figure>
+            <figure class="cs-img">
+              <img src="assets/type.png" alt="Typography" />
+            </figure>
           </div>
         </section>
 
@@ -1107,11 +1599,19 @@
         <section class="section" id="process">
           <h2 class="section-title">How I <em>got there.</em></h2>
           <div class="section-body">
-            <p>I mapped the flow first, sketched the swipe on paper, then tested a mid fidelity version before moving into final screens. The biggest change along the way was cutting steps: every screen that slowed down the decision came out.</p>
+            <p>
+              I mapped the flow first, sketched the swipe on paper, then tested
+              a mid fidelity version before moving into final screens. The
+              biggest change along the way was cutting steps: every screen that
+              slowed down the decision came out.
+            </p>
           </div>
           <div class="cs-pair is-small">
             <figure class="cs-img">
-              <img src="assets/sketchalign.png" alt="Early sketches of the flow" />
+              <img
+                src="assets/sketchalign.png"
+                alt="Early sketches of the flow"
+              />
               <figcaption class="cs-caption">Early sketches</figcaption>
             </figure>
             <figure class="cs-img">
@@ -1125,10 +1625,62 @@
         <section class="section" id="outcome">
           <h2 class="section-title">What came <em>out of it.</em></h2>
           <div class="section-body">
-            <p>Align was my senior capstone at Northeastern. It took me through the whole process on my own, from research to brand to a prototype ready to present.</p>
+            <p>
+              Align was my senior capstone at Northeastern. It took me through
+              the whole process on my own, from research to brand to a prototype
+              ready to present.
+            </p>
+          </div>
+          <!-- posters and social posts: save them as these file names and they show up -->
+          <div class="al-gallery">
+            <figure class="cs-img">
+              <img
+                src="assets/alignposter1.png"
+                alt="Align launch poster"
+                onerror="this.parentNode.remove()"
+              />
+            </figure>
+            <figure class="cs-img">
+              <img
+                src="assets/alignposter2.png"
+                alt="Align launch poster"
+                onerror="this.parentNode.remove()"
+              />
+            </figure>
+            <figure class="cs-img">
+              <img
+                src="assets/alignposter3.png"
+                alt="Align launch poster"
+                onerror="this.parentNode.remove()"
+              />
+            </figure>
+            <figure class="cs-img">
+              <img
+                src="assets/alignsocial1.png"
+                alt="Align Instagram post"
+                onerror="this.parentNode.remove()"
+              />
+            </figure>
+            <figure class="cs-img">
+              <img
+                src="assets/alignsocial2.png"
+                alt="Align Instagram post"
+                onerror="this.parentNode.remove()"
+              />
+            </figure>
+            <figure class="cs-img">
+              <img
+                src="assets/alignsocial3.png"
+                alt="Align TikTok post"
+                onerror="this.parentNode.remove()"
+              />
+            </figure>
           </div>
           <ul class="cs-list">
-            <li>A high fidelity app prototype with the full onboarding and swipe flow</li>
+            <li>
+              A high fidelity app prototype with the full onboarding and swipe
+              flow
+            </li>
             <li>A brand book with the logo, colors and type</li>
             <li>A launch poster series</li>
             <li>A social content system for Instagram and TikTok</li>
@@ -1173,9 +1725,7 @@
             >
           </div>
         </div>
-        <div class="text-center mt-4 small">
-          &copy; 2026 Rachel Chen
-        </div>
+        <div class="text-center mt-4 small">&copy; 2026 Rachel Chen</div>
       </div>
     </footer>
 
@@ -1331,7 +1881,9 @@
             if (hit.closest(".project-card")) return "See the project";
             if (hit.closest(".tl-filter")) return "Show";
             if (hit.closest(".navbar-brand"))
-              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+              return (
+                hit.closest(".navbar-brand").getAttribute("href") || ""
+              ).startsWith("#")
                 ? "Back to top"
                 : "Home";
             const a = hit.closest("a");
@@ -1341,7 +1893,8 @@
               if (/linkedin/i.test(href)) return "Let\u2019s connect";
               if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
               if (href.startsWith("#")) return "Take me there";
-              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              if (a.target === "_blank" || /^https?:/i.test(href))
+                return "Open";
               return "Go";
             }
             if (hit.closest(".navbar-toggler")) return "Menu";
@@ -1482,10 +2035,18 @@
         if (!song) return;
         const btn = song.querySelector(".cs-song-btn");
         const title = song.querySelector(".cs-song-text strong").textContent;
-        const artist = song.querySelector(".cs-song-text").textContent.split("·").pop().trim();
-        const getId = () => ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) || [])[1];
+        const artist = song
+          .querySelector(".cs-song-text")
+          .textContent.split("·")
+          .pop()
+          .trim();
+        const getId = () =>
+          ((song.dataset.spotify || "").match(/track\/([A-Za-z0-9]+)/) ||
+            [])[1];
         let id = null;
-        let controller = null, dock = null, playing = false;
+        let controller = null,
+          dock = null,
+          playing = false;
 
         const setPlaying = (on) => {
           playing = on;
@@ -1512,7 +2073,9 @@
               { uri: "spotify:track:" + id, width: "100%", height: 80 },
               (c) => {
                 controller = c;
-                c.addListener("playback_update", (e) => setPlaying(!e.data.isPaused));
+                c.addListener("playback_update", (e) =>
+                  setPlaying(!e.data.isPaused),
+                );
                 c.addListener("ready", () => c.play());
               },
             );
@@ -1527,7 +2090,12 @@
           id = getId();
           if (!id) {
             // no song link pasted yet: open it on Spotify instead
-            window.open("https://open.spotify.com/search/" + encodeURIComponent(song.dataset.search || ""), "_blank", "noopener");
+            window.open(
+              "https://open.spotify.com/search/" +
+                encodeURIComponent(song.dataset.search || ""),
+              "_blank",
+              "noopener",
+            );
             return;
           }
           if (!dock) {
@@ -1542,9 +2110,15 @@
       // journey map: draw the mood line when it comes into view
       const journey = document.querySelector(".journey");
       if (journey && "IntersectionObserver" in window) {
-        const jo = new IntersectionObserver(([e]) => {
-          if (e.isIntersecting) { journey.classList.add("is-in"); jo.disconnect(); }
-        }, { threshold: 0.4 });
+        const jo = new IntersectionObserver(
+          ([e]) => {
+            if (e.isIntersecting) {
+              journey.classList.add("is-in");
+              jo.disconnect();
+            }
+          },
+          { threshold: 0.4 },
+        );
         jo.observe(journey);
       } else if (journey) journey.classList.add("is-in");
 
@@ -1556,7 +2130,12 @@
         sections.forEach((sec) => {
           if (sec.getBoundingClientRect().top <= 180) current = sec.id;
         });
-        links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + current));
+        links.forEach((l) =>
+          l.classList.toggle(
+            "active",
+            l.getAttribute("href") === "#" + current,
+          ),
+        );
       }
       window.addEventListener("scroll", updateActive, { passive: true });
       updateActive();
