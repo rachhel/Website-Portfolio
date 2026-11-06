@@ -652,10 +652,11 @@
         filter: grayscale(1);
         opacity: 0.6;
       }
+      .exp-card:nth-child(3) .exp-logo {
+        height: 28px;
+        max-width: 130px;
+      }
 
-      /* ============================================================
-         SIMPLIFIED HERO: name + one sentence + pad (no eyebrow)
-         ============================================================ */
       .hero--pad .hero-name {
         margin-bottom: 1.8rem;
       }
@@ -865,7 +866,13 @@
       }
       .section-title .letter {
         display: inline-block;
-        font-family: var(--display, "Helvetica Neue", Helvetica, Arial, sans-serif) !important;
+        font-family: var(
+          --display,
+          "Helvetica Neue",
+          Helvetica,
+          Arial,
+          sans-serif
+        ) !important;
         -webkit-text-fill-color: var(--ink, #0a0a0a);
       }
       /* one left edge for Expertise, Work and Experience */
@@ -997,9 +1004,76 @@
         height: 100%;
       }
       .runway-help {
-        margin: 12px 0 0;
+        margin: 0;
         font-size: 0.95rem;
         color: #6b6b6b;
+        white-space: nowrap;
+      }
+      /* little link in the facts row that scrolls down to the game */
+      .fact-jump {
+        display: inline-block;
+        margin-top: 0.35rem;
+        font-size: 0.95rem;
+        color: #8a8a8a;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        transition: color 0.2s;
+      }
+      .fact-jump:hover {
+        color: #0a0a0a;
+      }
+      #cities {
+        scroll-margin-top: 120px;
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        html {
+          scroll-behavior: smooth;
+        }
+      }
+      .runway-sound {
+        appearance: none;
+        border: 0;
+        background: none;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+      }
+      .runway-sound:hover {
+        color: #0a0a0a;
+      }
+      .runway-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem 2rem;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      /* the cities you've reached so far */
+      .runway-trail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.95rem;
+        color: #c4c4c4;
+      }
+      .runway-trail li {
+        transition: color 0.4s;
+      }
+      .runway-trail li + li::before {
+        content: "\2192";
+        margin: 0 8px;
+        color: #c4c4c4;
+      }
+      .runway-trail li.is-on {
+        color: #0a0a0a;
       }
       @media (max-width: 900px) {
         .runway-section {
@@ -1070,6 +1144,26 @@
     </style>
     <!-- site-wide look: keep this as the last stylesheet -->
     <link rel="stylesheet" href="theme.css" />
+    <style>
+      /* fewer lines: only the rule under the hero stays (it separates the
+         intro from the details). Everything else is separated by space. */
+      #mainNav,
+      .expertise-section,
+      .chrome-works-section,
+      .experience-section,
+      .chrome-works-section .section-footer {
+        border-top: 0 !important;
+        border-bottom: 0 !important;
+      }
+      .rule-wrap,
+      .exp-divider {
+        display: none !important;
+      }
+      .chrome-works-section .projects-grid,
+      .experience-section .exp-grid {
+        margin-top: 2.5rem !important;
+      }
+    </style>
     <script
       src="https://cdn.databuddy.cc/databuddy.js"
       data-client-id="a6add130-9444-4508-9e3d-d8cf5b29bb50"
@@ -1142,7 +1236,12 @@
           ></div>
           <figcaption class="pad-label">
             <span>Brush the sequins</span>
-            <button type="button" class="pad-reset" id="padReset" data-cursor-label="Fix it">
+            <button
+              type="button"
+              class="pad-reset"
+              id="padReset"
+              data-cursor-label="Fix it"
+            >
               Reset <span aria-hidden="true">↺</span>
             </button>
           </figcaption>
@@ -1160,7 +1259,7 @@
             <a
               href="https://duke.edu"
               target="_blank"
-              style="text-decoration: underline; text-underline-offset: 2px;"
+              style="text-decoration: underline; text-underline-offset: 2px"
               >Duke University</a
             >
           </p>
@@ -1172,7 +1271,7 @@
             <a
               href="https://www.northeastern.edu"
               target="_blank"
-              style="text-decoration: underline; text-underline-offset: 2px;"
+              style="text-decoration: underline; text-underline-offset: 2px"
               >Northeastern</a
             >
           </p>
@@ -1184,19 +1283,19 @@
             <a
               href="https://www.bose.com"
               target="_blank"
-              style="text-decoration: underline; text-underline-offset: 2px;"
+              style="text-decoration: underline; text-underline-offset: 2px"
               >Bose</a
             >,
             <a
               href="https://delsys.com/company/timeline/?gad_source=1&gad_campaignid=23530796799&gbraid=0AAAAABO8dc0aWSSe-OWF7sZpfJbxv5B9X&gclid=CjwKCAiAhqHXBhAXEiwATbksU1pesr4o4f1FK0BqGhLXvOpf8QT-9TwmDhfOBLbxJqjjHLDpuFeAexoCv6cQAvD_BwE"
               target="_blank"
-              style="text-decoration: underline; text-underline-offset: 2px;"
+              style="text-decoration: underline; text-underline-offset: 2px"
               >Delsys</a
             >, and
             <a
               href="https://www.sift-info.com/"
               target="_blank"
-              style="text-decoration: underline; text-underline-offset: 2px;"
+              style="text-decoration: underline; text-underline-offset: 2px"
               >Sift</a
             >
           </p>
@@ -1204,6 +1303,9 @@
         <div class="fact">
           <p class="fact-label">Based in</p>
           <p class="fact-value">Los Angeles, Boston, and Durham</p>
+          <a href="#cities" class="fact-jump" data-cursor-label="Let’s go"
+            >Jump through them <span aria-hidden="true">↓</span></a
+          >
         </div>
       </div>
     </section>
@@ -1227,7 +1329,11 @@
                 <span class="tag-hint">Flip ↻</span>
               </span>
               <span class="tag-face tag-back">
-                <span class="tag-tools-list"><span>User research</span><span>Product strategy</span><span>PRDs · A/B testing</span><span>Analytics</span><span>Jira · Miro</span></span>
+                <span class="tag-tools-list"
+                  ><span>User research</span><span>Product strategy</span
+                  ><span>PRDs · A/B testing</span><span>Analytics</span
+                  ><span>Jira · Miro</span></span
+                >
               </span>
             </button>
           </div>
@@ -1244,7 +1350,11 @@
                 <span class="tag-hint">Flip ↻</span>
               </span>
               <span class="tag-face tag-back">
-                <span class="tag-tools-list"><span>Figma</span><span>Illustrator</span><span>InDesign</span><span>Prototyping</span><span>Design systems</span></span>
+                <span class="tag-tools-list"
+                  ><span>Figma</span><span>Illustrator</span
+                  ><span>InDesign</span><span>Prototyping</span
+                  ><span>Design systems</span></span
+                >
               </span>
             </button>
           </div>
@@ -1261,7 +1371,10 @@
                 <span class="tag-hint">Flip ↻</span>
               </span>
               <span class="tag-face tag-back">
-                <span class="tag-tools-list"><span>Java · Kotlin</span><span>React</span><span>Swift</span><span>Python · SQL</span><span>C#/WPF</span></span>
+                <span class="tag-tools-list"
+                  ><span>Java · Kotlin</span><span>React</span><span>Swift</span
+                  ><span>Python · SQL</span><span>C#/WPF</span></span
+                >
               </span>
             </button>
           </div>
@@ -1291,7 +1404,9 @@
             <div class="card-frame">
               <div class="card-inner">
                 <div class="card-img-wrap">
-                  <img class="card-img" src="assets/align.png" alt="ALIGN" />
+                  <video class="card-img" autoplay muted loop playsinline>
+                    <source src="assets/alignhead.mp4" type="video/mp4" />
+                  </video>
                   <div class="shimmer"></div>
                   <div class="rivets">
                     <div class="rivet tl"></div>
@@ -1325,11 +1440,9 @@
             <div class="card-frame">
               <div class="card-inner">
                 <div class="card-img-wrap">
-                  <img
-                    class="card-img"
-                    src="assets/betweenus/betweenus.png"
-                    alt="Between Us"
-                  />
+                  <video class="card-img" autoplay muted loop playsinline>
+                    <source src="assets/betweenus.mp4" type="video/mp4" />
+                  </video>
                   <div class="shimmer"></div>
                   <div class="rivets">
                     <div class="rivet tl"></div>
@@ -1362,11 +1475,9 @@
             <div class="card-frame">
               <div class="card-inner">
                 <div class="card-img-wrap">
-                  <img
-                    class="card-img"
-                    src="assets/superpowerhead.png"
-                    alt="Superpower Mentors"
-                  />
+                  <video class="card-img" autoplay muted loop playsinline>
+                    <source src="assets/superpower.mp4" type="video/mp4" />
+                  </video>
                   <div class="shimmer"></div>
                   <div class="rivets">
                     <div class="rivet tl"></div>
@@ -1399,11 +1510,9 @@
             <div class="card-frame">
               <div class="card-inner">
                 <div class="card-img-wrap">
-                  <img
-                    class="card-img"
-                    src="assets/RXenergyheader.png"
-                    alt="RX Energy"
-                  />
+                  <video class="card-img" autoplay muted loop playsinline>
+                    <source src="assets/rx/rxpreview.mp4" type="video/mp4" />
+                  </video>
                   <div class="shimmer"></div>
                   <div class="rivets">
                     <div class="rivet tl"></div>
@@ -1438,7 +1547,9 @@
             <div class="card-frame">
               <div class="card-inner">
                 <div class="card-img-wrap">
-                  <img class="card-img" src="assets/SINcover.png" alt="SIN" />
+                  <video class="card-img" autoplay muted loop playsinline>
+                    <source src="assets/sin.mp4" type="video/mp4" />
+                  </video>
                   <div class="shimmer"></div>
                   <div class="rivets">
                     <div class="rivet tl"></div>
@@ -1473,11 +1584,9 @@
             <div class="card-frame">
               <div class="card-inner">
                 <div class="card-img-wrap">
-                  <img
-                    class="card-img"
-                    src="assets/boozyhead.png"
-                    alt="Boozy Treats"
-                  />
+                  <video class="card-img" autoplay muted loop playsinline>
+                    <source src="assets/boozy.mp4" type="video/mp4" />
+                  </video>
                   <div class="shimmer"></div>
                   <div class="rivets">
                     <div class="rivet tl"></div>
@@ -1531,9 +1640,14 @@
             <div class="exp-top">
               <img
                 class="exp-logo"
-                src="assets/logos/delsys.svg"
+                src="assets/logos/delsys.png"
                 alt="Delsys logo"
-                onerror="this.remove()"
+                onerror="
+                  if (!this.dataset.tried) {
+                    this.dataset.tried = 1;
+                    this.src = this.src.replace(/\.svg$/, '.png');
+                  } else this.remove();
+                "
               />
             </div>
             <div class="exp-company">Delsys</div>
@@ -1557,9 +1671,7 @@
           </div>
           <div class="exp-hover-overlay">
             <span class="exp-hover-text">reach out to learn more</span>
-            <a
-              href="mailto:chen.rachel1@northeastern.edu"
-              class="exp-contact-btn"
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn"
               >Contact Me</a
             >
           </div>
@@ -1570,9 +1682,14 @@
             <div class="exp-top">
               <img
                 class="exp-logo"
-                src="assets/logos/sift.svg"
+                src="assets/logos/sift.png"
                 alt="Sift logo"
-                onerror="this.remove()"
+                onerror="
+                  if (!this.dataset.tried) {
+                    this.dataset.tried = 1;
+                    this.src = this.src.replace(/\.svg$/, '.png');
+                  } else this.remove();
+                "
               />
             </div>
             <div class="exp-company">Sift</div>
@@ -1596,9 +1713,7 @@
           </div>
           <div class="exp-hover-overlay">
             <span class="exp-hover-text">reach out to learn more</span>
-            <a
-              href="mailto:chen.rachel1@northeastern.edu"
-              class="exp-contact-btn"
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn"
               >Contact Me</a
             >
           </div>
@@ -1609,9 +1724,14 @@
             <div class="exp-top">
               <img
                 class="exp-logo"
-                src="assets/logos/bose.svg"
+                src="assets/logos/bose.png"
                 alt="Bose logo"
-                onerror="this.remove()"
+                onerror="
+                  if (!this.dataset.tried) {
+                    this.dataset.tried = 1;
+                    this.src = this.src.replace(/\.svg$/, '.png');
+                  } else this.remove();
+                "
               />
             </div>
             <div class="exp-company">Bose</div>
@@ -1635,21 +1755,18 @@
           </div>
           <div class="exp-hover-overlay">
             <span class="exp-hover-text">reach out to learn more</span>
-            <a
-              href="mailto:chen.rachel1@northeastern.edu"
-              class="exp-contact-btn"
+            <a href="mailto:rachelmchen16@gmail.com" class="exp-contact-btn"
               >Contact Me</a
             >
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Closer: runway mini game -->
-    <section class="runway-section" aria-label="Runway mini game">
+    <section class="runway-section" id="cities" aria-label="City hopping game">
       <div class="runway-head">
-        <p class="runway-line">Made it to the end? Walk the runway.</p>
+        <p class="runway-line">Jump through the cities that shaped me.</p>
         <p class="runway-score" aria-live="polite">
           <span id="runwayScore">000</span>
           <span class="runway-best">Best <span id="runwayBest">000</span></span>
@@ -1663,11 +1780,33 @@
         data-cursor-label="Jump"
         role="button"
         tabindex="0"
-        aria-label="Runway game. Press space or tap to jump over the obstacles."
+        aria-label="City hopping game. Press space or tap to jump over the obstacles and travel from Los Angeles to Durham."
       >
         <canvas id="runwayCanvas"></canvas>
       </div>
-      <p class="runway-help">Space or tap to jump</p>
+      <div class="runway-foot">
+        <ol class="runway-trail" id="runwayTrail" aria-label="Cities">
+          <li class="is-on">Los Angeles</li>
+          <li>Bay Area</li>
+          <li>Boston</li>
+          <li>Korea</li>
+          <li>Paris</li>
+          <li>Back in Boston</li>
+          <li>Durham</li>
+        </ol>
+        <p class="runway-help">
+          Space or tap to jump ·
+          <button
+            type="button"
+            class="runway-sound"
+            id="runwaySound"
+            aria-pressed="true"
+            data-cursor-label="Mute"
+          >
+            Sound on
+          </button>
+        </p>
+      </div>
     </section>
 
     <footer class="bg-dark text-light py-4">
@@ -1695,16 +1834,14 @@
               >LinkedIn</a
             >
             <a
-              href="mailto:chen.rachel1@northeastern.edu"
+              href="mailto:rachelmchen16@gmail.com"
               target="_blank"
               class="text-light"
               >Email</a
             >
           </div>
         </div>
-        <div class="text-center mt-4 small">
-          &copy; 2026 Rachel Chen
-        </div>
+        <div class="text-center mt-4 small">&copy; 2026 Rachel Chen</div>
       </div>
     </footer>
 
@@ -1904,7 +2041,8 @@
             let size = (H * this.o.fontSize) / lines.length;
             mx.font = this._font(size);
             if ("letterSpacing" in mx)
-              mx.letterSpacing = Math.round(size * (this.o.letterSpacing || 0)) + "px";
+              mx.letterSpacing =
+                Math.round(size * (this.o.letterSpacing || 0)) + "px";
             const widest = Math.max(
               ...lines.map((l) => mx.measureText(l).width),
             );
@@ -1912,7 +2050,8 @@
               size *= (W * this.o.maxTextWidth) / widest;
             mx.font = this._font(size);
             if ("letterSpacing" in mx)
-              mx.letterSpacing = Math.round(size * (this.o.letterSpacing || 0)) + "px";
+              mx.letterSpacing =
+                Math.round(size * (this.o.letterSpacing || 0)) + "px";
             mx.textAlign = "center";
             mx.textBaseline = "middle";
             mx.fillStyle = "#000";
@@ -2391,7 +2530,9 @@
             if (hit.closest(".project-card")) return "See the project";
             if (hit.closest(".tl-filter")) return "Show";
             if (hit.closest(".navbar-brand"))
-              return (hit.closest(".navbar-brand").getAttribute("href") || "").startsWith("#")
+              return (
+                hit.closest(".navbar-brand").getAttribute("href") || ""
+              ).startsWith("#")
                 ? "Back to top"
                 : "Home";
             const a = hit.closest("a");
@@ -2401,7 +2542,8 @@
               if (/linkedin/i.test(href)) return "Let\u2019s connect";
               if (/\.pdf$/i.test(href)) return "Open r\u00e9sum\u00e9";
               if (href.startsWith("#")) return "Take me there";
-              if (a.target === "_blank" || /^https?:/i.test(href)) return "Open";
+              if (a.target === "_blank" || /^https?:/i.test(href))
+                return "Open";
               return "Go";
             }
             if (hit.closest(".navbar-toggler")) return "Menu";
@@ -2570,7 +2712,8 @@
       const phone = window.matchMedia("(max-width: 600px)");
       const wall = new SequinWall(pad, {
         text: "so happy\nyou\u2019re here",
-        fontFamily: '"Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif',
+        fontFamily:
+          '"Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif',
         fontStyle: "normal",
         fontWeight: 700,
         fontSize: phone.matches ? 0.38 : 0.34, // message size relative to the pad height
@@ -2583,7 +2726,9 @@
       });
 
       /* reset button: wipe the pad back to matte and brush the message in again */
-      document.getElementById("padReset").addEventListener("click", () => wall.replay());
+      document
+        .getElementById("padReset")
+        .addEventListener("click", () => wall.replay());
 
       /* ---------- chrome star cursor (replaces the old cursor code) ---------- */
       initChromeCursor();
@@ -2640,7 +2785,9 @@
           const t = e.touches[0];
           const el = document.elementFromPoint(t.clientX, t.clientY);
           const letter =
-            el && el.closest && el.closest(".hero-name .letter, .section-title .letter");
+            el &&
+            el.closest &&
+            el.closest(".hero-name .letter, .section-title .letter");
           if (letter && letter !== lastTouched) {
             chromeOn(letter);
             chromeOff(letter);
@@ -2682,9 +2829,13 @@
         const bestEl = document.getElementById("runwayBest");
         const INK = "#0a0a0a";
         const MUTED = "#9a9a9a";
-        const FONT = '"Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif';
+        const FONT =
+          '"Heros Web", "Helvetica Neue", Helvetica, Arial, sans-serif';
 
-        let W = 0, H = 0, dpr = 1, ground = 0;
+        let W = 0,
+          H = 0,
+          dpr = 1,
+          ground = 0;
         const resize = () => {
           dpr = Math.min(window.devicePixelRatio || 1, 2);
           W = stage.clientWidth;
@@ -2700,14 +2851,21 @@
         };
 
         let best = 0;
-        try { best = parseInt(localStorage.getItem("runwayBest") || "0", 10) || 0; } catch (e) {}
+        try {
+          best = parseInt(localStorage.getItem("runwayBest") || "0", 10) || 0;
+        } catch (e) {}
         const pad3 = (n) => String(Math.floor(n)).padStart(3, "0");
         bestEl.textContent = pad3(best);
 
         // world
         let state = "ready"; // ready | play | over
-        let t = 0, speed = 0, score = 0, nextGap = 0, walk = 0;
-        let obstacles = [], sparkles = [];
+        let t = 0,
+          speed = 0,
+          score = 0,
+          nextGap = 0,
+          walk = 0;
+        let obstacles = [],
+          sparkles = [];
         const model = { x: 0, y: 0, vy: 0, h: 58 };
         const GRAV = 2600;
         let JUMP = 700;
@@ -2718,6 +2876,8 @@
           speed = 330;
           score = 0;
           nextGap = 420;
+          city = 0;
+          banner = 0;
           model.x = Math.max(56, W * 0.12);
           model.y = 0;
           model.vy = 0;
@@ -2726,74 +2886,254 @@
 
         const jump = () => {
           if (state === "ready" || state === "over") {
+            sfx("click");
             reset();
             state = "play";
+            setCity(0);
             last = performance.now();
             loop(last);
             return;
           }
           if (model.y === 0) {
+            sfx("jump");
             model.vy = JUMP;
             for (let i = 0; i < 6; i++)
-              sparkles.push({ x: model.x, y: ground, vx: (Math.random() - 0.7) * 120, vy: -Math.random() * 90, life: 1 });
+              sparkles.push({
+                x: model.x,
+                y: ground,
+                vx: (Math.random() - 0.7) * 120,
+                vy: -Math.random() * 90,
+                life: 1,
+              });
           }
         };
 
-        // obstacles: clothing rack, shopping bag, hat box
-        const KINDS = [
-          { name: "rack", w: 46, h: 44 },
-          { name: "bag", w: 24, h: 30 },
-          { name: "box", w: 30, h: 22 },
-          { name: "bags", w: 50, h: 30 },
+        // little sound effects, made in the browser (no audio files).
+        // nothing plays until someone clicks or presses a key on the game.
+        let audio = null;
+        let soundOn = true;
+        try {
+          soundOn = localStorage.getItem("runwaySound") !== "off";
+        } catch (e) {}
+        const soundBtn = document.getElementById("runwaySound");
+        const showSound = () => {
+          soundBtn.textContent = soundOn ? "Sound on" : "Sound off";
+          soundBtn.setAttribute("aria-pressed", String(soundOn));
+          soundBtn.setAttribute(
+            "data-cursor-label",
+            soundOn ? "Mute" : "Unmute",
+          );
+        };
+        showSound();
+        soundBtn.addEventListener("click", () => {
+          soundOn = !soundOn;
+          try {
+            localStorage.setItem("runwaySound", soundOn ? "on" : "off");
+          } catch (e) {}
+          showSound();
+          if (soundOn) sfx("click");
+        });
+        const tone = (freq, to, dur, type = "sine", vol = 0.12, delay = 0) => {
+          const t0 = audio.currentTime + delay;
+          const o = audio.createOscillator();
+          const g = audio.createGain();
+          o.type = type;
+          o.frequency.setValueAtTime(freq, t0);
+          if (to) o.frequency.exponentialRampToValueAtTime(to, t0 + dur);
+          g.gain.setValueAtTime(0.0001, t0);
+          g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+          g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+          o.connect(g).connect(audio.destination);
+          o.start(t0);
+          o.stop(t0 + dur + 0.02);
+        };
+        const sfx = (name) => {
+          if (!soundOn) return;
+          try {
+            audio =
+              audio || new (window.AudioContext || window.webkitAudioContext)();
+            if (audio.state === "suspended") audio.resume();
+          } catch (e) {
+            return;
+          }
+          if (name === "jump") tone(420, 880, 0.14, "triangle", 0.1);
+          else if (name === "click") tone(1200, 900, 0.05, "square", 0.04);
+          else if (name === "city") {
+            // a little sparkle chime: three notes up
+            [1046, 1318, 1568].forEach((f, i) =>
+              tone(f, 0, 0.32, "sine", 0.08, i * 0.08),
+            );
+          } else if (name === "trip") {
+            tone(330, 110, 0.38, "sawtooth", 0.06);
+          } else if (name === "finish") {
+            [784, 988, 1175, 1568].forEach((f, i) =>
+              tone(f, 0, 0.45, "sine", 0.08, i * 0.1),
+            );
+          }
+        };
+
+        // the cities: every 50 points you move on to the next one
+        const CITIES = [
+          {
+            name: "Los Angeles",
+            spotted: "Spotted: R in Los Angeles",
+            mark: "palms",
+            kinds: [
+              { name: "palm", w: 30, h: 44 },
+              { name: "surf", w: 14, h: 40 },
+              { name: "ball", w: 22, h: 22 },
+            ],
+          },
+          {
+            name: "Bay Area",
+            spotted: "Spotted: R in the Bay",
+            mark: "bridge",
+            kinds: [
+              { name: "cablecar", w: 50, h: 32 },
+              { name: "bread", w: 30, h: 18 },
+              { name: "cone", w: 18, h: 26 },
+            ],
+          },
+          {
+            name: "Boston",
+            spotted: "Spotted: R in Boston for college",
+            mark: "brownstones",
+            kinds: [
+              { name: "coffee", w: 20, h: 32 },
+              { name: "duck", w: 52, h: 28 },
+              { name: "cone", w: 18, h: 26 },
+            ],
+          },
+          {
+            name: "Korea",
+            spotted: "Spotted: R studying abroad in Korea",
+            mark: "tower",
+            kinds: [
+              { name: "soju", w: 14, h: 34 },
+              { name: "basket", w: 30, h: 20 },
+            ],
+          },
+          {
+            name: "Paris",
+            spotted: "Spotted: R in Paris",
+            mark: "eiffel",
+            kinds: [
+              { name: "baguette", w: 20, h: 40 },
+              { name: "chair", w: 22, h: 34 },
+              { name: "macarons", w: 22, h: 22 },
+            ],
+          },
+          {
+            name: "Back in Boston",
+            spotted: "Spotted: R, back in Boston",
+            mark: "brownstones",
+            kinds: [
+              { name: "coffee", w: 20, h: 32 },
+              { name: "duck", w: 52, h: 28 },
+              { name: "cone", w: 18, h: 26 },
+            ],
+          },
+          {
+            name: "Durham",
+            spotted: "Spotted: R in Durham. XOXO",
+            mark: "chapel",
+            kinds: [
+              { name: "books", w: 32, h: 26 },
+              { name: "bull", w: 48, h: 30 },
+              { name: "coffee", w: 20, h: 32 },
+            ],
+          },
         ];
+        const STEP = 50;
+        const trail = [...document.querySelectorAll("#runwayTrail li")];
+        let city = 0,
+          banner = 0,
+          reached = 0;
+        const setCity = (i) => {
+          if (i > 0) sfx(i === CITIES.length - 1 ? "finish" : "city");
+          city = i;
+          banner = 2.4; // seconds the "Spotted" line stays up
+          reached = Math.max(reached, i);
+          trail.forEach((li, k) => li.classList.toggle("is-on", k <= reached));
+        };
         const spawn = () => {
-          const k = KINDS[(Math.random() * KINDS.length) | 0];
+          const kinds = CITIES[city].kinds;
+          const k = kinds[(Math.random() * kinds.length) | 0];
           obstacles.push({ ...k, x: W + 20 });
         };
 
         // drawing helpers
         const line = (x1, y1, x2, y2, w = 2) => {
           ctx.lineWidth = w;
-          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
         };
 
         // the model: an original Y2K fashion-doll version of Rachel
         // (big head, long glossy black hair, navy baby tee, black flares, platforms, iced coffee)
-        const SKIN = "#efcdb4", SKIN_SH = "#e2b89b";
-        const NAVY = "#1f2e57", NAVY_BACK = "#16213f";
-        const JEANS = "#111111", JEANS_BACK = "#2c2c2c", HAIR = "#0b0b0b";
-        const LIPS = "#d4607a", BLUSH = "rgba(240,120,140,0.35)";
+        const SKIN = "#efcdb4",
+          SKIN_SH = "#e2b89b";
+        const NAVY = "#1f2e57",
+          NAVY_BACK = "#16213f";
+        const JEANS = "#111111",
+          JEANS_BACK = "#2c2c2c",
+          HAIR = "#0b0b0b";
+        const LIPS = "#d4607a",
+          BLUSH = "rgba(240,120,140,0.35)";
         const limb = (x1, y1, x2, y2, w, c) => {
-          ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = "round";
-          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+          ctx.strokeStyle = c;
+          ctx.lineWidth = w;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
         };
         // flared jeans leg + chunky platform
         const leg = (hx, hy, thigh, bend, c) => {
-          const kx = hx + Math.sin(thigh) * 12, ky = hy + Math.cos(thigh) * 12;
+          const kx = hx + Math.sin(thigh) * 12,
+            ky = hy + Math.cos(thigh) * 12;
           const sh = thigh - bend;
-          const fx = kx + Math.sin(sh) * 13, fy = ky + Math.cos(sh) * 13;
+          const fx = kx + Math.sin(sh) * 13,
+            fy = ky + Math.cos(sh) * 13;
           limb(hx, hy, kx, ky, 5.2, c);
           // shin flares out toward the hem
-          const nx = Math.cos(sh), ny = -Math.sin(sh);
+          const nx = Math.cos(sh),
+            ny = -Math.sin(sh);
           ctx.fillStyle = c;
           ctx.beginPath();
           ctx.moveTo(kx + nx * 2.2, ky + ny * 2.2);
           ctx.lineTo(fx + nx * 3.8, fy + ny * 3.8);
           ctx.lineTo(fx - nx * 3.8, fy - ny * 3.8);
           ctx.lineTo(kx - nx * 2.2, ky - ny * 2.2);
-          ctx.closePath(); ctx.fill();
+          ctx.closePath();
+          ctx.fill();
           // platform shoe peeking out under the flare
           ctx.fillStyle = "#000";
           ctx.beginPath();
-          ctx.moveTo(fx - 3, fy); ctx.lineTo(fx + 5.5, fy + 0.5);
-          ctx.lineTo(fx + 5.5, fy + 4.5); ctx.lineTo(fx - 3, fy + 4.5);
-          ctx.closePath(); ctx.fill();
+          ctx.moveTo(fx - 3, fy);
+          ctx.lineTo(fx + 5.5, fy + 0.5);
+          ctx.lineTo(fx + 5.5, fy + 4.5);
+          ctx.lineTo(fx - 3, fy + 4.5);
+          ctx.closePath();
+          ctx.fill();
         };
         const swingArm = (sx, sy, up, bend, sleeve) => {
-          const ex = sx + Math.sin(up) * 9, ey = sy + Math.cos(up) * 9;
+          const ex = sx + Math.sin(up) * 9,
+            ey = sy + Math.cos(up) * 9;
           const fa = up + bend;
-          const hx = ex + Math.sin(fa) * 9, hy = ey + Math.cos(fa) * 9;
-          limb(sx, sy, sx + Math.sin(up) * 4, sy + Math.cos(up) * 4, 4.4, sleeve); // puff of the tee sleeve
+          const hx = ex + Math.sin(fa) * 9,
+            hy = ey + Math.cos(fa) * 9;
+          limb(
+            sx,
+            sy,
+            sx + Math.sin(up) * 4,
+            sy + Math.cos(up) * 4,
+            4.4,
+            sleeve,
+          ); // puff of the tee sleeve
           limb(sx + Math.sin(up) * 3, sy + Math.cos(up) * 3, ex, ey, 2.6, SKIN);
           limb(ex, ey, hx, hy, 2.4, SKIN);
           return [hx, hy];
@@ -2801,14 +3141,27 @@
         const icedCoffee = (cx, cy) => {
           // clear cup, coffee with a milk swirl, dome lid, straw
           ctx.fillStyle = "#7a4a2c";
-          ctx.beginPath(); ctx.moveTo(cx - 3.6, cy - 5); ctx.lineTo(cx + 3.6, cy - 5);
-          ctx.lineTo(cx + 2.6, cy + 6); ctx.lineTo(cx - 2.6, cy + 6); ctx.closePath(); ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(cx - 3.6, cy - 5);
+          ctx.lineTo(cx + 3.6, cy - 5);
+          ctx.lineTo(cx + 2.6, cy + 6);
+          ctx.lineTo(cx - 2.6, cy + 6);
+          ctx.closePath();
+          ctx.fill();
           ctx.fillStyle = "#c99a73";
           ctx.fillRect(cx - 3.4, cy - 5, 6.8, 3.2);
-          ctx.strokeStyle = "#0a0a0a"; ctx.lineWidth = 0.9;
-          ctx.beginPath(); ctx.moveTo(cx - 3.8, cy - 7); ctx.lineTo(cx + 3.8, cy - 7);
-          ctx.lineTo(cx + 2.7, cy + 6.3); ctx.lineTo(cx - 2.7, cy + 6.3); ctx.closePath(); ctx.stroke();
-          ctx.beginPath(); ctx.arc(cx, cy - 7, 3.8, Math.PI, 0); ctx.stroke(); // dome lid
+          ctx.strokeStyle = "#0a0a0a";
+          ctx.lineWidth = 0.9;
+          ctx.beginPath();
+          ctx.moveTo(cx - 3.8, cy - 7);
+          ctx.lineTo(cx + 3.8, cy - 7);
+          ctx.lineTo(cx + 2.7, cy + 6.3);
+          ctx.lineTo(cx - 2.7, cy + 6.3);
+          ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(cx, cy - 7, 3.8, Math.PI, 0);
+          ctx.stroke(); // dome lid
           limb(cx + 0.8, cy - 10.5, cx + 2.6, cy - 16, 1.3, "#0a0a0a"); // straw
           ctx.fillStyle = "rgba(255,255,255,0.75)";
           ctx.fillRect(cx - 2.6, cy - 4, 0.9, 8); // shine on the plastic
@@ -2818,10 +3171,13 @@
           const base = ground - yOff - 4.5; // platforms add height
           const air = yOff > 0;
           const still = !air && state !== "play";
-          const s = Math.sin(walk), c = Math.cos(walk);
+          const s = Math.sin(walk),
+            c = Math.cos(walk);
           const bob = air || still ? 0 : Math.abs(c) * 1.2;
-          const hipY = base - 25 + bob, shY = base - 41 + bob;
-          const hx0 = x + 1, hy0 = base - 55 + bob; // head centre
+          const hipY = base - 25 + bob,
+            shY = base - 41 + bob;
+          const hx0 = x + 1,
+            hy0 = base - 55 + bob; // head centre
           const sway = air || still ? 0 : s * 1.4;
 
           // hair behind everything (long, glossy, swings when she walks)
@@ -2831,16 +3187,39 @@
           ctx.beginPath();
           ctx.moveTo(hx0 + 7, hy0 - 6);
           ctx.quadraticCurveTo(hx0 - 2, hy0 - 15, hx0 - 10, hy0 - 3);
-          ctx.quadraticCurveTo(hx0 - 12 + flow * 0.4, shY + 8, hx0 - 10 + flow, hipY - 2 + lift);
-          ctx.quadraticCurveTo(hx0 - 5 + flow * 0.5, hipY + 1 + lift * 0.6, hx0 - 2, shY + 6);
+          ctx.quadraticCurveTo(
+            hx0 - 12 + flow * 0.4,
+            shY + 8,
+            hx0 - 10 + flow,
+            hipY - 2 + lift,
+          );
+          ctx.quadraticCurveTo(
+            hx0 - 5 + flow * 0.5,
+            hipY + 1 + lift * 0.6,
+            hx0 - 2,
+            shY + 6,
+          );
           ctx.quadraticCurveTo(hx0 + 1, hy0 + 6, hx0 + 7, hy0 - 6);
           ctx.fill();
 
           // back leg + back arm
           if (air) leg(x - 1, hipY, -0.45, 0.7, JEANS_BACK);
           else if (still) leg(x - 1, hipY, -0.06, 0.03, JEANS_BACK);
-          else leg(x - 1, hipY, -s * 0.4, Math.max(0, -c) * 0.8 + 0.05, JEANS_BACK);
-          swingArm(x - 1.5, shY + 2, air ? -2.3 : still ? -0.1 : s * 0.5, air ? 0.4 : -0.2, NAVY_BACK);
+          else
+            leg(
+              x - 1,
+              hipY,
+              -s * 0.4,
+              Math.max(0, -c) * 0.8 + 0.05,
+              JEANS_BACK,
+            );
+          swingArm(
+            x - 1.5,
+            shY + 2,
+            air ? -2.3 : still ? -0.1 : s * 0.5,
+            air ? 0.4 : -0.2,
+            NAVY_BACK,
+          );
 
           // front leg
           if (air) leg(x + 1, hipY, 0.8, 1.3, JEANS);
@@ -2858,7 +3237,12 @@
           ctx.beginPath();
           ctx.moveTo(x - 4.6, shY);
           ctx.quadraticCurveTo(x + 1, shY - 2, x + 5, shY + 0.5);
-          ctx.quadraticCurveTo(x + 6.6, shY + 7, x + 4.6 + sway * 0.25, hipY - 5);
+          ctx.quadraticCurveTo(
+            x + 6.6,
+            shY + 7,
+            x + 4.6 + sway * 0.25,
+            hipY - 5,
+          );
           ctx.lineTo(x - 4.4 + sway * 0.25, hipY - 5);
           ctx.quadraticCurveTo(x - 5.6, shY + 7, x - 4.6, shY);
           ctx.fill();
@@ -2869,29 +3253,61 @@
 
           // big doll head, three-quarter view
           ctx.fillStyle = SKIN;
-          ctx.beginPath(); ctx.ellipse(hx0 + 1, hy0, 8.2, 9.2, 0.08, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(hx0 + 1, hy0, 8.2, 9.2, 0.08, 0, Math.PI * 2);
+          ctx.fill();
           // blush
           ctx.fillStyle = BLUSH;
-          ctx.beginPath(); ctx.ellipse(hx0 + 5.5, hy0 + 3.6, 2.2, 1.3, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(hx0 + 5.5, hy0 + 3.6, 2.2, 1.3, 0, 0, Math.PI * 2);
+          ctx.fill();
           // eyes: big almond shapes with a catchlight + a lash flick
           const eye = (ex, ey, rx, ry) => {
             ctx.fillStyle = "#0a0a0a";
-            ctx.beginPath(); ctx.ellipse(ex, ey, rx, ry, 0, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(ex, ey, rx, ry, 0, 0, Math.PI * 2);
+            ctx.fill();
             ctx.fillStyle = "#fff";
-            ctx.beginPath(); ctx.arc(ex + rx * 0.35, ey - ry * 0.35, Math.max(0.6, rx * 0.35), 0, Math.PI * 2); ctx.fill();
-            limb(ex + rx * 0.6, ey - ry * 0.7, ex + rx * 1.4, ey - ry * 1.3, 0.8, "#0a0a0a");
+            ctx.beginPath();
+            ctx.arc(
+              ex + rx * 0.35,
+              ey - ry * 0.35,
+              Math.max(0.6, rx * 0.35),
+              0,
+              Math.PI * 2,
+            );
+            ctx.fill();
+            limb(
+              ex + rx * 0.6,
+              ey - ry * 0.7,
+              ex + rx * 1.4,
+              ey - ry * 1.3,
+              0.8,
+              "#0a0a0a",
+            );
           };
           eye(hx0 + 5.4, hy0 + 0.2, 1.7, 2.1);
           eye(hx0 - 0.4, hy0 + 0.2, 1.3, 1.9);
           // brows
-          ctx.strokeStyle = "#2a1a14"; ctx.lineWidth = 0.7;
-          ctx.beginPath(); ctx.moveTo(hx0 + 3.8, hy0 - 3.5); ctx.quadraticCurveTo(hx0 + 5.6, hy0 - 4.6, hx0 + 7.1, hy0 - 3.7); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(hx0 - 2, hy0 - 3.4); ctx.quadraticCurveTo(hx0 - 0.6, hy0 - 4.3, hx0 + 0.7, hy0 - 3.6); ctx.stroke();
+          ctx.strokeStyle = "#2a1a14";
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(hx0 + 3.8, hy0 - 3.5);
+          ctx.quadraticCurveTo(hx0 + 5.6, hy0 - 4.6, hx0 + 7.1, hy0 - 3.7);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(hx0 - 2, hy0 - 3.4);
+          ctx.quadraticCurveTo(hx0 - 0.6, hy0 - 4.3, hx0 + 0.7, hy0 - 3.6);
+          ctx.stroke();
           // glossy lips
           ctx.fillStyle = LIPS;
-          ctx.beginPath(); ctx.ellipse(hx0 + 3.6, hy0 + 5.8, 2, 1.1, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(hx0 + 3.6, hy0 + 5.8, 2, 1.1, 0, 0, Math.PI * 2);
+          ctx.fill();
           ctx.fillStyle = "rgba(255,255,255,0.85)";
-          ctx.beginPath(); ctx.arc(hx0 + 4.2, hy0 + 5.4, 0.45, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath();
+          ctx.arc(hx0 + 4.2, hy0 + 5.4, 0.45, 0, Math.PI * 2);
+          ctx.fill();
 
           // hair on top: side part, glossy shine, front strand over the shoulder
           ctx.fillStyle = HAIR;
@@ -2904,14 +3320,21 @@
           ctx.quadraticCurveTo(hx0 - 4, hy0 + 6, hx0 - 3, hy0 - 2.5);
           ctx.quadraticCurveTo(hx0 + 2, hy0 - 6.8, hx0 + 9.4, hy0 - 1);
           ctx.fill();
-          ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.arc(hx0 + 0.5, hy0 - 2, 7.4, -2.4, -1.5); ctx.stroke();
+          ctx.strokeStyle = "rgba(255,255,255,0.55)";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(hx0 + 0.5, hy0 - 2, 7.4, -2.4, -1.5);
+          ctx.stroke();
           // tiny gold hoop
-          ctx.strokeStyle = "#c9a24a"; ctx.lineWidth = 0.9;
-          ctx.beginPath(); ctx.arc(hx0 - 2.6, hy0 + 6.6, 1.6, 0, Math.PI * 2); ctx.stroke();
+          ctx.strokeStyle = "#c9a24a";
+          ctx.lineWidth = 0.9;
+          ctx.beginPath();
+          ctx.arc(hx0 - 2.6, hy0 + 6.6, 1.6, 0, Math.PI * 2);
+          ctx.stroke();
 
           // front arm holding the iced coffee (raised when she jumps)
-          const sx = x + 1, sy = shY + 2;
+          const sx = x + 1,
+            sy = shY + 2;
           if (air) {
             const [cx, cy] = swingArm(sx, sy, 2.3, -0.5, NAVY); // coffee held up and out, not over her face
             icedCoffee(cx + 1.5, cy - 4);
@@ -2921,48 +3344,416 @@
           }
         };
 
+        // obstacles, drawn in the same black line style as the model's world
         const drawObstacle = (o) => {
-          const x = o.x, b = ground;
-          ctx.strokeStyle = INK; ctx.fillStyle = INK; ctx.lineCap = "round";
-          if (o.name === "rack") {
-            line(x, b, x, b - o.h, 2); line(x + o.w, b, x + o.w, b - o.h, 2);
-            line(x - 3, b - o.h, x + o.w + 3, b - o.h, 2);
-            line(x - 5, b, x + 5, b, 2); line(x + o.w - 5, b, x + o.w + 5, b, 2);
-            for (let i = 0; i < 3; i++) {
-              const gx = x + 9 + i * 14;
-              line(gx, b - o.h, gx, b - o.h + 4, 1.4);
-              ctx.beginPath();
-              ctx.moveTo(gx - 5, b - o.h + 5); ctx.lineTo(gx + 5, b - o.h + 5);
-              ctx.lineTo(gx + 6, b - o.h + 24 + (i % 2) * 5); ctx.lineTo(gx - 6, b - o.h + 24 + (i % 2) * 5);
-              ctx.closePath();
-              if (i === 1) ctx.fill(); else { ctx.lineWidth = 1.4; ctx.stroke(); }
+          const x = o.x,
+            b = ground;
+          ctx.strokeStyle = INK;
+          ctx.fillStyle = INK;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          const poly = (pts, fill, w = 1.6) => {
+            ctx.beginPath();
+            pts.forEach(([px, py], i) =>
+              i ? ctx.lineTo(px, py) : ctx.moveTo(px, py),
+            );
+            ctx.closePath();
+            if (fill) ctx.fill();
+            else {
+              ctx.lineWidth = w;
+              ctx.stroke();
             }
-          } else if (o.name === "bag" || o.name === "bags") {
-            const one = (bx, w, h, fill) => {
+          };
+          const circ = (cx, cy, r, fill, w = 1.6) => {
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            if (fill) ctx.fill();
+            else {
+              ctx.lineWidth = w;
+              ctx.stroke();
+            }
+          };
+          switch (o.name) {
+            case "palm": {
+              ctx.lineWidth = 3;
               ctx.beginPath();
-              ctx.moveTo(bx, b); ctx.lineTo(bx + w, b); ctx.lineTo(bx + w - 2, b - h); ctx.lineTo(bx + 2, b - h); ctx.closePath();
-              if (fill) ctx.fill(); else { ctx.lineWidth = 1.6; ctx.stroke(); }
-              ctx.lineWidth = 1.4;
-              ctx.beginPath(); ctx.arc(bx + w / 2, b - h, w * 0.26, Math.PI, 0); ctx.stroke();
-            };
-            one(x, 24, 30, true);
-            if (o.name === "bags") one(x + 26, 22, 24, false);
-          } else {
-            ctx.lineWidth = 1.6;
-            ctx.strokeRect(x, b - o.h, o.w, o.h);
-            line(x - 2, b - o.h, x + o.w + 2, b - o.h, 2.4);
-            line(x + o.w / 2, b - o.h, x + o.w / 2, b, 1.2);
+              ctx.moveTo(x + 14, b);
+              ctx.quadraticCurveTo(x + 10, b - 22, x + 16, b - 40);
+              ctx.stroke();
+              for (const [dx, dy] of [
+                [-14, 6],
+                [14, 4],
+                [-10, -4],
+                [12, -6],
+                [0, -8],
+              ]) {
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(x + 16, b - 40);
+                ctx.quadraticCurveTo(
+                  x + 16 + dx * 0.6,
+                  b - 46 + dy * 0.3,
+                  x + 16 + dx,
+                  b - 40 + dy,
+                );
+                ctx.stroke();
+              }
+              break;
+            }
+            case "surf":
+              ctx.beginPath();
+              ctx.ellipse(x + 7, b - 20, 7, 20, 0, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.strokeStyle = "#fff";
+              line(x + 7, b - 36, x + 7, b - 4, 1.2);
+              break;
+            case "ball":
+              circ(x + 11, b - 11, 10.5, false);
+              ctx.beginPath();
+              ctx.moveTo(x + 11, b - 11);
+              ctx.arc(x + 11, b - 11, 10.5, -Math.PI / 2, Math.PI / 6);
+              ctx.closePath();
+              ctx.fill();
+              break;
+            case "cablecar":
+              poly(
+                [
+                  [x, b - 4],
+                  [x + 50, b - 4],
+                  [x + 48, b - 26],
+                  [x + 2, b - 26],
+                ],
+                false,
+              );
+              line(x - 2, b - 27, x + 52, b - 27, 2.4);
+              for (let i = 0; i < 4; i++)
+                ctx.strokeRect(x + 6 + i * 10.5, b - 22, 7, 8);
+              circ(x + 10, b - 2, 3, true);
+              circ(x + 40, b - 2, 3, true);
+              line(x + 25, b - 27, x + 25, b - 34, 1.4);
+              break;
+            case "bread":
+              ctx.beginPath();
+              ctx.ellipse(x + 15, b - 8, 15, 9, 0, Math.PI, 0);
+              ctx.lineTo(x + 30, b);
+              ctx.lineTo(x, b);
+              ctx.closePath();
+              ctx.fill();
+              ctx.strokeStyle = "#fff";
+              line(x + 8, b - 12, x + 12, b - 6, 1.2);
+              line(x + 15, b - 14, x + 19, b - 8, 1.2);
+              line(x + 22, b - 12, x + 25, b - 7, 1.2);
+              break;
+            case "cone":
+              poly(
+                [
+                  [x, b],
+                  [x + 18, b],
+                  [x + 11, b - 26],
+                  [x + 7, b - 26],
+                ],
+                true,
+              );
+              ctx.fillStyle = "#fff";
+              poly(
+                [
+                  [x + 4.6, b - 10],
+                  [x + 13.4, b - 10],
+                  [x + 12.4, b - 15],
+                  [x + 5.6, b - 15],
+                ],
+                true,
+              );
+              break;
+            case "coffee":
+              poly(
+                [
+                  [x + 1, b - 26],
+                  [x + 19, b - 26],
+                  [x + 16, b],
+                  [x + 4, b],
+                ],
+                false,
+              );
+              ctx.fillStyle = INK;
+              poly(
+                [
+                  [x + 2.4, b - 18],
+                  [x + 17.6, b - 18],
+                  [x + 16, b],
+                  [x + 4, b],
+                ],
+                true,
+              );
+              ctx.beginPath();
+              ctx.arc(x + 10, b - 26, 9, Math.PI, 0);
+              ctx.lineWidth = 1.6;
+              ctx.stroke();
+              line(x + 12, b - 34, x + 15, b - 42, 1.6);
+              break;
+            case "duck":
+              poly(
+                [
+                  [x, b - 10],
+                  [x + 52, b - 10],
+                  [x + 46, b - 2],
+                  [x + 6, b - 2],
+                ],
+                true,
+              );
+              ctx.strokeRect(x + 10, b - 26, 30, 16);
+              line(x + 10, b - 26, x + 40, b - 26, 2.4);
+              circ(x + 12, b - 1, 3, true);
+              circ(x + 40, b - 1, 3, true);
+              break;
+            case "soju":
+              poly(
+                [
+                  [x + 1, b],
+                  [x + 13, b],
+                  [x + 13, b - 20],
+                  [x + 9, b - 26],
+                  [x + 9, b - 33],
+                  [x + 5, b - 33],
+                  [x + 5, b - 26],
+                  [x + 1, b - 20],
+                ],
+                false,
+              );
+              ctx.fillRect(x + 1, b - 16, 12, 8);
+              break;
+            case "basket":
+              ctx.strokeRect(x, b - 16, 30, 16);
+              for (let i = 1; i < 5; i++)
+                line(x + i * 6, b - 16, x + i * 6, b, 1);
+              ctx.beginPath();
+              ctx.arc(x + 15, b - 16, 10, Math.PI, 0);
+              ctx.lineWidth = 1.6;
+              ctx.stroke();
+              break;
+            case "baguette":
+              ctx.save();
+              ctx.translate(x + 11, b - 22);
+              ctx.rotate(0.22);
+              ctx.beginPath();
+              ctx.ellipse(0, -6, 4.5, 16, 0, 0, Math.PI * 2);
+              ctx.lineWidth = 1.6;
+              ctx.stroke();
+              ctx.restore();
+              poly(
+                [
+                  [x + 1, b],
+                  [x + 19, b],
+                  [x + 18, b - 20],
+                  [x + 2, b - 20],
+                ],
+                true,
+              );
+              break;
+            case "chair":
+              line(x + 4, b, x + 4, b - 34, 2);
+              line(x + 20, b, x + 20, b - 16, 2);
+              line(x + 2, b - 16, x + 22, b - 16, 2.4);
+              ctx.strokeRect(x + 4, b - 32, 1, 0);
+              for (let i = 0; i < 3; i++)
+                line(x + 4, b - 30 + i * 5, x + 14, b - 30 + i * 5, 1.2);
+              break;
+            case "macarons":
+              for (let i = 0; i < 3; i++) {
+                const y = b - 4 - i * 7.5;
+                ctx.beginPath();
+                ctx.ellipse(x + 11, y, 10, 3.6, 0, 0, Math.PI * 2);
+                i % 2 ? ctx.fill() : ((ctx.lineWidth = 1.5), ctx.stroke());
+              }
+              break;
+            case "books":
+              ctx.fillRect(x, b - 8, 32, 8);
+              ctx.strokeRect(x + 3, b - 16, 26, 8);
+              ctx.fillRect(x + 1, b - 25, 28, 8);
+              break;
+            case "bull":
+              poly(
+                [
+                  [x + 6, b - 8],
+                  [x + 36, b - 8],
+                  [x + 40, b - 22],
+                  [x + 8, b - 24],
+                ],
+                true,
+              );
+              ctx.beginPath();
+              ctx.ellipse(x + 42, b - 22, 6, 5, 0, 0, Math.PI * 2);
+              ctx.fill();
+              line(x + 44, b - 27, x + 48, b - 31, 1.6);
+              line(x + 40, b - 27, x + 38, b - 31, 1.6);
+              line(x + 10, b - 9, x + 10, b, 2.2);
+              line(x + 16, b - 9, x + 16, b, 2.2);
+              line(x + 30, b - 9, x + 30, b, 2.2);
+              line(x + 35, b - 9, x + 35, b, 2.2);
+              line(x + 6, b - 22, x + 1, b - 14, 1.4);
+              break;
           }
         };
 
+        // one landmark per city, drawn faintly in the background and drifting slowly
+        const LIGHT = "#d6d6d6";
+        const drawMark = (kind, x, gy) => {
+          ctx.strokeStyle = LIGHT;
+          ctx.fillStyle = LIGHT;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          const L = (x1, y1, x2, y2, w = 1.4) => line(x1, y1, x2, y2, w);
+          switch (kind) {
+            case "palms": {
+              ctx.beginPath();
+              ctx.moveTo(x - 80, gy);
+              ctx.quadraticCurveTo(x + 10, gy - 70, x + 120, gy - 40);
+              ctx.quadraticCurveTo(x + 200, gy - 20, x + 260, gy);
+              ctx.lineWidth = 1.4;
+              ctx.stroke();
+              for (const [px, ph] of [
+                [x + 30, 110],
+                [x + 52, 90],
+                [x + 180, 100],
+              ]) {
+                L(px, gy, px + 4, gy - ph);
+                for (const d of [-16, -8, 8, 16])
+                  L(
+                    px + 4,
+                    gy - ph,
+                    px + 4 + d,
+                    gy - ph + Math.abs(d) * 0.5 + 4,
+                  );
+              }
+              break;
+            }
+            case "bridge": {
+              const t1 = x,
+                t2 = x + 220,
+                top = gy - 120,
+                deck = gy - 34;
+              for (const tx of [t1, t2]) {
+                L(tx - 6, gy, tx - 6, top, 2.4);
+                L(tx + 6, gy, tx + 6, top, 2.4);
+                L(tx - 6, top + 14, tx + 6, top + 14);
+                L(tx - 6, top + 50, tx + 6, top + 50);
+              }
+              L(x - 120, deck, x + 340, deck, 2);
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.moveTo(x - 120, deck - 6);
+              ctx.quadraticCurveTo(x - 60, top + 40, t1, top);
+              ctx.quadraticCurveTo(x + 110, deck + 20, t2, top);
+              ctx.quadraticCurveTo(x + 280, top + 40, x + 340, deck - 6);
+              ctx.stroke();
+              for (let i = 1; i < 10; i++) {
+                const vx = t1 + i * 22;
+                const sag =
+                  top + Math.sin((i / 10) * Math.PI) * (deck - top - 6);
+                L(vx, sag, vx, deck, 0.8);
+              }
+              break;
+            }
+            case "brownstones": {
+              let bx = x;
+              for (const [w, h] of [
+                [46, 74],
+                [40, 86],
+                [50, 70],
+                [44, 92],
+                [48, 78],
+              ]) {
+                ctx.lineWidth = 1.3;
+                ctx.strokeRect(bx, gy - h, w, h);
+                L(bx - 2, gy - h, bx + w + 2, gy - h, 2);
+                for (let r = 0; r < 3; r++)
+                  for (let c = 0; c < 2; c++)
+                    ctx.strokeRect(
+                      bx + 8 + c * (w / 2 - 2),
+                      gy - h + 12 + r * 18,
+                      9,
+                      11,
+                    );
+                bx += w;
+              }
+              break;
+            }
+            case "tower": {
+              ctx.beginPath();
+              ctx.moveTo(x - 90, gy);
+              ctx.quadraticCurveTo(x, gy - 60, x + 90, gy);
+              ctx.lineWidth = 1.4;
+              ctx.stroke();
+              L(x - 3, gy - 30, x - 3, gy - 110, 2);
+              L(x + 3, gy - 30, x + 3, gy - 110, 2);
+              ctx.strokeRect(x - 12, gy - 128, 24, 18);
+              L(x - 16, gy - 128, x + 16, gy - 128, 2);
+              L(x, gy - 128, x, gy - 150, 1.6);
+              break;
+            }
+            case "eiffel": {
+              const top = gy - 150;
+              L(x - 46, gy, x - 6, top + 10, 1.8);
+              L(x + 46, gy, x + 6, top + 10, 1.8);
+              L(x - 6, top + 10, x, top - 6, 1.6);
+              L(x + 6, top + 10, x, top - 6, 1.6);
+              L(x - 34, gy - 40, x + 34, gy - 40, 2);
+              L(x - 20, gy - 82, x + 20, gy - 82, 1.8);
+              ctx.beginPath();
+              ctx.arc(x, gy, 26, Math.PI, 0);
+              ctx.lineWidth = 1.4;
+              ctx.stroke();
+              for (let i = 0; i < 6; i++) {
+                const y1 = gy - 40 - i * 7,
+                  y2 = y1 - 7;
+                L(x - 34 + i * 2.4, y1, x + 34 - i * 2.4, y2, 0.6);
+              }
+              break;
+            }
+            case "chapel": {
+              ctx.lineWidth = 1.3;
+              ctx.strokeRect(x - 70, gy - 50, 56, 50);
+              ctx.strokeRect(x + 14, gy - 50, 56, 50);
+              ctx.strokeRect(x - 14, gy - 130, 28, 130);
+              for (const tx of [x - 14, x - 5, x + 5, x + 14])
+                L(tx, gy - 130, tx, gy - 142, 1.4);
+              L(x - 16, gy - 130, x + 16, gy - 130, 2);
+              for (let r = 0; r < 3; r++) {
+                ctx.beginPath();
+                ctx.arc(x, gy - 96 + r * 28, 5, Math.PI, 0);
+                ctx.lineTo(x + 5, gy - 84 + r * 28);
+                ctx.lineTo(x - 5, gy - 84 + r * 28);
+                ctx.closePath();
+                ctx.stroke();
+              }
+              for (const ax of [x - 54, x - 38, x + 30, x + 46]) {
+                ctx.beginPath();
+                ctx.arc(ax, gy - 30, 4, Math.PI, 0);
+                ctx.lineTo(ax + 4, gy - 18);
+                ctx.lineTo(ax - 4, gy - 18);
+                ctx.closePath();
+                ctx.stroke();
+              }
+              break;
+            }
+          }
+        };
+        let skyX = 0;
+
         const draw = () => {
           ctx.clearRect(0, 0, W, H);
+          // this city's landmark, repeating slowly in the back
+          const span = Math.max(W * 0.9, 520);
+          const mark = CITIES[city].mark;
+          for (let mx = W * 0.55 - (skyX % span); mx < W + 400; mx += span)
+            drawMark(mark, mx, ground);
           // runway floor with lights
           ctx.strokeStyle = INK;
           line(0, ground + 0.5, W, ground + 0.5, 1);
           ctx.fillStyle = MUTED;
           const off = (t * speed) % 40;
-          for (let x = -off; x < W; x += 40) ctx.fillRect(x, ground + 12, 14, 1.5);
+          for (let x = -off; x < W; x += 40)
+            ctx.fillRect(x, ground + 12, 14, 1.5);
           obstacles.forEach(drawObstacle);
           drawModel(model.x, model.y);
           // sparkles
@@ -2971,38 +3762,74 @@
             ctx.fillStyle = INK;
             const r = 3 * p.life;
             ctx.beginPath();
-            ctx.moveTo(p.x, p.y - r * 1.6); ctx.lineTo(p.x + r * 0.4, p.y); ctx.lineTo(p.x, p.y + r * 1.6); ctx.lineTo(p.x - r * 0.4, p.y);
-            ctx.closePath(); ctx.fill();
+            ctx.moveTo(p.x, p.y - r * 1.6);
+            ctx.lineTo(p.x + r * 0.4, p.y);
+            ctx.lineTo(p.x, p.y + r * 1.6);
+            ctx.lineTo(p.x - r * 0.4, p.y);
+            ctx.closePath();
+            ctx.fill();
             ctx.beginPath();
-            ctx.moveTo(p.x - r * 1.6, p.y); ctx.lineTo(p.x, p.y + r * 0.4); ctx.lineTo(p.x + r * 1.6, p.y); ctx.lineTo(p.x, p.y - r * 0.4);
-            ctx.closePath(); ctx.fill();
+            ctx.moveTo(p.x - r * 1.6, p.y);
+            ctx.lineTo(p.x, p.y + r * 0.4);
+            ctx.lineTo(p.x + r * 1.6, p.y);
+            ctx.lineTo(p.x, p.y - r * 0.4);
+            ctx.closePath();
+            ctx.fill();
           });
           ctx.globalAlpha = 1;
+          // "Spotted" line when you reach a new city
+          if (state === "play" && banner > 0) {
+            ctx.globalAlpha = Math.min(1, banner / 0.4);
+            ctx.fillStyle = INK;
+            ctx.textAlign = "left";
+            ctx.font = `400 ${W < 500 ? 15 : 19}px ${FONT}`;
+            ctx.fillText(CITIES[city].spotted, 18, 34);
+            ctx.globalAlpha = 1;
+          }
           // messages
           ctx.fillStyle = INK;
           ctx.textAlign = "center";
           if (state === "ready") {
             ctx.font = `400 ${W < 500 ? 20 : 26}px ${FONT}`;
-            ctx.fillText(W < 500 ? "Tap to walk the runway" : "Press space or click to walk the runway", W / 2, H * 0.36);
+            ctx.fillText(
+              W < 500
+                ? "Tap to start in Los Angeles"
+                : "Press space or click to start in Los Angeles",
+              W / 2,
+              H * 0.36,
+            );
           } else if (state === "over") {
             ctx.font = `400 ${W < 500 ? 20 : 26}px ${FONT}`;
-            ctx.fillText("Wardrobe malfunction.", W / 2, H * 0.32);
+            ctx.fillText(
+              city === CITIES.length - 1
+                ? "You made it all the way to Durham."
+                : `Spotted: R, tripped in ${CITIES[city].name.replace("Back in ", "")}.`,
+              W / 2,
+              H * 0.32,
+            );
             ctx.font = `400 14px ${FONT}`;
             ctx.fillStyle = "#6b6b6b";
-            ctx.fillText(W < 500 ? "Tap to try again" : "Space or click to try again", W / 2, H * 0.32 + 26);
+            ctx.fillText(
+              W < 500 ? "Tap to try again" : "Space or click to try again",
+              W / 2,
+              H * 0.32 + 26,
+            );
           }
         };
 
         const hit = (o) => {
-          const mx1 = model.x - 6, mx2 = model.x + 8;
+          const mx1 = model.x - 6,
+            mx2 = model.x + 8;
           const my = ground - model.y; // feet
           return mx2 > o.x + 3 && mx1 < o.x + o.w - 3 && my > ground - o.h + 4;
         };
 
-        let raf = 0, last = 0, visible = false;
+        let raf = 0,
+          last = 0,
+          visible = false;
         const loop = (now) => {
           cancelAnimationFrame(raf);
-          const dt = Math.min(0.033, (now - last) / 1000 || 0);
+          const dt = Math.max(0, Math.min(0.033, (now - last) / 1000 || 0));
           last = now;
           t += dt;
           if (state === "play") {
@@ -3010,6 +3837,13 @@
             walk += dt * speed * 0.045;
             score += dt * speed * 0.03;
             scoreEl.textContent = pad3(score);
+            skyX += dt * speed * 0.25;
+            banner = Math.max(0, banner - dt);
+            const ci = Math.max(
+              0,
+              Math.min(CITIES.length - 1, Math.floor(score / STEP)),
+            );
+            if (ci !== city) setCity(ci);
             model.vy -= GRAV * dt;
             model.y = Math.max(0, model.y + model.vy * dt);
             if (model.y === 0) model.vy = 0;
@@ -3021,25 +3855,43 @@
             obstacles.forEach((o) => (o.x -= dt * speed));
             obstacles = obstacles.filter((o) => o.x > -80);
             if (obstacles.some(hit)) {
+              sfx("trip");
               state = "over";
               if (score > best) {
                 best = Math.floor(score);
                 bestEl.textContent = pad3(best);
-                try { localStorage.setItem("runwayBest", String(best)); } catch (e) {}
+                try {
+                  localStorage.setItem("runwayBest", String(best));
+                } catch (e) {}
               }
             }
           }
-          sparkles.forEach((p) => { p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt * 2.2; });
+          sparkles.forEach((p) => {
+            p.x += p.vx * dt;
+            p.y += p.vy * dt;
+            p.life -= dt * 2.2;
+          });
           sparkles = sparkles.filter((p) => p.life > 0);
           draw();
-          if (visible && (state === "play" || sparkles.length)) raf = requestAnimationFrame(loop);
+          if (visible && (state === "play" || sparkles.length))
+            raf = requestAnimationFrame(loop);
         };
 
-        stage.addEventListener("pointerdown", (e) => { e.preventDefault(); stage.focus({ preventScroll: true }); jump(); });
+        stage.addEventListener("pointerdown", (e) => {
+          e.preventDefault();
+          stage.focus({ preventScroll: true });
+          jump();
+        });
         document.addEventListener("keydown", (e) => {
           if (!(e.code === "Space" || e.code === "ArrowUp")) return;
           const active = document.activeElement;
-          if (active && active.matches("input, textarea, select, [contenteditable]")) return;
+          if (
+            active &&
+            active.matches(
+              "input, textarea, select, [contenteditable], #runwaySound",
+            )
+          )
+            return;
           if (!visible) return;
           e.preventDefault();
           jump();
@@ -3047,17 +3899,24 @@
 
         // only run while on screen
         if ("IntersectionObserver" in window) {
-          new IntersectionObserver(([en]) => {
-            visible = en.intersectionRatio > 0.5;
-            if (!visible && state === "play") { state = "over"; draw(); }
-          }, { threshold: [0, 0.5, 1] }).observe(stage);
+          new IntersectionObserver(
+            ([en]) => {
+              visible = en.intersectionRatio > 0.5;
+              if (!visible && state === "play") {
+                state = "over";
+                draw();
+              }
+            },
+            { threshold: [0, 0.5, 1] },
+          ).observe(stage);
         } else visible = true;
 
         window.addEventListener("resize", resize);
         resize();
         reset();
         draw();
-        if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => state !== "play" && draw());
+        if (document.fonts && document.fonts.ready)
+          document.fonts.ready.then(() => state !== "play" && draw());
       })();
 
       /* ---------- scroll reveals ---------- */
